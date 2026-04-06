@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0a0a"/>
+      <stop offset="100%" style="stop-color:#0d1a20"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <!-- Subtle grid lines -->
+  <line x1="0" y1="210" x2="1200" y2="210" stroke="#bfe8f2" stroke-width="0.4" opacity="0.05"/>
+  <line x1="0" y1="420" x2="1200" y2="420" stroke="#bfe8f2" stroke-width="0.4" opacity="0.05"/>
+  <line x1="400" y1="0" x2="400" y2="630" stroke="#bfe8f2" stroke-width="0.4" opacity="0.05"/>
+  <line x1="800" y1="0" x2="800" y2="630" stroke="#bfe8f2" stroke-width="0.4" opacity="0.05"/>
+
+  <!-- Glow orb -->
+  <ellipse cx="900" cy="315" rx="280" ry="240" fill="#bfe8f2" opacity="0.04" filter="url(#glow)"/>
+
+  <!-- Isometric house (right side) -->
+  <g filter="url(#glow)" transform="translate(820, 80) scale(2.8)">
+    <polygon points="40,32 54,22 54,42 40,52" fill="#6cb8d0"/>
+    <polygon points="12,32 40,32 40,52 12,52" fill="#bfe8f2"/>
+    <polygon points="40,32 54,22 40,6 26,16" fill="#96d0e4"/>
+    <polygon points="12,32 40,32 26,16" fill="#daf3fb"/>
+  </g>
+
+  <!-- Left content -->
+  <!-- Tag -->
+  <rect x="60" y="80" width="300" height="32" rx="4" fill="none" stroke="#bfe8f2" stroke-width="1" opacity="0.3"/>
+  <text x="76" y="101" font-family="'DM Sans', Arial, sans-serif" font-size="12" font-weight="600" letter-spacing="3" fill="#bfe8f2" opacity="0.6" text-transform="uppercase">FOR COSMOS ECOSYSTEM MIGRANTS</text>
+
+  <!-- Main headline -->
+  <text x="60" y="200" font-family="'DM Sans', Arial, sans-serif" font-size="72" font-weight="800" fill="#ffffff" letter-spacing="-2">Your Cosmos</text>
+  <text x="60" y="285" font-family="'DM Sans', Arial, sans-serif" font-size="72" font-weight="800" fill="#ffffff" letter-spacing="-2">chain is closing?</text>
+  <text x="60" y="370" font-family="Georgia, serif" font-size="60" font-weight="400" font-style="italic" fill="#6b7280">Here's what's next.</text>
+
+  <!-- Subtitle -->
+  <text x="60" y="440" font-family="'DM Sans', Arial, sans-serif" font-size="22" fill="#6b7280" letter-spacing="0">Your assets, your network, your reputation — all of it moves with you.</text>
+
+  <!-- Domain -->
+  <text x="60" y="560" font-family="'DM Sans', Arial, sans-serif" font-size="18" font-weight="600" letter-spacing="2" fill="#bfe8f2" opacity="0.5">WELCOMETOSOLANA.XYZ</text>
+
+  <!-- Bottom border accent -->
+  <rect x="60" y="590" width="120" height="2" fill="#bfe8f2" opacity="0.4"/>
+</svg>

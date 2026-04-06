@@ -1,0 +1,29 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_4061_50)">
+<path d="M52 0H12C5.37258 0 0 5.37258 0 12V52C0 58.6274 5.37258 64 12 64H52C58.6274 64 64 58.6274 64 52V12C64 5.37258 58.6274 0 52 0Z" fill="#050E11"/>
+<g opacity="0.06" filter="url(#filter0_f_4061_50)">
+<path d="M33 54C45.1503 54 55 45.9411 55 36C55 26.0589 45.1503 18 33 18C20.8497 18 11 26.0589 11 36C11 45.9411 20.8497 54 33 54Z" fill="#BFE8F2"/>
+</g>
+<g filter="url(#filter1_f_4061_50)">
+<path d="M40 32L54 22V42L40 52V32Z" fill="#6CB8D0"/>
+<path d="M12 32H40V52H12V32Z" fill="#BFE8F2"/>
+<path d="M40 32L54 22L40 6L26 16L40 32Z" fill="#96D0E4"/>
+<path d="M12 32H40L26 16L12 32Z" fill="#E4F7FD"/>
+</g>
+</g>
+<defs>
+<filter id="filter0_f_4061_50" x="3" y="10" width="60" height="52" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="4" result="effect1_foregroundBlur_4061_50"/>
+</filter>
+<filter id="filter1_f_4061_50" x="10.7" y="4.7" width="44.6" height="48.6" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="0.65" result="effect1_foregroundBlur_4061_50"/>
+</filter>
+<clipPath id="clip0_4061_50">
+<rect width="64" height="64" fill="white"/>
+</clipPath>
+</defs>
+</svg>
