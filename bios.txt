@@ -1,0 +1,104 @@
+# BIOS — edit only the text AFTER the pipe ( | )
+# Do not change the names before the pipe. Do not add extra pipes.
+# When done, tell Claude "update bios from bios.txt"
+# ─────────────────────────────────────────────────────────────────
+
+
+[DEFI]
+Raydium         | $1.1T lifetime volume. Building on-chain liquidity primitives that power the evolution of DeFi.
+Jupiter         | Just use crypto, Just use Jupiter.
+Meteora         | Building world-class dynamic liquidity pools for the biggest LP community. LPs earned $1B+ in fees.
+Kamino          | Building the next generation of credit infrastructure on Solana. NFA.
+
+
+[YIELD]
+Marinade        | Optimize your Solana staking. Marinade is a stake automation platform that automatically delegates to 100+ best-performing nodes   🌎
+Jito            | Building the Market Layer of Solana.
+Kamino          | Building the next generation of credit infrastructure on Solana. NFA.
+
+
+Meteora         | Building world-class dynamic liquidity pools for the biggest LP community. LPs earned $1B+ in fees.
+
+
+[COMMUNITIES]
+Superteam       | A community of founders, devs & grantees working in the Solana Ecosystem. || no token, just an online community.
+Solflare Empire | Official @Solflare Community Account | Home of Guardians, Ambassadors, and all community activities: news, events, workshops, and more.
+MonkeDAO        | Reject Humanity, Return to Monke. Solana's first community-owned & operated NFT DAO. Exclusive to @SolanaMBS owners.
+Famous Fox Fed  | Builders of @solana's most famous and trusted P2P tools. Stake your SOL with us!
+MoustacheDAO    | (( W )) We Do Men's Health Stuff | Stake with our @solana validator @stachenode or hold our Liquid Staking Token $LSTache to support health initiatives.
+Layer33         | A collective of 25 independent @solana validators committed to maintaining network decentralization. Our mission: ensure 33% of the Solana stake remains with independent operators.
+Superwhere      | A global interactive map for all Superteams & Solana builders. Part of @superteamINDO.
+Solana Events   | Global @Solana events. Accelerate USA | May 5th — Miami. Breakpoint 2026 | Nov 15–17 — London. Handle operated by @SolanaFndn.
+Pudgy Penguins  | The internet's favorite penguins.
+Moonbirds       | It's super birbish.
+Radiants DAO    | An on-chain cadre of talented storytellers, creators, developers, & artists. Hosts of the Solana Mobile Hackathon & the Bonkathon.
+Island DAO      | DAO, network state, events. Stay tuned for 2026 events lineup.
+MTNDAO          | The world-class, action packed startup experience. v9 summit: Feb 1–28, 2026. Salt Lake City, UT, USA.
+
+
+[GRANTS]
+Superteam Earn     | Making work2earn cool again • bounties & freelance gigs from chad crypto companies on solana
+Foundation Grants  | Official Solana Foundation funding for infra, tools and more. 
+Frontier Hackathon | $230K in prizes. Limited time. Apply now.
+Colosseum          | Solana's hackathon, accelerator, and venture fund
+
+
+[DEVELOPERS]
+Solana Devs       | Curated dev resources, tools, and ecosystem updates.
+Colosseum         | Hackathons that launched $600M+ in funded projects.
+Foundation Grants | Funding for open-source tooling and infrastructure builders.
+Superteam Earn    | Dev bounties from top Solana protocols. Ship and get paid.
+
+
+[NFTS]
+Magic Eden     | The home of all collectibles on 
+@solana
+ | http://magiceden.io | Posts not intended for US or UK audiences
+MonkeDAO       | Reject Humanity, Return to Monke. Solana's first community-owned & operated NFT DAO. Exclusive to @SolanaMBS owners.
+
+Pudgy Penguins | One of the most recognized NFT collections globally.
+Famous Fox Fed | Community-first NFT DAO with strong governance.
+
+
+[PREDICTION]
+Kalshi | Trade on anything: politics, sports, entertainment, crypto, weather, and so much more. For sports: 
+@KalshiSports
+ For culture: 
+@Kalshi_Culture You can access Kalshi directly inside Solflare wallet.
+
+
+[RWA]
+Huma Finance | Real yield back by real world payments, for everyone. $11B+ in payment volume. The largest PayFi protocol in the world. Yield from real payments, not speculation.
+
+
+[WALLETS]
+Solflare       | Unchain Your Money with The #1 
+@Solana
+ Wallet. ◎🔥 4M users, $14B+ assets. Gasless txs in USDC. 24/7 real human support.
+Backpack       |The most powerful margin account in finance.
+Trade, borrow, spend, earn.
+Phantom        | The crypto app for everyone. Not for UK users. See 
+@phantom__UK
+Jupiter Wallet | Wallet built into the Jupiter ecosystem.
+Samui Wallet   | Open-source Solana wallet. 
+
+
+[CARDS]
+Solflare Card | Spend your SOL and USDC anywhere Visa is accepted. Native Solana card.
+Kast          | The financial platform to store, earn, move, and spend stablecoins.
+Jupiter Card  | Spend your Jupiter ecosystem assets in the real world.
+
+
+[HARDWARE]
+Solflare Shield | Protect your portfolio in a single tap with a hardware wallet slim enough to fit in your pocket. Mighty simple.
+Solana Mobile   | Seeker, the definitive crypto mobile device. Powered by SKR. Seek and you will find.
+Unruggable      | Solana-native hardware wallet. Colosseum Cypherpunk Grand Champions 🏆
+
+
+[TAXES]
+NetrunnerTax | The most comprehensive tax tool for Solana Token, NFT & DeFi traders 🔌 Now Live • Powered by 
+@phase_
+
+
+[CHARITY]
+Donate.GG | The easiest way to donate crypto to things that matter.
