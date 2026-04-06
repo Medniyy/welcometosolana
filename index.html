@@ -105,7 +105,8 @@
         --accent-premium-glow: rgba(158, 165, 176, 0.11);
         --selection-accent: rgba(158, 165, 176, 0.3);
     }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; max-width: 100%; overflow-x: hidden; }
+    body { max-width: 100%; overflow-x: hidden; }
     @media (prefers-reduced-motion: reduce) {
         html { scroll-behavior: auto; }
         .scrolling-content { animation: none; }
