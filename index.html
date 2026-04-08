@@ -297,23 +297,16 @@
         letter-spacing: 0.12em;
     }
 </style>
-<!-- Google Analytics 4 — loads only after cookie consent -->
+<!-- Umami (cookieless analytics) — always-on, no consent needed
+     TODO after Railway deploy: replace UMAMI_SCRIPT_URL + UMAMI_WEBSITE_ID with your real values. -->
 <script>
-window.dataLayer=window.dataLayer||[];
-function gtag(){dataLayer.push(arguments);}
-gtag('js',new Date());
-window._ga4loaded=false;
-window.loadGA4=function(){
-  if(window._ga4loaded)return;
-  window._ga4loaded=true;
-  var s=document.createElement('script');
-  s.async=true;
-  s.src='https://www.googletagmanager.com/gtag/js?id=G-G6WNB8MSET';
-  document.head.appendChild(s);
-  gtag('config','G-G6WNB8MSET',{anonymize_ip:true,cookie_flags:'SameSite=None;Secure'});
-};
-if(localStorage.getItem('analytics_consent')==='accepted')window.loadGA4();
+  window._track=function(name,data){
+    try{
+      if(window.umami&&typeof window.umami.track==='function')window.umami.track(name,data||{});
+    }catch(e){}
+  };
 </script>
+<script defer src="https://umami-service-production-3ded.up.railway.app/script.js" data-website-id="faf37f2f-424a-4061-8416-2c4b5193a4b5"></script>
 </head>
 <body class="bg-background text-on-surface font-body">
 <a href="#main-content" class="skip-to-main font-label">Skip to content</a>
@@ -423,6 +416,11 @@ See migration guide
   <button type="button" onclick="showTab('hardware','Cold storage, Solana-style. Your keys, offline, safe.', this)" class="eco-tab font-label font-semibold uppercase text-[10px] sm:text-xs tracking-widest px-4 py-2.5 rounded-sm border transition-all">Hardware</button>
   <button type="button" onclick="showTab('taxes','Keep it compliant. Track your on-chain activity automatically.', this)" class="eco-tab font-label font-semibold uppercase text-[10px] sm:text-xs tracking-widest px-4 py-2.5 rounded-sm border transition-all">Taxes</button>
   <button type="button" onclick="showTab('charity','Give back with Solana. Social impact on-chain.', this)" class="eco-tab font-label font-semibold uppercase text-[10px] sm:text-xs tracking-widest px-4 py-2.5 rounded-sm border transition-all">Charity</button>
+  <button type="button" onclick="showTab('media','Creators, studios, podcasts, and Solana media — where culture is made.', this)" class="eco-tab font-label font-semibold uppercase text-[10px] sm:text-xs tracking-widest px-4 py-2.5 rounded-sm border transition-all">Media</button>
+  <button type="button" onclick="showTab('wellness','Wellness, recovery, fitness — stay sharp on-chain and IRL.', this)" class="eco-tab font-label font-semibold uppercase text-[10px] sm:text-xs tracking-widest px-4 py-2.5 rounded-sm border transition-all">Wellness</button>
+  <button type="button" onclick="showTab('jobs','Careers, bounties, and job boards across the Solana ecosystem.', this)" class="eco-tab font-label font-semibold uppercase text-[10px] sm:text-xs tracking-widest px-4 py-2.5 rounded-sm border transition-all">Jobs</button>
+  <button type="button" onclick="showTab('gaming','Games, studios, and gaming community on Solana.', this)" class="eco-tab font-label font-semibold uppercase text-[10px] sm:text-xs tracking-widest px-4 py-2.5 rounded-sm border transition-all">Gaming</button>
+  <button type="button" onclick="showTab('ai','AI tools, agents, and skills for building on Solana faster.', this)" class="eco-tab font-label font-semibold uppercase text-[10px] sm:text-xs tracking-widest px-4 py-2.5 rounded-sm border transition-all">AI</button>
 </div>
 
 <!-- Tab content panels -->
@@ -561,6 +559,18 @@ See migration guide
     <p class="text-on-surface-variant text-xs leading-relaxed">The world-class, action packed startup experience. v9 summit: Feb 1–28, 2026. Salt Lake City, UT, USA.</p>
     <span class="material-symbols-outlined text-premium text-sm mt-auto">arrow_forward</span>
   </a>
+  <a href="https://x.com/met_lparmy" target="_blank" class="eco-card bg-surface-container-low rounded-lg p-6 border border-outline-variant/10 hover:border-premium/40 transition-all no-underline flex flex-col gap-3">
+    <img src="logos/lparmy.jpg" class="w-9 h-9 rounded-full object-cover" alt="LP Army"/>
+    <h4 class="font-headline font-bold uppercase text-sm">LP Army</h4>
+    <p class="text-on-surface-variant text-xs leading-relaxed">A community of liquidity providers on MeteoraAG driving a world of market making, powered by retail.</p>
+    <span class="material-symbols-outlined text-premium text-sm mt-auto">arrow_forward</span>
+  </a>
+  <a href="https://x.com/LaFamilia_so" target="_blank" class="eco-card bg-surface-container-low rounded-lg p-6 border border-outline-variant/10 hover:border-premium/40 transition-all no-underline flex flex-col gap-3">
+    <img src="logos/lafamilia.jpg" class="w-9 h-9 rounded-full object-cover" alt="La Familia"/>
+    <h4 class="font-headline font-bold uppercase text-sm">La Familia</h4>
+    <p class="text-on-surface-variant text-xs leading-relaxed">Boosting the solana ecosystem in Spain 🇪🇸 We are the Family! 🎩</p>
+    <span class="material-symbols-outlined text-premium text-sm mt-auto">arrow_forward</span>
+  </a>
 </div>
 
 <div id="tab-grants" class="tab-panel hidden grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -614,6 +624,30 @@ See migration guide
     <img src="logos/superteam earn.jpg" class="w-9 h-9 rounded-full object-cover" alt="Superteam Earn"/>
     <h4 class="font-headline font-bold uppercase text-sm">Superteam Earn</h4>
     <p class="text-on-surface-variant text-xs leading-relaxed">Dev bounties from top Solana protocols. Ship and get paid.</p>
+    <span class="material-symbols-outlined text-premium text-sm mt-auto">arrow_forward</span>
+  </a>
+  <a href="https://x.com/streamflow_fi" target="_blank" class="eco-card bg-surface-container-low rounded-lg p-6 border border-outline-variant/10 hover:border-premium/40 transition-all no-underline flex flex-col gap-3">
+    <img src="logos/streamflow.jpg" class="w-9 h-9 rounded-full object-cover" alt="Streamflow"/>
+    <h4 class="font-headline font-bold uppercase text-sm">Streamflow</h4>
+    <p class="text-on-surface-variant text-xs leading-relaxed">Token Management Infrastructure for Internet Capital Markets on Solana</p>
+    <span class="material-symbols-outlined text-premium text-sm mt-auto">arrow_forward</span>
+  </a>
+  <a href="https://x.com/magicblock" target="_blank" class="eco-card bg-surface-container-low rounded-lg p-6 border border-outline-variant/10 hover:border-premium/40 transition-all no-underline flex flex-col gap-3">
+    <img src="logos/magicblock.jpg" class="w-9 h-9 rounded-full object-cover" alt="MagicBlock"/>
+    <h4 class="font-headline font-bold uppercase text-sm">MagicBlock</h4>
+    <p class="text-on-surface-variant text-xs leading-relaxed">The Real-Time Engine for Solana Applications</p>
+    <span class="material-symbols-outlined text-premium text-sm mt-auto">arrow_forward</span>
+  </a>
+  <a href="https://www.helius.dev/" target="_blank" class="eco-card bg-surface-container-low rounded-lg p-6 border border-outline-variant/10 hover:border-premium/40 transition-all no-underline flex flex-col gap-3">
+    <img src="logos/helius.jpg" class="w-9 h-9 rounded-full object-cover" alt="Helius"/>
+    <h4 class="font-headline font-bold uppercase text-sm">Helius</h4>
+    <p class="text-on-surface-variant text-xs leading-relaxed">The engine behind Solana's best teams, traders, and tinkerers. Solana’s most reliable and low latency RPCs, transaction landing services, and data streaming tools.</p>
+    <span class="material-symbols-outlined text-premium text-sm mt-auto">arrow_forward</span>
+  </a>
+  <a href="https://x.com/triton_one" target="_blank" class="eco-card bg-surface-container-low rounded-lg p-6 border border-outline-variant/10 hover:border-premium/40 transition-all no-underline flex flex-col gap-3">
+    <img src="logos/tritonone.jpg" class="w-9 h-9 rounded-full object-cover" alt="Triton One"/>
+    <h4 class="font-headline font-bold uppercase text-sm">Triton One</h4>
+    <p class="text-on-surface-variant text-xs leading-relaxed">Demonstrably Superior RPC for Solana, Sui, PythNet, and other blockchains. Build, iterate, and ship faster with Triton. 🌊</p>
     <span class="material-symbols-outlined text-premium text-sm mt-auto">arrow_forward</span>
   </a>
 </div>
@@ -777,6 +811,135 @@ See migration guide
     <img src="logos/donategg.jpg" class="w-9 h-9 rounded-full object-cover" alt="Donate.GG"/>
     <h4 class="font-headline font-bold uppercase text-sm">Donate.GG</h4>
     <p class="text-on-surface-variant text-xs leading-relaxed">The easiest way to donate crypto to things that matter.</p>
+    <span class="material-symbols-outlined text-premium text-sm mt-auto">arrow_forward</span>
+  </a>
+  <a href="https://telagacharity.com/" target="_blank" class="eco-card bg-surface-container-low rounded-lg p-6 border border-outline-variant/10 hover:border-premium/40 transition-all no-underline flex flex-col gap-3">
+    <img src="logos/telagacharity.jpg" class="w-9 h-9 rounded-full object-cover" alt="Telaga Charity"/>
+    <h4 class="font-headline font-bold uppercase text-sm">Telaga Charity</h4>
+    <p class="text-on-surface-variant text-xs leading-relaxed">Building schools & feeding the hungry. We take 0% commission from donations & have no token. Donate any SPL or share fees to: telagacharity.sol</p>
+    <span class="material-symbols-outlined text-premium text-sm mt-auto">arrow_forward</span>
+  </a>
+</div>
+
+<div id="tab-media" class="tab-panel hidden grid grid-cols-2 md:grid-cols-4 gap-4">
+  <a href="https://ath.camera" target="_blank" class="eco-card bg-surface-container-low rounded-lg p-6 border border-outline-variant/10 hover:border-premium/40 transition-all no-underline flex flex-col gap-3">
+    <img src="logos/ath.jpg" class="w-9 h-9 rounded-full object-cover" alt="ATH"/>
+    <h4 class="font-headline font-bold uppercase text-sm">ATH</h4>
+    <p class="text-on-surface-variant text-xs leading-relaxed">Real videos | AI films | Bangers only | Solana Global Content Competition Winners🏆</p>
+    <span class="material-symbols-outlined text-premium text-sm mt-auto">arrow_forward</span>
+  </a>
+  <a href="https://x.com/littleunusualHQ" target="_blank" class="eco-card bg-surface-container-low rounded-lg p-6 border border-outline-variant/10 hover:border-premium/40 transition-all no-underline flex flex-col gap-3">
+    <img src="logos/littleunusual.jpg" class="w-9 h-9 rounded-full object-cover" alt="Little Unusual"/>
+    <h4 class="font-headline font-bold uppercase text-sm">Little Unusual</h4>
+    <p class="text-on-surface-variant text-xs leading-relaxed">A remote web3 creative agency owning the unusual, powered by Superteam</p>
+    <span class="material-symbols-outlined text-premium text-sm mt-auto">arrow_forward</span>
+  </a>
+  <a href="https://x.com/ownershipfm" target="_blank" class="eco-card bg-surface-container-low rounded-lg p-6 border border-outline-variant/10 hover:border-premium/40 transition-all no-underline flex flex-col gap-3">
+    <img src="logos/ownership.jpg" class="w-9 h-9 rounded-full object-cover" alt="Ownership Podcast"/>
+    <h4 class="font-headline font-bold uppercase text-sm">Ownership Podcast</h4>
+    <p class="text-on-surface-variant text-xs leading-relaxed">Wanna go on the record? 💿</p>
+    <span class="material-symbols-outlined text-premium text-sm mt-auto">arrow_forward</span>
+  </a>
+  <a href="https://x.com/SolanaSensei" target="_blank" class="eco-card bg-surface-container-low rounded-lg p-6 border border-outline-variant/10 hover:border-premium/40 transition-all no-underline flex flex-col gap-3">
+    <img src="logos/solanasensei.jpg" class="w-9 h-9 rounded-full object-cover" alt="Solana Sensei"/>
+    <h4 class="font-headline font-bold uppercase text-sm">Solana Sensei</h4>
+    <p class="text-on-surface-variant text-xs leading-relaxed">Solana OG | God Mode Unlocked | Founder & CEO of Sensei Holdings and Namaste Group</p>
+    <span class="material-symbols-outlined text-premium text-sm mt-auto">arrow_forward</span>
+  </a>
+  <a href="https://x.com/SolBrothersPod" target="_blank" class="eco-card bg-surface-container-low rounded-lg p-6 border border-outline-variant/10 hover:border-premium/40 transition-all no-underline flex flex-col gap-3">
+    <img src="logos/solanaecosystemcall.jpg" class="w-9 h-9 rounded-full object-cover" alt="Solana Ecosystem Call"/>
+    <h4 class="font-headline font-bold uppercase text-sm">Solana Ecosystem Call</h4>
+    <p class="text-on-surface-variant text-xs leading-relaxed">Solana's Late Night Show. Comedy. Interviews. Coverage. Every last Thursday of the Month, 10AM ET.</p>
+    <span class="material-symbols-outlined text-premium text-sm mt-auto">arrow_forward</span>
+  </a>
+  <a href="https://x.com/Genfinity" target="_blank" class="eco-card bg-surface-container-low rounded-lg p-6 border border-outline-variant/10 hover:border-premium/40 transition-all no-underline flex flex-col gap-3">
+    <img src="logos/generationinfinity.jpg" class="w-9 h-9 rounded-full object-cover" alt="Generation Infinity"/>
+    <h4 class="font-headline font-bold uppercase text-sm">Generation Infinity</h4>
+    <p class="text-on-surface-variant text-xs leading-relaxed">Amplifying the future of digital infrastructure since 2021 | Builder Economy | L1 Ecosystems | Media, Research & News</p>
+    <span class="material-symbols-outlined text-premium text-sm mt-auto">arrow_forward</span>
+  </a>
+  <a href="https://x.com/thesensedotsol" target="_blank" class="eco-card bg-surface-container-low rounded-lg p-6 border border-outline-variant/10 hover:border-premium/40 transition-all no-underline flex flex-col gap-3">
+    <img src="logos/thesense.png" class="w-9 h-9 rounded-full object-cover" alt="The Sense"/>
+    <h4 class="font-headline font-bold uppercase text-sm">The Sense</h4>
+    <p class="text-on-surface-variant text-xs leading-relaxed">We create videos with our senses</p>
+    <span class="material-symbols-outlined text-premium text-sm mt-auto">arrow_forward</span>
+  </a>
+  <a href="https://x.com/fomo_magazine" target="_blank" class="eco-card bg-surface-container-low rounded-lg p-6 border border-outline-variant/10 hover:border-premium/40 transition-all no-underline flex flex-col gap-3">
+    <img src="logos/fomo.jpg" class="w-9 h-9 rounded-full object-cover" alt="FOMO Magazine"/>
+    <h4 class="font-headline font-bold uppercase text-sm">FOMO Magazine</h4>
+    <p class="text-on-surface-variant text-xs leading-relaxed">The No.1 Magazine on Solana 🔥 Video Content, Photos + Alpha. Powered by: KASTxyz | Backpack. Core Contributor: solana_temple | hysolfitness</p>
+    <span class="material-symbols-outlined text-premium text-sm mt-auto">arrow_forward</span>
+  </a>
+</div>
+
+<div id="tab-wellness" class="tab-panel hidden grid grid-cols-2 md:grid-cols-4 gap-4">
+  <a href="https://x.com/CudisWellness" target="_blank" class="eco-card bg-surface-container-low rounded-lg p-6 border border-outline-variant/10 hover:border-premium/40 transition-all no-underline flex flex-col gap-3">
+    <img src="logos/cudis.jpg" class="w-9 h-9 rounded-full object-cover" alt="Cudis"/>
+    <h4 class="font-headline font-bold uppercase text-sm">Cudis</h4>
+    <p class="text-on-surface-variant text-xs leading-relaxed">The Olympian-trusted wearable coach for wellness, recovery & anti-aging. Join 250k+ global members to optimize your wellness today.</p>
+    <span class="material-symbols-outlined text-premium text-sm mt-auto">arrow_forward</span>
+  </a>
+  <a href="https://x.com/moonwalkfitness" target="_blank" class="eco-card bg-surface-container-low rounded-lg p-6 border border-outline-variant/10 hover:border-premium/40 transition-all no-underline flex flex-col gap-3">
+    <img src="logos/moonwalk.jpg" class="w-9 h-9 rounded-full object-cover" alt="Moonwalk Fitness"/>
+    <h4 class="font-headline font-bold uppercase text-sm">Moonwalk Fitness</h4>
+    <p class="text-on-surface-variant text-xs leading-relaxed">Gamified fitness that turns daily steps into a healthy habit. Move more. Live better. Earn rewards. Download now on iOS and Android!</p>
+    <span class="material-symbols-outlined text-premium text-sm mt-auto">arrow_forward</span>
+  </a>
+  <a href="https://x.com/oneofusgang" target="_blank" class="eco-card bg-surface-container-low rounded-lg p-6 border border-outline-variant/10 hover:border-premium/40 transition-all no-underline flex flex-col gap-3">
+    <img src="logos/oneofus.jpg" class="w-9 h-9 rounded-full object-cover" alt="OneOfUs"/>
+    <h4 class="font-headline font-bold uppercase text-sm">OneOfUs</h4>
+    <p class="text-on-surface-variant text-xs leading-relaxed">Join us & stay active during crypto conferences. Powered by Aya • Fueled by Community • See you at Sunrise</p>
+    <span class="material-symbols-outlined text-premium text-sm mt-auto">arrow_forward</span>
+  </a>
+</div>
+
+<div id="tab-jobs" class="tab-panel hidden grid grid-cols-2 md:grid-cols-4 gap-4">
+  <a href="https://x.com/SuperteamTalent" target="_blank" class="eco-card bg-surface-container-low rounded-lg p-6 border border-outline-variant/10 hover:border-premium/40 transition-all no-underline flex flex-col gap-3">
+    <img src="logos/superteamtalent.jpg" class="w-9 h-9 rounded-full object-cover" alt="Superteam Talent"/>
+    <h4 class="font-headline font-bold uppercase text-sm">Superteam Talent</h4>
+    <p class="text-on-surface-variant text-xs leading-relaxed">building careers in the Solana ecosystem</p>
+    <span class="material-symbols-outlined text-premium text-sm mt-auto">arrow_forward</span>
+  </a>
+  <a href="https://app.gib.work/" target="_blank" class="eco-card bg-surface-container-low rounded-lg p-6 border border-outline-variant/10 hover:border-premium/40 transition-all no-underline flex flex-col gap-3">
+    <img src="logos/gib.work.jpg" class="w-9 h-9 rounded-full object-cover" alt="Gib.Work"/>
+    <h4 class="font-headline font-bold uppercase text-sm">Gib.Work</h4>
+    <p class="text-on-surface-variant text-xs leading-relaxed">Where anyone can create work, take on work, and get paid in the internet’s currency.</p>
+    <span class="material-symbols-outlined text-premium text-sm mt-auto">arrow_forward</span>
+  </a>
+  <a href="https://jobs.solana.com/" target="_blank" class="eco-card bg-surface-container-low rounded-lg p-6 border border-outline-variant/10 hover:border-premium/40 transition-all no-underline flex flex-col gap-3">
+    <img src="logos/solana.jpg" class="w-9 h-9 rounded-full object-cover" alt="Solana Job Board"/>
+    <h4 class="font-headline font-bold uppercase text-sm">Solana Job Board</h4>
+    <p class="text-on-surface-variant text-xs leading-relaxed">Search job openings across the Solana Network Opportunities network.</p>
+    <span class="material-symbols-outlined text-premium text-sm mt-auto">arrow_forward</span>
+  </a>
+  <a href="https://superteam.fun/earn" target="_blank" class="eco-card bg-surface-container-low rounded-lg p-6 border border-outline-variant/10 hover:border-premium/40 transition-all no-underline flex flex-col gap-3">
+    <img src="logos/superteam earn.jpg" class="w-9 h-9 rounded-full object-cover" alt="Superteam Earn"/>
+    <h4 class="font-headline font-bold uppercase text-sm">Superteam Earn</h4>
+    <p class="text-on-surface-variant text-xs leading-relaxed">Bounties, gigs, and grants across the Solana ecosystem.</p>
+    <span class="material-symbols-outlined text-premium text-sm mt-auto">arrow_forward</span>
+  </a>
+</div>
+
+<div id="tab-gaming" class="tab-panel hidden grid grid-cols-2 md:grid-cols-4 gap-4">
+  <a href="https://x.com/solanagaming" target="_blank" class="eco-card bg-surface-container-low rounded-lg p-6 border border-outline-variant/10 hover:border-premium/40 transition-all no-underline flex flex-col gap-3">
+    <img src="logos/solanagaming.jpg" class="w-9 h-9 rounded-full object-cover" alt="Solana Gaming"/>
+    <h4 class="font-headline font-bold uppercase text-sm">Solana Gaming</h4>
+    <p class="text-on-surface-variant text-xs leading-relaxed">Official Gaming Account for Solana 🕹️ Redefine how gamers play with speed, scalability, and digital ownership.</p>
+    <span class="material-symbols-outlined text-premium text-sm mt-auto">arrow_forward</span>
+  </a>
+</div>
+
+<div id="tab-ai" class="tab-panel hidden grid grid-cols-2 md:grid-cols-4 gap-4">
+  <a href="https://solana.com/skills" target="_blank" class="eco-card bg-surface-container-low rounded-lg p-6 border border-outline-variant/10 hover:border-premium/40 transition-all no-underline flex flex-col gap-3">
+    <img src="logos/solana.jpg" class="w-9 h-9 rounded-full object-cover" alt="Solana Agent Skills"/>
+    <h4 class="font-headline font-bold uppercase text-sm">Solana Agent Skills</h4>
+    <p class="text-on-surface-variant text-xs leading-relaxed">Pre-built skills you can drop into your AI agents to interact with Solana. Each skill gives your agent the context it needs to work with programs, tokens, tooling, and more.</p>
+    <span class="material-symbols-outlined text-premium text-sm mt-auto">arrow_forward</span>
+  </a>
+  <a href="https://x.com/TryNoahAI" target="_blank" class="eco-card bg-surface-container-low rounded-lg p-6 border border-outline-variant/10 hover:border-premium/40 transition-all no-underline flex flex-col gap-3">
+    <img src="logos/noahai.jpg" class="w-9 h-9 rounded-full object-cover" alt="Noah AI"/>
+    <h4 class="font-headline font-bold uppercase text-sm">Noah AI</h4>
+    <p class="text-on-surface-variant text-xs leading-relaxed">Build crypto apps by chatting with AI. One prompt at a time.</p>
     <span class="material-symbols-outlined text-premium text-sm mt-auto">arrow_forward</span>
   </a>
 </div>
@@ -1363,6 +1526,11 @@ const suggestLabels = {
   nfts: 'No NFT project?',
   prediction: null, // already added manually
   rwa: 'No RWA project?',
+  media: 'No media project?',
+  wellness: 'No wellness project?',
+  jobs: 'No jobs resource?',
+  gaming: 'No gaming project?',
+  ai: 'No AI tool?',
   wallets: 'No wallet?',
   cards: 'No crypto card?',
   hardware: 'No hardware wallet?',
@@ -1428,20 +1596,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 </script>
-<!-- ── Cookie Consent Banner ── -->
-<div id="cookie-banner" class="fixed bottom-0 left-0 right-0 z-[80] bg-[#111111] border-t border-outline-variant/40 px-5 sm:px-8 py-4 hidden">
-  <div class="max-w-[1440px] mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-    <p class="text-[10px] tracking-widest uppercase text-zinc-400 leading-relaxed max-w-xl">
-      We use cookies to analyze site traffic via Google Analytics. No personal data is sold.
-      <button onclick="showPrivacyModal()" class="text-[color:var(--accent-premium)] underline underline-offset-2 bg-transparent border-none cursor-pointer p-0 font-label text-[10px] tracking-widest uppercase ml-1">Privacy Policy</button>
-    </p>
-    <div class="flex gap-3 shrink-0">
-      <button onclick="acceptCookies()" class="hero-cta-neon font-label tracking-widest uppercase text-xs font-bold py-2 px-5">Accept</button>
-      <button onclick="declineCookies()" class="bg-transparent text-zinc-500 hover:text-on-surface font-label tracking-widest uppercase text-xs font-bold py-2 px-5 border border-outline-variant/40 hover:border-outline-variant transition-all">Decline</button>
-    </div>
-  </div>
-</div>
-
 <!-- ── Privacy Policy Modal ── -->
 <div id="privacy-modal" class="fixed inset-0 z-[90] bg-black/80 backdrop-blur-sm hidden items-center justify-center p-5" onclick="if(event.target===this)closePrivacyModal()">
   <div class="bg-[#111111] border border-outline-variant/40 rounded-lg max-w-lg w-full p-8 relative max-h-[80vh] overflow-y-auto">
@@ -1452,55 +1606,36 @@ document.addEventListener('DOMContentLoaded', () => {
     <div class="flex flex-col gap-5 text-[11px] text-zinc-400 leading-relaxed font-label">
       <div>
         <p class="text-on-surface font-semibold uppercase tracking-widest text-[10px] mb-1">Analytics</p>
-        <p>This site uses Google Analytics to understand how visitors interact with the content. Data collected includes pages visited, time on page, approximate location (country level), and browser type. No personally identifiable information is collected or stored.</p>
+        <p>This site uses Umami Analytics (cookieless) to measure page views and on-site interactions (like tab clicks). No personally identifiable information is collected or stored.</p>
       </div>
       <div>
         <p class="text-on-surface font-semibold uppercase tracking-widest text-[10px] mb-1">Cookies</p>
-        <p>Google Analytics uses cookies to distinguish unique visitors. You can accept or decline these cookies using the banner on this site. Declining means no analytics data is collected from your visit.</p>
+        <p>We do not use tracking cookies for analytics.</p>
       </div>
       <div>
         <p class="text-on-surface font-semibold uppercase tracking-widest text-[10px] mb-1">Data Sharing</p>
-        <p>We do not sell or share your data with third parties. Data is processed by Google LLC under their privacy policy. IP addresses are anonymized.</p>
+        <p>We do not sell your data. Analytics data is stored in our Umami instance.</p>
       </div>
       <div>
         <p class="text-on-surface font-semibold uppercase tracking-widest text-[10px] mb-1">Your Rights</p>
-        <p>You can withdraw consent at any time by clearing your browser cookies. You can also opt out globally using <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" class="text-[color:var(--accent-premium)] underline underline-offset-2">Google's Analytics opt-out tool</a>.</p>
+        <p>You can use your browser settings to block scripts. For privacy questions, reach out via the contact channels listed on this site.</p>
       </div>
-      <a href="https://policies.google.com/privacy" target="_blank" class="text-zinc-500 underline underline-offset-2 hover:text-zinc-300 transition-all text-[10px] uppercase tracking-widest">Google Privacy Policy →</a>
     </div>
   </div>
 </div>
 
 <script>
-// ── Consent Management ──
-(function(){
-  var banner=document.getElementById('cookie-banner');
-  var consent=localStorage.getItem('analytics_consent');
-  if(consent==='accepted'){window.loadGA4&&window.loadGA4();}
-  else if(consent!=='declined'){if(banner)banner.classList.remove('hidden');}
-
-  window.acceptCookies=function(){
-    localStorage.setItem('analytics_consent','accepted');
-    if(banner)banner.classList.add('hidden');
-    window.loadGA4&&window.loadGA4();
-  };
-  window.declineCookies=function(){
-    localStorage.setItem('analytics_consent','declined');
-    if(banner)banner.classList.add('hidden');
-  };
-  window.showPrivacyModal=function(){
-    var m=document.getElementById('privacy-modal');
-    if(m){m.classList.remove('hidden');m.classList.add('flex');}
-  };
-  window.closePrivacyModal=function(){
-    var m=document.getElementById('privacy-modal');
-    if(m){m.classList.add('hidden');m.classList.remove('flex');}
-  };
-})();
+window.showPrivacyModal=function(){
+  var m=document.getElementById('privacy-modal');
+  if(m){m.classList.remove('hidden');m.classList.add('flex');}
+};
+window.closePrivacyModal=function(){
+  var m=document.getElementById('privacy-modal');
+  if(m){m.classList.add('hidden');m.classList.remove('flex');}
+};
 
 // ── Solflare & Site Event Tracking ──
 document.addEventListener('click',function(e){
-  if(!window._ga4loaded)return;
   var t=e.target.closest('a[href],button[onclick],button.eco-tab,button.hero-cta-neon,a.hero-cta-neon');
   if(!t)return;
   var href=t.getAttribute('href')||'';
@@ -1511,19 +1646,19 @@ document.addEventListener('click',function(e){
   var s=t.closest('section[id]');if(s)sec=s.id;
 
   if(href.includes('solflare.com/download')){
-    gtag('event','solflare_download_clicked',{section:sec});
+    window._track('solflare_download_clicked',{section:sec});
   }else if(href.includes('solflare.com/crypto-card')){
-    gtag('event','solflare_card_clicked');
+    window._track('solflare_card_clicked');
   }else if(href.includes('solflare.com/hardware-wallet')){
-    gtag('event','solflare_shield_clicked');
+    window._track('solflare_shield_clicked');
   }else if(href.includes('discord.com/invite/solflare')){
-    gtag('event','solflare_discord_clicked',{section:sec});
+    window._track('solflare_discord_clicked',{section:sec});
   }else if(id==='tab-btn-wallets'||oc.includes("'wallets'")){
-    gtag('event','wallets_tab_clicked');
+    window._track('wallets_tab_clicked');
   }else if(cls.includes('hero-cta-neon')){
-    gtag('event','hero_cta_clicked',{text:t.textContent.trim().substring(0,50)});
+    window._track('hero_cta_clicked',{text:t.textContent.trim().substring(0,50)});
   }else if(cls.includes('eco-tab')){
-    gtag('event','ecosystem_tab_clicked',{tab:t.textContent.trim()});
+    window._track('ecosystem_tab_clicked',{tab:t.textContent.trim()});
   }
 });
 </script>

@@ -1,0 +1,41 @@
+# Local-only / tool folders
+.cursor/
+.claude/
+.agents/
+
+# Local-only docs
+local-docs/
+docs/
+VERSION
+bios(descriptions).txt
+bios.txt
+index.local.html
+
+# Local scratch + heavy artifacts
+node_modules/
+videopresentations/
+Migration/
+transcripts/
+archive/
+Stitch/
+website/
+website-minimal/
+favicons/
+~/
+
+# Local tooling / project files (keep repo focused on the site)
+package.json
+package-lock.json
+export-pdf.mjs
+generate-og.mjs
+og-template.html
+project_overview.html
+skills-lock.json
+SETUP.md
+DESIGN_GUIDELINES.md
+README.md
+
+# OS / editor
+.DS_Store
+Thumbs.db
+
