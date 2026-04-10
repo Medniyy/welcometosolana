@@ -401,26 +401,31 @@ See migration guide
   <p id="eco-subtitle" class="text-on-surface-variant mt-4 text-lg font-light">Your people are already here. Find your local Solana chapter.</p>
 </div>
 
-<!-- Tab buttons -->
+<!-- Tab buttons (label order: A–Z; default open tab = Communities) -->
 <div class="flex flex-wrap justify-center gap-3 mb-10" id="eco-tabs">
-  <button type="button" onclick="showTab('defi','Trade, swap, and provide liquidity with real volume and real depth.', this)" class="eco-tab font-label font-semibold uppercase text-[10px] sm:text-xs tracking-widest px-4 py-2.5 rounded-sm border transition-all">DeFi</button>
-  <button type="button" onclick="showTab('yield','Put your assets to work. Real yield from real on-chain activity.', this)" class="eco-tab font-label font-semibold uppercase text-[10px] sm:text-xs tracking-widest px-4 py-2.5 rounded-sm border transition-all">Yield</button>
+  <button type="button" onclick="showTab('ai','AI tools, agents, and skills for building on Solana faster.', this)" class="eco-tab font-label font-semibold uppercase text-[10px] sm:text-xs tracking-widest px-4 py-2.5 rounded-sm border transition-all">AI</button>
+  <button type="button" onclick="showTab('cards','Spend your crypto anywhere. Real cards backed by real Solana assets.', this)" class="eco-tab font-label font-semibold uppercase text-[10px] sm:text-xs tracking-widest px-4 py-2.5 rounded-sm border transition-all">Cards</button>
+  <button type="button" onclick="showTab('charity','Give back with Solana. Social impact on-chain.', this)" class="eco-tab font-label font-semibold uppercase text-[10px] sm:text-xs tracking-widest px-4 py-2.5 rounded-sm border transition-all">Charity</button>
   <button type="button" onclick="showTab('communities','Your people are already here. Find your local Solana chapter.', this)" class="eco-tab active-tab font-label font-semibold uppercase text-[10px] sm:text-xs tracking-widest px-4 py-2.5 rounded-sm border transition-all">Communities</button>
-  <button type="button" onclick="showTab('grants','Real funding. Real programs. No gatekeeping.', this)" class="eco-tab font-label font-semibold uppercase text-[10px] sm:text-xs tracking-widest px-4 py-2.5 rounded-sm border transition-all">Grants</button>
+  <button type="button" onclick="showTab('defi','Trade, swap, and provide liquidity with real volume and real depth.', this)" class="eco-tab font-label font-semibold uppercase text-[10px] sm:text-xs tracking-widest px-4 py-2.5 rounded-sm border transition-all">DeFi</button>
   <button type="button" onclick="showTab('developers','Build on the fastest chain in crypto. Ship, get funded, repeat.', this)" class="eco-tab font-label font-semibold uppercase text-[10px] sm:text-xs tracking-widest px-4 py-2.5 rounded-sm border transition-all">Developers</button>
+  <button type="button" onclick="showTab('gaming','Games, studios, and gaming community on Solana.', this)" class="eco-tab font-label font-semibold uppercase text-[10px] sm:text-xs tracking-widest px-4 py-2.5 rounded-sm border transition-all">Gaming</button>
+  <button type="button" onclick="showTab('grants','Real funding. Real programs. No gatekeeping.', this)" class="eco-tab font-label font-semibold uppercase text-[10px] sm:text-xs tracking-widest px-4 py-2.5 rounded-sm border transition-all">Grants</button>
+  <button type="button" onclick="showTab('hardware','Cold storage, Solana-style. Your keys, offline, safe.', this)" class="eco-tab font-label font-semibold uppercase text-[10px] sm:text-xs tracking-widest px-4 py-2.5 rounded-sm border transition-all">Hardware</button>
+  <button type="button" onclick="showTab('jobs','Careers, bounties, and job boards across the Solana ecosystem.', this)" class="eco-tab font-label font-semibold uppercase text-[10px] sm:text-xs tracking-widest px-4 py-2.5 rounded-sm border transition-all">Jobs</button>
+  <button type="button" onclick="showTab('lending','Order book credit and on-chain borrow markets.', this)" class="eco-tab font-label font-semibold uppercase text-[10px] sm:text-xs tracking-widest px-4 py-2.5 rounded-sm border transition-all">Lending</button>
+  <button type="button" onclick="showTab('media','Creators, studios, podcasts, and Solana media — where culture is made.', this)" class="eco-tab font-label font-semibold uppercase text-[10px] sm:text-xs tracking-widest px-4 py-2.5 rounded-sm border transition-all">Media</button>
   <button type="button" onclick="showTab('nfts','Discover, trade, and collect. Solana has the most active NFT scene in crypto.', this)" class="eco-tab font-label font-semibold uppercase text-[10px] sm:text-xs tracking-widest px-4 py-2.5 rounded-sm border transition-all">NFTs</button>
   <button type="button" onclick="showTab('prediction','Trade on real-world outcomes. Available right inside Solflare.', this)" class="eco-tab font-label font-semibold uppercase text-[10px] sm:text-xs tracking-widest px-4 py-2.5 rounded-sm border transition-all">Prediction</button>
+  <button type="button" onclick="showTab('privacy','Private payments, swaps, and transfers.', this)" class="eco-tab font-label font-semibold uppercase text-[10px] sm:text-xs tracking-widest px-4 py-2.5 rounded-sm border transition-all">Privacy</button>
   <button type="button" onclick="showTab('rwa','Real-world assets, on-chain. Finance meets blockchain.', this)" class="eco-tab font-label font-semibold uppercase text-[10px] sm:text-xs tracking-widest px-4 py-2.5 rounded-sm border transition-all">RWA</button>
-  <button type="button" id="tab-btn-wallets" onclick="showTab('wallets','Start with Solflare. Built for Solana, loved by 4M+ users.', this)" class="eco-tab font-label font-semibold uppercase text-[10px] sm:text-xs tracking-widest px-4 py-2.5 rounded-sm border transition-all">Wallets</button>
-  <button type="button" onclick="showTab('cards','Spend your crypto anywhere. Real cards backed by real Solana assets.', this)" class="eco-tab font-label font-semibold uppercase text-[10px] sm:text-xs tracking-widest px-4 py-2.5 rounded-sm border transition-all">Cards</button>
-  <button type="button" onclick="showTab('hardware','Cold storage, Solana-style. Your keys, offline, safe.', this)" class="eco-tab font-label font-semibold uppercase text-[10px] sm:text-xs tracking-widest px-4 py-2.5 rounded-sm border transition-all">Hardware</button>
+  <button type="button" onclick="showTab('stocks','Tokenized equities and on-chain stock exposure.', this)" class="eco-tab font-label font-semibold uppercase text-[10px] sm:text-xs tracking-widest px-4 py-2.5 rounded-sm border transition-all">Stocks</button>
   <button type="button" onclick="showTab('taxes','Keep it compliant. Track your on-chain activity automatically.', this)" class="eco-tab font-label font-semibold uppercase text-[10px] sm:text-xs tracking-widest px-4 py-2.5 rounded-sm border transition-all">Taxes</button>
-  <button type="button" onclick="showTab('charity','Give back with Solana. Social impact on-chain.', this)" class="eco-tab font-label font-semibold uppercase text-[10px] sm:text-xs tracking-widest px-4 py-2.5 rounded-sm border transition-all">Charity</button>
-  <button type="button" onclick="showTab('media','Creators, studios, podcasts, and Solana media — where culture is made.', this)" class="eco-tab font-label font-semibold uppercase text-[10px] sm:text-xs tracking-widest px-4 py-2.5 rounded-sm border transition-all">Media</button>
+  <button type="button" onclick="showTab('travel','Book and travel with crypto on Solana.', this)" class="eco-tab font-label font-semibold uppercase text-[10px] sm:text-xs tracking-widest px-4 py-2.5 rounded-sm border transition-all">Travel</button>
+  <button type="button" onclick="showTab('validators','Independent validators, stake pools, and Solana infrastructure.', this)" class="eco-tab font-label font-semibold uppercase text-[10px] sm:text-xs tracking-widest px-4 py-2.5 rounded-sm border transition-all">Validators</button>
+  <button type="button" id="tab-btn-wallets" onclick="showTab('wallets','Start with Solflare. Built for Solana, loved by 4M+ users.', this)" class="eco-tab font-label font-semibold uppercase text-[10px] sm:text-xs tracking-widest px-4 py-2.5 rounded-sm border transition-all">Wallets</button>
   <button type="button" onclick="showTab('wellness','Wellness, recovery, fitness — stay sharp on-chain and IRL.', this)" class="eco-tab font-label font-semibold uppercase text-[10px] sm:text-xs tracking-widest px-4 py-2.5 rounded-sm border transition-all">Wellness</button>
-  <button type="button" onclick="showTab('jobs','Careers, bounties, and job boards across the Solana ecosystem.', this)" class="eco-tab font-label font-semibold uppercase text-[10px] sm:text-xs tracking-widest px-4 py-2.5 rounded-sm border transition-all">Jobs</button>
-  <button type="button" onclick="showTab('gaming','Games, studios, and gaming community on Solana.', this)" class="eco-tab font-label font-semibold uppercase text-[10px] sm:text-xs tracking-widest px-4 py-2.5 rounded-sm border transition-all">Gaming</button>
-  <button type="button" onclick="showTab('ai','AI tools, agents, and skills for building on Solana faster.', this)" class="eco-tab font-label font-semibold uppercase text-[10px] sm:text-xs tracking-widest px-4 py-2.5 rounded-sm border transition-all">AI</button>
+  <button type="button" onclick="showTab('yield','Put your assets to work. Real yield from real on-chain activity.', this)" class="eco-tab font-label font-semibold uppercase text-[10px] sm:text-xs tracking-widest px-4 py-2.5 rounded-sm border transition-all">Yield</button>
 </div>
 
 <!-- Tab content panels -->
@@ -447,6 +452,18 @@ See migration guide
     <img src="logos/kamino.jpg" class="w-10 h-10 rounded-full object-cover" alt="Kamino"/>
     <h4 class="font-headline font-bold uppercase text-sm">Kamino</h4>
     <p class="text-on-surface-variant text-xs leading-relaxed">Building the next generation of credit infrastructure on Solana. NFA.</p>
+    <span class="material-symbols-outlined text-premium text-sm mt-auto">arrow_forward</span>
+  </a>
+  <a href="https://x.com/byreal_io" target="_blank" class="eco-card bg-surface-container-low rounded-lg p-6 border border-outline-variant/10 hover:border-premium/40 transition-all no-underline flex flex-col gap-3">
+    <img src="logos/byreal.jpg" class="w-10 h-10 rounded-full object-cover" alt="Byreal"/>
+    <h4 class="font-headline font-bold uppercase text-sm">Byreal</h4>
+    <p class="text-on-surface-variant text-xs leading-relaxed">The most agent-native DEX on Solana. Incubated by Bybit. Home to bbSOL. Built for agents.</p>
+    <span class="material-symbols-outlined text-premium text-sm mt-auto">arrow_forward</span>
+  </a>
+  <a href="https://x.com/Loopscale" target="_blank" class="eco-card bg-surface-container-low rounded-lg p-6 border border-outline-variant/10 hover:border-premium/40 transition-all no-underline flex flex-col gap-3">
+    <img src="logos/loopscale.png" class="w-10 h-10 rounded-full object-cover" alt="Loopscale"/>
+    <h4 class="font-headline font-bold uppercase text-sm">Loopscale</h4>
+    <p class="text-on-surface-variant text-xs leading-relaxed">Order book-based credit markets. A new standard for borrowing and lending onchain.</p>
     <span class="material-symbols-outlined text-premium text-sm mt-auto">arrow_forward</span>
   </a>
 </div>
@@ -476,15 +493,30 @@ See migration guide
     <p class="text-on-surface-variant text-xs leading-relaxed">Building world-class dynamic liquidity pools for the biggest LP community. LPs earned $1B+ in fees.</p>
     <span class="material-symbols-outlined text-premium text-sm mt-auto">arrow_forward</span>
   </a>
+  <a href="https://x.com/perena" target="_blank" class="eco-card bg-surface-container-low rounded-lg p-6 border border-outline-variant/10 hover:border-premium/40 transition-all no-underline flex flex-col gap-3">
+    <img src="logos/perena.jpg" class="w-10 h-10 rounded-full object-cover" alt="Perena"/>
+    <h4 class="font-headline font-bold uppercase text-sm">Perena</h4>
+    <p class="text-on-surface-variant text-xs leading-relaxed">Modern finance begins with digital money. Grow your wealth with USD*.</p>
+    <span class="material-symbols-outlined text-premium text-sm mt-auto">arrow_forward</span>
+  </a>
+</div>
+
+<div id="tab-validators" class="tab-panel hidden grid grid-cols-2 md:grid-cols-4 gap-4">
+  <a href="https://x.com/layer33xyz" target="_blank" class="eco-card bg-surface-container-low rounded-lg p-6 border border-outline-variant/10 hover:border-premium/40 transition-all no-underline flex flex-col gap-3">
+    <img src="logos/layer33.jpg" class="w-9 h-9 rounded-full object-cover" alt="Layer33"/>
+    <h4 class="font-headline font-bold uppercase text-sm">Layer33</h4>
+    <p class="text-on-surface-variant text-xs leading-relaxed">A collective of 25 independent Solana validators committed to maintaining network decentralization. Our mission: ensure 33% of the Solana stake remains with independent operators.</p>
+    <span class="material-symbols-outlined text-premium text-sm mt-auto">arrow_forward</span>
+  </a>
+  <a href="https://x.com/phase_" target="_blank" class="eco-card bg-surface-container-low rounded-lg p-6 border border-outline-variant/10 hover:border-premium/40 transition-all no-underline flex flex-col gap-3">
+    <img src="logos/phase.jpg" class="w-9 h-9 rounded-full object-cover" alt="Phase"/>
+    <h4 class="font-headline font-bold uppercase text-sm">Phase</h4>
+    <p class="text-on-surface-variant text-xs leading-relaxed">Validators. Stake pools. Solana infrastructure since 2021.</p>
+    <span class="material-symbols-outlined text-premium text-sm mt-auto">arrow_forward</span>
+  </a>
 </div>
 
 <div id="tab-communities" class="tab-panel grid grid-cols-2 md:grid-cols-4 gap-4">
-  <a href="https://superteam.fun/" target="_blank" class="eco-card bg-surface-container-low rounded-lg p-6 border border-outline-variant/10 hover:border-premium/40 transition-all no-underline flex flex-col gap-3">
-    <img src="logos/superteam.jpg" class="w-9 h-9 rounded-full object-cover" alt="Superteam"/>
-    <h4 class="font-headline font-bold uppercase text-sm">Superteam</h4>
-    <p class="text-on-surface-variant text-xs leading-relaxed">A community of founders, devs & grantees working in the Solana Ecosystem. || no token, just an online community.</p>
-    <span class="material-symbols-outlined text-premium text-sm mt-auto">arrow_forward</span>
-  </a>
   <a href="https://discord.com/invite/solflare" target="_blank" class="eco-card bg-surface-container-low rounded-lg p-6 border border-premium/40 hover:border-premium/55 transition-all no-underline flex flex-col gap-3 relative">
     <div class="absolute top-3 right-3 text-premium text-[10px] font-bold uppercase tracking-widest">★ Recommended</div>
     <div class="w-9 h-9 rounded-full overflow-hidden bg-black flex items-center justify-center">
@@ -492,6 +524,12 @@ See migration guide
     </div>
     <h4 class="font-headline font-bold uppercase text-sm">Solflare Empire</h4>
     <p class="text-on-surface-variant text-xs leading-relaxed">Official @Solflare Community Account | Home of Guardians, Ambassadors, and all community activities: news, events, workshops, and more.</p>
+    <span class="material-symbols-outlined text-premium text-sm mt-auto">arrow_forward</span>
+  </a>
+  <a href="https://superteam.fun/" target="_blank" class="eco-card bg-surface-container-low rounded-lg p-6 border border-outline-variant/10 hover:border-premium/40 transition-all no-underline flex flex-col gap-3">
+    <img src="logos/superteam.jpg" class="w-9 h-9 rounded-full object-cover" alt="Superteam"/>
+    <h4 class="font-headline font-bold uppercase text-sm">Superteam</h4>
+    <p class="text-on-surface-variant text-xs leading-relaxed">A community of founders, devs & grantees working in the Solana Ecosystem. || no token, just an online community.</p>
     <span class="material-symbols-outlined text-premium text-sm mt-auto">arrow_forward</span>
   </a>
   <a href="https://x.com/MonkeDAO" target="_blank" class="eco-card bg-surface-container-low rounded-lg p-6 border border-outline-variant/10 hover:border-premium/40 transition-all no-underline flex flex-col gap-3">
@@ -515,7 +553,7 @@ See migration guide
   <a href="https://x.com/layer33xyz" target="_blank" class="eco-card bg-surface-container-low rounded-lg p-6 border border-outline-variant/10 hover:border-premium/40 transition-all no-underline flex flex-col gap-3">
     <img src="logos/layer33.jpg" class="w-9 h-9 rounded-full object-cover" alt="Layer33"/>
     <h4 class="font-headline font-bold uppercase text-sm">Layer33</h4>
-    <p class="text-on-surface-variant text-xs leading-relaxed">A collective of 25 independent @solana validators committed to maintaining network decentralization. Our mission: ensure 33% of the Solana stake remains with independent operators.</p>
+    <p class="text-on-surface-variant text-xs leading-relaxed">A collective of 25 independent Solana validators committed to maintaining network decentralization. Our mission: ensure 33% of the Solana stake remains with independent operators.</p>
     <span class="material-symbols-outlined text-premium text-sm mt-auto">arrow_forward</span>
   </a>
   <a href="https://superwhere.io/" target="_blank" class="eco-card bg-surface-container-low rounded-lg p-6 border border-outline-variant/10 hover:border-premium/40 transition-all no-underline flex flex-col gap-3">
@@ -703,13 +741,24 @@ See migration guide
     <p class="text-on-surface-variant text-xs leading-relaxed">Real yield backed by real world payments, for everyone. $11B+ in payment volume. The largest PayFi protocol in the world.</p>
     <span class="material-symbols-outlined text-premium text-sm mt-auto">arrow_forward</span>
   </a>
-  <div class="eco-card bg-surface-container-low rounded-lg p-6 border border-dashed border-outline-variant/20 flex flex-col gap-3">
-    <div class="w-9 h-9 rounded-full bg-primary-container/10 flex items-center justify-center">
-      <span class="material-symbols-outlined text-primary-container text-base">add_circle</span>
-    </div>
-    <h4 class="font-headline font-bold uppercase text-sm text-on-surface-variant">More coming</h4>
-    <p class="text-on-surface-variant text-xs leading-relaxed">RWA is growing fast on Solana. Western Union, BlackRock, Reserve — all building here.</p>
-  </div>
+  <a href="https://x.com/orogoldapp" target="_blank" class="eco-card bg-surface-container-low rounded-lg p-6 border border-outline-variant/10 hover:border-premium/40 transition-all no-underline flex flex-col gap-3">
+    <img src="logos/oro.jpg" class="w-9 h-9 rounded-full object-cover" alt="Oro"/>
+    <h4 class="font-headline font-bold uppercase text-sm">Oro</h4>
+    <p class="text-on-surface-variant text-xs leading-relaxed">Yield-generating digital gold on Solana.</p>
+    <span class="material-symbols-outlined text-premium text-sm mt-auto">arrow_forward</span>
+  </a>
+  <a href="https://x.com/onrefinance" target="_blank" class="eco-card bg-surface-container-low rounded-lg p-6 border border-outline-variant/10 hover:border-premium/40 transition-all no-underline flex flex-col gap-3">
+    <img src="logos/onre.jpg" class="w-9 h-9 rounded-full object-cover" alt="OnRe"/>
+    <h4 class="font-headline font-bold uppercase text-sm">OnRe</h4>
+    <p class="text-on-surface-variant text-xs leading-relaxed">Leading onchain asset manager. Powering Solana's highest-yielding institutional dollar asset backed by real-world reinsurance.</p>
+    <span class="material-symbols-outlined text-premium text-sm mt-auto">arrow_forward</span>
+  </a>
+  <a href="https://x.com/HastraFi" target="_blank" class="eco-card bg-surface-container-low rounded-lg p-6 border border-outline-variant/10 hover:border-premium/40 transition-all no-underline flex flex-col gap-3">
+    <img src="logos/hastra.jpg" class="w-9 h-9 rounded-full object-cover" alt="Hastra"/>
+    <h4 class="font-headline font-bold uppercase text-sm">Hastra</h4>
+    <p class="text-on-surface-variant text-xs leading-relaxed">Institutional-grade products at your fingertips. Earn up to 8% with PRIME on Solana. Posts not intended for US audiences.</p>
+    <span class="material-symbols-outlined text-premium text-sm mt-auto">arrow_forward</span>
+  </a>
 </div>
 
 <div id="tab-wallets" class="tab-panel hidden grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -940,6 +989,60 @@ See migration guide
     <img src="logos/noahai.jpg" class="w-9 h-9 rounded-full object-cover" alt="Noah AI"/>
     <h4 class="font-headline font-bold uppercase text-sm">Noah AI</h4>
     <p class="text-on-surface-variant text-xs leading-relaxed">Build crypto apps by chatting with AI. One prompt at a time.</p>
+    <span class="material-symbols-outlined text-premium text-sm mt-auto">arrow_forward</span>
+  </a>
+  <a href="https://x.com/byreal_io" target="_blank" class="eco-card bg-surface-container-low rounded-lg p-6 border border-outline-variant/10 hover:border-premium/40 transition-all no-underline flex flex-col gap-3">
+    <img src="logos/byreal.jpg" class="w-9 h-9 rounded-full object-cover" alt="Byreal"/>
+    <h4 class="font-headline font-bold uppercase text-sm">Byreal</h4>
+    <p class="text-on-surface-variant text-xs leading-relaxed">The most agent-native DEX on Solana. Incubated by Bybit. Home to bbSOL. Built for agents.</p>
+    <span class="material-symbols-outlined text-premium text-sm mt-auto">arrow_forward</span>
+  </a>
+</div>
+
+<div id="tab-stocks" class="tab-panel hidden grid grid-cols-2 md:grid-cols-4 gap-4">
+  <a href="https://x.com/xStocksFi" target="_blank" class="eco-card bg-surface-container-low rounded-lg p-6 border border-outline-variant/10 hover:border-premium/40 transition-all no-underline flex flex-col gap-3">
+    <img src="logos/xstocks.jpg" class="w-9 h-9 rounded-full object-cover" alt="xStocks"/>
+    <h4 class="font-headline font-bold uppercase text-sm">xStocks</h4>
+    <p class="text-on-surface-variant text-xs leading-relaxed">Pioneering tokenized equities. Over 75 tokenized stocks available onchain and on centralized exchanges.</p>
+    <span class="material-symbols-outlined text-premium text-sm mt-auto">arrow_forward</span>
+  </a>
+</div>
+
+<div id="tab-lending" class="tab-panel hidden grid grid-cols-2 md:grid-cols-4 gap-4">
+  <a href="https://x.com/Loopscale" target="_blank" class="eco-card bg-surface-container-low rounded-lg p-6 border border-outline-variant/10 hover:border-premium/40 transition-all no-underline flex flex-col gap-3">
+    <img src="logos/loopscale.png" class="w-9 h-9 rounded-full object-cover" alt="Loopscale"/>
+    <h4 class="font-headline font-bold uppercase text-sm">Loopscale</h4>
+    <p class="text-on-surface-variant text-xs leading-relaxed">Order book-based credit markets. A new standard for borrowing and lending onchain.</p>
+    <span class="material-symbols-outlined text-premium text-sm mt-auto">arrow_forward</span>
+  </a>
+</div>
+
+<div id="tab-travel" class="tab-panel hidden grid grid-cols-2 md:grid-cols-4 gap-4">
+  <a href="https://x.com/NOMADZxyz" target="_blank" class="eco-card bg-surface-container-low rounded-lg p-6 border border-outline-variant/10 hover:border-premium/40 transition-all no-underline flex flex-col gap-3">
+    <img src="logos/nomadz.jpg" class="w-9 h-9 rounded-full object-cover" alt="Nomadz"/>
+    <h4 class="font-headline font-bold uppercase text-sm">Nomadz</h4>
+    <p class="text-on-surface-variant text-xs leading-relaxed">Book with crypto and save up to 60% on 1M+ stays. Supported by Solana Foundation and Circle. Winner of the Solana Mobile Hackathon. Solana Events Travel Partner.</p>
+    <span class="material-symbols-outlined text-premium text-sm mt-auto">arrow_forward</span>
+  </a>
+</div>
+
+<div id="tab-privacy" class="tab-panel hidden grid grid-cols-2 md:grid-cols-4 gap-4">
+  <a href="https://x.com/HoudiniSwap" target="_blank" class="eco-card bg-surface-container-low rounded-lg p-6 border border-outline-variant/10 hover:border-premium/40 transition-all no-underline flex flex-col gap-3">
+    <img src="logos/houdini.jpg" class="w-9 h-9 rounded-full object-cover" alt="HoudiniSwap"/>
+    <h4 class="font-headline font-bold uppercase text-sm">HoudiniSwap</h4>
+    <p class="text-on-surface-variant text-xs leading-relaxed">The #1 tool for private payments and transactions on any chain. Swap and move assets without the public trail.</p>
+    <span class="material-symbols-outlined text-premium text-sm mt-auto">arrow_forward</span>
+  </a>
+  <a href="https://x.com/HusherExchange" target="_blank" class="eco-card bg-surface-container-low rounded-lg p-6 border border-outline-variant/10 hover:border-premium/40 transition-all no-underline flex flex-col gap-3">
+    <img src="logos/husher.jpg" class="w-9 h-9 rounded-full object-cover" alt="Husher"/>
+    <h4 class="font-headline font-bold uppercase text-sm">Husher</h4>
+    <p class="text-on-surface-variant text-xs leading-relaxed">Swap crypto instantly, privately, across any chain.</p>
+    <span class="material-symbols-outlined text-premium text-sm mt-auto">arrow_forward</span>
+  </a>
+  <a href="https://x.com/theprivacycash" target="_blank" class="eco-card bg-surface-container-low rounded-lg p-6 border border-outline-variant/10 hover:border-premium/40 transition-all no-underline flex flex-col gap-3">
+    <img src="logos/privacycash.jpg" class="w-9 h-9 rounded-full object-cover" alt="Privacy Cash"/>
+    <h4 class="font-headline font-bold uppercase text-sm">Privacy Cash</h4>
+    <p class="text-on-surface-variant text-xs leading-relaxed">Private transfers, swaps and bridging on Solana. $330M+ processed. 14 audits completed. Backed by Alliance. No CA.</p>
     <span class="material-symbols-outlined text-premium text-sm mt-auto">arrow_forward</span>
   </a>
 </div>
@@ -1518,24 +1621,29 @@ function showTab(name, subtitle, btn) {
 
 // Add "suggest" card to every tab that doesn't already have one
 const suggestLabels = {
-  defi: 'No DeFi protocol?',
-  yield: 'No yield protocol?',
+  ai: 'No AI tool?',
+  cards: 'No crypto card?',
+  charity: 'No charity?',
   communities: 'No community?',
-  grants: 'No grant program?',
+  defi: 'No DeFi protocol?',
   developers: 'No dev resource?',
+  gaming: 'No gaming project?',
+  grants: 'No grant program?',
+  hardware: 'No hardware wallet?',
+  jobs: 'No jobs resource?',
+  lending: 'No lending protocol?',
+  media: 'No media project?',
   nfts: 'No NFT project?',
   prediction: null, // already added manually
+  privacy: 'No privacy tool?',
   rwa: 'No RWA project?',
-  media: 'No media project?',
-  wellness: 'No wellness project?',
-  jobs: 'No jobs resource?',
-  gaming: 'No gaming project?',
-  ai: 'No AI tool?',
-  wallets: 'No wallet?',
-  cards: 'No crypto card?',
-  hardware: 'No hardware wallet?',
+  stocks: 'No stocks project?',
   taxes: null, // already added
-  charity: 'No charity?',
+  travel: 'No travel product?',
+  validators: 'No validator?',
+  wallets: 'No wallet?',
+  wellness: 'No wellness project?',
+  yield: 'No yield protocol?',
 };
 
 document.addEventListener('DOMContentLoaded', () => {
