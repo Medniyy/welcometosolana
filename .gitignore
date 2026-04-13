@@ -13,6 +13,9 @@ index.local.html
 
 # Local scratch + heavy artifacts
 node_modules/
+category-pngs/
+ascii-art.html
+generate_category_pngs.py
 videopresentations/
 Migration/
 transcripts/
