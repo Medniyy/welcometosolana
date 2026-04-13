@@ -1,0 +1,10 @@
+welcometosolana.xyz
+
+Purpose: A community-run migration guide for Cosmos ecosystem users moving to Solana. Includes a step-by-step migration guide and a curated Solana ecosystem directory (categories and project links).
+
+Canonical: https://welcometosolana.xyz/
+Sitemap: https://welcometosolana.xyz/sitemap.xml
+
+Key pages:
+- Home: https://welcometosolana.xyz/
+
