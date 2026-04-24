@@ -28,34 +28,7 @@
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<script id="tailwind-config">
-tailwind.config = {
-  darkMode:"class",
-  theme:{extend:{
-    colors:{
-      "tertiary-fixed":"#a3a3a3","on-tertiary-fixed":"#0a0a0a","on-secondary-fixed-variant":"#525252",
-      "primary-fixed-dim":"#a3a3a3","on-tertiary":"#0a0a0a","tertiary-container":"#2a2a2a",
-      "surface-container-low":"#111111","surface-dim":"#0a0a0a","on-secondary-fixed":"#0a0a0a",
-      "surface-bright":"#2a2a2a","surface-container-high":"#2a2a2a","secondary-fixed":"#f5f5f5",
-      "primary-fixed":"#e5e5e5","on-primary-container":"#0a0a0a","on-secondary-container":"#0a0a0a",
-      "on-tertiary-fixed-variant":"#525252","error-container":"#404040","inverse-on-surface":"#0a0a0a",
-      "surface-container-highest":"#1a1a1a","outline-variant":"#2a2a2a","inverse-primary":"#a3a3a3",
-      "secondary-fixed-dim":"#737373","surface":"#0a0a0a","on-secondary":"#0a0a0a","error":"#737373",
-      "secondary":"#ffffff","tertiary-fixed-dim":"#737373","on-primary":"#0a0a0a",
-      "inverse-surface":"#f5f5f5","surface-container":"#111111","tertiary":"#525252","on-error":"#0a0a0a",
-      "primary-container":"#ffffff","surface-container-lowest":"#0a0a0a","on-surface":"#f5f5f5",
-      "on-surface-variant":"#737373","on-primary-fixed-variant":"#525252","on-primary-fixed":"#f5f5f5",
-      "on-background":"#f5f5f5","surface-variant":"#1a1a1a","secondary-container":"#e5e5e5",
-      "background":"#0a0a0a","surface-tint":"#2a2a2a","on-tertiary-container":"#f5f5f5",
-      "on-error-container":"#a3a3a3","primary":"#f5f5f5","outline":"#404040",
-      "premium":"rgb(var(--color-premium) / <alpha-value>)","premium-dim":"rgb(var(--color-premium-dim) / <alpha-value>)"
-    },
-    borderRadius:{DEFAULT:"0.25rem",lg:"0.25rem",xl:"0.25rem",full:"9999px"},
-    fontFamily:{headline:["Source Serif 4","serif"],body:["DM Sans","sans-serif"],label:["DM Sans","sans-serif"]}
-  }}
-};
-</script>
+<link rel="stylesheet" href="assets/styles.css"/>
 <style>
 :root{
   --color-premium:158 165 176;
@@ -268,6 +241,64 @@ a:focus-visible,button:focus-visible{outline:2px solid color-mix(in srgb,var(--f
 
 /* Hide scrollbar chrome on route toggle */
 .route-hide{display:none!important}
+
+/* ===== CONTRAST ENHANCEMENTS (all breakpoints) ===== */
+/* Lift card surfaces — #111 on #0a0a0a is ~1.2:1, barely visible at low brightness */
+.journey{
+  background:#1a1a1a;
+  border-color:rgba(90,90,90,0.75);
+}
+/* Frost micro-accent strip on top edge of each journey card */
+.journey::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--frost-3) 0%,var(--frost-1) 55%,transparent 100%);
+  opacity:.45;z-index:2;
+}
+/* Journey numerals: muted teal instead of near-invisible #525252 */
+.journey .j-num{color:#3d7a8e}
+/* Lift eco/wallet cards */
+.eco-card{background:#181818;border-color:rgba(65,65,65,0.9)}
+/* Variant text: nudge #737373 → #989898 */
+.text-on-surface-variant{color:#989898!important}
+/* Section break dividers: stronger */
+.border-outline-variant\/60{border-color:rgba(70,70,70,0.85)!important}
+.border-outline-variant\/40{border-color:rgba(60,60,60,0.75)!important}
+/* Section numerals: muted teal anchor instead of #404040 */
+.sec-num{color:#2f6272}
+/* Route step nodes: lift background */
+.step-node{background:#1a1a1a;border-color:rgba(65,65,65,0.9)}
+/* Dotgrid section: slightly brighter dots */
+.dotgrid{background-image:radial-gradient(rgba(158,165,176,0.13) 1px,transparent 1px)}
+
+/* ===== ANIMATION SYSTEM ===== */
+/* Scroll reveal base */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .6s cubic-bezier(.25,.46,.45,.94),transform .6s cubic-bezier(.25,.46,.45,.94)}
+.reveal.is-visible{opacity:1;transform:translateY(0)}
+/* j-num blur-to-clear entrance (Apple-style) */
+@keyframes jNumBlurIn{
+  from{opacity:0;transform:translateY(10px);filter:blur(10px)}
+  to{opacity:1;transform:translateY(0);filter:blur(0)}
+}
+.j-num-animate{animation:jNumBlurIn .8s cubic-bezier(.25,.46,.45,.94) both}
+/* Hero content load animation */
+@keyframes heroLoad{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.hero-load{animation:heroLoad .75s cubic-bezier(.25,.46,.45,.94) both}
+/* sec-num slide-in from left */
+@keyframes secNumIn{from{opacity:0;transform:translateX(-10px)}to{opacity:1;transform:translateX(0)}}
+.sec-num-animate{animation:secNumIn .6s cubic-bezier(.25,.46,.45,.94) both}
+/* count-up finish flash */
+@keyframes countDone{0%{opacity:.5}100%{opacity:1}}
+.count-done{animation:countDone .3s ease-out both}
+/* Spring press on buttons/CTAs */
+button:active:not([disabled]),.hero-cta-neon:active{transform:scale(.96)!important;transition-duration:.08s!important}
+/* Eco card stagger reveal */
+.eco-reveal{opacity:0;transform:translateY(14px);transition:opacity .45s cubic-bezier(.25,.46,.45,.94),transform .45s cubic-bezier(.25,.46,.45,.94)}
+.eco-reveal.is-visible{opacity:1;transform:translateY(0)}
+/* Respect reduced motion */
+@media(prefers-reduced-motion:reduce){
+  .reveal,.eco-reveal{opacity:1!important;transform:none!important;transition:none!important}
+  .j-num-animate,.hero-load,.sec-num-animate{animation:none!important;opacity:1!important;filter:none!important;transform:none!important}
+}
 </style>
 <script>window._track=function(name,data){try{if(window.umami&&typeof window.umami.track==='function')window.umami.track(name,data||{})}catch(e){}}</script>
 <script defer src="https://umami-service-production-3ded.up.railway.app/script.js" data-website-id="faf37f2f-424a-4061-8416-2c4b5193a4b5"></script>
@@ -2053,5 +2084,109 @@ document.addEventListener('click',function(e){
     window._track('community_discord_clicked',{section:sec});
   }
 });
+
+/* ===== ANIMATION ENGINE ===== */
+(function(){
+  var reduced=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+  /* — Count-up for .num-xl — */
+  function countUp(el){
+    if(reduced) return;
+    var node=[].slice.call(el.childNodes).find(function(n){return n.nodeType===3&&n.textContent.trim();});
+    if(!node) return;
+    var raw=node.textContent.trim();
+    if(raw.indexOf('–')!==-1||raw.charAt(0)==="'") return; // skip ranges + year
+    var m=raw.match(/^([^0-9]*)(-?\d+(?:\.\d+)?)([^0-9]*)$/);
+    if(!m) return;
+    var prefix=m[1],target=parseFloat(m[2]),suffix=m[3];
+    var isFloat=target%1!==0;
+    var duration=Math.max(900,Math.min(1800,700+Math.abs(target)*2));
+    var t0=null;
+    function tick(now){
+      if(!t0) t0=now;
+      var p=Math.min((now-t0)/duration,1);
+      var e=1-Math.pow(1-p,3);
+      node.textContent=prefix+(isFloat?(e*target).toFixed(1):Math.round(e*target))+suffix;
+      if(p<1) requestAnimationFrame(tick);
+      else{node.textContent=raw;el.classList.add('count-done');}
+    }
+    node.textContent=prefix+'0'+suffix;
+    requestAnimationFrame(tick);
+  }
+  var countObs=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){if(e.isIntersecting){countUp(e.target);countObs.unobserve(e.target);}});
+  },{threshold:0.5});
+  document.querySelectorAll('.num-xl').forEach(function(el){countObs.observe(el);});
+
+  /* — Scroll reveal for .reveal — */
+  if(!reduced){
+    var revealObs=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('is-visible');revealObs.unobserve(e.target);}});
+    },{threshold:0.1,rootMargin:'0px 0px -30px 0px'});
+    document.querySelectorAll('.reveal').forEach(function(el){revealObs.observe(el);});
+  } else {
+    document.querySelectorAll('.reveal').forEach(function(el){el.classList.add('is-visible');});
+  }
+
+  /* — Journey card j-num blur entrance, staggered — */
+  if(!reduced){
+    document.querySelectorAll('.journey .j-num').forEach(function(el,i){
+      el.classList.add('j-num-animate');
+      el.style.animationDelay=(100+i*130)+'ms';
+    });
+  }
+
+  /* — Hero columns fade-in on load — */
+  if(!reduced){
+    document.querySelectorAll('#journeys>div>div').forEach(function(el,i){
+      el.classList.add('hero-load');
+      el.style.animationDelay=(i*140)+'ms';
+    });
+  }
+
+  /* — sec-num slide-in on scroll — */
+  if(!reduced){
+    var secObs=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('sec-num-animate');secObs.unobserve(e.target);}});
+    },{threshold:0.3});
+    document.querySelectorAll('.sec-num').forEach(function(el){secObs.observe(el);});
+  }
+
+  /* — Migration step rows stagger — */
+  if(!reduced){
+    var howSection=document.getElementById('how');
+    if(howSection){
+      var stepsObs=new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if(e.isIntersecting){
+            howSection.querySelectorAll('.step-row').forEach(function(row,i){
+              row.classList.add('reveal');
+              setTimeout(function(){row.classList.add('is-visible');},50+i*70);
+            });
+            stepsObs.unobserve(e.target);
+          }
+        });
+      },{threshold:0.05});
+      stepsObs.observe(howSection);
+    }
+  }
+
+  /* — Eco card stagger when tab shown — */
+  if(!reduced){
+    var origShowTab=window.showTab;
+    if(typeof origShowTab==='function'){
+      window.showTab=function(id,subtitle,btn){
+        origShowTab(id,subtitle,btn);
+        var panel=document.getElementById('tab-'+id);
+        if(!panel) return;
+        panel.querySelectorAll('.eco-card').forEach(function(card,i){
+          card.classList.remove('is-visible');
+          card.classList.add('eco-reveal');
+          setTimeout(function(){card.classList.add('is-visible');},i*35);
+        });
+      };
+    }
+  }
+})();
 </script>
 </body></html>
