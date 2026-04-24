@@ -1,10 +1,16 @@
 welcometosolana.xyz
 
-Purpose: A curated Solana ecosystem directory with 86+ projects — wallets (Solflare), DeFi, staking, yield, jobs, communities, and more. Also includes a step-by-step migration playbook for users moving to Solana. Your entry point to everything on Solana.
+Purpose: A guided migration engine for people, communities, and builders moving into Solana. Users choose a path: move assets, move community, start building, or just explore. The site also includes a full Solana ecosystem directory, Solflare wallet path, and a step-by-step migration playbook.
 
 Canonical: https://welcometosolana.xyz/
 Sitemap: https://welcometosolana.xyz/sitemap.xml
 
-Key pages:
-- Home: https://welcometosolana.xyz/
+Key sections:
+- Journey selector: https://welcometosolana.xyz/#journeys
+- Move assets: https://welcometosolana.xyz/#journey-assets
+- Move community: https://welcometosolana.xyz/#journey-community
+- Start building: https://welcometosolana.xyz/#journey-build
+- Just exploring: https://welcometosolana.xyz/#journey-explore
+- Ecosystem directory: https://welcometosolana.xyz/#ecosystem
+- Migration playbook: https://welcometosolana.xyz/#how
 
