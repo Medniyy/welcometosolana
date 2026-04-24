@@ -30,6 +30,8 @@ favicons/
 # Local tooling / project files (keep repo focused on the site)
 package.json
 package-lock.json
+tailwind.config.js
+src/
 export-pdf.mjs
 generate-og.mjs
 og-template.html
