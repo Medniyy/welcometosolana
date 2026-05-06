@@ -267,11 +267,23 @@ a:focus-visible,button:focus-visible{outline:2px solid color-mix(in srgb,var(--f
   display:flex;
   justify-content:center;
 }
-#squid-route-frame{
-  width:100% !important;
+.squid-frame-shell{
+  width:100%;
   max-width:430px;
-  height:min(72vh, 684px) !important;
+  height:min(72vh, 684px);
   border-radius:14px;
+  overflow:hidden;
+  background:#111111;
+  /* Draw the border as an inset stroke to avoid 1px seams */
+  box-shadow:0 0 0 1px rgba(65,65,65,.85) inset;
+}
+#squid-route-frame{
+  display:block;
+  width:100% !important;
+  height:100% !important;
+  border:0 !important;
+  background:transparent;
+  overflow:hidden;
 }
 
 /* — Ticker — */
@@ -1919,7 +1931,9 @@ button:active:not([disabled]),.hero-cta-neon:active{transform:scale(.96)!importa
                 If the widget doesn’t load, open the direct link above or check your browser console for iframe/CSP blocks.
               </p>
               <div id="squid-route-panel" class="hidden mt-4">
-                <iframe id="squid-route-frame" title="Squid swap (inline)" width="430" height="684" src="about:blank" loading="lazy" class="w-full border border-outline-variant/60 bg-black"></iframe>
+                <div class="squid-frame-shell">
+                  <iframe id="squid-route-frame" title="Squid swap (inline)" width="430" height="684" src="about:blank" loading="lazy" scrolling="no"></iframe>
+                </div>
               </div>
             </div>
           </li>
