@@ -174,6 +174,106 @@ a:focus-visible,button:focus-visible{outline:2px solid color-mix(in srgb,var(--f
 .eco-card:hover .arrow{transform:translate(2px,-2px);color:var(--frost-1)}
 .tab-panel.hidden{display:none}
 
+/* — Squid widget preview + embed host — */
+.squid-widget-host{position:relative;isolation:isolate}
+.squid-mock-tabs{display:flex;gap:0;border-bottom:1px solid rgba(65,65,65,.75);margin-bottom:1rem}
+.squid-mock-tab{
+  font-family:"DM Sans",sans-serif;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+  padding:.65rem 1rem;color:#737373;border-bottom:2px solid transparent;margin-bottom:-1px;cursor:default;
+}
+.squid-mock-tab.is-active{color:var(--frost-1);border-bottom-color:color-mix(in srgb,var(--frost-1) 65%,transparent)}
+.squid-mock-field{
+  background:#0f0f0f;border:1px solid rgba(65,65,65,.85);border-radius:12px;padding:.85rem 1rem;margin-bottom:.65rem;
+}
+.squid-mock-label{font-family:"DM Sans",sans-serif;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:#737373}
+.squid-mock-row{display:flex;align-items:center;justify-content:space-between;gap:.75rem;margin-top:.35rem}
+.squid-mock-token{font-family:"DM Sans",sans-serif;font-size:14px;font-weight:600;color:#e8e8e8}
+.squid-mock-amt{font-family:"DM Sans",sans-serif;font-size:18px;font-weight:500;color:#a8a8a8;font-variant-numeric:tabular-nums}
+.squid-mock-chain{display:inline-flex;align-items:center;gap:.4rem;font-size:11px;color:#989898}
+.squid-mock-dot{width:6px;height:6px;border-radius:9999px;background:var(--frost-2);opacity:.9}
+.squid-mock-fee{font-family:"DM Sans",sans-serif;font-size:11px;color:#737373;margin:.5rem 0 1rem}
+.squid-mock-cta{
+  width:100%;border-radius:9999px;border:1px solid color-mix(in srgb,var(--frost-1) 45%,#2a2a2a);
+  background:linear-gradient(155deg,color-mix(in srgb,var(--frost-1) 22%,#1a1a1a) 0%,#141414 100%);
+  color:var(--frost-1);font-family:"DM Sans",sans-serif;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  padding:.85rem 1rem;cursor:default;text-align:center;
+}
+.squid-mock-foot{font-family:"DM Sans",sans-serif;font-size:10px;color:#5c5c5c;margin-top:1rem;text-align:center;letter-spacing:.02em}
+.squid-mock-badge{
+  display:inline-flex;align-items:center;gap:.35rem;font-family:"DM Sans",sans-serif;font-size:9px;font-weight:700;
+  letter-spacing:.2em;text-transform:uppercase;color:#061016;
+  background:linear-gradient(155deg,var(--frost-1) 0%,var(--frost-2) 100%);padding:.35rem .6rem;border-radius:6px;
+}
+.squid-embed-tabs{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1rem}
+.squid-embed-tab{
+  font-family:"DM Sans",sans-serif;font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  padding:.45rem .9rem;border:1px solid rgba(65,65,65,.85);background:#141414;color:#989898;cursor:pointer;border-radius:9999px;transition:border-color .2s,color .2s;
+}
+.squid-embed-tab:hover{border-color:var(--accent-premium-soft);color:var(--accent-premium)}
+.squid-embed-tab.is-on{border-color:color-mix(in srgb,var(--frost-1) 45%,#2a2a2a);color:var(--frost-1);background:#0f1416}
+#squid-live-frame{border:1px solid rgba(65,65,65,.85);border-radius:16px;background:#0a0a0a;max-width:100%;display:block}
+
+.squid-section-glow{
+  position:absolute;top:0;right:0;width:12rem;height:12rem;
+  background:radial-gradient(circle at 70% 30%,rgba(191,232,242,.08),transparent 65%);
+  pointer-events:none;
+}
+.squid-split{display:flex;flex-direction:column;gap:2rem}
+@media (min-width:768px){
+  .squid-split{display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,430px);gap:2.5rem;align-items:start}
+}
+.squid-widget-max{width:100%;max-width:430px}
+.squid-mock-shell{
+  border-radius:1rem;
+  box-shadow:0 24px 80px rgba(0,0,0,.45);
+  background:#121212;
+}
+
+/* — Squid inline controls (Step 01 dropdown) — */
+.squid-step-head{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:1rem;
+}
+.squid-step-head p{margin:0}
+.squid-step-head .squid-inline-btn{flex-shrink:0}
+.squid-inline-btn{
+  border:1px solid color-mix(in srgb,var(--frost-1) 22%,rgba(65,65,65,.85));
+  background:linear-gradient(155deg,rgba(191,232,242,.10) 0%,#141414 100%);
+  color:var(--frost-1);
+  font-family:"DM Sans",sans-serif;
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  padding:.5rem .8rem;
+  display:inline-flex;
+  align-items:center;
+  gap:.25rem;
+}
+
+/* Restore the Step-04 bolt icon look */
+.step-node-bolt .material-symbols-outlined{
+  font-variation-settings:"FILL" 0,"wght" 300,"GRAD" 0,"opsz" 24;
+  font-size:18px;
+  line-height:1;
+  color:var(--accent-premium);
+}
+
+/* Inline Squid iframe sizing */
+/* Only center when panel is open (not .hidden) */
+#squid-route-panel:not(.hidden){
+  display:flex;
+  justify-content:center;
+}
+#squid-route-frame{
+  width:100% !important;
+  max-width:430px;
+  height:min(72vh, 684px) !important;
+  border-radius:14px;
+}
+
 /* — Ticker — */
 .scrolling-ticker{display:flex;white-space:nowrap;overflow:hidden}
 .scrolling-content{display:flex;animation:scroll 55s linear infinite}
@@ -733,6 +833,7 @@ button:active:not([disabled]),.hero-cta-neon:active{transform:scale(.96)!importa
             </div>
           </li>
         </ol>
+
       </div>
 
     </div>
@@ -1799,13 +1900,26 @@ button:active:not([disabled]),.hero-cta-neon:active{transform:scale(.96)!importa
           <li class="step-row flex items-start gap-5 py-5 border-b border-outline-variant/40 relative group">
             <div class="step-node">01</div>
             <div class="flex-1 min-w-0">
-              <p class="font-headline font-semibold text-base text-on-surface">
-                <a href="https://app.squidrouter.com/" target="_blank" rel="noopener" class="text-premium no-underline hover:brightness-125 inline-flex items-center gap-1.5">Swap your bags → USDC on Osmosis via Squid <span class="material-symbols-outlined text-sm">open_in_new</span></a>
-              </p>
+              <div class="squid-step-head">
+                <p class="font-headline font-semibold text-base text-on-surface">
+                  <a href="https://app.squidrouter.com/" target="_blank" rel="noopener" class="text-premium no-underline hover:brightness-125 inline-flex items-center gap-1.5">Swap your bags → USDC on Osmosis via Squid <span class="material-symbols-outlined text-sm">open_in_new</span></a>
+                </p>
+                <button type="button" id="squid-route-toggle" class="squid-inline-btn">
+                  Swap in place
+                  <span class="material-symbols-outlined text-sm" aria-hidden="true">arrow_drop_down</span>
+                </button>
+              </div>
               <div class="mt-2 flex items-center gap-2">
                 <img src="logos/squid.jpg" class="w-5 h-5 rounded-full" alt=""/>
                 <img src="logos/osmosis.jpg" class="w-5 h-5 rounded-full" alt=""/>
                 <span class="font-body text-[11px] text-on-surface-variant">app.squidrouter.com</span>
+              </div>
+
+              <p id="squid-route-hint" class="hidden mt-3 font-body text-[11px] text-on-surface-variant leading-relaxed">
+                If the widget doesn’t load, open the direct link above or check your browser console for iframe/CSP blocks.
+              </p>
+              <div id="squid-route-panel" class="hidden mt-4">
+                <iframe id="squid-route-frame" title="Squid swap (inline)" width="430" height="684" src="about:blank" loading="lazy" class="w-full border border-outline-variant/60 bg-black"></iframe>
               </div>
             </div>
           </li>
@@ -1836,7 +1950,7 @@ button:active:not([disabled]),.hero-cta-neon:active{transform:scale(.96)!importa
             </div>
           </li>
           <li class="step-row step-final flex items-start gap-5 py-5 relative">
-            <div class="step-node"><span class="material-symbols-outlined text-base">bolt</span></div>
+            <div class="step-node step-node-bolt"><span class="material-symbols-outlined" aria-hidden="true">bolt</span></div>
             <div class="flex-1 min-w-0">
               <p class="font-headline font-semibold text-base text-premium">Done — you're on Solana</p>
               <p class="font-body text-[12px] text-on-surface-variant leading-[1.5] mt-1">
@@ -2187,6 +2301,49 @@ document.addEventListener('click',function(e){
       };
     }
   }
+})();
+
+/* Squid widget inline embed (Widget Studio export). */
+window.SQUID_IFRAME_SRC = window.SQUID_IFRAME_SRC || 'https://studio.squidrouter.com/iframe?config=%7B%22integratorId%22%3A%22squid-widget-studio%22%2C%22theme%22%3A%7B%22borderRadius%22%3A%7B%22button-lg-primary%22%3A%220.3125rem%22%2C%22button-lg-secondary%22%3A%220.3125rem%22%2C%22button-lg-tertiary%22%3A%220.3125rem%22%2C%22button-md-primary%22%3A%229999px%22%2C%22button-md-secondary%22%3A%220.3125rem%22%2C%22button-md-tertiary%22%3A%220.3125rem%22%2C%22button-sm-primary%22%3A%221.25rem%22%2C%22button-sm-secondary%22%3A%221.25rem%22%2C%22button-sm-tertiary%22%3A%221.25rem%22%2C%22container%22%3A%220.3125rem%22%2C%22input%22%3A%220.3125rem%22%2C%22menu-sm%22%3A%220.3125rem%22%2C%22menu-lg%22%3A%220.3125rem%22%2C%22modal%22%3A%220.3125rem%22%7D%2C%22fontSize%22%3A%7B%22caption%22%3A%220.875rem%22%2C%22body-small%22%3A%221.14375rem%22%2C%22body-medium%22%3A%221.40625rem%22%2C%22body-large%22%3A%221.75625rem%22%2C%22heading-small%22%3A%222.1875rem%22%2C%22heading-medium%22%3A%223.08125rem%22%2C%22heading-large%22%3A%224.40625rem%22%7D%2C%22fontWeight%22%3A%7B%22caption%22%3A%22400%22%2C%22body-small%22%3A%22400%22%2C%22body-medium%22%3A%22400%22%2C%22body-large%22%3A%22400%22%2C%22heading-small%22%3A%22400%22%2C%22heading-medium%22%3A%22400%22%2C%22heading-large%22%3A%22400%22%7D%2C%22fontFamily%22%3A%7B%22squid-main%22%3A%22GeistVariable%2C%20sans-serif%22%7D%2C%22boxShadow%22%3A%7B%22container%22%3A%220px%202px%205px%201px%20rgba(0%2C%200%2C%200%2C%200.20)%2C%200px%205px%2020px%20-1px%20rgba(0%2C%200%2C%200%2C%200.33)%22%7D%2C%22color%22%3A%7B%22grey-100%22%3A%22%23FBFBFD%22%2C%22grey-200%22%3A%22%23EDEFF3%22%2C%22grey-300%22%3A%22%23EEF0F6%22%2C%22grey-400%22%3A%22%23A7ABBE%22%2C%22grey-500%22%3A%22%23989898%22%2C%22grey-600%22%3A%22%237F8798%22%2C%22grey-700%22%3A%22%234C515D%22%2C%22grey-800%22%3A%22%23111111%22%2C%22grey-900%22%3A%22%230A0A0A%22%2C%22royal-300%22%3A%22%23D9BEF4%22%2C%22royal-400%22%3A%22%23B893EC%22%2C%22royal-500%22%3A%22%23BFE8F2%22%2C%22royal-600%22%3A%22%238353C5%22%2C%22royal-700%22%3A%22%236B45A1%22%2C%22status-positive%22%3A%22%2393D2E8%22%2C%22status-negative%22%3A%22%239EA5B0%22%2C%22status-partial%22%3A%22%239EA5B0%22%2C%22highlight-700%22%3A%22%23E4FE53%22%2C%22animation-bg%22%3A%22%23BFE8F2%22%2C%22animation-text%22%3A%22%23FBFBFD%22%2C%22button-lg-primary-bg%22%3A%22%23BFE8F2%22%2C%22button-lg-primary-text%22%3A%22%23061016%22%2C%22button-lg-secondary-bg%22%3A%22%23FBFBFD%22%2C%22button-lg-secondary-text%22%3A%22%23292C32%22%2C%22button-lg-tertiary-bg%22%3A%22%23292C32%22%2C%22button-lg-tertiary-text%22%3A%22%23D1D6E0%22%2C%22button-md-primary-bg%22%3A%22%23141414%22%2C%22button-md-primary-text%22%3A%22%23989898%22%2C%22button-md-secondary-bg%22%3A%22%23FBFBFD%22%2C%22button-md-secondary-text%22%3A%22%23292C32%22%2C%22button-md-tertiary-bg%22%3A%22%23292C32%22%2C%22button-md-tertiary-text%22%3A%22%23D1D6E0%22%2C%22button-sm-primary-bg%22%3A%22%239E79D2%22%2C%22button-sm-primary-text%22%3A%22%23FBFBFD%22%2C%22button-sm-secondary-bg%22%3A%22%23FBFBFD%22%2C%22button-sm-secondary-text%22%3A%22%23292C32%22%2C%22button-sm-tertiary-bg%22%3A%22%23292C32%22%2C%22button-sm-tertiary-text%22%3A%22%23D1D6E0%22%2C%22input-bg%22%3A%22%230F0F0F%22%2C%22input-placeholder%22%3A%22%23737373%22%2C%22input-text%22%3A%22%23E8E8E8%22%2C%22input-selection%22%3A%22%239EA5B04D%22%2C%22menu-bg%22%3A%22%23111111CC%22%2C%22menu-text%22%3A%22%23F5F5F5%22%2C%22menu-backdrop%22%3A%22%23FBFBFD1A%22%2C%22modal-backdrop%22%3A%22%2317191C54%22%7D%7D%2C%22themeType%22%3A%22dark%22%2C%22apiUrl%22%3A%22https%3A%2F%2Fv2.api.squidrouter.com%22%2C%22tabs%22%3A%7B%22swap%22%3Atrue%2C%22buy%22%3Atrue%2C%22send%22%3Afalse%7D%2C%22priceImpactWarnings%22%3A%7B%22warning%22%3A3%2C%22critical%22%3A5%7D%2C%22loadPreviousStateFromLocalStorage%22%3Atrue%7D';
+
+(function(){
+  var toggle = document.getElementById('squid-route-toggle');
+  var panel  = document.getElementById('squid-route-panel');
+  var frame  = document.getElementById('squid-route-frame');
+  var hint   = document.getElementById('squid-route-hint');
+  if(!toggle || !panel || !frame) return;
+
+  function parseConfigFromUrl(url){
+    try{
+      var u = new URL(url);
+      var cfgParam = u.searchParams.get('config');
+      if(!cfgParam) return null;
+      return JSON.parse(decodeURIComponent(cfgParam));
+    } catch {
+      return null;
+    }
+  }
+
+  function getInlineUrl(){
+    var baseUrl = typeof window.SQUID_IFRAME_SRC === 'string' ? window.SQUID_IFRAME_SRC.trim() : '';
+    if(!baseUrl) return '';
+    // Always use the exported config URL (chain-agnostic selection happens inside the widget).
+    // Validate it parses, but don't mutate it.
+    void parseConfigFromUrl(baseUrl);
+    return baseUrl;
+  }
+
+  toggle.addEventListener('click', function(){
+    var src = getInlineUrl();
+    if(!src){
+      panel.classList.add('hidden');
+      if(hint) hint.classList.remove('hidden');
+      return;
+    }
+    if(hint) hint.classList.add('hidden');
+    if(frame.getAttribute('src') !== src) frame.src = src;
+    panel.classList.toggle('hidden');
+  });
 })();
 </script>
 </body></html>
