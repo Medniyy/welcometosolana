@@ -8,6 +8,15 @@
       <feGaussianBlur stdDeviation="8" result="blur"/>
       <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
+    <filter id="softGlow">
+      <feGaussianBlur stdDeviation="14" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <linearGradient id="route" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#bfe8f2" stop-opacity="0.08"/>
+      <stop offset="55%" stop-color="#bfe8f2" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#93d2e8" stop-opacity="0.12"/>
+    </linearGradient>
   </defs>
 
   <!-- Background -->
@@ -19,32 +28,53 @@
   <line x1="400" y1="0" x2="400" y2="630" stroke="#bfe8f2" stroke-width="0.4" opacity="0.05"/>
   <line x1="800" y1="0" x2="800" y2="630" stroke="#bfe8f2" stroke-width="0.4" opacity="0.05"/>
 
-  <!-- Glow orb -->
-  <ellipse cx="900" cy="315" rx="280" ry="240" fill="#bfe8f2" opacity="0.04" filter="url(#glow)"/>
+  <!-- Glow field -->
+  <ellipse cx="920" cy="320" rx="320" ry="260" fill="#bfe8f2" opacity="0.032" filter="url(#softGlow)"/>
+  <ellipse cx="860" cy="255" rx="210" ry="180" fill="#93d2e8" opacity="0.024" filter="url(#softGlow)"/>
 
-  <!-- Isometric house (right side) -->
-  <g filter="url(#glow)" transform="translate(820, 80) scale(2.8)">
-    <polygon points="40,32 54,22 54,42 40,52" fill="#6cb8d0"/>
-    <polygon points="12,32 40,32 40,52 12,52" fill="#bfe8f2"/>
-    <polygon points="40,32 54,22 40,6 26,16" fill="#96d0e4"/>
-    <polygon points="12,32 40,32 26,16" fill="#daf3fb"/>
+  <!-- Route graph motif (right side) -->
+  <g transform="translate(660, 92)">
+    <!-- soft halo behind the routes -->
+    <path d="M65,440 C220,300 330,330 430,220 C540,95 670,120 780,40" fill="none" stroke="#bfe8f2" stroke-width="26" stroke-linecap="round" opacity="0.03" filter="url(#softGlow)"/>
+    <path d="M30,380 C205,310 320,245 455,170 C590,96 675,135 825,70" fill="none" stroke="#93d2e8" stroke-width="22" stroke-linecap="round" opacity="0.02" filter="url(#softGlow)"/>
+
+    <!-- main route -->
+    <path d="M70,450 C220,305 335,340 445,225 C555,110 675,135 790,48" fill="none" stroke="url(#route)" stroke-width="3" stroke-linecap="round"/>
+    <path d="M34,392 C210,316 325,255 466,178 C607,102 690,142 840,76" fill="none" stroke="#bfe8f2" stroke-opacity="0.12" stroke-width="2.4" stroke-linecap="round"/>
+
+    <!-- nodes -->
+    <g>
+      <circle cx="70" cy="450" r="7" fill="#bfe8f2" opacity="0.42"/>
+      <circle cx="240" cy="320" r="6" fill="#bfe8f2" opacity="0.30"/>
+      <circle cx="445" cy="225" r="7" fill="#bfe8f2" opacity="0.36"/>
+      <circle cx="595" cy="128" r="6" fill="#93d2e8" opacity="0.28"/>
+      <circle cx="790" cy="48" r="8" fill="#bfe8f2" opacity="0.46"/>
+    </g>
+
+    <!-- destination mark -->
+    <g transform="translate(770, 34)" filter="url(#glow)">
+      <circle cx="20" cy="20" r="18" fill="none" stroke="#bfe8f2" stroke-opacity="0.32" stroke-width="1.4"/>
+      <circle cx="20" cy="20" r="6" fill="#bfe8f2" opacity="0.55"/>
+    </g>
   </g>
 
   <!-- Left content -->
-  <!-- Tag -->
-  <rect x="60" y="80" width="300" height="32" rx="4" fill="none" stroke="#bfe8f2" stroke-width="1" opacity="0.3"/>
-  <text x="76" y="101" font-family="'DM Sans', Arial, sans-serif" font-size="12" font-weight="600" letter-spacing="3" fill="#bfe8f2" opacity="0.6" text-transform="uppercase">FOR COSMOS ECOSYSTEM MIGRANTS</text>
+  <!-- Kicker -->
+  <rect x="60" y="78" width="238" height="32" rx="4" fill="none" stroke="#bfe8f2" stroke-width="1" opacity="0.26"/>
+  <text x="76" y="99" font-family="'DM Sans', Arial, sans-serif" font-size="12" font-weight="650" letter-spacing="3" fill="#bfe8f2" opacity="0.62">GET TO SOLANA</text>
 
-  <!-- Main headline -->
-  <text x="60" y="200" font-family="'DM Sans', Arial, sans-serif" font-size="72" font-weight="800" fill="#ffffff" letter-spacing="-2">Your Cosmos</text>
-  <text x="60" y="285" font-family="'DM Sans', Arial, sans-serif" font-size="72" font-weight="800" fill="#ffffff" letter-spacing="-2">chain is closing?</text>
-  <text x="60" y="370" font-family="Georgia, serif" font-size="60" font-weight="400" font-style="italic" fill="#6b7280">Here's what's next.</text>
+  <!-- Headline -->
+  <text x="60" y="200" font-family="'DM Sans', Arial, sans-serif" font-size="84" font-weight="820" fill="#ffffff" letter-spacing="-2.5">Every path,</text>
+  <text x="60" y="292" font-family="'DM Sans', Arial, sans-serif" font-size="84" font-weight="820" fill="#ffffff" letter-spacing="-2.5">mapped.</text>
 
-  <!-- Subtitle -->
-  <text x="60" y="440" font-family="'DM Sans', Arial, sans-serif" font-size="22" fill="#6b7280" letter-spacing="0">Your assets, your network, your reputation — all of it moves with you.</text>
+  <!-- Description -->
+  <text x="60" y="366" font-family="'DM Sans', Arial, sans-serif" font-size="26" fill="#8b93a3" letter-spacing="0">
+    <tspan x="60" dy="0">Choose what you are moving — assets, community, attention,</tspan>
+    <tspan x="60" dy="40">or work — and follow the route into Solana.</tspan>
+  </text>
 
   <!-- Domain -->
-  <text x="60" y="560" font-family="'DM Sans', Arial, sans-serif" font-size="18" font-weight="600" letter-spacing="2" fill="#bfe8f2" opacity="0.5">WELCOMETOSOLANA.XYZ</text>
+  <text x="60" y="560" font-family="'DM Sans', Arial, sans-serif" font-size="18" font-weight="650" letter-spacing="2" fill="#bfe8f2" opacity="0.46">WELCOMETOSOLANA.XYZ</text>
 
   <!-- Bottom border accent -->
   <rect x="60" y="590" width="120" height="2" fill="#bfe8f2" opacity="0.4"/>
