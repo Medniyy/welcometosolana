@@ -297,6 +297,47 @@ a:focus-visible,button:focus-visible{outline:2px solid color-mix(in srgb,var(--f
 /* — Contrast numerals — */
 .num-xl{font-family:"DM Sans",sans-serif;font-feature-settings:"tnum" 1,"ss01" 1;letter-spacing:-0.04em;font-weight:500}
 
+/* — Why Solana cards — */
+.why-head{margin-bottom:2.25rem}
+@media (min-width:768px){.why-head{margin-bottom:2.65rem}}
+.why-grid{display:grid;grid-template-columns:1fr;gap:1rem}
+@media (min-width:768px){.why-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.why-card{
+  position:relative;min-height:190px;border:1px solid rgba(65,65,65,.72);border-radius:10px;
+  background:radial-gradient(circle at 14% 16%,rgba(191,232,242,.045),transparent 34%),linear-gradient(180deg,rgba(22,22,22,.72),rgba(10,10,10,.82));
+  padding:1.55rem 1.6rem 1.45rem;overflow:hidden;
+  transition:border-color .22s ease,background-color .22s ease,transform .28s cubic-bezier(.22,1,.36,1),box-shadow .28s cubic-bezier(.22,1,.36,1);
+}
+.why-card::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;box-shadow:inset 0 1px 0 rgba(255,255,255,.035),inset 0 0 48px rgba(191,232,242,.025)}
+.why-card-top{display:grid;grid-template-columns:3.1rem 1fr;column-gap:1.25rem;align-items:start}
+.why-icon{
+  width:3.1rem;height:3.1rem;border-radius:999px;border:1px solid rgba(191,232,242,.25);
+  background:radial-gradient(circle at 65% 25%,rgba(168,85,247,.14),transparent 46%),rgba(191,232,242,.035);
+  color:var(--frost-1);display:inline-flex;align-items:center;justify-content:center;box-shadow:0 0 24px rgba(191,232,242,.045);
+}
+.why-icon .material-symbols-outlined{font-size:21px;line-height:1}
+.why-metric{color:#f5f5f5;font-family:"DM Sans",sans-serif;font-size:2rem;line-height:1;letter-spacing:-.06em;font-weight:600;font-feature-settings:"tnum" 1}
+.why-metric small{font-size:.95rem;letter-spacing:-.03em;color:#a8a8a8;font-weight:500}
+.why-accent{width:2.1rem;height:1px;background:linear-gradient(90deg,var(--frost-1),rgba(168,85,247,.65),transparent);margin:.95rem 0 .85rem}
+.why-title{color:#f0f0f0;font-family:"Source Serif 4",Georgia,serif;font-size:.98rem;font-weight:650;line-height:1.2}
+.why-desc{color:#a0a0a0;font-family:"DM Sans",sans-serif;font-size:.8rem;line-height:1.55;margin-top:.45rem}
+.why-intro{color:#989898;font-family:"DM Sans",sans-serif;font-size:.95rem;line-height:1.6;max-width:36rem;margin-top:1rem}
+.why-card:hover{border-color:rgba(191,232,242,.28);transform:translateY(-2px);box-shadow:0 18px 60px -42px rgba(191,232,242,.28)}
+.why-card:hover .why-icon{border-color:rgba(191,232,242,.42);box-shadow:0 0 28px rgba(191,232,242,.08)}
+.why-trust{margin-top:1rem;border:1px solid rgba(65,65,65,.72);border-radius:10px;background:linear-gradient(180deg,rgba(18,18,18,.72),rgba(10,10,10,.84));padding:1.25rem 1.5rem 1.45rem}
+@media (min-width:768px){.why-trust{padding:1.4rem 2.5rem 1.6rem}}
+.why-trust-label{text-align:center;color:#989898;font-family:"DM Sans",sans-serif;font-size:.58rem;font-weight:700;letter-spacing:.32em;text-transform:uppercase;margin-bottom:1.15rem}
+.why-logo-row{display:flex;align-items:center;justify-content:center;gap:.95rem;flex-wrap:wrap}
+.why-logo{color:#d4d4d4;opacity:.82;font-family:"DM Sans",sans-serif;font-size:1.18rem;font-weight:750;line-height:1;letter-spacing:-.04em;white-space:nowrap}
+.why-logo.visa{font-size:1.35rem;font-style:italic;letter-spacing:.02em;text-transform:uppercase}
+.why-logo.worldpay{font-size:1.25rem;font-weight:650;text-transform:lowercase}
+.why-logo.circle{font-size:1.18rem;letter-spacing:.02em;text-transform:uppercase}
+.why-logo.paypal{font-size:1.22rem;font-style:italic}
+.why-logo.fiserv{font-size:1.35rem;font-family:Georgia,serif;font-weight:700;text-transform:lowercase}
+.why-divider{width:1px;height:2.1rem;background:rgba(152,152,152,.35)}
+@media (max-width:640px){.why-divider{display:none}.why-logo-row{gap:1rem 1.4rem}}
+@media (hover:none){.why-card:hover{transform:none;box-shadow:none}}
+
 /* — Route step node — */
 .route-line{
   background:linear-gradient(180deg,transparent 0%,#2a2a2a 10%,#2a2a2a 90%,transparent 100%);
@@ -356,8 +397,9 @@ a:focus-visible,button:focus-visible{outline:2px solid color-mix(in srgb,var(--f
 /* ===== CONTRAST ENHANCEMENTS (all breakpoints) ===== */
 /* Lift card surfaces — #111 on #0a0a0a is ~1.2:1, barely visible at low brightness */
 .journey{
-  background:#1a1a1a;
-  border-color:rgba(90,90,90,0.75);
+  background:linear-gradient(180deg,rgba(24,24,24,.88),rgba(12,12,12,.92));
+  border-color:rgba(65,65,65,0.9);
+  border-radius:10px;
 }
 /* Frost micro-accent strip on top edge of each journey card */
 .journey::before{
@@ -368,7 +410,11 @@ a:focus-visible,button:focus-visible{outline:2px solid color-mix(in srgb,var(--f
 /* Journey numerals: muted teal instead of near-invisible #525252 */
 .journey .j-num{color:#3d7a8e}
 /* Lift eco/wallet cards */
-.eco-card{background:#181818;border-color:rgba(65,65,65,0.9)}
+.eco-card{background:linear-gradient(180deg,rgba(24,24,24,.86),rgba(14,14,14,.92));border-color:rgba(65,65,65,0.86);border-radius:10px}
+.eco-card:hover{border-color:rgba(191,232,242,.28);background:#171717}
+.eco-tab{border-radius:999px}
+.eco-tab.active-tab{box-shadow:inset 0 1px 0 rgba(255,255,255,.32),0 10px 32px rgba(123,196,223,.16)}
+.eco-tab:not(.active-tab):hover{background:rgba(191,232,242,.035)}
 /* Variant text: nudge #737373 → #989898 */
 .text-on-surface-variant{color:#989898!important}
 /* Section break dividers: stronger */
@@ -380,11 +426,21 @@ a:focus-visible,button:focus-visible{outline:2px solid color-mix(in srgb,var(--f
 .step-node{background:#1a1a1a;border-color:rgba(65,65,65,0.9)}
 /* Dotgrid section: slightly brighter dots */
 .dotgrid{background-image:radial-gradient(rgba(158,165,176,0.13) 1px,transparent 1px)}
+@media (max-width:640px){
+  .journey,.eco-card,.why-card{background:linear-gradient(180deg,rgba(27,27,27,.96),rgba(15,15,15,.98));border-color:rgba(92,92,92,.9)}
+  .journey .j-num{color:#438298}
+  .why-grid{gap:.8rem}
+  .why-card{min-height:0;padding:1.25rem}
+  .why-card-top{grid-template-columns:2.7rem 1fr;column-gap:1rem}
+  .why-icon{width:2.7rem;height:2.7rem}
+  .why-metric{font-size:1.75rem}
+}
 
 /* ===== ANIMATION SYSTEM ===== */
 /* Scroll reveal base */
 .reveal{opacity:0;transform:translateY(20px);transition:opacity .6s cubic-bezier(.25,.46,.45,.94),transform .6s cubic-bezier(.25,.46,.45,.94)}
 .reveal.is-visible{opacity:1;transform:translateY(0)}
+.why-card.reveal.is-visible:hover{transform:translateY(-2px)}
 /* j-num blur-to-clear entrance (Apple-style) */
 @keyframes jNumBlurIn{
   from{opacity:0;transform:translateY(10px);filter:blur(10px)}
@@ -433,8 +489,8 @@ html.wts-offline .material-symbols-outlined{font-feature-settings:normal;font-va
     <div class="hidden md:flex items-center gap-8 lg:gap-10">
       <a class="nav-link text-neutral-500 hover:text-on-surface font-label tracking-[0.2em] uppercase text-[10px] lg:text-[11px] no-underline transition-colors" href="#journeys">Journeys</a>
       <a class="nav-link text-neutral-500 hover:text-on-surface font-label tracking-[0.2em] uppercase text-[10px] lg:text-[11px] no-underline transition-colors" href="#ecosystem">Ecosystem</a>
-      <a class="nav-link text-neutral-500 hover:text-on-surface font-label tracking-[0.2em] uppercase text-[10px] lg:text-[11px] no-underline transition-colors" href="#why">Why migrate</a>
-      <a class="nav-link text-neutral-500 hover:text-on-surface font-label tracking-[0.2em] uppercase text-[10px] lg:text-[11px] no-underline transition-colors" href="#how">Migration</a>
+      <a class="nav-link text-neutral-500 hover:text-on-surface font-label tracking-[0.2em] uppercase text-[10px] lg:text-[11px] no-underline transition-colors" href="#why">Why Solana</a>
+      <a class="nav-link text-neutral-500 hover:text-on-surface font-label tracking-[0.2em] uppercase text-[10px] lg:text-[11px] no-underline transition-colors" href="#how">Routes</a>
       <a class="nav-link text-neutral-500 hover:text-on-surface font-label tracking-[0.2em] uppercase text-[10px] lg:text-[11px] no-underline transition-colors" href="#founder">Who built this</a>
     </div>
     <!-- CTA -->
@@ -460,7 +516,7 @@ html.wts-offline .material-symbols-outlined{font-feature-settings:normal;font-va
     <div id="journeys" class="relative z-10 grid grid-cols-12 gap-6 lg:gap-10 py-14 md:py-20 scroll-mt-32">
       <!-- Left : statement -->
       <div class="col-span-12 lg:col-span-5 flex flex-col">
-        <span class="font-label text-[10px] tracking-[0.3em] uppercase text-premium mb-6">Cosmos · Ethereum · Polkadot</span>
+        <span class="font-label text-[10px] tracking-[0.3em] uppercase text-premium mb-6">Assets · Community · Attention · Work</span>
         <h1 class="font-headline font-light text-5xl sm:text-6xl md:text-[4.5rem] lg:text-[5rem] xl:text-[5.75rem] leading-[0.96] tracking-[-0.02em] text-on-surface">
           Get to <span class="italic font-normal text-premium">Solana.</span><br/>
           Every path,<br/>
@@ -821,7 +877,7 @@ html.wts-offline .material-symbols-outlined{font-feature-settings:normal;font-va
             <div>
               <p class="font-headline font-semibold text-[13px] text-on-surface">Why Solana matters</p>
               <p class="font-body text-[11.5px] text-on-surface-variant leading-[1.5] mt-0.5">
-                <a href="#why" class="underline underline-offset-2 decoration-outline-variant hover:decoration-premium transition-colors">Read the contrast →</a>
+                <a href="#why" class="underline underline-offset-2 decoration-outline-variant hover:decoration-premium transition-colors">Why Solana →</a>
               </p>
             </div>
           </li>
@@ -1641,97 +1697,127 @@ html.wts-offline .material-symbols-outlined{font-feature-settings:normal;font-va
         <span class="material-symbols-outlined text-premium text-sm mt-auto">arrow_forward</span>
       </a>
     </div>
-    
-    </section>
-    
-    <!-- Why Migrate Section -->
   </div>
 </section>
 
-<!-- =================== WHY MIGRATE =================== -->
+<!-- =================== WHY SOLANA =================== -->
 <section id="why" class="border-t border-outline-variant/60 scroll-mt-32">
   <div class="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12 py-16 md:py-24">
-    <div class="grid grid-cols-12 gap-6 mb-12 items-end">
-      <div class="col-span-12 md:col-span-8">
+    <div class="why-head">
+      <div>
         <div class="flex items-baseline gap-4">
           <span class="sec-num text-5xl md:text-6xl">03</span>
-          <span class="font-label text-[10px] tracking-[0.3em] uppercase text-premium">Receipts</span>
+          <span class="font-label text-[10px] tracking-[0.3em] uppercase text-premium">Proof</span>
         </div>
         <h2 class="font-headline font-light text-4xl md:text-5xl lg:text-6xl leading-[0.98] tracking-tight mt-3">
-          What you leave. <span class="italic font-normal text-premium">What you gain.</span>
+          Why <span class="italic font-normal text-premium">Solana.</span>
         </h2>
-      </div>
-      <div class="col-span-12 md:col-span-4 md:text-right">
-        <p class="font-body text-sm text-on-surface-variant leading-[1.55]">No vibes. Real numbers. Pulled from on-chain &amp; public reporting.</p>
+        <p class="why-intro">
+          Real usage, serious institutions, and an ecosystem with enough depth to make the move worth it.
+        </p>
       </div>
     </div>
 
-    <div class="grid md:grid-cols-2 gap-px bg-outline-variant/60 border border-outline-variant/60">
-      <!-- Leaving -->
-      <div class="bg-background p-7 md:p-10">
-        <div class="flex items-center justify-between pb-4 mb-6 border-b border-outline-variant/60">
-          <div class="flex items-center gap-3">
-            <img src="logos/cosmos.png" class="w-7 h-7 rounded-full object-cover bg-white" alt="Cosmos"/>
-            <span class="font-label text-[10px] tracking-[0.3em] uppercase text-on-surface-variant">Cosmos today</span>
+    <div class="why-grid">
+      <div class="why-card reveal">
+        <div class="why-card-top">
+          <span class="why-icon">
+            <span class="material-symbols-outlined text-[18px]" aria-hidden="true">event</span>
+          </span>
+          <div>
+            <p class="why-metric">6 <small>yrs</small></p>
+            <div class="why-accent"></div>
+            <p class="why-title">Time-Proven</p>
+            <p class="why-desc">Mainnet since 2020. Battle-tested through multiple cycles.</p>
           </div>
-          <span class="material-symbols-outlined text-tertiary text-base">trending_down</span>
         </div>
-        <dl class="space-y-5">
-          <div class="flex items-start gap-5">
-            <dt class="num-xl text-2xl text-tertiary w-20 flex-shrink-0 tabular-nums">21<span class="text-sm">d</span></dt>
-            <dd><p class="font-headline font-semibold text-sm text-on-surface">Unbonding period</p><p class="font-body text-[11.5px] text-on-surface-variant leading-[1.5] mt-0.5">Capital locked for 3 weeks. No liquid staking that works.</p></dd>
-          </div>
-          <div class="flex items-start gap-5">
-            <dt class="num-xl text-2xl text-tertiary w-20 flex-shrink-0 tabular-nums">$15<span class="text-sm">M</span></dt>
-            <dd><p class="font-headline font-semibold text-sm text-on-surface">Osmosis TVL</p><p class="font-body text-[11.5px] text-on-surface-variant leading-[1.5] mt-0.5">Down 99% from the $2.1B peak. Pools too shallow.</p></dd>
-          </div>
-          <div class="flex items-start gap-5">
-            <dt class="num-xl text-2xl text-tertiary w-20 flex-shrink-0 tabular-nums">-96<span class="text-sm">%</span></dt>
-            <dd><p class="font-headline font-semibold text-sm text-on-surface">ATOM from ATH</p><p class="font-body text-[11.5px] text-on-surface-variant leading-[1.5] mt-0.5">21 projects closed, on maintenance, or migrated in 2025–2026.</p></dd>
-          </div>
-          <div class="flex items-start gap-5">
-            <dt class="num-xl text-2xl text-tertiary w-20 flex-shrink-0 tabular-nums">0</dt>
-            <dd><p class="font-headline font-semibold text-sm text-on-surface">Real stablecoin yield</p><p class="font-body text-[11.5px] text-on-surface-variant leading-[1.5] mt-0.5">USDC barely exists on-chain. No meaningful opportunities.</p></dd>
-          </div>
-          <div class="flex items-start gap-5">
-            <dt class="num-xl text-2xl text-tertiary w-20 flex-shrink-0 tabular-nums">0</dt>
-            <dd><p class="font-headline font-semibold text-sm text-on-surface">Regular IRL meetups</p><p class="font-body text-[11.5px] text-on-surface-variant leading-[1.5] mt-0.5">No hackathons at scale. No grant programs. No creator path.</p></dd>
-          </div>
-        </dl>
       </div>
 
-      <!-- Gaining -->
-      <div class="bg-background p-7 md:p-10 relative">
-        <span class="ribbon-rec">★ Recommended</span>
-        <div class="flex items-center justify-between pb-4 mb-6 mt-6 border-b border-premium/40">
-          <div class="flex items-center gap-3">
-            <img src="logos/solana.jpg" class="w-7 h-7 rounded-full object-cover" alt="Solana"/>
-            <span class="font-label text-[10px] tracking-[0.3em] uppercase text-premium">Solana now</span>
+      <div class="why-card reveal">
+        <div class="why-card-top">
+          <span class="why-icon">
+            <span class="material-symbols-outlined text-[18px]" aria-hidden="true">account_balance</span>
+          </span>
+          <div>
+            <p class="why-metric">Enterprise</p>
+            <div class="why-accent"></div>
+            <p class="why-title">Business Approach</p>
+            <p class="why-desc">Global companies and serious teams are building here.</p>
           </div>
-          <span class="material-symbols-outlined text-premium text-base">rocket_launch</span>
         </div>
-        <dl class="space-y-5">
-          <div class="flex items-start gap-5">
-            <dt class="num-xl text-2xl text-premium w-20 flex-shrink-0 tabular-nums">2–3<span class="text-sm">d</span></dt>
-            <dd><p class="font-headline font-semibold text-sm text-on-surface">Staking unlock</p><p class="font-body text-[11.5px] text-on-surface-variant leading-[1.5] mt-0.5">1 epoch. Liquid staking via Marinade &amp; Jito. Capital stays productive.</p></dd>
+      </div>
+
+      <div class="why-card reveal">
+        <div class="why-card-top">
+          <span class="why-icon">
+            <span class="material-symbols-outlined text-[18px]" aria-hidden="true">bar_chart</span>
+          </span>
+          <div>
+            <p class="why-metric">$3T+</p>
+            <div class="why-accent"></div>
+            <p class="why-title">Lifetime Trading Volume</p>
+            <p class="why-desc">High on-chain trading activity across DEX venues and aggregators.</p>
           </div>
-          <div class="flex items-start gap-5">
-            <dt class="num-xl text-2xl text-premium w-20 flex-shrink-0 tabular-nums">$1.1<span class="text-sm">T</span></dt>
-            <dd><p class="font-headline font-semibold text-sm text-on-surface">Raydium lifetime volume</p><p class="font-body text-[11.5px] text-on-surface-variant leading-[1.5] mt-0.5">Jupiter routes $7.37B/month in swaps. Real depth, real liquidity.</p></dd>
+        </div>
+      </div>
+
+      <div class="why-card reveal">
+        <div class="why-card-top">
+          <span class="why-icon">
+            <span class="material-symbols-outlined text-[18px]" aria-hidden="true">groups</span>
+          </span>
+          <div>
+            <p class="why-metric">26+</p>
+            <div class="why-accent"></div>
+            <p class="why-title">Real Events</p>
+            <p class="why-desc">Monthly IRL meetups, builders, and global ecosystem presence.</p>
           </div>
-          <div class="flex items-start gap-5">
-            <dt class="num-xl text-2xl text-premium w-20 flex-shrink-0 tabular-nums">$17<span class="text-sm">B</span></dt>
-            <dd><p class="font-headline font-semibold text-sm text-on-surface">Stablecoin supply</p><p class="font-body text-[11.5px] text-on-surface-variant leading-[1.5] mt-0.5">$660B stablecoin volume Feb '26 — 37% of global stablecoin txs.</p></dd>
+        </div>
+      </div>
+
+      <div class="why-card reveal">
+        <div class="why-card-top">
+          <span class="why-icon">
+            <span class="material-symbols-outlined text-[18px]" aria-hidden="true">redeem</span>
+          </span>
+          <div>
+            <p class="why-metric">$100M+</p>
+            <div class="why-accent"></div>
+            <p class="why-title">Funding Opportunities</p>
+            <p class="why-desc">Grants, accelerators, and support for ecosystem teams.</p>
           </div>
-          <div class="flex items-start gap-5">
-            <dt class="num-xl text-2xl text-premium w-20 flex-shrink-0 tabular-nums">26+</dt>
-            <dd><p class="font-headline font-semibold text-sm text-on-surface">IRL meetups / month</p><p class="font-body text-[11.5px] text-on-surface-variant leading-[1.5] mt-0.5">Superteam in 30+ countries. Hackathons with 80K+ builders, 150 countries.</p></dd>
+        </div>
+      </div>
+
+      <div class="why-card reveal">
+        <div class="why-card-top">
+          <span class="why-icon">
+            <span class="material-symbols-outlined text-[18px]" aria-hidden="true">shield</span>
+          </span>
+          <div>
+            <p class="why-metric">Post-Quantum</p>
+            <div class="why-accent"></div>
+            <p class="why-title">Ready</p>
+            <p class="why-desc">Ongoing work toward quantum-resistant cryptographic infrastructure.</p>
           </div>
-          <div class="flex items-start gap-5">
-            <dt class="num-xl text-2xl text-premium w-20 flex-shrink-0 tabular-nums">755<span class="text-sm">%</span></dt>
-            <dd><p class="font-headline font-semibold text-sm text-on-surface">YoY payment growth</p><p class="font-body text-[11.5px] text-on-surface-variant leading-[1.5] mt-0.5">$6.5B payment volume. Western Union, BlackRock, Reserve building here.</p></dd>
-          </div>
-        </dl>
+        </div>
+      </div>
+    </div>
+
+    <div class="why-trust reveal">
+      <p class="why-trust-label">Also trusted by teams from</p>
+      <div class="why-logo-row">
+        <span class="why-logo">Western<br/>Union</span>
+        <span class="why-divider" aria-hidden="true"></span>
+        <span class="why-logo visa">Visa</span>
+        <span class="why-divider" aria-hidden="true"></span>
+        <span class="why-logo worldpay">worldpay</span>
+        <span class="why-divider" aria-hidden="true"></span>
+        <span class="why-logo circle">Circle</span>
+        <span class="why-divider" aria-hidden="true"></span>
+        <span class="why-logo paypal">PayPal</span>
+        <span class="why-divider" aria-hidden="true"></span>
+        <span class="why-logo fiserv">fiserv.</span>
       </div>
     </div>
   </div>
@@ -2069,8 +2155,8 @@ html.wts-offline .material-symbols-outlined{font-feature-settings:normal;font-va
   <nav class="flex flex-col gap-4 items-stretch text-left w-full max-w-sm mx-auto">
     <a class="font-headline text-xl text-on-surface no-underline py-3 border-b border-outline-variant/40" href="#journeys">Journeys</a>
     <a class="font-headline text-xl text-on-surface no-underline py-3 border-b border-outline-variant/40" href="#ecosystem">Ecosystem</a>
-    <a class="font-headline text-xl text-on-surface no-underline py-3 border-b border-outline-variant/40" href="#why">Why migrate</a>
-    <a class="font-headline text-xl text-on-surface no-underline py-3 border-b border-outline-variant/40" href="#how">Migration</a>
+    <a class="font-headline text-xl text-on-surface no-underline py-3 border-b border-outline-variant/40" href="#why">Why Solana</a>
+    <a class="font-headline text-xl text-on-surface no-underline py-3 border-b border-outline-variant/40" href="#how">Routes</a>
     <a class="font-headline text-xl text-on-surface no-underline py-3 border-b border-outline-variant/40" href="#founder">Who built this</a>
   </nav>
   <a href="#journeys" class="mt-auto hero-cta-neon w-full max-w-sm mx-auto text-center py-4 font-label font-bold uppercase tracking-[0.22em] text-[12px] no-underline">Start</a>
