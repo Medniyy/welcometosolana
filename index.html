@@ -24,11 +24,9 @@
  {"@type":"WebPage","@id":"https://welcometosolana.xyz/#webpage","url":"https://welcometosolana.xyz/","name":"Welcome to Solana — Migration Engine","keywords":["Solana","Solflare","Solana migration","Solana ecosystem","Solana wallet"],"isPartOf":{"@id":"https://welcometosolana.xyz/#website"},"about":{"@id":"https://welcometosolana.xyz/#organization"}}
 ]}
 </script>
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>(function(){var offline=location.protocol==="file:"||new URLSearchParams(location.search).get("offline")==="1";window.__WTS_OFFLINE__=offline;if(offline)document.documentElement.classList.add("wts-offline");})();</script>
 <link rel="stylesheet" href="assets/styles.css"/>
+<script>(function(){if(window.__WTS_OFFLINE__)return;var h=document.head;var dm=document.createElement("link");dm.rel="preconnect";dm.href="https://fonts.googleapis.com";h.appendChild(dm);var gs=document.createElement("link");gs.rel="preconnect";gs.href="https://fonts.gstatic.com";gs.crossOrigin="";h.appendChild(gs);var f1=document.createElement("link");f1.rel="stylesheet";f1.href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&display=swap";h.appendChild(f1);var f2=document.createElement("link");f2.rel="stylesheet";f2.href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap";h.appendChild(f2);})();</script>
 <style>
 :root{
   --color-premium:158 165 176;
@@ -268,6 +266,7 @@ a:focus-visible,button:focus-visible{outline:2px solid color-mix(in srgb,var(--f
   justify-content:center;
 }
 .squid-frame-shell{
+  position:relative;
   width:100%;
   max-width:430px;
   height:min(72vh, 684px);
@@ -411,9 +410,18 @@ button:active:not([disabled]),.hero-cta-neon:active{transform:scale(.96)!importa
   .reveal,.eco-reveal{opacity:1!important;transform:none!important;transition:none!important}
   .j-num-animate,.hero-load,.sec-num-animate{animation:none!important;opacity:1!important;filter:none!important;transform:none!important}
 }
+/* Offline preview: system fonts + no broken icon font reliance */
+html.wts-offline .font-headline{font-family:Georgia,'Times New Roman',serif!important}
+html.wts-offline .font-body,html.wts-offline .font-label{font-family:system-ui,Segoe UI,Roboto,sans-serif!important}
+html.wts-offline .material-symbols-outlined{font-feature-settings:normal;font-variation-settings:'FILL'0,'wght'400,'GRAD'0,'opsz'24!important}
+.wts-offline-banner{position:fixed;bottom:0;left:0;right:0;z-index:9999;padding:.65rem 1rem;background:rgba(10,10,10,.92);border-top:1px solid color-mix(in srgb,var(--frost-1) 14%,rgba(42,42,42,.65));font-family:system-ui,Segoe UI,Roboto,sans-serif;font-size:11px;color:#a8b0bc;text-align:center}
+.squid-offline-mock-inner{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;gap:.85rem;padding:1.25rem;background:#111;color:#e8e8e8;font-family:system-ui,Segoe UI,Roboto,sans-serif;border-radius:inherit}
+.squid-offline-mock-inner .mock-tabs{font-size:11px;font-weight:600;opacity:.75}
+.squid-offline-mock-inner .mock-row{border-radius:10px;background:#161616;border:1px solid rgba(191,232,242,.12);padding:.65rem .75rem;font-size:11px;color:#9ca3af}
+.squid-offline-mock-inner .mock-cta{margin-top:.25rem;height:40px;border-radius:999px;background:rgba(191,232,242,.25);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#061016}
 </style>
 <script>window._track=function(name,data){try{if(window.umami&&typeof window.umami.track==='function')window.umami.track(name,data||{})}catch(e){}}</script>
-<script defer src="https://umami-service-production-3ded.up.railway.app/script.js" data-website-id="faf37f2f-424a-4061-8416-2c4b5193a4b5"></script>
+<script>(function(){if(window.__WTS_OFFLINE__)return;var s=document.createElement("script");s.defer=true;s.src="https://umami-service-production-3ded.up.railway.app/script.js";s.dataset.websiteId="faf37f2f-424a-4061-8416-2c4b5193a4b5";document.head.appendChild(s);})();</script>
 </head>
 <body class="bg-background text-on-surface font-body antialiased">
 <a href="#main-content" class="skip-to-main font-label">Skip to content</a>
@@ -1901,7 +1909,7 @@ button:active:not([disabled]),.hero-cta-neon:active{transform:scale(.96)!importa
           <div class="mt-8">
             <p class="font-label text-[10px] tracking-[0.3em] uppercase text-on-surface-variant mb-3">Watch the walkthrough</p>
             <div class="relative w-full overflow-hidden border border-outline-variant/60 bg-black" style="padding-top:56.25%;">
-              <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/JGeK8-y3fh8?rel=0&modestbranding=1&playsinline=1" title="Tutorial" loading="lazy" frameborder="0" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+              <iframe id="wts-tutorial-iframe" class="absolute inset-0 w-full h-full" data-online-src="https://www.youtube.com/embed/JGeK8-y3fh8?rel=0&amp;modestbranding=1&amp;playsinline=1" src="about:blank" title="Tutorial" loading="lazy" frameborder="0" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </div>
           </div>
         </div>
@@ -1933,6 +1941,12 @@ button:active:not([disabled]),.hero-cta-neon:active{transform:scale(.96)!importa
               <div id="squid-route-panel" class="hidden mt-4">
                 <div class="squid-frame-shell">
                   <iframe id="squid-route-frame" title="Squid swap (inline)" width="430" height="684" src="about:blank" loading="lazy" scrolling="no"></iframe>
+                  <div id="squid-offline-mock" class="hidden squid-offline-mock-inner" aria-hidden="true">
+                    <div class="mock-tabs">Swap · Buy</div>
+                    <div class="mock-row">Pay · ETH → Receive · select token</div>
+                    <div class="mock-row">Offline preview — widget loads when online.</div>
+                    <div class="mock-cta">Connect</div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -2121,6 +2135,28 @@ function showRoute(name, btn){
 var suggestLabels={ai:'No AI tool?',cards:'No crypto card?',charity:'No charity?',communities:'No community?',defi:'No DeFi protocol?',developers:'No dev resource?',domains:'No domain service?',frontier:'No Frontier link?',gaming:'No gaming project?',grants:'No grant program?',hardware:'No hardware wallet?',jobs:'No jobs resource?',lending:'No lending protocol?',media:'No media project?',nfts:'No NFT project?',payments:'No payment app?',prediction:'No prediction market?',privacy:'No privacy tool?',rwa:'No RWA project?',stocks:'No stocks project?',taxes:'No tax tool?',travel:'No travel product?',validators:'No validator?',wallets:'No wallet?',wellness:'No wellness project?',yield:'No yield protocol?'};
 
 document.addEventListener('DOMContentLoaded',function(){
+  // Offline preview: banner + lazy-load YouTube only when online
+  if(window.__WTS_OFFLINE__){
+    var ban=document.createElement('div');
+    ban.className='wts-offline-banner';
+    ban.setAttribute('role','status');
+    ban.textContent='Offline preview — remote fonts, analytics, video, and Squid load only when online.';
+    document.body.appendChild(ban);
+    var yt=document.getElementById('wts-tutorial-iframe');
+    if(yt&&yt.parentElement){
+      yt.style.display='none';
+      var wrap=yt.parentElement;
+      var ph=document.createElement('div');
+      ph.className='absolute inset-0 flex flex-col items-center justify-center gap-3 px-4 text-center';
+      ph.style.background='#0a0a0a';
+      ph.innerHTML='<p class="font-label text-[10px] tracking-[0.28em] uppercase text-premium">Offline preview</p><p class="font-body text-[13px] text-on-surface-variant max-w-[280px] leading-relaxed">Tutorial video needs internet.</p><a class="font-body text-[12px] text-premium no-underline border border-premium/35 px-3 py-2 hover:bg-premium/10 transition-colors" href="https://www.youtube.com/watch?v=JGeK8-y3fh8" target="_blank" rel="noopener">Open on YouTube</a>';
+      wrap.appendChild(ph);
+    }
+  }else{
+    var yti=document.getElementById('wts-tutorial-iframe');
+    if(yti&&yti.dataset&&yti.dataset.onlineSrc) yti.src=yti.dataset.onlineSrc;
+  }
+
   // Mobile nav
   var mobileNav=document.getElementById('mobile-nav');
   var navOpen=document.getElementById('nav-open');
@@ -2317,14 +2353,19 @@ document.addEventListener('click',function(e){
   }
 })();
 
-/* Squid widget inline embed (Widget Studio export). */
-window.SQUID_IFRAME_SRC = window.SQUID_IFRAME_SRC || 'https://studio.squidrouter.com/iframe?config=%7B%22integratorId%22%3A%22squid-widget-studio%22%2C%22theme%22%3A%7B%22borderRadius%22%3A%7B%22button-lg-primary%22%3A%220.3125rem%22%2C%22button-lg-secondary%22%3A%220.3125rem%22%2C%22button-lg-tertiary%22%3A%220.3125rem%22%2C%22button-md-primary%22%3A%229999px%22%2C%22button-md-secondary%22%3A%220.3125rem%22%2C%22button-md-tertiary%22%3A%220.3125rem%22%2C%22button-sm-primary%22%3A%221.25rem%22%2C%22button-sm-secondary%22%3A%221.25rem%22%2C%22button-sm-tertiary%22%3A%221.25rem%22%2C%22container%22%3A%220.3125rem%22%2C%22input%22%3A%220.3125rem%22%2C%22menu-sm%22%3A%220.3125rem%22%2C%22menu-lg%22%3A%220.3125rem%22%2C%22modal%22%3A%220.3125rem%22%7D%2C%22fontSize%22%3A%7B%22caption%22%3A%220.875rem%22%2C%22body-small%22%3A%221.14375rem%22%2C%22body-medium%22%3A%221.40625rem%22%2C%22body-large%22%3A%221.75625rem%22%2C%22heading-small%22%3A%222.1875rem%22%2C%22heading-medium%22%3A%223.08125rem%22%2C%22heading-large%22%3A%224.40625rem%22%7D%2C%22fontWeight%22%3A%7B%22caption%22%3A%22400%22%2C%22body-small%22%3A%22400%22%2C%22body-medium%22%3A%22400%22%2C%22body-large%22%3A%22400%22%2C%22heading-small%22%3A%22400%22%2C%22heading-medium%22%3A%22400%22%2C%22heading-large%22%3A%22400%22%7D%2C%22fontFamily%22%3A%7B%22squid-main%22%3A%22GeistVariable%2C%20sans-serif%22%7D%2C%22boxShadow%22%3A%7B%22container%22%3A%220px%202px%205px%201px%20rgba(0%2C%200%2C%200%2C%200.20)%2C%200px%205px%2020px%20-1px%20rgba(0%2C%200%2C%200%2C%200.33)%22%7D%2C%22color%22%3A%7B%22grey-100%22%3A%22%23FBFBFD%22%2C%22grey-200%22%3A%22%23EDEFF3%22%2C%22grey-300%22%3A%22%23EEF0F6%22%2C%22grey-400%22%3A%22%23A7ABBE%22%2C%22grey-500%22%3A%22%23989898%22%2C%22grey-600%22%3A%22%237F8798%22%2C%22grey-700%22%3A%22%234C515D%22%2C%22grey-800%22%3A%22%23111111%22%2C%22grey-900%22%3A%22%230A0A0A%22%2C%22royal-300%22%3A%22%23D9BEF4%22%2C%22royal-400%22%3A%22%23B893EC%22%2C%22royal-500%22%3A%22%23BFE8F2%22%2C%22royal-600%22%3A%22%238353C5%22%2C%22royal-700%22%3A%22%236B45A1%22%2C%22status-positive%22%3A%22%2393D2E8%22%2C%22status-negative%22%3A%22%239EA5B0%22%2C%22status-partial%22%3A%22%239EA5B0%22%2C%22highlight-700%22%3A%22%23E4FE53%22%2C%22animation-bg%22%3A%22%23BFE8F2%22%2C%22animation-text%22%3A%22%23FBFBFD%22%2C%22button-lg-primary-bg%22%3A%22%23BFE8F2%22%2C%22button-lg-primary-text%22%3A%22%23061016%22%2C%22button-lg-secondary-bg%22%3A%22%23FBFBFD%22%2C%22button-lg-secondary-text%22%3A%22%23292C32%22%2C%22button-lg-tertiary-bg%22%3A%22%23292C32%22%2C%22button-lg-tertiary-text%22%3A%22%23D1D6E0%22%2C%22button-md-primary-bg%22%3A%22%23141414%22%2C%22button-md-primary-text%22%3A%22%23989898%22%2C%22button-md-secondary-bg%22%3A%22%23FBFBFD%22%2C%22button-md-secondary-text%22%3A%22%23292C32%22%2C%22button-md-tertiary-bg%22%3A%22%23292C32%22%2C%22button-md-tertiary-text%22%3A%22%23D1D6E0%22%2C%22button-sm-primary-bg%22%3A%22%239E79D2%22%2C%22button-sm-primary-text%22%3A%22%23FBFBFD%22%2C%22button-sm-secondary-bg%22%3A%22%23FBFBFD%22%2C%22button-sm-secondary-text%22%3A%22%23292C32%22%2C%22button-sm-tertiary-bg%22%3A%22%23292C32%22%2C%22button-sm-tertiary-text%22%3A%22%23D1D6E0%22%2C%22input-bg%22%3A%22%230F0F0F%22%2C%22input-placeholder%22%3A%22%23737373%22%2C%22input-text%22%3A%22%23E8E8E8%22%2C%22input-selection%22%3A%22%239EA5B04D%22%2C%22menu-bg%22%3A%22%23111111CC%22%2C%22menu-text%22%3A%22%23F5F5F5%22%2C%22menu-backdrop%22%3A%22%23FBFBFD1A%22%2C%22modal-backdrop%22%3A%22%2317191C54%22%7D%7D%2C%22themeType%22%3A%22dark%22%2C%22apiUrl%22%3A%22https%3A%2F%2Fv2.api.squidrouter.com%22%2C%22tabs%22%3A%7B%22swap%22%3Atrue%2C%22buy%22%3Atrue%2C%22send%22%3Afalse%7D%2C%22priceImpactWarnings%22%3A%7B%22warning%22%3A3%2C%22critical%22%3A5%7D%2C%22loadPreviousStateFromLocalStorage%22%3Atrue%7D';
+/* Squid widget inline embed (Widget Studio export). Offline preview clears URL so we never hit the network. */
+(function(){
+  var squidDefaultSrc='https://studio.squidrouter.com/iframe?config=%7B%22integratorId%22%3A%22squid-widget-studio%22%2C%22theme%22%3A%7B%22borderRadius%22%3A%7B%22button-lg-primary%22%3A%220.3125rem%22%2C%22button-lg-secondary%22%3A%220.3125rem%22%2C%22button-lg-tertiary%22%3A%220.3125rem%22%2C%22button-md-primary%22%3A%229999px%22%2C%22button-md-secondary%22%3A%220.3125rem%22%2C%22button-md-tertiary%22%3A%220.3125rem%22%2C%22button-sm-primary%22%3A%221.25rem%22%2C%22button-sm-secondary%22%3A%221.25rem%22%2C%22button-sm-tertiary%22%3A%221.25rem%22%2C%22container%22%3A%220.3125rem%22%2C%22input%22%3A%220.3125rem%22%2C%22menu-sm%22%3A%220.3125rem%22%2C%22menu-lg%22%3A%220.3125rem%22%2C%22modal%22%3A%220.3125rem%22%7D%2C%22fontSize%22%3A%7B%22caption%22%3A%220.875rem%22%2C%22body-small%22%3A%221.14375rem%22%2C%22body-medium%22%3A%221.40625rem%22%2C%22body-large%22%3A%221.75625rem%22%2C%22heading-small%22%3A%222.1875rem%22%2C%22heading-medium%22%3A%223.08125rem%22%2C%22heading-large%22%3A%224.40625rem%22%7D%2C%22fontWeight%22%3A%7B%22caption%22%3A%22400%22%2C%22body-small%22%3A%22400%22%2C%22body-medium%22%3A%22400%22%2C%22body-large%22%3A%22400%22%2C%22heading-small%22%3A%22400%22%2C%22heading-medium%22%3A%22400%22%2C%22heading-large%22%3A%22400%22%7D%2C%22fontFamily%22%3A%7B%22squid-main%22%3A%22GeistVariable%2C%20sans-serif%22%7D%2C%22boxShadow%22%3A%7B%22container%22%3A%220px%202px%205px%201px%20rgba(0%2C%200%2C%200%2C%200.20)%2C%200px%205px%2020px%20-1px%20rgba(0%2C%200%2C%200%2C%200.33)%22%7D%2C%22color%22%3A%7B%22grey-100%22%3A%22%23FBFBFD%22%2C%22grey-200%22%3A%22%23EDEFF3%22%2C%22grey-300%22%3A%22%23EEF0F6%22%2C%22grey-400%22%3A%22%23A7ABBE%22%2C%22grey-500%22%3A%22%23989898%22%2C%22grey-600%22%3A%22%237F8798%22%2C%22grey-700%22%3A%22%234C515D%22%2C%22grey-800%22%3A%22%23111111%22%2C%22grey-900%22%3A%22%230A0A0A%22%2C%22royal-300%22%3A%22%23D9BEF4%22%2C%22royal-400%22%3A%22%23B893EC%22%2C%22royal-500%22%3A%22%23BFE8F2%22%2C%22royal-600%22%3A%22%238353C5%22%2C%22royal-700%22%3A%22%236B45A1%22%2C%22status-positive%22%3A%22%2393D2E8%22%2C%22status-negative%22%3A%22%239EA5B0%22%2C%22status-partial%22%3A%22%239EA5B0%22%2C%22highlight-700%22%3A%22%23E4FE53%22%2C%22animation-bg%22%3A%22%23BFE8F2%22%2C%22animation-text%22%3A%22%23FBFBFD%22%2C%22button-lg-primary-bg%22%3A%22%23BFE8F2%22%2C%22button-lg-primary-text%22%3A%22%23061016%22%2C%22button-lg-secondary-bg%22%3A%22%23FBFBFD%22%2C%22button-lg-secondary-text%22%3A%22%23292C32%22%2C%22button-lg-tertiary-bg%22%3A%22%23292C32%22%2C%22button-lg-tertiary-text%22%3A%22%23D1D6E0%22%2C%22button-md-primary-bg%22%3A%22%23141414%22%2C%22button-md-primary-text%22%3A%22%23989898%22%2C%22button-md-secondary-bg%22%3A%22%23FBFBFD%22%2C%22button-md-secondary-text%22%3A%22%23292C32%22%2C%22button-md-tertiary-bg%22%3A%22%23292C32%22%2C%22button-md-tertiary-text%22%3A%22%23D1D6E0%22%2C%22button-sm-primary-bg%22%3A%22%239E79D2%22%2C%22button-sm-primary-text%22%3A%22%23FBFBFD%22%2C%22button-sm-secondary-bg%22%3A%22%23FBFBFD%22%2C%22button-sm-secondary-text%22%3A%22%23292C32%22%2C%22button-sm-tertiary-bg%22%3A%22%23292C32%22%2C%22button-sm-tertiary-text%22%3A%22%23D1D6E0%22%2C%22input-bg%22%3A%22%230F0F0F%22%2C%22input-placeholder%22%3A%22%23737373%22%2C%22input-text%22%3A%22%23E8E8E8%22%2C%22input-selection%22%3A%22%239EA5B04D%22%2C%22menu-bg%22%3A%22%23111111CC%22%2C%22menu-text%22%3A%22%23F5F5F5%22%2C%22menu-backdrop%22%3A%22%23FBFBFD1A%22%2C%22modal-backdrop%22%3A%22%2317191C54%22%7D%7D%2C%22themeType%22%3A%22dark%22%2C%22apiUrl%22%3A%22https%3A%2F%2Fv2.api.squidrouter.com%22%2C%22tabs%22%3A%7B%22swap%22%3Atrue%2C%22buy%22%3Atrue%2C%22send%22%3Afalse%7D%2C%22priceImpactWarnings%22%3A%7B%22warning%22%3A3%2C%22critical%22%3A5%7D%2C%22loadPreviousStateFromLocalStorage%22%3Atrue%7D';
+  if(window.__WTS_OFFLINE__) window.SQUID_IFRAME_SRC='';
+  else window.SQUID_IFRAME_SRC=window.SQUID_IFRAME_SRC||squidDefaultSrc;
+})();
 
 (function(){
   var toggle = document.getElementById('squid-route-toggle');
   var panel  = document.getElementById('squid-route-panel');
   var frame  = document.getElementById('squid-route-frame');
   var hint   = document.getElementById('squid-route-hint');
+  var mock   = document.getElementById('squid-offline-mock');
   if(!toggle || !panel || !frame) return;
 
   function parseConfigFromUrl(url){
@@ -2348,6 +2389,15 @@ window.SQUID_IFRAME_SRC = window.SQUID_IFRAME_SRC || 'https://studio.squidrouter
   }
 
   toggle.addEventListener('click', function(){
+    if(window.__WTS_OFFLINE__){
+      panel.classList.toggle('hidden');
+      var open = !panel.classList.contains('hidden');
+      frame.style.display = 'none';
+      if(mock) mock.classList.toggle('hidden', !open);
+      if(hint) hint.classList.add('hidden');
+      return;
+    }
+    /* Online: keep logic identical to production — only toggle panel + set iframe src (no display/mock tweaks). */
     var src = getInlineUrl();
     if(!src){
       panel.classList.add('hidden');
