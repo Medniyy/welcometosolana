@@ -3,13 +3,152 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Welcome to Solana</title>
-<meta name="description" content="Choose your path into Solana. Built for people making the move."/>
+<title>Welcome to Solana — Choose your path</title>
+<meta name="description" content="Choose your path into Solana. For newcomers, creators, builders, and experienced traders. Pick who you are and get a fully tailored guide."/>
+<link rel="canonical" href="https://welcometosolana.xyz/"/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://welcometosolana.xyz/"/>
+<meta property="og:title" content="Welcome to Solana — Choose your path"/>
+<meta property="og:description" content="Choose your path into Solana. For newcomers, creators, builders, and experienced traders."/>
+<meta property="og:image" content="https://welcometosolana.xyz/og-image-v2.png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Welcome to Solana — Choose your path"/>
+<meta name="twitter:description" content="Pick your path into Solana. Newcomer, creator, builder, or pro — each path is tailored for you."/>
+<meta name="twitter:image" content="https://welcometosolana.xyz/og-image-v2.png"/>
 <link rel="icon" type="image/svg+xml" href="favicon.svg"/>
+<script>window._track=function(n,d){try{if(window.umami&&typeof window.umami.track==='function')window.umami.track(n,d||{})}catch(e){}}</script>
+<script>(function(){var s=document.createElement('script');s.defer=true;s.src='https://umami-service-production-3ded.up.railway.app/script.js';s.dataset.websiteId='faf37f2f-424a-4061-8416-2c4b5193a4b5';document.head.appendChild(s);})();</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&display=swap"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&family=JetBrains+Mono:wght@400;500;600&display=swap"/>
 <link rel="stylesheet" href="assets/v2.css"/>
+<style>
+/* ===== Gate — V3 design alignment =====
+   Overrides v2.css tokens for gate.html only. All other pages unaffected. */
+
+:root {
+  /* V3 background / surface */
+  --bg:               #0d0f12;
+  --surface:          #161a20;
+  --surface-raised:   #1b2029;
+  /* V3 borders */
+  --outline:          rgba(255,255,255,.07);
+  --outline-muted:    rgba(255,255,255,.05);
+  /* V3 ink scale */
+  --on-surface:       #ecedef;
+  --on-surface-variant: #b6bbc4;
+  --on-surface-dim:   #5f646d;
+  /* V3 fonts */
+  --font-body:        'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono:        'JetBrains Mono', ui-monospace, monospace;
+  /* V3 frost */
+  --frost-1:          #cfeef6;
+  --frost-2:          #93d2e8;
+  --frost-3:          #6fb9d6;
+  --frost-glow:       rgba(147,210,232,.20);
+}
+
+/* Dot grid — V3 tone (slightly cooler, softer) */
+.dot-grid {
+  background-image: radial-gradient(circle, rgba(255,255,255,.04) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+/* Ambient glow, like V3 hero */
+.gate-body::before {
+  content: '';
+  position: fixed;
+  top: -120px; right: -120px;
+  width: 640px; height: 640px;
+  background: radial-gradient(circle, rgba(147,210,232,.13), transparent 70%);
+  filter: blur(90px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Title — V3 weight/tracking */
+.gate-title {
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  color: var(--on-surface);
+}
+
+/* Subtitle — V3 frost italic gradient */
+.gate-sub {
+  font-weight: 300;
+  font-size: clamp(1.1rem, 2.6vw, 1.9rem);
+  letter-spacing: -0.01em;
+  background: linear-gradient(90deg, #cfeef6 0%, #93d2e8 60%, #6fb9d6 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-top: .9rem;
+}
+
+/* Cards — V3 surface + border language */
+.arch-card {
+  background: var(--surface);
+  border-color: rgba(255,255,255,.10);
+  border-radius: 18px;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .arch-card:hover {
+    border-color: rgba(147,210,232,.35);
+    box-shadow: 0 20px 56px rgba(0,0,0,.55),
+                0 0 0 1px rgba(147,210,232,.14),
+                0 0 60px -20px rgba(147,210,232,.18);
+  }
+}
+
+/* Card label — V3 mono style */
+.arch-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: .1em;
+  color: var(--on-surface-dim);
+  padding: .7rem .5rem 1rem;
+}
+.arch-card:hover .arch-label { color: var(--frost-2); }
+
+/* Overlay — V3 background */
+#gate-overlay { background: var(--bg); }
+
+.overlay-text {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .12em;
+  color: var(--on-surface-dim);
+}
+
+/* Escape link — V3 mono style */
+/* Bottom CTA block */
+.gate-cta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .875rem;
+  position: relative;
+  z-index: 1;
+}
+.gate-cta-text {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--on-surface-dim);
+  letter-spacing: .02em;
+  text-align: center;
+}
+.gate-cta-btns {
+  display: flex;
+  gap: .625rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+</style>
 </head>
 <body class="gate-body">
 
@@ -67,8 +206,12 @@
   </div>
 </main>
 
-<footer>
-  <a href="ecosystem-new.html" class="gate-escape">Just want to browse everything? → Explore the ecosystem</a>
+<footer class="gate-cta">
+  <p class="gate-cta-text">Just want to browse everything?</p>
+  <div class="gate-cta-btns">
+    <a href="ecosystem-new.html" class="placeholder-back">Explore the ecosystem →</a>
+    <a href="https://t.me/+3prPanTSreIwMzMy" target="_blank" rel="noopener" class="placeholder-back" onclick="window._track('click_telegram',{from:'gate'})">Join Telegram ↗</a>
+  </div>
 </footer>
 
 <div id="gate-overlay" role="status" aria-live="polite">
@@ -102,6 +245,7 @@
     var texts   = JSON.parse(card.dataset.texts || '["Getting ready…"]');
 
     localStorage.setItem('wts_persona', persona);
+    window._track('gate_path_select', { persona: persona });
 
     var rect = card.getBoundingClientRect();
     var cx   = rect.left + rect.width  / 2;

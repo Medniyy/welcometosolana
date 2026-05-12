@@ -9,6 +9,12 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&display=swap"/>
 <link rel="stylesheet" href="assets/v2.css"/>
+<script>window._track=function(n,d){try{if(window.umami&&typeof window.umami.track==='function')window.umami.track(n,d||{})}catch(e){}}</script>
+<script>(function(){var s=document.createElement('script');s.defer=true;s.src='https://umami-service-production-3ded.up.railway.app/script.js';s.dataset.websiteId='faf37f2f-424a-4061-8416-2c4b5193a4b5';document.head.appendChild(s);})();</script>
+<style>
+.placeholder-sub-form{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center}
+.placeholder-sub-msg{font-size:12px;color:rgba(255,255,255,.4);margin-top:.5rem;text-align:center;font-family:inherit}
+</style>
 </head>
 <body class="placeholder-body">
 <div class="dot-grid" aria-hidden="true"></div>
@@ -17,6 +23,46 @@
 <h1 class="placeholder-title">Coming <em>soon.</em></h1>
 <p class="placeholder-sub">The Builder path is planned. Dev tools, grants, hackathons, validators — all mapped for you.</p>
 <a href="index.html" class="placeholder-back">← Back to gate</a>
-<a href="ecosystem-new.html" class="placeholder-back" style="margin-left:.5rem">Explore ecosystem →</a>
+<a href="ecosystem-new.html" class="placeholder-back">Explore ecosystem →</a>
+<a href="https://t.me/+3prPanTSreIwMzMy" target="_blank" rel="noopener" class="placeholder-back" onclick="window._track('click_telegram',{from:'builder-placeholder'})">Join Telegram ↗</a>
+<button class="placeholder-back" id="sub-toggle">Subscribe to newsletter →</button>
+<div id="sub-form-wrap" style="display:none">
+  <form class="placeholder-sub-form" id="sub-form">
+    <input class="newsletter-input" id="sub-email" type="email" placeholder="you@example.com" required autocomplete="email"/>
+    <button class="newsletter-btn" type="submit">Subscribe →</button>
+  </form>
+  <p class="placeholder-sub-msg" id="sub-msg"></p>
+</div>
+<script>
+(function(){
+  var toggle=document.getElementById('sub-toggle');
+  var wrap=document.getElementById('sub-form-wrap');
+  var form=document.getElementById('sub-form');
+  if(!toggle||!form) return;
+  toggle.addEventListener('click',function(){
+    toggle.style.display='none';
+    wrap.style.display='block';
+    document.getElementById('sub-email').focus();
+  });
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var email=document.getElementById('sub-email').value.trim();
+    if(!email) return;
+    var btn=form.querySelector('.newsletter-btn');
+    btn.textContent='Subscribing…'; btn.disabled=true;
+    var fd=new FormData(); fd.append('email',email);
+    fetch('https://buttondown.com/api/emails/embed-subscribe/welcometosolana',{method:'POST',body:fd,mode:'no-cors'})
+      .then(function(){
+        wrap.innerHTML='<p style="font-size:13px;color:#93d2e8;font-family:inherit;text-align:center">Check your inbox — confirmation link sent. ✓</p>';
+        try{localStorage.setItem('wts_subscribed','1');}catch(er){}
+        window._track('newsletter_subscribed',{source:'builder-placeholder'});
+      })
+      .catch(function(){
+        btn.textContent='Subscribe →'; btn.disabled=false;
+        document.getElementById('sub-msg').textContent='Something went wrong — please try again.';
+      });
+  });
+})();
+</script>
 </body>
 </html>
