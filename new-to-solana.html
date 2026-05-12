@@ -1884,10 +1884,10 @@ window.SQUID_IFRAME_SRC = 'https://studio.squidrouter.com/iframe?config=%7B%22in
   }
 
   function openWidget() {
-    if (src && frame && (frame.src === 'about:blank' || frame.src === '' || frame.src === location.href)) {
+    if (src && frame && frame.getAttribute('src') !== src) {
       frame.src = src;
     }
-    if (wrap) wrap.style.display = '';
+    if (wrap) wrap.style.display = 'block';
     var label = document.getElementById('route-cta-label');
     if (label) label.textContent = 'Close widget';
     var arrow = cta.querySelector('.btn-arrow');
