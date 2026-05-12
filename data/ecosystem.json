@@ -1,0 +1,143 @@
+{
+  "categories": [
+    {"id":"wallets","label":"Wallets","description":"Your access layer for Solana apps, payments, staking, and identity.","personas":["new","builder","creator","pro"]},
+    {"id":"cards","label":"Cards","description":"Spend, pay, and connect crypto to real-world use cases.","personas":["new","builder","creator","pro"]},
+    {"id":"communities","label":"Communities","description":"Find people, local chapters, groups, events, and culture.","personas":["new","creator"]},
+    {"id":"defi","label":"DeFi","description":"Swap, lend, borrow, provide liquidity, and use capital onchain.","personas":["pro"]},
+    {"id":"yield","label":"Yield","description":"Staking, lending, liquidity, and other yield opportunities.","personas":["pro"]},
+    {"id":"developers","label":"Developers","description":"Tools, docs, infra, and resources for building on Solana.","personas":["builder"]},
+    {"id":"grants","label":"Grants","description":"Funding, programs, and opportunities for builders and creators.","personas":["builder","creator"]},
+    {"id":"validators","label":"Validators","description":"Infrastructure, node operators, staking, and network participants.","personas":["builder","pro"]},
+    {"id":"nfts","label":"NFTs","description":"Collectibles, communities, creator assets, and NFT-native apps.","personas":["creator","pro"]},
+    {"id":"ai","label":"AI","description":"AI products, agents, tools, and experiments on Solana.","personas":["builder","pro","creator"]},
+    {"id":"payments","label":"Payments","description":"Payment tools, stablecoin flows, and merchant use cases.","personas":["builder","new"]},
+    {"id":"jobs","label":"Jobs","description":"Work, gigs, bounties, and hiring opportunities.","personas":["builder","creator"]},
+    {"id":"media","label":"Media","description":"News, content, creators, and ways to follow the ecosystem.","personas":["creator","new"]},
+    {"id":"gaming","label":"Gaming","description":"Games, quests, culture, and playable Solana experiences.","personas":["new","creator","pro"]},
+    {"id":"hardware","label":"Hardware","description":"Physical devices, phones, cards, and real-world crypto interfaces.","personas":["pro","builder"]},
+    {"id":"rwa","label":"RWA","description":"Real-world assets and tokenized financial products.","personas":["pro"]},
+    {"id":"prediction","label":"Prediction","description":"Markets, forecasting, and speculative information tools.","personas":["pro"]},
+    {"id":"lending","label":"Lending","description":"Borrowing, lending, credit, and collateral tools.","personas":["pro"]},
+    {"id":"stocks","label":"Stocks","description":"Tokenized stocks, market access, and finance experiments.","personas":["pro"]},
+    {"id":"privacy","label":"Privacy","description":"Privacy tools, private transactions, and safer user flows.","personas":["pro"]},
+    {"id":"domains","label":"Domains","description":"Names, identity, profiles, and ownership layers.","personas":["builder","pro"]},
+    {"id":"taxes","label":"Taxes","description":"Tax tools, reporting, and portfolio accounting.","personas":["pro"]},
+    {"id":"wellness","label":"Wellness","description":"Lifestyle, health, and human-first tools around the ecosystem.","personas":["new","creator"]},
+    {"id":"travel","label":"Travel","description":"Useful tools and communities for people moving across borders.","personas":["new","creator"]},
+    {"id":"charity","label":"Charity","description":"Donation, public goods, and impact-focused projects.","personas":["new","creator"]}
+  ],
+  "projects": [
+    {"id":"solflare","name":"Solflare","category":"wallets","description":"4M+ users. Built for Solana. Staking, DeFi, and hardware wallet built in.","url":"https://www.solflare.com","logo":"logos/solflare.jpg","featured":true,"personas":["new","builder","creator","pro"]},
+    {"id":"phantom","name":"Phantom","category":"wallets","description":"The crypto app for everyone. Not available for UK users.","url":"https://phantom.app","logo":"logos/phantom.jpg","featured":false,"personas":["new","builder","creator","pro"]},
+    {"id":"backpack","name":"Backpack","category":"wallets","description":"The most powerful margin account. Multi-chain.","url":"https://backpack.app","logo":"logos/backpack.png","featured":false,"personas":["new","builder","creator","pro"]},
+    {"id":"jupiter-wallet","name":"Jupiter Wallet","category":"wallets","description":"Wallet integrated into the Jupiter DEX ecosystem.","url":"https://jup.ag","logo":"logos/jupwallet.jpg","featured":false,"personas":["new","pro"]},
+    {"id":"samui","name":"Samui","category":"wallets","description":"Smart wallet with advanced account features.","url":"https://samui.build","logo":"logos/samuo.svg","featured":false,"personas":["builder","pro"]},
+
+    {"id":"solflare-card","name":"Solflare Card","category":"cards","description":"Spend crypto anywhere. Linked to your Solflare wallet.","url":"https://www.solflare.com/crypto-card/","logo":"logos/solflare.jpg","featured":true,"personas":["new","builder","creator","pro"]},
+    {"id":"kast","name":"Kast","category":"cards","description":"Crypto card for everyday spending.","url":"https://x.com/KASTxyz","logo":"logos/kast.jpg","featured":false,"personas":["new","creator","pro"]},
+    {"id":"jupiter-card","name":"Jupiter Card","category":"cards","description":"Spend your Jupiter assets in the real world.","url":"https://x.com/JupiterExchange","logo":"logos/jupiter.jpg","featured":false,"personas":["pro"]},
+
+    {"id":"solflare-empire","name":"Solflare Empire","category":"communities","description":"Official Solflare community. Great first stop for newcomers.","url":"https://discord.com/invite/solflare","logo":"logos/solflareempire.jpg","featured":true,"personas":["new","creator"]},
+    {"id":"superteam","name":"Superteam","category":"communities","description":"Network of builders and operators. 30+ country chapters.","url":"https://superteam.fun/","logo":"logos/superteam.jpg","featured":true,"personas":["new","builder","creator"]},
+    {"id":"monkedao","name":"MonkeDAO","category":"communities","description":"One of the most established DAOs in Solana.","url":"https://x.com/MonkeDAO","logo":"logos/monkedao.jpg","featured":false,"personas":["new","creator"]},
+    {"id":"mtndao","name":"MTNDAO","category":"communities","description":"Builders and founders gathering IRL. Annual retreats.","url":"https://x.com/mtndao","logo":"logos/mntdao.jpg","featured":false,"personas":["new","builder"]},
+    {"id":"famous-fox","name":"Famous Fox Fed","category":"communities","description":"Community-driven NFT project with strong culture.","url":"https://x.com/FamousFoxFed","logo":"logos/famousfox.jpg","featured":false,"personas":["creator"]},
+    {"id":"moustachedao","name":"MoustacheDAO","category":"communities","description":"Tight-knit Solana community.","url":"https://x.com/MoustacheDAO","logo":"logos/moustachedao.jpg","featured":false,"personas":["new","creator"]},
+    {"id":"layer33","name":"Layer33","category":"communities","description":"Validator community and Solana ecosystem contributors.","url":"https://x.com/layer33xyz","logo":"logos/layer33.jpg","featured":false,"personas":["builder"]},
+    {"id":"superwhere","name":"Superwhere","category":"communities","description":"Find Solana events and meetups near you.","url":"https://superwhere.io/","logo":"logos/superwhere.jpg","featured":false,"personas":["new","creator"]},
+    {"id":"solana-events","name":"Solana Events","category":"communities","description":"Official calendar of Solana ecosystem events.","url":"https://x.com/SolanaEvents","logo":"logos/solanaevents.jpg","featured":false,"personas":["new","creator","builder"]},
+    {"id":"pudgy","name":"Pudgy Penguins","category":"communities","description":"One of the most recognisable NFT communities. Active on Solana.","url":"https://x.com/pudgypenguins","logo":"logos/pudgypengguins.jpg","featured":false,"personas":["creator"]},
+    {"id":"moonbirds","name":"Moonbirds","category":"communities","description":"NFT community with strong collector base.","url":"https://x.com/moonbirds","logo":"logos/moonbirdds.jpg","featured":false,"personas":["creator"]},
+    {"id":"radiants","name":"Radiants DAO","category":"communities","description":"Community-governed Solana collective.","url":"https://x.com/RadiantDAO","logo":"logos/radiants.jpg","featured":false,"personas":["creator"]},
+    {"id":"island-dao","name":"Island DAO","category":"communities","description":"Community-focused DAO with global presence.","url":"#","logo":"logos/island dao.jpg","featured":false,"personas":["creator"]},
+    {"id":"lp-army","name":"LP Army","category":"communities","description":"Liquidity provider community on Solana.","url":"https://x.com/met_lparmy","logo":"logos/lparmy.jpg","featured":false,"personas":["pro"]},
+    {"id":"la-familia","name":"La Familia","category":"communities","description":"Spanish-speaking Solana community.","url":"https://x.com/LaFamilia_so","logo":"logos/lafamilia.jpg","featured":false,"personas":["new","creator"]},
+
+    {"id":"raydium","name":"Raydium","category":"defi","description":"$1.1T lifetime volume. Building on-chain liquidity primitives.","url":"https://raydium.io","logo":"logos/raydium.jpg","featured":true,"personas":["pro"]},
+    {"id":"jupiter","name":"Jupiter","category":"defi","description":"Swap anything. Best price. Aggregates all Solana liquidity.","url":"https://jup.ag","logo":"logos/jupiter.jpg","featured":true,"personas":["pro","new"]},
+    {"id":"meteora","name":"Meteora","category":"defi","description":"Dynamic liquidity pools. Over $1B in fees for LPs.","url":"https://meteora.ag","logo":"logos/meteora.jpg","featured":false,"personas":["pro"]},
+    {"id":"kamino","name":"Kamino","category":"defi","description":"USDC yield. Credit markets. Capital-efficient DeFi.","url":"https://kamino.finance","logo":"logos/kamino.jpg","featured":false,"personas":["pro"]},
+    {"id":"titan","name":"Titan","category":"defi","description":"Next-gen exchange with advanced trading features.","url":"https://titan.exchange/swap","logo":"logos/titan.jpg","featured":false,"personas":["pro"]},
+    {"id":"dflow","name":"DFlow","category":"defi","description":"Order flow and DEX infrastructure.","url":"https://dflow.net","logo":"logos/dflow.jpg","featured":false,"personas":["pro"]},
+    {"id":"byreal","name":"Byreal","category":"defi","description":"DeFi and AI on Solana.","url":"https://x.com/byreal_io","logo":"logos/byreal.jpg","featured":false,"personas":["pro","builder"]},
+    {"id":"loopscale","name":"Loopscale","category":"defi","description":"Structured credit and lending on Solana.","url":"https://x.com/Loopscale","logo":"logos/loopscale.png","featured":false,"personas":["pro"]},
+
+    {"id":"marinade","name":"Marinade","category":"yield","description":"Liquid staking for SOL. ~5-6% APR, stay liquid.","url":"https://marinade.finance","logo":"logos/Marinade.jpg","featured":true,"personas":["pro","new"]},
+    {"id":"jito","name":"Jito","category":"yield","description":"MEV-boosted liquid staking on Solana.","url":"https://jito.network","logo":"logos/jito.png","featured":true,"personas":["pro"]},
+    {"id":"perena","name":"Perena","category":"yield","description":"Yield strategies and stablecoin optimization.","url":"https://x.com/perena","logo":"logos/perena.jpg","featured":false,"personas":["pro"]},
+
+    {"id":"helius","name":"Helius","category":"developers","description":"The most reliable Solana RPC and developer platform.","url":"https://www.helius.dev/","logo":"logos/helius.jpg","featured":true,"personas":["builder"]},
+    {"id":"solana-devs","name":"Solana Devs","category":"developers","description":"Official developer resources and documentation.","url":"https://x.com/solana_devs","logo":"logos/solanadevelopers.jpg","featured":true,"personas":["builder"]},
+    {"id":"magicblock","name":"MagicBlock","category":"developers","description":"Fully onchain games and real-time Solana infra.","url":"https://x.com/magicblock","logo":"logos/magicblock.jpg","featured":false,"personas":["builder"]},
+    {"id":"triton","name":"Triton One","category":"developers","description":"Enterprise RPC and Solana infrastructure.","url":"https://x.com/triton_one","logo":"logos/tritonone.jpg","featured":false,"personas":["builder"]},
+    {"id":"streamflow","name":"Streamflow","category":"developers","description":"Token vesting, streaming payments, and payroll.","url":"https://x.com/streamflow_fi","logo":"logos/streamflow.jpg","featured":false,"personas":["builder"]},
+    {"id":"harmonic","name":"Harmonic","category":"developers","description":"Validator and developer tooling infrastructure.","url":"https://x.com/harmonic_gg","logo":"logos/harmonic.jpg","featured":false,"personas":["builder"]},
+    {"id":"solana-new","name":"Solana.new","category":"developers","description":"Hot new projects on Solana. Discover what's shipping.","url":"https://www.solana.new/","logo":"logos/solana.new.png","featured":false,"personas":["builder","pro"]},
+
+    {"id":"superteam-earn","name":"Superteam Earn","category":"grants","description":"Bounties, grants, and paid opportunities for builders and creators.","url":"https://superteam.fun/earn","logo":"logos/superteam earn.jpg","featured":true,"personas":["builder","creator"]},
+    {"id":"foundation-grants","name":"Foundation Grants","category":"grants","description":"Solana Foundation funding for ecosystem teams.","url":"https://solana.org/grants-funding","logo":"logos/solanafoundation.jpg","featured":true,"personas":["builder"]},
+    {"id":"colosseum","name":"Colosseum","category":"grants","description":"Hackathons and accelerator programs for Solana builders.","url":"https://colosseum.com/","logo":"logos/colosseum.jpg","featured":false,"personas":["builder"]},
+    {"id":"frontier","name":"Frontier Hackathon","category":"grants","description":"$230K in prizes. Live now. Open to all builders.","url":"https://superteam.fun/earn/hackathon/frontier","logo":"logos/superteam.jpg","featured":true,"personas":["builder"]},
+
+    {"id":"layer33-validator","name":"Layer33","category":"validators","description":"Community validator and Solana contributor.","url":"https://x.com/layer33xyz","logo":"logos/layer33.jpg","featured":false,"personas":["builder","pro"]},
+    {"id":"phase","name":"Phase","category":"validators","description":"Validator infrastructure on Solana.","url":"https://x.com/phase_labs","logo":"logos/phase.jpg","featured":false,"personas":["builder","pro"]},
+    {"id":"harmonic-validator","name":"Harmonic","category":"validators","description":"Validator and developer infrastructure.","url":"https://x.com/harmonic_gg","logo":"logos/harmonic.jpg","featured":false,"personas":["builder","pro"]},
+
+    {"id":"magic-eden","name":"Magic Eden","category":"nfts","description":"The leading NFT marketplace on Solana.","url":"https://magiceden.io","logo":"logos/magiceden.png","featured":true,"personas":["creator","pro"]},
+    {"id":"monkedao-nft","name":"MonkeDAO","category":"nfts","description":"Community-driven NFT project with strong culture.","url":"https://x.com/MonkeDAO","logo":"logos/monkedao.jpg","featured":false,"personas":["creator"]},
+
+    {"id":"sendai","name":"SendAI","category":"ai","description":"AI agents and toolkits built for Solana.","url":"https://x.com/sendaifun","logo":"logos/sendai.jpg","featured":true,"personas":["builder","pro"]},
+    {"id":"noahai","name":"Noah AI","category":"ai","description":"AI-native crypto experience.","url":"https://x.com/TryNoahAI","logo":"logos/noahai.jpg","featured":false,"personas":["builder","pro"]},
+    {"id":"solana-new-ai","name":"Solana.new","category":"ai","description":"Discover the newest AI experiments launching on Solana.","url":"https://www.solana.new/","logo":"logos/solana.new.png","featured":false,"personas":["builder","pro"]},
+
+    {"id":"raise","name":"Raise","category":"payments","description":"Stablecoin payments and merchant tools.","url":"https://x.com/RaiseApp","logo":"logos/raise.png","featured":true,"personas":["builder","new"]},
+
+    {"id":"superteam-talent","name":"Superteam Talent","category":"jobs","description":"Hire and get hired within the Solana ecosystem.","url":"https://x.com/SuperteamTalent","logo":"logos/superteamtalent.jpg","featured":true,"personas":["builder","creator"]},
+    {"id":"gib-work","name":"Gib.Work","category":"jobs","description":"Freelance gigs and bounties on Solana.","url":"https://app.gib.work/","logo":"logos/gib.work.jpg","featured":false,"personas":["builder","creator"]},
+    {"id":"solana-jobs","name":"Solana Job Board","category":"jobs","description":"Full-time roles across the ecosystem.","url":"https://jobs.solana.com/jobs","logo":"logos/solana.jpg","featured":false,"personas":["builder","creator"]},
+
+    {"id":"ath","name":"ATH","category":"media","description":"The team behind this guide. Video, content, and community.","url":"https://ath.camera","logo":"logos/ath.jpg","featured":true,"personas":["creator","new"]},
+    {"id":"little-unusual","name":"Little Unusual","category":"media","description":"Independent media covering Solana culture.","url":"https://x.com/littleunusualHQ","logo":"logos/littleunusual.jpg","featured":false,"personas":["creator","new"]},
+    {"id":"ownership","name":"Ownership Podcast","category":"media","description":"Deep conversations on ownership and crypto.","url":"https://x.com/ownershipfm","logo":"logos/ownership.jpg","featured":false,"personas":["creator"]},
+    {"id":"solana-sensei","name":"Solana Sensei","category":"media","description":"Educational content about the Solana ecosystem.","url":"https://x.com/SolanaSensei","logo":"logos/solanasensei.jpg","featured":false,"personas":["new","creator"]},
+    {"id":"sol-ecosystem-call","name":"Solana Ecosystem Call","category":"media","description":"Weekly ecosystem updates and discussions.","url":"https://x.com/SolBrothersPod","logo":"logos/solanaecosystemcall.jpg","featured":false,"personas":["new","creator"]},
+    {"id":"genfinity","name":"Generation Infinity","category":"media","description":"Content creators covering the Solana space.","url":"https://x.com/Genfinity","logo":"logos/generationinfinity.jpg","featured":false,"personas":["creator"]},
+    {"id":"thesense","name":"The Sense","category":"media","description":"Ecosystem signal and curated Solana news.","url":"https://x.com/thesensedotsol","logo":"logos/thesense.png","featured":false,"personas":["new","creator"]},
+    {"id":"fomo","name":"FOMO Magazine","category":"media","description":"Crypto culture and Solana editorial.","url":"https://x.com/fomo_magazine","logo":"logos/fomo.jpg","featured":false,"personas":["creator"]},
+
+    {"id":"solana-gaming","name":"Solana Gaming","category":"gaming","description":"Games, quests, and culture in the Solana gaming ecosystem.","url":"https://x.com/solanagaming","logo":"logos/solanagaming.jpg","featured":true,"personas":["new","creator","pro"]},
+
+    {"id":"solflare-shield","name":"Solflare Shield","category":"hardware","description":"Hardware wallet from Solflare. Your keys, your assets.","url":"https://www.solflare.com/hardware-wallet/","logo":"logos/solflare.jpg","featured":true,"personas":["pro","builder"]},
+    {"id":"solana-mobile","name":"Solana Mobile","category":"hardware","description":"The Saga phone. Native Solana dApp store built in.","url":"https://x.com/solanamobile","logo":"logos/solanamobile.jpg","featured":false,"personas":["pro"]},
+    {"id":"unruggable","name":"Unruggable","category":"hardware","description":"Physical crypto security devices.","url":"https://x.com/unruggable_io","logo":"logos/unruggable.jpg","featured":false,"personas":["pro"]},
+
+    {"id":"huma","name":"Huma Finance","category":"rwa","description":"Real-world asset lending and yield on Solana.","url":"https://huma.finance","logo":"logos/huma.png","featured":true,"personas":["pro"]},
+    {"id":"oro","name":"Oro","category":"rwa","description":"Gold-backed assets on Solana.","url":"https://x.com/orogoldapp","logo":"logos/oro.jpg","featured":false,"personas":["pro"]},
+    {"id":"onre","name":"OnRe","category":"rwa","description":"Real-world finance infrastructure on Solana.","url":"https://x.com/onrefinance","logo":"logos/onre.jpg","featured":false,"personas":["pro"]},
+    {"id":"hastra","name":"Hastra","category":"rwa","description":"Tokenized real-world assets.","url":"https://x.com/HastraFi","logo":"logos/hastra.jpg","featured":false,"personas":["pro"]},
+    {"id":"powerledger","name":"Powerledger","category":"rwa","description":"Tokenized energy trading and sustainability.","url":"https://x.com/Powerledger_io","logo":"logos/powerledger.png","featured":false,"personas":["pro"]},
+
+    {"id":"kalshi","name":"Kalshi","category":"prediction","description":"Real-money prediction markets. Regulated.","url":"https://kalshi.com","logo":"logos/kalshi.jpg","featured":true,"personas":["pro"]},
+
+    {"id":"loopscale-lend","name":"Loopscale","category":"lending","description":"Structured credit and borrowing on Solana.","url":"https://x.com/Loopscale","logo":"logos/loopscale.png","featured":true,"personas":["pro"]},
+
+    {"id":"xstocks","name":"xStocks","category":"stocks","description":"Tokenized stocks and equity on Solana.","url":"https://x.com/xStocksApp","logo":"logos/xstocks.jpg","featured":true,"personas":["pro"]},
+
+    {"id":"houdini","name":"HoudiniSwap","category":"privacy","description":"Private cross-chain swaps.","url":"https://x.com/HoudiniSwap","logo":"logos/houdini.jpg","featured":false,"personas":["pro"]},
+    {"id":"husher","name":"Husher","category":"privacy","description":"Private transactions on Solana.","url":"https://x.com/HusherExchange","logo":"logos/husher.jpg","featured":false,"personas":["pro"]},
+    {"id":"privacy-cash","name":"Privacy Cash","category":"privacy","description":"Cash-like privacy for Solana transactions.","url":"https://x.com/theprivacycash","logo":"logos/privacycash.jpg","featured":false,"personas":["pro"]},
+
+    {"id":"sns","name":"Solana Name Service","category":"domains","description":"Human-readable .sol names and identity on Solana.","url":"https://x.com/sns","logo":"logos/sns.jpg","featured":true,"personas":["builder","pro"]},
+
+    {"id":"netrunner","name":"NetrunnerTax","category":"taxes","description":"Tax reporting and portfolio accounting for Solana.","url":"https://x.com/NetrunnerTax","logo":"logos/neturnner.jpg","featured":true,"personas":["pro"]},
+
+    {"id":"cudis","name":"Cudis","category":"wellness","description":"Health and wellness tools integrated with Solana.","url":"https://x.com/CudisWellness","logo":"logos/cudis.jpg","featured":false,"personas":["new","creator"]},
+    {"id":"moonwalk","name":"Moonwalk Fitness","category":"wellness","description":"Move-to-earn fitness on Solana.","url":"https://x.com/moonwalkfitness","logo":"logos/moonwalk.jpg","featured":false,"personas":["new","creator"]},
+    {"id":"oneofus","name":"OneOfUs","category":"wellness","description":"Lifestyle and community around the Solana ecosystem.","url":"https://x.com/oneofusgang","logo":"logos/oneofus.jpg","featured":false,"personas":["new","creator"]},
+
+    {"id":"nomadz","name":"Nomadz","category":"travel","description":"Tools and community for people moving across borders.","url":"https://x.com/NOMADZxyz","logo":"logos/nomadz.jpg","featured":true,"personas":["new","creator"]},
+
+    {"id":"donategg","name":"Donate.GG","category":"charity","description":"Crypto donations for public goods and charities.","url":"https://x.com/donatedotgg","logo":"logos/donategg.jpg","featured":false,"personas":["new","creator"]},
+    {"id":"telaga","name":"Telaga Charity","category":"charity","description":"Islamic charity and impact projects on Solana.","url":"https://telagacharity.com/","logo":"logos/telagacharity.jpg","featured":false,"personas":["new","creator"]}
+  ]
+}

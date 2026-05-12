@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>New to Solana — Welcome to Solana</title>
+<meta name="description" content="Everything you need to get started on Solana. Wallet, first SOL, first apps, community — step by step."/>
+<link rel="icon" type="image/svg+xml" href="favicon.svg"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&display=swap"/>
+<link rel="stylesheet" href="assets/v2.css"/>
+<link rel="stylesheet" href="assets/nts.css"/>
+</head>
+<body>
+
+<!-- ==================== NAV ==================== -->
+<nav class="path-nav">
+  <a href="gate.html" class="path-nav-logo">Welcome to <em>Solana</em></a>
+  <div class="nav-right">
+    <span class="nav-chip">New to Solana</span>
+    <a href="gate.html" class="nav-switch">Switch path →</a>
+  </div>
+</nav>
+
+<!-- ==================== PROGRESS RAIL ==================== -->
+<div class="nts-rail" id="progress-rail" role="navigation" aria-label="Page sections">
+  <div class="nts-rail-inner">
+    <a href="#what"        class="nts-rail-step is-active" data-step="1"><span class="rail-num">01</span> What is Solana</a>
+    <span class="rail-sep" aria-hidden="true"></span>
+    <a href="#why"         class="nts-rail-step" data-step="2"><span class="rail-num">02</span> Why Solana</a>
+    <span class="rail-sep" aria-hidden="true"></span>
+    <a href="#cando"       class="nts-rail-step" data-step="3"><span class="rail-num">03</span> What can you do</a>
+    <span class="rail-sep" aria-hidden="true"></span>
+    <a href="#wallet"      class="nts-rail-step" data-step="4"><span class="rail-num">04</span> Get a wallet</a>
+    <span class="rail-sep" aria-hidden="true"></span>
+    <a href="#get-sol"     class="nts-rail-step" data-step="5"><span class="rail-num">05</span> Move assets in</a>
+    <span class="rail-sep" aria-hidden="true"></span>
+    <a href="#first-steps" class="nts-rail-step" data-step="6"><span class="rail-num">06</span> What next</a>
+    <span class="rail-sep" aria-hidden="true"></span>
+    <a href="#community"   class="nts-rail-step" data-step="7"><span class="rail-num">07</span> Community</a>
+    <span class="rail-sep" aria-hidden="true"></span>
+    <a href="#apps"        class="nts-rail-step" data-step="8"><span class="rail-num">08</span> Starter stack</a>
+  </div>
+  <div class="nts-rail-track">
+    <div class="nts-rail-progress" id="rail-progress"></div>
+  </div>
+</div>
+
+<!-- ==================== HERO ==================== -->
+<section class="nts-hero" id="hero">
+  <div class="nts-hero-inner">
+    <div class="nts-hero-content">
+      <p class="nts-hero-kicker">Your path into Solana</p>
+      <h1 class="nts-hero-title">You're in the<br/><em>right place.</em></h1>
+      <p class="nts-hero-desc">We'll walk you through everything — what Solana is, how to get a wallet, how to get your first SOL, and where to go next. No jargon, no steps skipped.</p>
+      <div class="nts-hero-actions">
+        <a href="#wallet" class="btn-frost">Start here: Get a wallet →</a>
+        <a href="#what" class="nts-hero-skip">Read from the beginning ↓</a>
+      </div>
+    </div>
+    <div class="nts-hero-visual" aria-hidden="true">
+      <img src="Newtosolana.png" alt="" class="nts-hero-char"/>
+    </div>
+  </div>
+  <div class="nts-hero-scroll" aria-hidden="true">↓ Scroll to begin</div>
+</section>
+
+<!-- ==================== 01: WHAT IS SOLANA ==================== -->
+<section class="nts-section" id="what" data-step="1">
+  <div class="nts-section-inner">
+    <p class="nts-section-label reveal">01 — What is Solana</p>
+    <h2 class="nts-h2 reveal">Solana is the leading high-performance network powering internet capital markets, payments, and crypto applications.</h2>
+    <p class="nts-lead reveal">One network. Thousands of applications. Sub-cent transactions. Here's what you need to know.</p>
+
+    <div class="nts-fact-grid">
+      <div class="nts-fact-card reveal reveal-d1">
+        <div class="nts-fact-metric">SOL</div>
+        <div class="nts-fact-label">The native token</div>
+        <p class="nts-fact-desc">SOL is the fuel of the network. Every transaction, swap, or app interaction costs a tiny amount of SOL — usually less than $0.00025. You need SOL to do anything on-chain.</p>
+      </div>
+      <div class="nts-fact-card reveal reveal-d2">
+        <div class="nts-fact-metric">&lt;$0.01</div>
+        <div class="nts-fact-label">Transaction fees</div>
+        <p class="nts-fact-desc">Every action on Solana costs a tiny fee paid in SOL. The average is around $0.00025. Fast and cheap by design, not by luck.</p>
+      </div>
+      <div class="nts-fact-card reveal reveal-d3">
+        <div class="nts-fact-metric">Staking</div>
+        <div class="nts-fact-label">Earn while you hold</div>
+        <p class="nts-fact-desc">Stake SOL directly inside Solflare — tap Stake, pick a validator, done. Earn rewards for helping secure the network. No third-party app needed.</p>
+      </div>
+      <div class="nts-fact-card reveal reveal-d4">
+        <div class="nts-fact-metric">Governance</div>
+        <div class="nts-fact-label">Under development</div>
+        <p class="nts-fact-desc">In the future, SOL will be used to vote on key protocol upgrades and community decisions. Your stake will be your voice in how the network evolves.</p>
+      </div>
+    </div>
+
+    <div class="nts-video-wrap reveal">
+      <div class="nts-video-player">
+        <iframe
+          src="https://www.youtube.com/embed/3-SWJaLZBic?list=PLilwLeBwGuK6p3pB-vUQf1TjkX48j0Af-"
+          title="Introduction to Solana — playlist"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="nts-video-side">
+        <div class="nts-video-side-label">Watch first</div>
+        <div class="nts-video-side-title">Introduction to Solana — curated playlist</div>
+        <p class="nts-video-side-desc">A short video series covering what Solana is, how it works, and why it matters. A good 20 minutes before diving into the rest of this guide.</p>
+        <a href="https://youtube.com/playlist?list=PLilwLeBwGuK6p3pB-vUQf1TjkX48j0Af-" target="_blank" rel="noopener" class="btn-frost">View full playlist on YouTube ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 02: WHY SOLANA ==================== -->
+<section class="nts-section nts-section--alt" id="why" data-step="2">
+  <div class="nts-section-inner">
+    <p class="nts-section-label reveal">02 — Why Solana</p>
+    <h2 class="nts-h2 reveal">The argument in <em>numbers.</em></h2>
+    <p class="nts-lead reveal">Real usage, serious institutions, and an ecosystem deep enough to make the move worth it.</p>
+
+    <div class="nts-proof-grid">
+      <div class="nts-proof-card reveal reveal-d1">
+        <div class="nts-proof-metric">6 yrs</div>
+        <div class="nts-proof-title">Time-proven</div>
+        <p class="nts-proof-desc">Mainnet launched in 2020. Battle-tested through multiple market cycles and years of active development. Not a new experiment.</p>
+      </div>
+      <div class="nts-proof-card is-featured reveal reveal-d2">
+        <div class="nts-proof-metric">$3T+</div>
+        <div class="nts-proof-title">Lifetime trading volume</div>
+        <p class="nts-proof-desc">Over $3 trillion in on-chain trading activity across DEX venues and aggregators. This is real usage, not theoretical capacity.</p>
+      </div>
+      <div class="nts-proof-card reveal reveal-d3">
+        <div class="nts-proof-metric">$100M+</div>
+        <div class="nts-proof-title">Funding available</div>
+        <p class="nts-proof-desc">Grants, accelerators, hackathon prizes, and ecosystem support programs available for teams building on Solana.</p>
+      </div>
+      <div class="nts-proof-card reveal reveal-d1">
+        <div class="nts-proof-metric">26+</div>
+        <div class="nts-proof-title">Real-world events</div>
+        <p class="nts-proof-desc">Monthly IRL meetups and a global ecosystem presence. One of the most active in-person builder communities in crypto.</p>
+      </div>
+      <div class="nts-proof-card reveal reveal-d2">
+        <div class="nts-proof-metric">Enterprise</div>
+        <div class="nts-proof-title">Institutional adoption</div>
+        <p class="nts-proof-desc">Global companies and serious teams are building here. Capital, builders, and institutions choosing the same network.</p>
+      </div>
+      <div class="nts-proof-card reveal reveal-d3">
+        <div class="nts-proof-metric">Post-quantum</div>
+        <div class="nts-proof-title">Future-ready</div>
+        <p class="nts-proof-desc">Ongoing work toward quantum-resistant cryptographic infrastructure. Built to last beyond the current cycle.</p>
+      </div>
+    </div>
+
+    <div class="nts-trust-strip reveal">
+      <span class="nts-trust-label">Also trusted by</span>
+      <div class="nts-trust-logos">
+        <span class="nts-trust-logo">Visa</span>
+        <span class="nts-trust-logo">PayPal</span>
+        <span class="nts-trust-logo">Circle</span>
+        <span class="nts-trust-logo">Western Union</span>
+        <span class="nts-trust-logo">Worldpay</span>
+        <span class="nts-trust-logo">Fiserv</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 03: WHAT CAN YOU DO ==================== -->
+<section class="nts-section" id="cando" data-step="3">
+  <div class="nts-section-inner">
+    <p class="nts-section-label reveal">03 — What Solana is for</p>
+    <h2 class="nts-h2 reveal">Not just a chain. <em>A platform.</em></h2>
+    <p class="nts-lead reveal">Click any card to see what it means in practice.</p>
+
+    <div class="nts-cando-grid">
+
+      <button class="nts-cando-card reveal reveal-d1" aria-label="Trade and swap — click to read more" aria-pressed="false">
+        <div class="nts-flip-inner">
+          <div class="nts-flip-front" aria-hidden="false">
+            <div class="nts-flip-icon" aria-hidden="true">⇄</div>
+            <div class="nts-flip-title">Trade &amp; swap</div>
+            <div class="nts-flip-hint">Click to learn more</div>
+          </div>
+          <div class="nts-flip-back" aria-hidden="true">
+            <div class="nts-flip-back-title">Trade &amp; swap</div>
+            <p class="nts-flip-desc">Jupiter aggregates every liquidity source on Solana. Swap any token at the best available price, in one click. No registration, no waiting.</p>
+            <div class="nts-flip-close">Click to flip back</div>
+          </div>
+        </div>
+      </button>
+
+      <button class="nts-cando-card reveal reveal-d2" aria-label="Earn yield — click to read more" aria-pressed="false">
+        <div class="nts-flip-inner">
+          <div class="nts-flip-front" aria-hidden="false">
+            <div class="nts-flip-icon" aria-hidden="true">%</div>
+            <div class="nts-flip-title">Earn yield</div>
+            <div class="nts-flip-hint">Click to learn more</div>
+          </div>
+          <div class="nts-flip-back" aria-hidden="true">
+            <div class="nts-flip-back-title">Earn yield</div>
+            <p class="nts-flip-desc">Stake SOL directly in Solflare and earn passively. Liquid staking via Marinade or Jito lets you earn while keeping assets accessible.</p>
+            <div class="nts-flip-close">Click to flip back</div>
+          </div>
+        </div>
+      </button>
+
+      <button class="nts-cando-card reveal reveal-d3" aria-label="Send money globally — click to read more" aria-pressed="false">
+        <div class="nts-flip-inner">
+          <div class="nts-flip-front" aria-hidden="false">
+            <div class="nts-flip-icon" aria-hidden="true">→</div>
+            <div class="nts-flip-title">Send money globally</div>
+            <div class="nts-flip-hint">Click to learn more</div>
+          </div>
+          <div class="nts-flip-back" aria-hidden="true">
+            <div class="nts-flip-back-title">Send money globally</div>
+            <p class="nts-flip-desc">Move USDC anywhere in the world in seconds for less than a cent. No banks, no delays, no permission needed. Solflare supports gasless USDC transfers.</p>
+            <div class="nts-flip-close">Click to flip back</div>
+          </div>
+        </div>
+      </button>
+
+      <button class="nts-cando-card reveal reveal-d1" aria-label="Build on Solana — click to read more" aria-pressed="false">
+        <div class="nts-flip-inner">
+          <div class="nts-flip-front" aria-hidden="false">
+            <div class="nts-flip-icon" aria-hidden="true">⬡</div>
+            <div class="nts-flip-title">Build on Solana</div>
+            <div class="nts-flip-hint">Click to learn more</div>
+          </div>
+          <div class="nts-flip-back" aria-hidden="true">
+            <div class="nts-flip-back-title">Build on Solana</div>
+            <p class="nts-flip-desc">The fastest chain in production. Ship real products, get funded through grants and hackathons, and reach users who are already here.</p>
+            <div class="nts-flip-close">Click to flip back</div>
+          </div>
+        </div>
+      </button>
+
+      <button class="nts-cando-card reveal reveal-d2" aria-label="Collect and trade NFTs — click to read more" aria-pressed="false">
+        <div class="nts-flip-inner">
+          <div class="nts-flip-front" aria-hidden="false">
+            <div class="nts-flip-icon" aria-hidden="true">◈</div>
+            <div class="nts-flip-title">Collect &amp; trade NFTs</div>
+            <div class="nts-flip-hint">Click to learn more</div>
+          </div>
+          <div class="nts-flip-back" aria-hidden="true">
+            <div class="nts-flip-back-title">Collect &amp; trade NFTs</div>
+            <p class="nts-flip-desc">Buy, sell, and hold digital assets on Magic Eden and other marketplaces. Some of the most active NFT communities in crypto live on Solana.</p>
+            <div class="nts-flip-close">Click to flip back</div>
+          </div>
+        </div>
+      </button>
+
+      <button class="nts-cando-card reveal reveal-d3" aria-label="Join communities — click to read more" aria-pressed="false">
+        <div class="nts-flip-inner">
+          <div class="nts-flip-front" aria-hidden="false">
+            <div class="nts-flip-icon" aria-hidden="true">◎</div>
+            <div class="nts-flip-title">Join communities</div>
+            <div class="nts-flip-hint">Click to learn more</div>
+          </div>
+          <div class="nts-flip-back" aria-hidden="true">
+            <div class="nts-flip-back-title">Join communities</div>
+            <p class="nts-flip-desc">Find like-minded people around the globe. Solana has active chapters in 30+ countries through Superteam, DAOs, local meetups, and builder groups.</p>
+            <div class="nts-flip-close">Click to flip back</div>
+          </div>
+        </div>
+      </button>
+
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 04: WALLET ==================== -->
+<section class="nts-section nts-section--alt" id="wallet" data-step="4">
+  <div class="nts-section-inner">
+    <p class="nts-section-label reveal">04 — Start with a wallet</p>
+    <h2 class="nts-h2 reveal">Your wallet is <em>your key.</em></h2>
+    <p class="nts-lead reveal">Before anything else, you need a Solana wallet. This is where your assets live, where you sign transactions, and where the whole ecosystem opens up.</p>
+
+    <div class="nts-wallet-layout">
+      <a href="https://www.solflare.com/download/" target="_blank" rel="noopener" class="nts-wallet-featured reveal">
+        <div class="nts-wallet-ribbon">★ Start here · Recommended</div>
+        <div class="nts-wallet-header">
+          <div class="nts-wallet-logo-wrap">
+            <img src="logos/solflare.jpg" alt="Solflare"/>
+          </div>
+          <div>
+            <div class="nts-wallet-name">Solflare</div>
+            <div class="nts-wallet-meta">4M+ users · Built for Solana</div>
+          </div>
+        </div>
+        <p class="nts-wallet-desc">Your all-access pass to Solana. Staking is built right in — open the app, tap Stake, done. No third-party app needed. Takes two minutes to set up, no email required.</p>
+        <div class="nts-wallet-cta-row">
+          <span class="btn-frost">Download Solflare ↗</span>
+          <span class="nts-wallet-platforms">Chrome · iOS · Android</span>
+        </div>
+      </a>
+
+      <div class="reveal reveal-d2">
+        <div class="nts-wallet-others-label">Other options</div>
+        <div class="nts-wallet-others">
+          <a href="https://phantom.app" target="_blank" rel="noopener" class="nts-wallet-alt">
+            <img src="logos/phantom.jpg" class="nts-wallet-alt-logo" alt="Phantom"/>
+            <div>
+              <div class="nts-wallet-alt-name">Phantom</div>
+              <div class="nts-wallet-alt-desc">The crypto app for everyone. Not available in the UK.</div>
+            </div>
+            <span class="nts-wallet-alt-arrow" aria-hidden="true">↗</span>
+          </a>
+          <a href="https://backpack.app" target="_blank" rel="noopener" class="nts-wallet-alt">
+            <img src="logos/backpack.png" class="nts-wallet-alt-logo" alt="Backpack" style="background:#fff"/>
+            <div>
+              <div class="nts-wallet-alt-name">Backpack</div>
+              <div class="nts-wallet-alt-desc">Powerful margin account and multi-chain wallet.</div>
+            </div>
+            <span class="nts-wallet-alt-arrow" aria-hidden="true">↗</span>
+          </a>
+          <a href="https://jup.ag" target="_blank" rel="noopener" class="nts-wallet-alt">
+            <img src="logos/jupwallet.jpg" class="nts-wallet-alt-logo" alt="Jupiter Wallet"/>
+            <div>
+              <div class="nts-wallet-alt-name">Jupiter Wallet</div>
+              <div class="nts-wallet-alt-desc">Integrated into the Jupiter DEX ecosystem.</div>
+            </div>
+            <span class="nts-wallet-alt-arrow" aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 05: MOVE ASSETS IN ==================== -->
+<section class="nts-section" id="get-sol" data-step="5">
+  <div class="nts-section-inner">
+    <p class="nts-section-label reveal">05 — Get your first SOL</p>
+    <h2 class="nts-h2 reveal">Move your assets <em>in.</em></h2>
+    <p class="nts-lead reveal">You have two routes: bridge from another chain, or buy SOL directly. Pick what fits your situation.</p>
+
+    <div class="nts-route-layout">
+
+      <!-- Left: route builder -->
+      <div class="reveal">
+
+        <!-- Step 1: Bridge or Buy -->
+        <div class="nts-chain-label">Choose your route</div>
+        <div class="nts-route-type" id="route-type-tabs" role="tablist">
+          <button class="nts-route-tab is-active" data-panel="bridge" role="tab" aria-selected="true" aria-controls="panel-bridge">
+            <div class="nts-route-tab-title">Bridge from another chain</div>
+            <div class="nts-route-tab-desc">You already hold crypto on Ethereum, Cosmos, or elsewhere.</div>
+          </button>
+          <button class="nts-route-tab" data-panel="buy" role="tab" aria-selected="false" aria-controls="panel-buy">
+            <div class="nts-route-tab-title">Buy SOL directly</div>
+            <div class="nts-route-tab-desc">You're starting from fiat — card or bank transfer.</div>
+          </button>
+        </div>
+
+        <!-- BRIDGE PANEL -->
+        <div class="nts-bridge-panel is-active" id="panel-bridge" role="tabpanel">
+
+          <!-- Step 2: Chain source -->
+          <div class="nts-chain-label">Where are you coming from?</div>
+          <div class="nts-chain-tabs" role="tablist">
+            <button class="nts-chain-tab is-active" data-chain="evm" role="tab" aria-selected="true">Ethereum (EVM)</button>
+            <button class="nts-chain-tab" data-chain="cosmos" role="tab" aria-selected="false">Cosmos</button>
+            <button class="nts-chain-tab" data-chain="other" role="tab" aria-selected="false">Other</button>
+          </div>
+
+          <!-- EVM -->
+          <div class="nts-chain-panel is-active" id="chain-evm">
+            <p class="nts-step-desc" style="margin-bottom: 16px;">Covers ETH, BNB, Polygon, Optimism, Arbitrum, Base, Avalanche, and any EVM-compatible chain.</p>
+
+            <div class="nts-method-label">Choose your method</div>
+            <div class="nts-method-tabs">
+              <button class="nts-method-tab is-active" data-route="evm-dex">
+                <span class="nts-method-badge">Recommended</span>
+                Permissionless route
+              </button>
+              <button class="nts-method-tab" data-route="evm-cex">
+                <span class="nts-method-badge">Via exchange</span>
+                KYC required
+              </button>
+            </div>
+
+            <div class="nts-method-panel is-active" id="route-evm-dex">
+              <p class="nts-step-desc" style="margin-bottom: 16px;">Keep your keys the whole way. No identity verification. Uses Squid Router.</p>
+              <ol class="nts-steps">
+                <li class="nts-step-item">
+                  <div class="nts-step-node">01</div>
+                  <div class="nts-step-body">
+                    <div class="nts-step-title">Install Solflare — this is where your SOL lands</div>
+                    <p class="nts-step-desc">You need a Solana wallet address before you can receive anything. Takes two minutes, no email needed.</p>
+                    <a href="https://www.solflare.com/download/" target="_blank" rel="noopener" class="nts-step-link">
+                      <img src="logos/solflare.jpg" class="nts-step-logo" alt=""/> solflare.com/download ↗
+                    </a>
+                  </div>
+                </li>
+                <li class="nts-step-item">
+                  <div class="nts-step-node">02</div>
+                  <div class="nts-step-body">
+                    <div class="nts-step-title">Open Squid Router and connect your EVM wallet</div>
+                    <p class="nts-step-desc">Squid handles cross-chain swaps from any EVM chain directly into Solana. Works with MetaMask, Rabby, and any EVM wallet.</p>
+                    <button class="nts-squid-btn" onclick="openSquidPanel('squid-evm-frame')">Open Squid Router →</button>
+                  </div>
+                </li>
+                <li class="nts-step-item is-final">
+                  <div class="nts-step-node">03</div>
+                  <div class="nts-step-body">
+                    <div class="nts-step-title">Select your token on EVM → SOL, enter your Solflare address, confirm</div>
+                    <p class="nts-step-desc">Squid finds the best route. Usually completes in under 2 minutes. You arrive with SOL ready to use.</p>
+                  </div>
+                </li>
+              </ol>
+            </div>
+
+            <div class="nts-method-panel" id="route-evm-cex">
+              <p class="nts-step-desc" style="margin-bottom: 16px;">Beginner-friendly. Requires identity verification. Takes about 15 minutes.</p>
+              <ol class="nts-steps">
+                <li class="nts-step-item">
+                  <div class="nts-step-node">01</div>
+                  <div class="nts-step-body">
+                    <div class="nts-step-title">Deposit your assets to a CEX</div>
+                    <p class="nts-step-desc">Coinbase, Binance, or Bybit all work. Deposit ETH, USDC, or whatever token you hold.</p>
+                    <div class="nts-step-logos">
+                      <img src="logos/coinbase.png" class="nts-step-logo" alt="Coinbase"/>
+                      <img src="logos/binance.jpg" class="nts-step-logo" alt="Binance"/>
+                      <img src="logos/bybit.jpg" class="nts-step-logo" alt="Bybit"/>
+                    </div>
+                  </div>
+                </li>
+                <li class="nts-step-item">
+                  <div class="nts-step-node">02</div>
+                  <div class="nts-step-body">
+                    <div class="nts-step-title">Swap to SOL on the exchange</div>
+                    <p class="nts-step-desc">Use the exchange's built-in trading to buy SOL with your deposited assets.</p>
+                  </div>
+                </li>
+                <li class="nts-step-item">
+                  <div class="nts-step-node">03</div>
+                  <div class="nts-step-body">
+                    <div class="nts-step-title">Install Solflare wallet</div>
+                    <a href="https://www.solflare.com/download/" target="_blank" rel="noopener" class="nts-step-link">solflare.com/download ↗</a>
+                  </div>
+                </li>
+                <li class="nts-step-item is-final">
+                  <div class="nts-step-node">04</div>
+                  <div class="nts-step-body">
+                    <div class="nts-step-title">Withdraw SOL to your Solflare address</div>
+                    <p class="nts-step-desc">Select <strong>Solana network</strong>. Double-check the first 4 characters of your address before confirming.</p>
+                  </div>
+                </li>
+              </ol>
+            </div>
+          </div>
+
+          <!-- COSMOS -->
+          <div class="nts-chain-panel" id="chain-cosmos">
+            <p class="nts-step-desc" style="margin-bottom: 16px;">Covers ATOM, Osmosis, and any IBC-compatible chain.</p>
+
+            <div class="nts-method-label">Choose your method</div>
+            <div class="nts-method-tabs">
+              <button class="nts-method-tab is-active" data-route="cosmos-dex">
+                <span class="nts-method-badge">Recommended</span>
+                Permissionless route
+              </button>
+              <button class="nts-method-tab" data-route="cosmos-cex">
+                <span class="nts-method-badge">Via exchange</span>
+                KYC required
+              </button>
+            </div>
+
+            <div class="nts-method-panel is-active" id="route-cosmos-dex">
+              <p class="nts-step-desc" style="margin-bottom: 16px;">Keep your keys the whole way. No KYC. Uses Squid and Noble.</p>
+              <ol class="nts-steps">
+                <li class="nts-step-item">
+                  <div class="nts-step-node">01</div>
+                  <div class="nts-step-body">
+                    <div class="nts-step-title">Swap your bags → USDC on Osmosis via Squid</div>
+                    <p class="nts-step-desc">Use Squid to choose the route, swap on Osmosis, and prepare USDC for the bridge.</p>
+                    <button class="nts-squid-btn" onclick="openSquidPanel('squid-cosmos-frame')">Open Squid Router →</button>
+                    <a href="https://app.squidrouter.com/" target="_blank" rel="noopener" class="nts-step-link" style="margin-top: 8px;">
+                      <img src="logos/squid.jpg" class="nts-step-logo" alt=""/> Or open in new tab ↗
+                    </a>
+                  </div>
+                </li>
+                <li class="nts-step-item">
+                  <div class="nts-step-node">02</div>
+                  <div class="nts-step-body">
+                    <div class="nts-step-title">Install Solflare wallet</div>
+                    <p class="nts-step-desc">This is where your Solana-side assets land, and where the ecosystem opens up.</p>
+                    <a href="https://www.solflare.com/download/" target="_blank" rel="noopener" class="nts-step-link">
+                      <img src="logos/solflare.jpg" class="nts-step-logo" alt=""/> solflare.com/download ↗
+                    </a>
+                  </div>
+                </li>
+                <li class="nts-step-item is-final">
+                  <div class="nts-step-node">03</div>
+                  <div class="nts-step-body">
+                    <div class="nts-step-title">Bridge USDC Cosmos → Solana via Noble</div>
+                    <p class="nts-step-desc">Connect both Keplr and Solflare. Solflare supports gasless USDC — you can explore before buying SOL.</p>
+                    <a href="https://express.noble.xyz/transfer?origin=osmosis&destination=solana&routing=standard" target="_blank" rel="noopener" class="nts-step-link">
+                      <img src="logos/noble.jpg" class="nts-step-logo" alt=""/> express.noble.xyz ↗
+                    </a>
+                  </div>
+                </li>
+              </ol>
+            </div>
+
+            <div class="nts-method-panel" id="route-cosmos-cex">
+              <p class="nts-step-desc" style="margin-bottom: 16px;">Beginner-friendly. Requires KYC. Takes about 15 minutes.</p>
+              <ol class="nts-steps">
+                <li class="nts-step-item">
+                  <div class="nts-step-node">01</div>
+                  <div class="nts-step-body">
+                    <div class="nts-step-title">Swap your bags to ATOM on Osmosis</div>
+                    <a href="https://osmosis.zone/" target="_blank" rel="noopener" class="nts-step-link">
+                      <img src="logos/osmosis.jpg" class="nts-step-logo" alt=""/> osmosis.zone ↗
+                    </a>
+                  </div>
+                </li>
+                <li class="nts-step-item">
+                  <div class="nts-step-node">02</div>
+                  <div class="nts-step-body">
+                    <div class="nts-step-title">Send ATOM back to Cosmos Hub</div>
+                    <p class="nts-step-desc">IBC transfer from Osmosis → Cosmos Hub. Fast and cheap.</p>
+                  </div>
+                </li>
+                <li class="nts-step-item">
+                  <div class="nts-step-node">03</div>
+                  <div class="nts-step-body">
+                    <div class="nts-step-title">Deposit ATOM to a CEX and swap for SOL</div>
+                    <div class="nts-step-logos">
+                      <img src="logos/binance.jpg" class="nts-step-logo" alt="Binance"/>
+                      <img src="logos/bybit.jpg" class="nts-step-logo" alt="Bybit"/>
+                      <img src="logos/coinbase.png" class="nts-step-logo" alt="Coinbase"/>
+                    </div>
+                  </div>
+                </li>
+                <li class="nts-step-item">
+                  <div class="nts-step-node">04</div>
+                  <div class="nts-step-body">
+                    <div class="nts-step-title">Install Solflare wallet</div>
+                    <a href="https://www.solflare.com/download/" target="_blank" rel="noopener" class="nts-step-link">solflare.com/download ↗</a>
+                  </div>
+                </li>
+                <li class="nts-step-item is-final">
+                  <div class="nts-step-node">05</div>
+                  <div class="nts-step-body">
+                    <div class="nts-step-title">Withdraw SOL to your Solflare address</div>
+                    <p class="nts-step-desc">Select <strong>Solana network</strong>. Double-check the first 4 characters.</p>
+                  </div>
+                </li>
+              </ol>
+            </div>
+          </div>
+
+          <!-- OTHER -->
+          <div class="nts-chain-panel" id="chain-other">
+            <p class="nts-step-desc" style="margin-bottom: 16px;">Not EVM or Cosmos? Here's the safest general path.</p>
+            <ol class="nts-steps">
+              <li class="nts-step-item">
+                <div class="nts-step-node">01</div>
+                <div class="nts-step-body">
+                  <div class="nts-step-title">Check if your chain has a bridge to EVM</div>
+                  <p class="nts-step-desc">Many chains bridge to Ethereum or BNB. If yours does, bridge to EVM first — then use the Ethereum route above.</p>
+                </div>
+              </li>
+              <li class="nts-step-item">
+                <div class="nts-step-node">02</div>
+                <div class="nts-step-body">
+                  <div class="nts-step-title">Otherwise: use a CEX</div>
+                  <p class="nts-step-desc">Deposit your token to Coinbase, Binance, or Bybit. Swap to SOL. Withdraw to your Solflare address on the Solana network.</p>
+                  <div class="nts-step-logos">
+                    <img src="logos/coinbase.png" class="nts-step-logo" alt="Coinbase"/>
+                    <img src="logos/binance.jpg" class="nts-step-logo" alt="Binance"/>
+                    <img src="logos/bybit.jpg" class="nts-step-logo" alt="Bybit"/>
+                  </div>
+                </div>
+              </li>
+              <li class="nts-step-item is-final">
+                <div class="nts-step-node">03</div>
+                <div class="nts-step-body">
+                  <div class="nts-step-title">Stuck? Ask in the Telegram group</div>
+                  <p class="nts-step-desc">Drop your chain and situation. Someone will point you to the safest route.</p>
+                  <a href="https://t.me/+3prPanTSreIwMzMy" target="_blank" rel="noopener" class="nts-step-link">Join Telegram ↗</a>
+                </div>
+              </li>
+            </ol>
+          </div>
+
+        </div><!-- end #panel-bridge -->
+
+        <!-- BUY PANEL -->
+        <div class="nts-buy-panel" id="panel-buy">
+          <p class="nts-step-desc" style="margin-bottom: 24px;">Starting from scratch with fiat? Buy SOL directly.</p>
+          <ol class="nts-steps">
+            <li class="nts-step-item">
+              <div class="nts-step-node">01</div>
+              <div class="nts-step-body">
+                <div class="nts-step-title">Install Solflare — it has a Buy button built in</div>
+                <p class="nts-step-desc">The easiest route: open Solflare, tap <strong>Buy</strong>, and purchase SOL directly inside the app with a card or bank transfer. No separate exchange account needed.</p>
+                <a href="https://www.solflare.com/download/" target="_blank" rel="noopener" class="nts-step-link">
+                  <img src="logos/solflare.jpg" class="nts-step-logo" alt=""/> Download Solflare ↗
+                </a>
+              </div>
+            </li>
+            <li class="nts-step-item">
+              <div class="nts-step-node">02</div>
+              <div class="nts-step-body">
+                <div class="nts-step-title">Or: open a Coinbase or Binance account</div>
+                <p class="nts-step-desc">If you prefer a dedicated exchange, both work well. KYC takes a few minutes. Buy SOL, then withdraw to your Solflare address on Solana network.</p>
+                <div class="nts-step-logos">
+                  <img src="logos/coinbase.png" class="nts-step-logo" alt="Coinbase"/>
+                  <img src="logos/binance.jpg" class="nts-step-logo" alt="Binance"/>
+                </div>
+              </div>
+            </li>
+            <li class="nts-step-item is-final">
+              <div class="nts-step-node">03</div>
+              <div class="nts-step-body">
+                <div class="nts-step-title">SOL arrives. You're on Solana.</div>
+                <p class="nts-step-desc">Double-check you selected <strong>Solana network</strong> when withdrawing. Verify the first 4 characters of your address.</p>
+              </div>
+            </li>
+          </ol>
+        </div><!-- end #panel-buy -->
+
+      </div><!-- end left col -->
+
+      <!-- Right: Squid panel -->
+      <div class="nts-route-right">
+        <div class="nts-route-panel">
+          <div class="nts-route-panel-header">
+            <span class="nts-route-panel-title">Squid Router</span>
+            <button class="nts-squid-btn" id="squid-toggle-main" onclick="toggleSquidMain()">Open ↓</button>
+          </div>
+          <div class="squid-frame-wrap" id="squid-main-wrap">
+            <div class="nts-squid-shell">
+              <iframe id="squid-evm-frame" src="about:blank" title="Squid Router" scrolling="no" loading="lazy"></iframe>
+            </div>
+          </div>
+          <div class="nts-route-summary" id="route-summary">
+            <div class="nts-route-summary-item">
+              <span class="nts-route-summary-num">1.</span>
+              <span class="nts-route-summary-text"><strong>Get a wallet</strong> — Solflare, 2 min setup</span>
+            </div>
+            <div class="nts-route-summary-item">
+              <span class="nts-route-summary-num">2.</span>
+              <span class="nts-route-summary-text"><strong>Choose your source</strong> — EVM / Cosmos / Other</span>
+            </div>
+            <div class="nts-route-summary-item">
+              <span class="nts-route-summary-num">3.</span>
+              <span class="nts-route-summary-text"><strong>Use Squid Router</strong> — permissionless swap</span>
+            </div>
+            <div class="nts-route-summary-item">
+              <span class="nts-route-summary-num">4.</span>
+              <span class="nts-route-summary-text"><strong>SOL arrives</strong> — usually under 2 min</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end nts-route-layout -->
+  </div>
+</section>
+
+<!-- ==================== 06: WHAT NEXT ==================== -->
+<section class="nts-section nts-section--alt" id="first-steps" data-step="6">
+  <div class="nts-section-inner">
+    <p class="nts-section-label reveal">06 — What next</p>
+    <h2 class="nts-h2 reveal">Your wallet is ready.<br/><em>What do you want to do first?</em></h2>
+    <p class="nts-choice-intro reveal">Pick what's relevant to you right now.</p>
+
+    <div class="nts-choice-grid">
+      <a href="https://www.solflare.com" target="_blank" rel="noopener" class="nts-choice-card reveal reveal-d1">
+        <div class="nts-choice-num">01</div>
+        <div class="nts-choice-title">Stake your first SOL</div>
+        <p class="nts-choice-desc">Open Solflare, tap Stake. Earn rewards while helping secure the network. Built in — no extra app needed.</p>
+        <span class="nts-choice-arrow">Do this in Solflare →</span>
+      </a>
+      <a href="https://jup.ag" target="_blank" rel="noopener" class="nts-choice-card reveal reveal-d2">
+        <div class="nts-choice-num">02</div>
+        <div class="nts-choice-title">Make your first swap</div>
+        <p class="nts-choice-desc">Jupiter gives you the best price across all Solana liquidity sources. Swap any token, one click.</p>
+        <span class="nts-choice-arrow">Open Jupiter →</span>
+      </a>
+      <a href="https://marinade.finance" target="_blank" rel="noopener" class="nts-choice-card reveal reveal-d3">
+        <div class="nts-choice-num">03</div>
+        <div class="nts-choice-title">Earn yield on USDC</div>
+        <p class="nts-choice-desc">Put idle assets to work. Marinade and Kamino offer liquid staking and USDC yield strategies.</p>
+        <span class="nts-choice-arrow">Explore yield →</span>
+      </a>
+      <a href="#community" class="nts-choice-card reveal reveal-d4">
+        <div class="nts-choice-num">04</div>
+        <div class="nts-choice-title">Find your community</div>
+        <p class="nts-choice-desc">Chapters, DAOs, and meetups in 30+ countries. The people are the ecosystem.</p>
+        <span class="nts-choice-arrow">Find people ↓</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== NEWSLETTER BANNER ==================== -->
+<div class="nts-newsletter-banner">
+  <div class="nts-newsletter-inner">
+    <div>
+      <div class="nts-newsletter-kicker">Ecosystem Notes · Free</div>
+      <div class="nts-newsletter-title">Stay on the <em>map.</em></div>
+      <p class="nts-newsletter-desc">Map updates, useful links, and ecosystem finds — sent when there's enough signal. No spam.</p>
+    </div>
+    <form class="nts-newsletter-form" action="https://buttondown.com/api/emails/embed-subscribe/welcometosolana" method="post" target="_blank">
+      <input class="nts-newsletter-input" type="email" name="email" placeholder="you@example.com" required autocomplete="email" aria-label="Email address"/>
+      <button class="nts-newsletter-btn" type="submit">Subscribe — free</button>
+    </form>
+  </div>
+</div>
+
+<!-- ==================== 07: COMMUNITY ==================== -->
+<section class="nts-section" id="community" data-step="7">
+  <div class="nts-section-inner">
+    <p class="nts-section-label reveal">07 — Find your people</p>
+    <h2 class="nts-h2 reveal">Community is <em>already here.</em></h2>
+    <p class="nts-lead reveal">Chapters, builders, DAOs, and IRL meetups active across more than 30 countries.</p>
+
+    <div class="nts-community-grid">
+      <a href="https://discord.com/invite/solflare" target="_blank" rel="noopener" class="nts-community-card reveal reveal-d1">
+        <img src="logos/solflareempire.jpg" class="nts-community-logo" alt="Solflare Empire"/>
+        <div class="nts-community-name">Solflare Empire</div>
+        <p class="nts-community-desc">The official Solflare community. A good first place to ask questions and meet other newcomers.</p>
+        <div class="nts-community-cta">Join Discord →</div>
+      </a>
+      <a href="https://superteam.fun/" target="_blank" rel="noopener" class="nts-community-card reveal reveal-d2">
+        <img src="logos/superteam.jpg" class="nts-community-logo" alt="Superteam"/>
+        <div class="nts-community-name">Superteam</div>
+        <p class="nts-community-desc">Network of builders, creators, and operators. 30+ country chapters. Find the one near you.</p>
+        <div class="nts-community-cta">Explore →</div>
+      </a>
+      <a href="https://x.com/MonkeDAO" target="_blank" rel="noopener" class="nts-community-card reveal reveal-d3">
+        <img src="logos/monkedao.jpg" class="nts-community-logo" alt="MonkeDAO"/>
+        <div class="nts-community-name">MonkeDAO</div>
+        <p class="nts-community-desc">One of the most established DAOs in Solana. Community-governed, globally active.</p>
+        <div class="nts-community-cta">Follow →</div>
+      </a>
+      <a href="https://x.com/mtndao" target="_blank" rel="noopener" class="nts-community-card reveal reveal-d4">
+        <img src="logos/mntdao.jpg" class="nts-community-logo" alt="MTNDAO"/>
+        <div class="nts-community-name">MTNDAO</div>
+        <p class="nts-community-desc">Builders and founders gathering IRL. Annual retreats and a tight-knit global network.</p>
+        <div class="nts-community-cta">Follow →</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 08: STARTER STACK ==================== -->
+<section class="nts-section nts-section--alt" id="apps" data-step="8">
+  <div class="nts-section-inner">
+    <p class="nts-section-label reveal">08 — First apps</p>
+    <h2 class="nts-h2 reveal">Your starter <em>stack.</em></h2>
+    <p class="nts-lead reveal">A curated starting point — the five apps most people reach for first.</p>
+
+    <div class="nts-apps-grid">
+      <a href="https://jup.ag" target="_blank" rel="noopener" class="nts-app-card reveal reveal-d1">
+        <img src="logos/jupiter.jpg" class="nts-app-logo" alt="Jupiter"/>
+        <div class="nts-app-name">Jupiter</div>
+        <p class="nts-app-desc">Swap anything. Best price. One click.</p>
+      </a>
+      <a href="https://marinade.finance" target="_blank" rel="noopener" class="nts-app-card reveal reveal-d2">
+        <img src="logos/Marinade.jpg" class="nts-app-logo" alt="Marinade"/>
+        <div class="nts-app-name">Marinade</div>
+        <p class="nts-app-desc">Stake SOL, stay liquid. ~5–6% APR.</p>
+      </a>
+      <a href="https://kamino.finance" target="_blank" rel="noopener" class="nts-app-card reveal reveal-d3">
+        <img src="logos/kamino.jpg" class="nts-app-logo" alt="Kamino"/>
+        <div class="nts-app-name">Kamino</div>
+        <p class="nts-app-desc">USDC yield. Credit markets that work.</p>
+      </a>
+      <a href="https://raydium.io" target="_blank" rel="noopener" class="nts-app-card reveal reveal-d4">
+        <img src="logos/raydium.jpg" class="nts-app-logo" alt="Raydium"/>
+        <div class="nts-app-name">Raydium</div>
+        <p class="nts-app-desc">$1.1T lifetime DEX volume. Real depth.</p>
+      </a>
+      <a href="https://meteora.ag" target="_blank" rel="noopener" class="nts-app-card reveal reveal-d1">
+        <img src="logos/meteora.jpg" class="nts-app-logo" alt="Meteora"/>
+        <div class="nts-app-name">Meteora</div>
+        <p class="nts-app-desc">Dynamic liquidity. $1B+ in LP fees.</p>
+      </a>
+    </div>
+
+    <a href="ecosystem-new.html" class="nts-apps-more reveal">Explore 86+ projects in the full directory →</a>
+  </div>
+</section>
+
+<!-- ==================== HUMAN MOMENT ==================== -->
+<section class="nts-human reveal">
+  <div class="nts-human-inner">
+    <div class="nts-human-left">
+      <div class="nts-human-label">Built by</div>
+      <div class="nts-human-name">ATH</div>
+      <p class="nts-human-cred">Community-run · Solana contributors · Global Content Competition winners</p>
+      <a href="https://ath.camera" target="_blank" rel="noopener" class="nts-human-link">ath.camera ↗</a>
+    </div>
+    <blockquote class="nts-human-quote">
+      "We made this move ourselves. We decided to pivot and move to an ecosystem where we can use our full potential, keep growing, and learn from the people around us.
+      <br/><br/>
+      We continue to contribute to Solana, and this guide was originally built for ourselves.
+      <br/><br/>
+      No VC money, no committee, no template. If something here is wrong or missing, DM us and we'll fix it. The point is to make the move easier for the next team."
+    </blockquote>
+  </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer class="nts-footer">
+  <div class="nts-footer-inner">
+    <div class="nts-footer-links">
+      <a href="gate.html" class="nts-footer-link">← Switch path</a>
+      <a href="ecosystem-new.html" class="nts-footer-link">Explore ecosystem</a>
+      <a href="https://t.me/+3prPanTSreIwMzMy" target="_blank" rel="noopener" class="nts-footer-link">Join Telegram</a>
+      <a href="https://x.com/athcamera" target="_blank" rel="noopener" class="nts-footer-link">@athcamera</a>
+    </div>
+    <span class="nts-footer-copy">© 2026 Welcome to Solana · Not financial advice</span>
+  </div>
+</footer>
+
+<button id="scroll-top" aria-label="Back to top">↑</button>
+
+<!-- ==================== SCRIPTS ==================== -->
+<script>
+window.SQUID_SRC = 'https://studio.squidrouter.com/iframe?config=%7B%22integratorId%22%3A%22squid-widget-studio%22%2C%22theme%22%3A%7B%22borderRadius%22%3A%7B%22button-lg-primary%22%3A%220.3125rem%22%2C%22button-lg-secondary%22%3A%220.3125rem%22%2C%22button-lg-tertiary%22%3A%220.3125rem%22%2C%22button-md-primary%22%3A%229999px%22%2C%22button-md-secondary%22%3A%220.3125rem%22%2C%22button-md-tertiary%22%3A%220.3125rem%22%2C%22button-sm-primary%22%3A%221.25rem%22%2C%22button-sm-secondary%22%3A%221.25rem%22%2C%22button-sm-tertiary%22%3A%221.25rem%22%2C%22container%22%3A%220.3125rem%22%2C%22input%22%3A%220.3125rem%22%2C%22menu-sm%22%3A%220.3125rem%22%2C%22menu-lg%22%3A%220.3125rem%22%2C%22modal%22%3A%220.3125rem%22%7D%2C%22fontSize%22%3A%7B%22caption%22%3A%220.875rem%22%2C%22body-small%22%3A%221.14375rem%22%2C%22body-medium%22%3A%221.40625rem%22%2C%22body-large%22%3A%221.75625rem%22%2C%22heading-small%22%3A%222.1875rem%22%2C%22heading-medium%22%3A%223.08125rem%22%2C%22heading-large%22%3A%224.40625rem%22%7D%2C%22fontWeight%22%3A%7B%22caption%22%3A%22400%22%2C%22body-small%22%3A%22400%22%2C%22body-medium%22%3A%22400%22%2C%22body-large%22%3A%22400%22%2C%22heading-small%22%3A%22400%22%2C%22heading-medium%22%3A%22400%22%2C%22heading-large%22%3A%22400%22%7D%2C%22fontFamily%22%3A%7B%22squid-main%22%3A%22InterVariable%2C%20sans-serif%22%7D%2C%22boxShadow%22%3A%7B%22container%22%3A%220px%202px%205px%201px%20rgba(0%2C%200%2C%200%2C%200.20)%2C%200px%205px%2020px%20-1px%20rgba(0%2C%200%2C%200%2C%200.33)%22%7D%2C%22color%22%3A%7B%22grey-800%22%3A%22%23111111%22%2C%22grey-900%22%3A%22%230A0A0A%22%2C%22royal-500%22%3A%22%23BFE8F2%22%2C%22status-positive%22%3A%22%2393D2E8%22%2C%22button-lg-primary-bg%22%3A%22%23BFE8F2%22%2C%22button-lg-primary-text%22%3A%22%23061016%22%2C%22input-bg%22%3A%22%230F0F0F%22%2C%22input-text%22%3A%22%23E8E8E8%22%7D%7D%2C%22themeType%22%3A%22dark%22%2C%22apiUrl%22%3A%22https%3A%2F%2Fv2.api.squidrouter.com%22%2C%22tabs%22%3A%7B%22swap%22%3Atrue%2C%22buy%22%3Atrue%2C%22send%22%3Afalse%7D%7D';
+
+(function () {
+  'use strict';
+
+  /* -------- Scroll reveal -------- */
+  var revealObs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add('is-visible'); revealObs.unobserve(e.target); }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(function (el) { revealObs.observe(el); });
+
+  /* -------- Progress rail -------- */
+  var railSteps = document.querySelectorAll('.nts-rail-step[data-step]');
+  var railBar   = document.getElementById('rail-progress');
+  var sections  = document.querySelectorAll('section[data-step]');
+  var totalSteps = sections.length;
+
+  var sectionObs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      var step = e.target.dataset.step;
+      railSteps.forEach(function (s) {
+        s.classList.toggle('is-active', s.dataset.step === step);
+      });
+      if (railBar) {
+        railBar.style.width = ((parseInt(step, 10) / totalSteps) * 100) + '%';
+      }
+    });
+  }, { threshold: 0.3, rootMargin: '-60px 0px -60px 0px' });
+
+  sections.forEach(function (s) { sectionObs.observe(s); });
+
+  /* -------- Flip cards -------- */
+  document.querySelectorAll('.nts-cando-card').forEach(function (card) {
+    function flip() {
+      var open = !card.classList.contains('is-flipped');
+      card.classList.toggle('is-flipped', open);
+      card.setAttribute('aria-pressed', open.toString());
+      var front = card.querySelector('.nts-flip-front');
+      var back  = card.querySelector('.nts-flip-back');
+      if (front) front.setAttribute('aria-hidden', open.toString());
+      if (back)  back.setAttribute('aria-hidden', (!open).toString());
+    }
+    card.addEventListener('click', flip);
+    card.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); flip(); }
+    });
+  });
+
+  /* -------- Route type (Bridge / Buy) -------- */
+  document.querySelectorAll('[id="route-type-tabs"] .nts-route-tab').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      document.querySelectorAll('[id="route-type-tabs"] .nts-route-tab').forEach(function (b) {
+        b.classList.remove('is-active');
+        b.setAttribute('aria-selected', 'false');
+      });
+      document.querySelectorAll('.nts-bridge-panel, .nts-buy-panel').forEach(function (p) { p.classList.remove('is-active'); });
+      btn.classList.add('is-active');
+      btn.setAttribute('aria-selected', 'true');
+      var target = document.getElementById('panel-' + btn.dataset.panel);
+      if (target) target.classList.add('is-active');
+    });
+  });
+
+  /* -------- Chain tabs -------- */
+  document.querySelectorAll('.nts-chain-tabs').forEach(function (group) {
+    group.querySelectorAll('.nts-chain-tab').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        group.querySelectorAll('.nts-chain-tab').forEach(function (b) {
+          b.classList.remove('is-active');
+          b.setAttribute('aria-selected', 'false');
+        });
+        var chainPanel = group.closest('.nts-bridge-panel, .nts-chain-panel, .nts-method-panel, #panel-bridge');
+        if (chainPanel) {
+          chainPanel.querySelectorAll('.nts-chain-panel').forEach(function (p) { p.classList.remove('is-active'); });
+        } else {
+          document.querySelectorAll('.nts-chain-panel').forEach(function (p) { p.classList.remove('is-active'); });
+        }
+        btn.classList.add('is-active');
+        btn.setAttribute('aria-selected', 'true');
+        var target = document.getElementById('chain-' + btn.dataset.chain);
+        if (target) target.classList.add('is-active');
+      });
+    });
+  });
+
+  /* -------- Method tabs (DEX / CEX) -------- */
+  document.querySelectorAll('.nts-method-tabs').forEach(function (group) {
+    group.querySelectorAll('.nts-method-tab').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        group.querySelectorAll('.nts-method-tab').forEach(function (b) { b.classList.remove('is-active'); });
+        var chainPanel = group.closest('.nts-chain-panel');
+        if (chainPanel) {
+          chainPanel.querySelectorAll('.nts-method-panel').forEach(function (p) { p.classList.remove('is-active'); });
+        }
+        btn.classList.add('is-active');
+        var target = document.getElementById('route-' + btn.dataset.route);
+        if (target) target.classList.add('is-active');
+      });
+    });
+  });
+
+  /* -------- Scroll top -------- */
+  var scrollBtn = document.getElementById('scroll-top');
+  window.addEventListener('scroll', function () {
+    scrollBtn.classList.toggle('is-visible', window.scrollY > 600);
+  }, { passive: true });
+  scrollBtn.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+
+})();
+
+/* -------- Squid Router -------- */
+function openSquidPanel(frameId) {
+  var wrap = document.getElementById('squid-main-wrap');
+  var frame = document.getElementById(frameId) || document.getElementById('squid-evm-frame');
+  if (wrap) {
+    wrap.classList.add('is-open');
+    var summary = document.getElementById('route-summary');
+    if (summary) summary.style.display = 'none';
+  }
+  if (frame && frame.src === 'about:blank') {
+    frame.src = window.SQUID_SRC;
+  }
+}
+
+function toggleSquidMain() {
+  var wrap = document.getElementById('squid-main-wrap');
+  var summary = document.getElementById('route-summary');
+  var btn = document.getElementById('squid-toggle-main');
+  if (!wrap) return;
+  var open = wrap.classList.toggle('is-open');
+  if (btn) btn.textContent = open ? 'Close ↑' : 'Open ↓';
+  if (summary) summary.style.display = open ? 'none' : 'block';
+  if (open) {
+    var frame = wrap.querySelector('iframe');
+    if (frame && frame.src === 'about:blank') frame.src = window.SQUID_SRC;
+  }
+}
+</script>
+</body>
+</html>

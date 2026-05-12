@@ -1,0 +1,1854 @@
+/* ============================================================
+   nts.css — New to Solana · Page-specific design system
+   Loaded after v2.css. Overrides and extends for NTS only.
+   Base: 17px html font-size, Inter body, Source Serif 4 display
+   Spacing: 8px grid throughout
+   Radius: max 12px
+   ============================================================ */
+
+/* ==================== BASE ==================== */
+html { font-size: 17px; }
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* ==================== CSS VARIABLES ==================== */
+:root {
+  --nts-font:         'Inter', system-ui, -apple-system, sans-serif;
+  --nts-font-display: 'Source Serif 4', Georgia, serif;
+
+  /* 8px spacing grid */
+  --s1:  8px;
+  --s2:  16px;
+  --s3:  24px;
+  --s4:  32px;
+  --s5:  40px;
+  --s6:  48px;
+  --s8:  64px;
+  --s10: 80px;
+  --s12: 96px;
+
+  /* Layout */
+  --nts-nav-h:   72px;
+  --nts-rail-h:  52px;
+  --nts-top:     124px; /* nav + rail */
+  --nts-max:     1280px;
+  --nts-pad:     clamp(24px, 5vw, 80px);
+
+  /* Radius */
+  --r-sm:   6px;
+  --r-md:   8px;
+  --r-lg:   12px;
+  --r-pill: 9999px;
+
+  /* Colors (extending v2.css) */
+  --bg-alt:       #161616;
+  --surface-card: #1c1c1c;
+  --frost-text:   #061016;
+  --frost-grad:   linear-gradient(155deg, var(--frost-1) 0%, var(--frost-2) 42%, var(--frost-3) 100%);
+
+  /* Transitions */
+  --ease: cubic-bezier(.22,.61,.36,1);
+  --dur:  0.25s;
+}
+
+/* ==================== UTILITIES ==================== */
+.nts-container {
+  max-width: var(--nts-max);
+  margin: 0 auto;
+  padding: 0 var(--nts-pad);
+}
+
+.nts-section-label {
+  display: flex;
+  align-items: center;
+  gap: var(--s2);
+  font-family: var(--nts-font);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--premium);
+  margin-bottom: var(--s3);
+}
+.nts-section-label::before {
+  content: '';
+  flex-shrink: 0;
+  width: 28px;
+  height: 1px;
+  background: var(--premium);
+  opacity: 0.6;
+}
+
+.nts-h1 {
+  font-family: var(--nts-font-display);
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  color: var(--on-surface);
+}
+.nts-h1 em { font-style: italic; font-weight: 400; color: var(--premium); }
+
+.nts-h2 {
+  font-family: var(--nts-font-display);
+  font-size: clamp(1.65rem, 3vw, 2rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--on-surface);
+  margin-bottom: var(--s3);
+}
+.nts-h2 em { font-style: italic; font-weight: 400; color: var(--premium); }
+
+.nts-h3 {
+  font-family: var(--nts-font-display);
+  font-size: 1.18rem;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: var(--on-surface);
+}
+
+.nts-lead {
+  font-size: 1.06rem;
+  color: var(--on-surface-variant);
+  line-height: 1.65;
+  max-width: 60ch;
+  margin-bottom: var(--s6);
+}
+
+/* Buttons */
+.btn-frost {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s1);
+  background: var(--frost-grad);
+  color: var(--frost-text);
+  border: 1px solid rgba(170,235,255,.45);
+  border-radius: var(--r-pill);
+  padding: 14px 28px;
+  font-family: var(--nts-font);
+  font-size: 0.94rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: box-shadow var(--dur) var(--ease), transform var(--dur) var(--ease);
+  white-space: nowrap;
+}
+.btn-frost:hover {
+  box-shadow: 0 8px 32px rgba(70,200,235,.35);
+  transform: translateY(-1px);
+}
+.btn-frost:focus-visible {
+  outline: 2px solid var(--frost-2);
+  outline-offset: 3px;
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s1);
+  background: transparent;
+  color: var(--on-surface-variant);
+  border: 1px solid var(--outline);
+  border-radius: var(--r-md);
+  padding: 12px 24px;
+  font-family: var(--nts-font);
+  font-size: 0.94rem;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: border-color var(--dur), color var(--dur), background var(--dur);
+}
+.btn-outline:hover {
+  border-color: rgba(158,165,176,.5);
+  color: var(--on-surface);
+  background: rgba(255,255,255,.03);
+}
+.btn-outline:focus-visible {
+  outline: 2px solid var(--frost-2);
+  outline-offset: 3px;
+}
+
+.btn-ghost-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--nts-font);
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--premium);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  padding-bottom: 2px;
+  transition: color var(--dur), border-color var(--dur);
+}
+.btn-ghost-inline:hover {
+  color: var(--frost-1);
+  border-color: var(--frost-1);
+}
+
+/* ==================== NAV OVERRIDES ==================== */
+.path-nav {
+  height: var(--nts-nav-h);
+  padding: 0 var(--nts-pad);
+}
+
+.path-nav-logo {
+  font-size: 1.06rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.path-nav-logo em {
+  font-size: 1.06rem;
+  font-style: italic;
+  font-weight: 400;
+}
+
+.nav-chip {
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: none;
+  padding: 7px 14px;
+  border-radius: var(--r-md);
+}
+
+.nav-switch {
+  font-size: 0.88rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  color: var(--on-surface-dim);
+  text-decoration: none;
+  transition: color var(--dur);
+}
+.nav-switch:hover { color: var(--on-surface-variant); }
+.nav-switch:focus-visible {
+  outline: 2px solid var(--frost-2);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+/* ==================== PROGRESS RAIL ==================== */
+.nts-rail {
+  position: sticky;
+  top: var(--nts-nav-h);
+  z-index: 45;
+  height: var(--nts-rail-h);
+  background: color-mix(in srgb, #141414 92%, transparent);
+  backdrop-filter: blur(16px) saturate(1.1);
+  -webkit-backdrop-filter: blur(16px) saturate(1.1);
+  border-bottom: 1px solid rgba(64,64,64,.35);
+  overflow: hidden;
+}
+
+.nts-rail-inner {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  max-width: var(--nts-max);
+  margin: 0 auto;
+  padding: 0 var(--nts-pad);
+  gap: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.nts-rail-inner::-webkit-scrollbar { display: none; }
+
+.nts-rail-step {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--s1);
+  padding: 6px 12px;
+  border-radius: var(--r-sm);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: var(--nts-font);
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--on-surface-dim);
+  transition: color var(--dur), background var(--dur);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.nts-rail-step:hover {
+  color: var(--on-surface-variant);
+  background: rgba(255,255,255,.04);
+}
+.nts-rail-step:focus-visible {
+  outline: 2px solid var(--frost-2);
+  outline-offset: -2px;
+}
+
+.nts-rail-step.is-active {
+  color: var(--on-surface);
+  font-weight: 600;
+}
+.nts-rail-step.is-active .rail-num {
+  color: var(--frost-2);
+}
+
+.rail-num {
+  font-size: 0.7rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--on-surface-dim);
+  transition: color var(--dur);
+  line-height: 1;
+}
+
+.rail-sep {
+  width: 16px;
+  height: 1px;
+  background: var(--outline);
+  flex-shrink: 0;
+  margin: 0 4px;
+}
+
+/* Rail progress track */
+.nts-rail-track {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: rgba(64,64,64,.3);
+}
+.nts-rail-progress {
+  height: 100%;
+  background: var(--frost-grad);
+  width: 0%;
+  transition: width 0.4s var(--ease);
+}
+
+/* ==================== HERO ==================== */
+.nts-hero {
+  min-height: calc(100svh - var(--nts-top));
+  padding-top: var(--nts-top);
+  display: grid;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.nts-hero-inner {
+  max-width: var(--nts-max);
+  margin: 0 auto;
+  padding: var(--s10) var(--nts-pad);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s8);
+  align-items: center;
+  width: 100%;
+}
+
+/* Hero background treatment */
+.nts-hero::before {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 55%;
+  background: radial-gradient(ellipse at 70% 40%, rgba(147,210,232,.06) 0%, transparent 65%);
+  pointer-events: none;
+}
+.nts-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 15% 80%, rgba(123,196,223,.04) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.nts-hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.nts-hero-kicker {
+  display: flex;
+  align-items: center;
+  gap: var(--s2);
+  font-family: var(--nts-font);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--frost-2);
+  margin-bottom: var(--s4);
+}
+.nts-hero-kicker::before {
+  content: '';
+  width: 32px;
+  height: 1.5px;
+  background: var(--frost-2);
+  border-radius: 2px;
+}
+
+.nts-hero-title {
+  font-family: var(--nts-font-display);
+  font-size: clamp(2.4rem, 5vw, 3.2rem);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  color: var(--on-surface);
+  margin-bottom: var(--s4);
+}
+.nts-hero-title em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--premium);
+}
+
+.nts-hero-desc {
+  font-size: 1.06rem;
+  color: var(--on-surface-variant);
+  line-height: 1.65;
+  max-width: 46ch;
+  margin-bottom: var(--s6);
+}
+
+.nts-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s2);
+  align-items: center;
+}
+
+.nts-hero-skip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--nts-font);
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--on-surface-dim);
+  text-decoration: none;
+  transition: color var(--dur);
+}
+.nts-hero-skip:hover { color: var(--on-surface-variant); }
+.nts-hero-skip:focus-visible {
+  outline: 2px solid var(--frost-2);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+.nts-hero-visual {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  height: clamp(400px, 55vh, 600px);
+}
+
+.nts-hero-char {
+  height: 100%;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+  object-position: bottom center;
+  opacity: 0.78;
+  -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,0) 0%, rgba(0,0,0,.5) 10%, rgba(0,0,0,1) 22%);
+  mask-image:         linear-gradient(to top, rgba(0,0,0,0) 0%, rgba(0,0,0,.5) 10%, rgba(0,0,0,1) 22%);
+}
+
+.nts-hero-scroll {
+  position: absolute;
+  bottom: var(--s5);
+  left: var(--nts-pad);
+  display: flex;
+  align-items: center;
+  gap: var(--s1);
+  font-family: var(--nts-font);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--on-surface-dim);
+  z-index: 2;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .nts-hero-scroll { animation: scroll-bounce 2.5s ease-in-out infinite; }
+}
+
+/* ==================== SECTION BASE ==================== */
+.nts-section {
+  padding: var(--s10) var(--nts-pad);
+  border-top: 1px solid rgba(64,64,64,.35);
+}
+
+.nts-section--alt {
+  background: var(--bg-alt);
+}
+
+.nts-section-inner {
+  max-width: var(--nts-max);
+  margin: 0 auto;
+}
+
+/* ==================== SECTION 01: WHAT IS SOLANA ==================== */
+.nts-fact-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--s2);
+  margin-bottom: var(--s8);
+}
+
+.nts-fact-card {
+  background: var(--surface);
+  border: 1px solid var(--outline);
+  border-radius: var(--r-lg);
+  padding: var(--s4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s2);
+  transition: border-color var(--dur), background var(--dur), transform var(--dur);
+}
+.nts-fact-card:hover {
+  border-color: rgba(158,165,176,.35);
+  background: var(--surface-raised);
+  transform: translateY(-2px);
+}
+
+.nts-fact-metric {
+  font-family: var(--nts-font-display);
+  font-size: clamp(1.65rem, 2.5vw, 2.2rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--frost-1);
+  line-height: 1;
+}
+
+.nts-fact-label {
+  font-family: var(--nts-font);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--on-surface-variant);
+}
+
+.nts-fact-desc {
+  font-size: 0.94rem;
+  color: var(--on-surface-dim);
+  line-height: 1.6;
+  flex: 1;
+}
+
+/* Video section */
+.nts-video-wrap {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--s6);
+  align-items: start;
+}
+
+.nts-video-player {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  background: #000;
+  border: 1px solid var(--outline);
+}
+.nts-video-player iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.nts-video-side {
+  padding-top: var(--s3);
+}
+.nts-video-side-label {
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--on-surface-dim);
+  margin-bottom: var(--s2);
+}
+.nts-video-side-title {
+  font-family: var(--nts-font-display);
+  font-size: 1.24rem;
+  font-weight: 600;
+  color: var(--on-surface);
+  margin-bottom: var(--s3);
+  line-height: 1.3;
+}
+.nts-video-side-desc {
+  font-size: 0.94rem;
+  color: var(--on-surface-variant);
+  line-height: 1.6;
+  margin-bottom: var(--s4);
+}
+
+/* ==================== SECTION 02: WHY SOLANA ==================== */
+.nts-proof-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--s3);
+  margin-bottom: var(--s8);
+}
+
+.nts-proof-card {
+  background: var(--surface);
+  border: 1px solid var(--outline);
+  border-radius: var(--r-lg);
+  padding: var(--s4) var(--s4) var(--s5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s2);
+  transition: border-color var(--dur), background var(--dur);
+}
+.nts-proof-card:hover {
+  border-color: rgba(158,165,176,.3);
+  background: var(--surface-raised);
+}
+.nts-proof-card.is-featured {
+  background: var(--surface-raised);
+  border-color: rgba(191,232,242,.2);
+}
+
+.nts-proof-metric {
+  font-family: var(--nts-font-display);
+  font-size: clamp(1.76rem, 3vw, 2.4rem);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  color: var(--on-surface);
+  line-height: 1;
+}
+.nts-proof-card.is-featured .nts-proof-metric {
+  color: var(--frost-1);
+}
+
+.nts-proof-title {
+  font-family: var(--nts-font);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--on-surface-variant);
+}
+
+.nts-proof-desc {
+  font-size: 0.94rem;
+  color: var(--on-surface-dim);
+  line-height: 1.6;
+  flex: 1;
+  margin-top: var(--s1);
+}
+
+/* Trust strip */
+.nts-trust-strip {
+  display: flex;
+  align-items: center;
+  gap: var(--s5);
+  flex-wrap: wrap;
+  padding: var(--s4) var(--s5);
+  background: var(--surface);
+  border: 1px solid var(--outline);
+  border-radius: var(--r-lg);
+}
+
+.nts-trust-label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--on-surface-dim);
+  flex-shrink: 0;
+}
+
+.nts-trust-logos {
+  display: flex;
+  align-items: center;
+  gap: var(--s5);
+  flex-wrap: wrap;
+  flex: 1;
+}
+
+.nts-trust-logo {
+  font-family: var(--nts-font);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--on-surface-dim);
+  letter-spacing: -0.01em;
+  opacity: 0.65;
+  transition: opacity var(--dur), color var(--dur);
+}
+.nts-trust-logo:hover { opacity: 1; color: var(--on-surface-variant); }
+
+/* ==================== SECTION 03: WHAT CAN YOU DO (Flip cards) ==================== */
+.nts-cando-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--s3);
+}
+
+.nts-cando-card {
+  perspective: 1000px;
+  height: 240px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  text-align: left;
+}
+.nts-cando-card:focus-visible { outline: none; }
+.nts-cando-card:focus-visible .nts-flip-inner {
+  outline: 2px solid var(--frost-2);
+  outline-offset: 3px;
+  border-radius: var(--r-lg);
+}
+
+.nts-flip-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  border-radius: var(--r-lg);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .nts-flip-inner {
+    transition: transform 0.45s var(--ease);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nts-flip-inner { transition: none; }
+}
+.nts-cando-card.is-flipped .nts-flip-inner {
+  transform: rotateY(180deg);
+}
+
+.nts-flip-front,
+.nts-flip-back {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--r-lg);
+  border: 1px solid var(--outline);
+  padding: var(--s4);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.nts-flip-front {
+  background: var(--surface);
+  align-items: flex-start;
+  justify-content: space-between;
+  transition: border-color var(--dur);
+}
+.nts-cando-card:hover .nts-flip-front,
+.nts-cando-card:focus-visible .nts-flip-front {
+  border-color: rgba(158,165,176,.35);
+}
+
+.nts-flip-back {
+  background: var(--surface-raised);
+  border-color: rgba(191,232,242,.2);
+  transform: rotateY(180deg);
+  justify-content: space-between;
+}
+
+.nts-flip-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--r-md);
+  background: rgba(147,210,232,.1);
+  border: 1px solid rgba(147,210,232,.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.18rem;
+  margin-bottom: var(--s3);
+}
+
+.nts-flip-title {
+  font-family: var(--nts-font-display);
+  font-size: 1.18rem;
+  font-weight: 600;
+  color: var(--on-surface);
+  line-height: 1.3;
+  flex: 1;
+}
+
+.nts-flip-hint {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--on-surface-dim);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.nts-flip-hint::after {
+  content: '↻';
+  font-size: 0.94rem;
+}
+
+.nts-flip-desc {
+  font-size: 0.94rem;
+  color: var(--on-surface-variant);
+  line-height: 1.6;
+  flex: 1;
+  margin-bottom: var(--s3);
+}
+
+.nts-flip-back-title {
+  font-family: var(--nts-font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--frost-1);
+  margin-bottom: var(--s2);
+}
+
+.nts-flip-close {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--on-surface-dim);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* ==================== SECTION 04: WALLET ==================== */
+.nts-wallet-layout {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: var(--s5);
+  align-items: start;
+}
+
+.nts-wallet-featured {
+  background: var(--surface);
+  border: 1px solid rgba(191,232,242,.18);
+  border-radius: var(--r-lg);
+  padding: var(--s6);
+  text-decoration: none;
+  display: block;
+  transition: border-color var(--dur), background var(--dur), transform var(--dur);
+  position: relative;
+  overflow: hidden;
+}
+.nts-wallet-featured::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 80% 20%, rgba(147,210,232,.07) 0%, transparent 60%);
+  pointer-events: none;
+}
+.nts-wallet-featured:hover {
+  border-color: rgba(191,232,242,.35);
+  background: var(--surface-raised);
+  transform: translateY(-2px);
+}
+.nts-wallet-featured:focus-visible {
+  outline: 2px solid var(--frost-2);
+  outline-offset: 3px;
+}
+
+.nts-wallet-ribbon {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--frost-grad);
+  color: var(--frost-text);
+  font-family: var(--nts-font);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: var(--r-sm);
+  margin-bottom: var(--s4);
+}
+
+.nts-wallet-header {
+  display: flex;
+  align-items: center;
+  gap: var(--s3);
+  margin-bottom: var(--s4);
+}
+
+.nts-wallet-logo-wrap {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 2px solid rgba(191,232,242,.2);
+}
+.nts-wallet-logo-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.nts-wallet-name {
+  font-family: var(--nts-font-display);
+  font-size: 1.65rem;
+  font-weight: 700;
+  color: var(--on-surface);
+  letter-spacing: -0.02em;
+}
+
+.nts-wallet-meta {
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--on-surface-dim);
+  margin-top: 3px;
+}
+
+.nts-wallet-desc {
+  font-size: 1rem;
+  color: var(--on-surface-variant);
+  line-height: 1.65;
+  margin-bottom: var(--s5);
+  max-width: 52ch;
+}
+
+.nts-wallet-cta-row {
+  display: flex;
+  align-items: center;
+  gap: var(--s3);
+  flex-wrap: wrap;
+}
+
+.nts-wallet-platforms {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--on-surface-dim);
+}
+
+.nts-wallet-others-label {
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--on-surface-dim);
+  margin-bottom: var(--s3);
+}
+
+.nts-wallet-others {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s2);
+}
+
+.nts-wallet-alt {
+  display: flex;
+  align-items: center;
+  gap: var(--s3);
+  background: var(--surface);
+  border: 1px solid var(--outline);
+  border-radius: var(--r-lg);
+  padding: var(--s3) var(--s4);
+  text-decoration: none;
+  transition: border-color var(--dur), background var(--dur);
+}
+.nts-wallet-alt:hover {
+  border-color: rgba(158,165,176,.35);
+  background: var(--surface-raised);
+}
+.nts-wallet-alt:focus-visible {
+  outline: 2px solid var(--frost-2);
+  outline-offset: 3px;
+}
+
+.nts-wallet-alt-logo {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.nts-wallet-alt-name {
+  font-family: var(--nts-font-display);
+  font-size: 1.06rem;
+  font-weight: 600;
+  color: var(--on-surface);
+}
+
+.nts-wallet-alt-desc {
+  font-size: 0.88rem;
+  color: var(--on-surface-dim);
+  line-height: 1.45;
+  margin-top: 2px;
+}
+
+.nts-wallet-alt-arrow {
+  margin-left: auto;
+  font-size: 1rem;
+  color: var(--on-surface-dim);
+  flex-shrink: 0;
+  transition: transform var(--dur), color var(--dur);
+}
+.nts-wallet-alt:hover .nts-wallet-alt-arrow {
+  transform: translate(2px,-2px);
+  color: var(--frost-1);
+}
+
+/* ==================== SECTION 05: BRIDGE / BUY ==================== */
+.nts-route-layout {
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: var(--s8);
+  align-items: start;
+}
+
+/* Route type selector */
+.nts-route-type {
+  display: flex;
+  gap: var(--s2);
+  margin-bottom: var(--s6);
+}
+
+.nts-route-tab {
+  flex: 1;
+  padding: var(--s3) var(--s4);
+  background: var(--surface);
+  border: 2px solid var(--outline);
+  border-radius: var(--r-lg);
+  cursor: pointer;
+  text-align: left;
+  transition: border-color var(--dur), background var(--dur);
+  font-family: var(--nts-font);
+}
+.nts-route-tab:focus-visible {
+  outline: 2px solid var(--frost-2);
+  outline-offset: 3px;
+}
+
+.nts-route-tab.is-active {
+  border-color: rgba(191,232,242,.4);
+  background: var(--surface-raised);
+}
+
+.nts-route-tab-title {
+  font-size: 1.06rem;
+  font-weight: 700;
+  color: var(--on-surface);
+  margin-bottom: 3px;
+}
+
+.nts-route-tab-desc {
+  font-size: 0.88rem;
+  color: var(--on-surface-dim);
+  line-height: 1.4;
+}
+.nts-route-tab.is-active .nts-route-tab-title {
+  color: var(--frost-1);
+}
+
+/* Bridge panel */
+.nts-bridge-panel { display: none; }
+.nts-bridge-panel.is-active { display: block; }
+
+/* Chain source selector */
+.nts-chain-label {
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--on-surface-dim);
+  margin-bottom: var(--s2);
+}
+
+.nts-chain-tabs {
+  display: flex;
+  gap: var(--s1);
+  margin-bottom: var(--s5);
+  flex-wrap: wrap;
+}
+
+.nts-chain-tab {
+  padding: 10px 20px;
+  background: transparent;
+  border: 1px solid var(--outline);
+  border-radius: var(--r-md);
+  cursor: pointer;
+  font-family: var(--nts-font);
+  font-size: 0.94rem;
+  font-weight: 500;
+  color: var(--on-surface-dim);
+  transition: border-color var(--dur), color var(--dur), background var(--dur);
+}
+.nts-chain-tab:hover {
+  border-color: rgba(158,165,176,.4);
+  color: var(--on-surface-variant);
+}
+.nts-chain-tab.is-active {
+  border-color: rgba(158,165,176,.5);
+  color: var(--on-surface);
+  background: rgba(158,165,176,.07);
+  font-weight: 600;
+}
+.nts-chain-tab:focus-visible {
+  outline: 2px solid var(--frost-2);
+  outline-offset: 3px;
+}
+
+.nts-chain-panel { display: none; }
+.nts-chain-panel.is-active { display: block; }
+
+/* Method selector */
+.nts-method-label {
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--on-surface-dim);
+  margin-bottom: var(--s2);
+}
+
+.nts-method-tabs {
+  display: flex;
+  gap: var(--s2);
+  margin-bottom: var(--s5);
+}
+
+.nts-method-tab {
+  flex: 1;
+  padding: 10px 16px;
+  background: transparent;
+  border: 1px solid var(--outline);
+  border-radius: var(--r-md);
+  cursor: pointer;
+  font-family: var(--nts-font);
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--on-surface-dim);
+  transition: border-color var(--dur), color var(--dur), background var(--dur);
+  text-align: left;
+}
+.nts-method-tab:hover {
+  border-color: rgba(158,165,176,.4);
+  color: var(--on-surface-variant);
+}
+.nts-method-tab.is-active {
+  border-color: rgba(191,232,242,.3);
+  color: var(--frost-1);
+  background: rgba(147,210,232,.05);
+  font-weight: 600;
+}
+.nts-method-tab:focus-visible {
+  outline: 2px solid var(--frost-2);
+  outline-offset: 3px;
+}
+
+.nts-method-badge {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--on-surface-dim);
+  margin-bottom: 3px;
+}
+.nts-method-tab.is-active .nts-method-badge {
+  color: var(--frost-2);
+}
+
+.nts-method-panel { display: none; }
+.nts-method-panel.is-active { display: block; }
+
+/* Steps */
+.nts-steps {
+  list-style: none;
+  position: relative;
+  padding-left: 0;
+}
+.nts-steps::before {
+  content: '';
+  position: absolute;
+  left: 19px;
+  top: 24px;
+  bottom: 24px;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--frost-2), transparent);
+  opacity: 0.2;
+}
+
+.nts-step-item {
+  display: flex;
+  gap: var(--s3);
+  padding: var(--s3) 0;
+  position: relative;
+}
+
+.nts-step-node {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 1px solid var(--outline);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--nts-font);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--on-surface-dim);
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+.nts-step-item.is-final .nts-step-node {
+  background: var(--frost-grad);
+  border-color: transparent;
+  color: var(--frost-text);
+}
+
+.nts-step-body { padding-top: 8px; }
+
+.nts-step-title {
+  font-family: var(--nts-font-display);
+  font-size: 1.06rem;
+  font-weight: 600;
+  color: var(--on-surface);
+  margin-bottom: var(--s1);
+  line-height: 1.35;
+}
+
+.nts-step-desc {
+  font-size: 0.94rem;
+  color: var(--on-surface-dim);
+  line-height: 1.6;
+  margin-bottom: var(--s2);
+}
+
+.nts-step-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--premium);
+  text-decoration: none;
+  transition: color var(--dur);
+}
+.nts-step-link:hover { color: var(--frost-1); }
+.nts-step-link:focus-visible {
+  outline: 2px solid var(--frost-2);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+.nts-step-logos {
+  display: flex;
+  align-items: center;
+  gap: var(--s1);
+  margin-top: var(--s1);
+}
+.nts-step-logo {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Right panel (Squid + route summary) */
+.nts-route-right {
+  position: sticky;
+  top: var(--nts-top);
+}
+
+.nts-route-panel {
+  background: var(--surface);
+  border: 1px solid var(--outline);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+}
+
+.nts-route-panel-header {
+  padding: var(--s3) var(--s4);
+  border-bottom: 1px solid var(--outline);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nts-route-panel-title {
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--on-surface-dim);
+}
+
+.nts-squid-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid color-mix(in srgb, var(--frost-1) 25%, rgba(65,65,65,.85));
+  background: linear-gradient(155deg, rgba(191,232,242,.1) 0%, #141414 100%);
+  color: var(--frost-1);
+  font-family: var(--nts-font);
+  font-size: 0.88rem;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: var(--r-md);
+  cursor: pointer;
+  transition: box-shadow var(--dur);
+}
+.nts-squid-btn:hover { box-shadow: 0 0 0 1px rgba(191,232,242,.2); }
+.nts-squid-btn:focus-visible {
+  outline: 2px solid var(--frost-2);
+  outline-offset: 3px;
+}
+
+.squid-frame-wrap { display: none; }
+.squid-frame-wrap.is-open { display: block; }
+.nts-squid-shell {
+  height: min(68vh, 640px);
+}
+.nts-squid-shell iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: transparent;
+}
+
+.nts-route-summary {
+  padding: var(--s4);
+}
+.nts-route-summary-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--s2);
+  padding: var(--s2) 0;
+  border-bottom: 1px solid rgba(64,64,64,.25);
+  font-size: 0.94rem;
+  color: var(--on-surface-variant);
+}
+.nts-route-summary-item:last-child { border-bottom: none; }
+.nts-route-summary-num {
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--on-surface-dim);
+  flex-shrink: 0;
+  margin-top: 3px;
+  width: 20px;
+}
+.nts-route-summary-text strong {
+  color: var(--on-surface);
+  font-weight: 600;
+}
+
+/* Buy panel */
+.nts-buy-panel { display: none; }
+.nts-buy-panel.is-active { display: block; }
+
+/* ==================== SECTION 06: WHAT NEXT ==================== */
+.nts-choice-intro {
+  font-family: var(--nts-font-display);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(1.18rem, 2.5vw, 1.5rem);
+  color: var(--on-surface-variant);
+  letter-spacing: -0.01em;
+  line-height: 1.4;
+  margin-bottom: var(--s6);
+}
+
+.nts-choice-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--s3);
+}
+
+.nts-choice-card {
+  background: var(--surface);
+  border: 1px solid var(--outline);
+  border-radius: var(--r-lg);
+  padding: var(--s4) var(--s4) var(--s5);
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  transition: border-color var(--dur), background var(--dur), transform var(--dur);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .nts-choice-card:hover { transform: translateY(-3px); }
+}
+.nts-choice-card:hover {
+  border-color: rgba(158,165,176,.35);
+  background: var(--surface-raised);
+}
+.nts-choice-card:focus-visible {
+  outline: 2px solid var(--frost-2);
+  outline-offset: 3px;
+}
+
+.nts-choice-num {
+  font-family: var(--nts-font-display);
+  font-size: 2.4rem;
+  font-weight: 200;
+  font-style: italic;
+  color: rgba(80,80,80,.6);
+  line-height: 1;
+  margin-bottom: var(--s3);
+}
+
+.nts-choice-title {
+  font-family: var(--nts-font-display);
+  font-size: 1.12rem;
+  font-weight: 600;
+  color: var(--on-surface);
+  margin-bottom: var(--s2);
+  line-height: 1.3;
+}
+
+.nts-choice-desc {
+  font-size: 0.94rem;
+  color: var(--on-surface-dim);
+  line-height: 1.6;
+  flex: 1;
+}
+
+.nts-choice-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--on-surface-dim);
+  margin-top: var(--s4);
+  transition: color var(--dur), transform var(--dur);
+}
+.nts-choice-card:hover .nts-choice-arrow {
+  color: var(--frost-1);
+  transform: translateX(3px);
+}
+
+/* ==================== NEWSLETTER BANNER ==================== */
+.nts-newsletter-banner {
+  border-top: 1px solid rgba(64,64,64,.35);
+  border-bottom: 1px solid rgba(64,64,64,.35);
+  background: linear-gradient(135deg, rgba(147,210,232,.04) 0%, rgba(20,20,20,0) 50%, rgba(123,196,223,.03) 100%);
+  padding: var(--s8) var(--nts-pad);
+}
+
+.nts-newsletter-inner {
+  max-width: var(--nts-max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s8);
+  align-items: center;
+}
+
+.nts-newsletter-kicker {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--premium);
+  margin-bottom: var(--s2);
+}
+
+.nts-newsletter-title {
+  font-family: var(--nts-font-display);
+  font-size: 1.65rem;
+  font-weight: 600;
+  color: var(--on-surface);
+  letter-spacing: -0.02em;
+  margin-bottom: var(--s2);
+}
+.nts-newsletter-title em { font-style: italic; font-weight: 400; }
+
+.nts-newsletter-desc {
+  font-size: 1rem;
+  color: var(--on-surface-variant);
+  line-height: 1.6;
+}
+
+.nts-newsletter-form {
+  display: flex;
+  gap: var(--s2);
+}
+
+.nts-newsletter-input {
+  flex: 1;
+  background: var(--surface);
+  border: 1px solid rgba(64,64,64,.7);
+  color: var(--on-surface);
+  font-family: var(--nts-font);
+  font-size: 1rem;
+  padding: 14px 20px;
+  border-radius: var(--r-pill);
+  outline: none;
+  transition: border-color var(--dur);
+}
+.nts-newsletter-input::placeholder { color: var(--on-surface-dim); }
+.nts-newsletter-input:focus { border-color: rgba(158,165,176,.5); }
+
+.nts-newsletter-btn {
+  font-family: var(--nts-font);
+  font-size: 0.94rem;
+  font-weight: 600;
+  color: var(--frost-text);
+  background: var(--frost-grad);
+  border: 1px solid rgba(170,235,255,.45);
+  padding: 14px 28px;
+  border-radius: var(--r-pill);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: box-shadow var(--dur);
+}
+.nts-newsletter-btn:hover { box-shadow: 0 6px 24px rgba(70,200,235,.3); }
+.nts-newsletter-btn:focus-visible {
+  outline: 2px solid var(--frost-2);
+  outline-offset: 3px;
+}
+
+/* ==================== SECTION 07: COMMUNITY ==================== */
+.nts-community-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--s3);
+}
+
+.nts-community-card {
+  background: var(--surface);
+  border: 1px solid var(--outline);
+  border-radius: var(--r-lg);
+  padding: var(--s4);
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s3);
+  transition: border-color var(--dur), background var(--dur), transform var(--dur);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .nts-community-card:hover { transform: translateY(-2px); }
+}
+.nts-community-card:hover {
+  border-color: rgba(158,165,176,.35);
+  background: var(--surface-raised);
+}
+.nts-community-card:focus-visible {
+  outline: 2px solid var(--frost-2);
+  outline-offset: 3px;
+}
+
+.nts-community-logo {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid var(--outline);
+}
+
+.nts-community-name {
+  font-family: var(--nts-font-display);
+  font-size: 1.06rem;
+  font-weight: 600;
+  color: var(--on-surface);
+  line-height: 1.3;
+}
+
+.nts-community-desc {
+  font-size: 0.94rem;
+  color: var(--on-surface-dim);
+  line-height: 1.6;
+  flex: 1;
+}
+
+.nts-community-cta {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--on-surface-dim);
+  transition: color var(--dur);
+}
+.nts-community-card:hover .nts-community-cta {
+  color: var(--frost-1);
+}
+
+/* ==================== SECTION 08: STARTER STACK ==================== */
+.nts-apps-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--s3);
+  margin-bottom: var(--s6);
+}
+
+.nts-app-card {
+  background: var(--surface);
+  border: 1px solid var(--outline);
+  border-radius: var(--r-lg);
+  padding: var(--s4) var(--s3);
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--s2);
+  transition: border-color var(--dur), background var(--dur), transform var(--dur);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .nts-app-card:hover { transform: translateY(-2px); }
+}
+.nts-app-card:hover {
+  border-color: rgba(158,165,176,.35);
+  background: var(--surface-raised);
+}
+.nts-app-card:focus-visible {
+  outline: 2px solid var(--frost-2);
+  outline-offset: 3px;
+}
+
+.nts-app-logo {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid var(--outline);
+}
+
+.nts-app-name {
+  font-family: var(--nts-font);
+  font-size: 0.94rem;
+  font-weight: 700;
+  color: var(--on-surface);
+}
+
+.nts-app-desc {
+  font-size: 0.88rem;
+  color: var(--on-surface-dim);
+  line-height: 1.45;
+}
+
+.nts-apps-more {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s1);
+  font-size: 0.94rem;
+  font-weight: 600;
+  color: var(--premium);
+  text-decoration: none;
+  padding: 12px 24px;
+  border: 1px solid var(--outline);
+  border-radius: var(--r-md);
+  transition: border-color var(--dur), color var(--dur), background var(--dur);
+}
+.nts-apps-more:hover {
+  border-color: rgba(158,165,176,.4);
+  color: var(--frost-1);
+  background: rgba(255,255,255,.02);
+}
+.nts-apps-more:focus-visible {
+  outline: 2px solid var(--frost-2);
+  outline-offset: 3px;
+}
+
+/* ==================== HUMAN MOMENT ==================== */
+.nts-human {
+  padding: var(--s10) var(--nts-pad);
+  border-top: 1px solid rgba(64,64,64,.35);
+  background: var(--bg-alt);
+}
+
+.nts-human-inner {
+  max-width: var(--nts-max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: var(--s8);
+  align-items: center;
+}
+
+.nts-human-left {}
+
+.nts-human-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--on-surface-dim);
+  margin-bottom: var(--s2);
+}
+
+.nts-human-name {
+  font-family: var(--nts-font-display);
+  font-size: 1.65rem;
+  font-weight: 700;
+  color: var(--on-surface);
+  letter-spacing: -0.02em;
+  margin-bottom: var(--s1);
+}
+
+.nts-human-cred {
+  font-size: 0.94rem;
+  color: var(--on-surface-dim);
+  line-height: 1.55;
+  margin-bottom: var(--s3);
+}
+
+.nts-human-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--premium);
+  text-decoration: none;
+  transition: color var(--dur);
+}
+.nts-human-link:hover { color: var(--frost-1); }
+
+.nts-human-quote {
+  font-family: var(--nts-font-display);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(1rem, 1.5vw, 1.18rem);
+  line-height: 1.75;
+  color: var(--on-surface-variant);
+  border-left: 2px solid rgba(191,232,242,.25);
+  padding-left: var(--s5);
+}
+
+/* ==================== FOOTER ==================== */
+.nts-footer {
+  padding: var(--s8) var(--nts-pad);
+  border-top: 1px solid rgba(64,64,64,.35);
+}
+
+.nts-footer-inner {
+  max-width: var(--nts-max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--s8);
+  align-items: center;
+}
+
+.nts-footer-links {
+  display: flex;
+  gap: var(--s4);
+  flex-wrap: wrap;
+}
+
+.nts-footer-link {
+  font-family: var(--nts-font);
+  font-size: 0.94rem;
+  font-weight: 600;
+  color: var(--on-surface-variant);
+  text-decoration: none;
+  transition: color var(--dur);
+  padding: 4px 0;
+}
+.nts-footer-link:hover { color: var(--frost-1); }
+.nts-footer-link:focus-visible {
+  outline: 2px solid var(--frost-2);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+.nts-footer-copy {
+  font-size: 0.88rem;
+  color: var(--on-surface-dim);
+  white-space: nowrap;
+}
+
+/* ==================== SCROLL TOP ==================== */
+#scroll-top {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--r-md);
+  font-size: 1.06rem;
+}
+
+/* ==================== SCROLL REVEAL ==================== */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.55s var(--ease), transform 0.55s var(--ease);
+}
+.reveal.is-visible { opacity: 1; transform: none; }
+.reveal-d1 { transition-delay: 0.08s; }
+.reveal-d2 { transition-delay: 0.16s; }
+.reveal-d3 { transition-delay: 0.24s; }
+.reveal-d4 { transition-delay: 0.32s; }
+
+/* ==================== REDUCED MOTION ==================== */
+@media (prefers-reduced-motion: reduce) {
+  .nts-flip-inner { transition: none; }
+  .nts-cando-card:focus-visible .nts-flip-inner { transform: none; }
+}
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 1100px) {
+  .nts-route-layout { grid-template-columns: 1fr; }
+  .nts-route-right { position: static; margin-top: var(--s5); }
+  .nts-proof-grid { grid-template-columns: repeat(2, 1fr); }
+  .nts-choice-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 900px) {
+  .nts-hero-inner { grid-template-columns: 1fr; gap: var(--s6); }
+  .nts-hero-visual { display: none; }
+  .nts-wallet-layout { grid-template-columns: 1fr; }
+  .nts-fact-grid { grid-template-columns: repeat(2, 1fr); }
+  .nts-cando-grid { grid-template-columns: repeat(2, 1fr); }
+  .nts-community-grid { grid-template-columns: repeat(2, 1fr); }
+  .nts-apps-grid { grid-template-columns: repeat(3, 1fr); }
+  .nts-newsletter-inner { grid-template-columns: 1fr; gap: var(--s5); }
+  .nts-human-inner { grid-template-columns: 1fr; }
+  .nts-video-wrap { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 640px) {
+  :root {
+    --nts-rail-h: 44px;
+    --nts-nav-h: 60px;
+    --nts-top: 104px;
+  }
+  html { font-size: 16px; }
+
+  .nts-rail-inner { gap: 0; }
+  .nts-rail-step { padding: 5px 10px; font-size: 0.72rem; }
+  .rail-sep { width: 8px; margin: 0 2px; }
+
+  .nts-hero { padding-top: var(--nts-top); min-height: auto; }
+  .nts-hero-inner { padding: var(--s6) var(--nts-pad); }
+  .nts-hero-desc { font-size: 1rem; }
+
+  .nts-section { padding: var(--s8) var(--nts-pad); }
+
+  .nts-fact-grid { grid-template-columns: 1fr 1fr; }
+  .nts-proof-grid { grid-template-columns: 1fr; }
+  .nts-cando-grid { grid-template-columns: 1fr; }
+  .nts-choice-grid { grid-template-columns: 1fr; }
+  .nts-community-grid { grid-template-columns: 1fr 1fr; }
+  .nts-apps-grid { grid-template-columns: repeat(2, 1fr); }
+
+  .nts-route-type { flex-direction: column; }
+  .nts-method-tabs { flex-direction: column; }
+
+  .nts-newsletter-form { flex-direction: column; }
+
+  .nts-footer-inner { grid-template-columns: 1fr; gap: var(--s4); }
+  .nts-footer-links { gap: var(--s3); }
+
+  .nts-human-quote { padding-left: var(--s3); }
+  .nts-cando-card { height: 200px; }
+}
+
+/* ==================== KEYFRAMES ==================== */
+@keyframes scroll-bounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(6px); }
+}

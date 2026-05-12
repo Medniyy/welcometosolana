@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Ecosystem Directory — Welcome to Solana</title>
+<meta name="description" content="86+ Solana projects across 25 categories. Search, filter by persona, and discover the ecosystem."/>
+<link rel="icon" type="image/svg+xml" href="favicon.svg"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&display=swap"/>
+<link rel="stylesheet" href="assets/v2.css"/>
+</head>
+<body>
+
+<nav class="path-nav">
+  <a href="gate.html" class="path-nav-logo">Welcome to <em>Solana</em></a>
+  <div class="nav-right">
+    <a href="gate.html" class="nav-switch">← Choose path</a>
+  </div>
+</nav>
+
+<div class="eco-page-hero">
+  <div class="eco-page-hero-inner">
+    <p class="section-kicker">Ecosystem Directory</p>
+    <h1 class="section-title" style="font-size:clamp(2.2rem,5vw,4rem)">Explore <em>everything.</em></h1>
+    <p class="section-lead" id="eco-subtitle">25 categories. 86+ projects. Updated 2026.</p>
+
+    <div class="eco-search-wrap">
+      <span class="eco-search-icon" aria-hidden="true">⌕</span>
+      <input class="eco-search" id="eco-search" type="search" placeholder="Search projects…" autocomplete="off" aria-label="Search ecosystem projects"/>
+    </div>
+
+    <div class="eco-persona-filters" id="eco-personas" role="group" aria-label="Filter by persona">
+      <button class="eco-persona-btn is-active" data-persona="all">All</button>
+      <button class="eco-persona-btn" data-persona="new">New to Solana</button>
+      <button class="eco-persona-btn" data-persona="creator">Creator</button>
+      <button class="eco-persona-btn" data-persona="builder">Builder</button>
+      <button class="eco-persona-btn" data-persona="pro">Pro</button>
+    </div>
+
+    <div class="eco-category-rail" id="eco-cats" role="group" aria-label="Filter by category">
+      <button class="eco-cat-btn is-active" data-cat="all">All categories</button>
+    </div>
+
+    <div class="eco-results-meta" id="eco-count"></div>
+    <div class="eco-grid" id="eco-grid"></div>
+    <div class="eco-empty" id="eco-empty">No projects match your search.</div>
+  </div>
+</div>
+
+<section class="human-section">
+  <div class="human-inner">
+    <div>
+      <div class="human-built-by">Built by</div>
+      <div class="human-name">ATH</div>
+      <div class="human-cred">Community-run · Solana contributors</div>
+      <a href="https://ath.camera" target="_blank" rel="noopener" class="human-link">ath.camera ↗</a>
+    </div>
+    <blockquote class="human-quote">"We made this move ourselves. This guide was originally built for ourselves. If something is wrong or missing, DM us and we'll fix it."</blockquote>
+  </div>
+</section>
+
+<footer class="path-footer">
+  <div class="path-footer-inner">
+    <div class="path-footer-links">
+      <a href="gate.html" class="path-footer-link">Choose a path</a>
+      <a href="https://t.me/+3prPanTSreIwMzMy" target="_blank" rel="noopener" class="path-footer-link">Join Telegram</a>
+      <a href="https://x.com/athcamera" target="_blank" rel="noopener" class="path-footer-link">@athcamera</a>
+    </div>
+    <span class="path-footer-copy">© 2026 Welcome to Solana · Not financial advice</span>
+  </div>
+</footer>
+
+<button id="scroll-top" aria-label="Back to top">↑</button>
+
+<script>
+(function(){
+  var DATA_URL = 'data/ecosystem.json';
+  var state = { persona: 'all', cat: 'all', query: '' };
+  var allProjects = [], allCats = [];
+
+  fetch(DATA_URL)
+    .then(function(r){ return r.json(); })
+    .then(function(data){
+      allCats = data.categories;
+      allProjects = data.projects;
+      buildCatRail();
+      render();
+    })
+    .catch(function(e){ console.error('Ecosystem data failed to load', e); });
+
+  function buildCatRail(){
+    var rail = document.getElementById('eco-cats');
+    rail.innerHTML = '<button class="eco-cat-btn is-active" data-cat="all">All categories</button>';
+    allCats.forEach(function(cat){
+      var btn = document.createElement('button');
+      btn.className = 'eco-cat-btn';
+      btn.dataset.cat = cat.id;
+      btn.textContent = cat.label;
+      rail.appendChild(btn);
+    });
+    rail.addEventListener('click', function(e){
+      var btn = e.target.closest('.eco-cat-btn');
+      if(!btn) return;
+      state.cat = btn.dataset.cat;
+      rail.querySelectorAll('.eco-cat-btn').forEach(function(b){ b.classList.remove('is-active'); });
+      btn.classList.add('is-active');
+      updateSubtitle();
+      render();
+    });
+  }
+
+  function updateSubtitle(){
+    var sub = document.getElementById('eco-subtitle');
+    if(state.cat === 'all' && state.persona === 'all'){
+      sub.textContent = '25 categories. 86+ projects. Updated 2026.';
+    } else {
+      var parts = [];
+      if(state.persona !== 'all') parts.push(capitalize(state.persona === 'new' ? 'New to Solana' : state.persona));
+      if(state.cat !== 'all'){
+        var found = allCats.find(function(c){ return c.id === state.cat; });
+        if(found) parts.push(found.description);
+      }
+      sub.textContent = parts.join(' · ');
+    }
+  }
+
+  function capitalize(s){ return s.charAt(0).toUpperCase() + s.slice(1); }
+
+  function matches(p){
+    if(state.persona !== 'all' && p.personas.indexOf(state.persona) === -1) return false;
+    if(state.cat !== 'all' && p.category !== state.cat) return false;
+    if(state.query){
+      var q = state.query.toLowerCase();
+      if(p.name.toLowerCase().indexOf(q) === -1 && p.description.toLowerCase().indexOf(q) === -1 && p.category.toLowerCase().indexOf(q) === -1) return false;
+    }
+    return true;
+  }
+
+  function render(){
+    var grid  = document.getElementById('eco-grid');
+    var empty = document.getElementById('eco-empty');
+    var count = document.getElementById('eco-count');
+    var visible = allProjects.filter(matches);
+
+    count.textContent = visible.length + ' project' + (visible.length !== 1 ? 's' : '');
+    grid.innerHTML = '';
+
+    if(visible.length === 0){
+      empty.classList.add('is-visible');
+      return;
+    }
+    empty.classList.remove('is-visible');
+
+    visible.forEach(function(p, i){
+      var catObj = allCats.find(function(c){ return c.id === p.category; });
+      var catLabel = catObj ? catObj.label : p.category;
+      var card = document.createElement('a');
+      card.href = p.url;
+      card.target = '_blank';
+      card.rel = 'noopener';
+      card.className = 'eco-card' + (p.featured ? ' is-featured' : '');
+      card.style.transitionDelay = Math.min(i, 12) * 25 + 'ms';
+      card.innerHTML =
+        '<img class="eco-card-logo" src="' + p.logo + '" alt="' + p.name + '" loading="lazy" onerror="this.style.background=\'#1a1a1a\';this.src=\'logos/solana.jpg\'"/>' +
+        '<div class="eco-card-name">' + p.name + '</div>' +
+        '<div class="eco-card-cat">' + catLabel + '</div>' +
+        '<div class="eco-card-desc">' + p.description + '</div>' +
+        '<span class="eco-card-arrow" aria-hidden="true">↗</span>';
+      grid.appendChild(card);
+      // Stagger reveal
+      requestAnimationFrame(function(){
+        setTimeout(function(){ card.style.opacity = '1'; card.style.transform = 'none'; }, Math.min(i,12) * 25);
+      });
+    });
+  }
+
+  // Persona filter
+  document.getElementById('eco-personas').addEventListener('click', function(e){
+    var btn = e.target.closest('.eco-persona-btn');
+    if(!btn) return;
+    state.persona = btn.dataset.persona;
+    document.querySelectorAll('.eco-persona-btn').forEach(function(b){ b.classList.remove('is-active'); });
+    btn.classList.add('is-active');
+    updateSubtitle();
+    render();
+  });
+
+  // Search
+  var searchTimer;
+  document.getElementById('eco-search').addEventListener('input', function(e){
+    clearTimeout(searchTimer);
+    var q = e.target.value;
+    searchTimer = setTimeout(function(){
+      state.query = q.trim();
+      render();
+    }, 180);
+  });
+
+  // Pre-select persona from gate choice
+  var savedPersona = localStorage.getItem('wts_persona');
+  if(savedPersona && savedPersona !== 'new-to-solana'){
+    var personaMap = {'creator':'creator','builder':'builder','pro':'pro'};
+    var mapped = personaMap[savedPersona];
+    if(mapped){
+      state.persona = mapped;
+      var btn = document.querySelector('[data-persona="' + mapped + '"]');
+      if(btn){
+        document.querySelectorAll('.eco-persona-btn').forEach(function(b){ b.classList.remove('is-active'); });
+        btn.classList.add('is-active');
+      }
+    }
+  }
+
+  // Scroll top
+  var scrollBtn = document.getElementById('scroll-top');
+  window.addEventListener('scroll', function(){ scrollBtn.classList.toggle('is-visible', window.scrollY > 400); }, {passive:true});
+  scrollBtn.addEventListener('click', function(){ window.scrollTo({top:0,behavior:'smooth'}); });
+})();
+</script>
+</body>
+</html>

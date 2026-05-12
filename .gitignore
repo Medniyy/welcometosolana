@@ -11,6 +11,11 @@ bios(descriptions).txt
 bios.txt
 index.local.html
 
+# Internal task and source docs (never deploy)
+TASK_*.md
+*_SOURCE.md
+CURSOR_DEPLOY_TASK.md
+
 # Local scratch + heavy artifacts
 node_modules/
 category-pngs/

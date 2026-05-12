@@ -2,7 +2,26 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://welcometosolana.xyz/</loc>
-    <lastmod>2026-04-16</lastmod>
+    <lastmod>2026-05-13</lastmod>
+    <priority>1.0</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://welcometosolana.xyz/new-to-solana.html</loc>
+    <lastmod>2026-05-13</lastmod>
+    <priority>0.9</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://welcometosolana.xyz/ecosystem-new.html</loc>
+    <lastmod>2026-05-13</lastmod>
+    <priority>0.8</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://welcometosolana.xyz/gate.html</loc>
+    <lastmod>2026-05-13</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
   </url>
 </urlset>
-
