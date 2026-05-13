@@ -234,10 +234,7 @@
   var fan       = document.getElementById('card-fan');
   var busy      = false;
 
-  var supportsVP9 = (function(){
-    var v = document.createElement('video');
-    return v.canPlayType('video/webm; codecs="vp9"') !== '';
-  })();
+  var isMobile = window.matchMedia('(max-width: 768px)').matches || ('ontouchstart' in window && screen.width < 1024);
 
   function pickCard(card){
     if(busy) return;
@@ -256,7 +253,7 @@
     var cx   = rect.left + rect.width  / 2;
     var cy   = rect.top  + rect.height / 2;
 
-    if(video && supportsVP9){
+    if(video && !isMobile){
       oVideo.src = video;
       oVideo.style.display = 'block';
       oImg.style.display = 'none';
