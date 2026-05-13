@@ -234,6 +234,11 @@
   var fan       = document.getElementById('card-fan');
   var busy      = false;
 
+  var supportsVP9 = (function(){
+    var v = document.createElement('video');
+    return v.canPlayType('video/webm; codecs="vp9"') !== '';
+  })();
+
   function pickCard(card){
     if(busy) return;
     busy = true;
@@ -251,7 +256,7 @@
     var cx   = rect.left + rect.width  / 2;
     var cy   = rect.top  + rect.height / 2;
 
-    if(video){
+    if(video && supportsVP9){
       oVideo.src = video;
       oVideo.style.display = 'block';
       oImg.style.display = 'none';
