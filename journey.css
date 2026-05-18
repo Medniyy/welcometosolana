@@ -2460,42 +2460,46 @@ a { color: inherit; text-decoration: none; }
 .wallet-hero > * { position: relative; z-index: 1; }
 
 /* ---- Step 05: Bridge/Buy as a real pill segment with sliding indicator ---- */
-.seg-tabs--xl {
-  position: relative;
-  padding: 6px;
-  background: var(--bg-2);
-  border: 1px solid var(--line-2);
-  border-radius: 14px;
-  overflow: hidden;
-}
-.seg-tabs--xl::before {
-  content: '';
-  position: absolute;
-  top: 6px;
-  bottom: 6px;
-  width: calc(50% - 6px);
-  left: 6px;
-  background: linear-gradient(155deg, rgba(147,210,232,.10), rgba(147,210,232,.04));
-  border: 1px solid rgba(147,210,232,.32);
-  border-radius: 10px;
-  transition: transform .35s cubic-bezier(.22,.61,.36,1);
-  z-index: 0;
-}
-/* When the second tab is active, slide indicator right */
-.seg-tabs--xl:has(> .seg-tab:nth-child(2).is-active)::before {
-  transform: translateX(100%);
-}
-.seg-tabs--xl .seg-tab {
-  position: relative;
-  z-index: 1;
-  background: transparent;
-  border: 1px solid transparent;
-}
-.seg-tabs--xl .seg-tab:hover { background: transparent; border-color: transparent; }
-.seg-tabs--xl .seg-tab.is-active {
-  background: transparent;
-  border: 1px solid transparent;
-  box-shadow: none;
+/* Desktop-only: sliding pill indicator inside the tab container.
+   Below 700px the base .seg-tab active styles handle highlighting per tab. */
+@media (min-width: 700px) {
+  .seg-tabs--xl {
+    position: relative;
+    padding: 6px;
+    background: var(--bg-2);
+    border: 1px solid var(--line-2);
+    border-radius: 14px;
+    overflow: hidden;
+  }
+  .seg-tabs--xl::before {
+    content: '';
+    position: absolute;
+    top: 6px;
+    bottom: 6px;
+    width: calc(50% - 6px);
+    left: 6px;
+    background: linear-gradient(155deg, rgba(147,210,232,.10), rgba(147,210,232,.04));
+    border: 1px solid rgba(147,210,232,.32);
+    border-radius: 10px;
+    transition: transform .35s cubic-bezier(.22,.61,.36,1);
+    z-index: 0;
+  }
+  /* When the second tab is active, slide indicator right */
+  .seg-tabs--xl:has(> .seg-tab:nth-child(2).is-active)::before {
+    transform: translateX(100%);
+  }
+  .seg-tabs--xl .seg-tab {
+    position: relative;
+    z-index: 1;
+    background: transparent;
+    border: 1px solid transparent;
+  }
+  .seg-tabs--xl .seg-tab:hover { background: transparent; border-color: transparent; }
+  .seg-tabs--xl .seg-tab.is-active {
+    background: transparent;
+    border: 1px solid transparent;
+    box-shadow: none;
+  }
 }
 
 /* ---- Step 06 (next): dim siblings on hover, accent badge color ---- */
