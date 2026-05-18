@@ -2301,18 +2301,614 @@ a { color: inherit; text-decoration: none; }
 #scroll-top.is-visible { opacity: 1; pointer-events: auto; }
 #scroll-top:hover { border-color: var(--frost-3); transform: translateY(-2px); }
 
-/* ============ REVEAL ANIMATIONS ============ */
-.seg-header, .learn-card, .proof-card, .cando-card, .next-card, .community-card, .app-card, .trust, .watch-row, .checkpoint, .wallet-hero, .wallet-alt {
+/* ============ REVEAL ANIMATIONS — typed variants ============
+   .reveal applies the baseline transition; .reveal--{variant} sets the
+   from-state transform. .is-visible flips them to rest. The old
+   list-of-selectors that hid everything by default has been replaced
+   with explicit .reveal tagging from journey.js, so anything we don't
+   tag (e.g. the route builder steps, footer) stays visible. */
+.reveal {
   opacity: 0;
-  transform: translateY(20px);
-  transition: opacity .7s var(--ease-out), transform .7s var(--ease-out);
+  transition:
+    opacity .7s var(--ease-out),
+    transform .7s var(--ease-out);
+  will-change: opacity, transform;
 }
+.reveal--up    { transform: translateY(22px); }
+.reveal--left  { transform: translateX(-14px); }
+.reveal--scale { transform: scale(.965) translateY(8px); transform-origin: left center; }
+.reveal--card  { transform: translateY(20px) scale(.96); }
+.reveal--fade  { /* no transform — stays grounded */ }
+
 .is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Fast-scroll skip: deep-in-view on first observe → no animation. */
+.reveal.reveal-no-anim {
+  transition: none !important;
+  transform: none !important;
   opacity: 1 !important;
-  transform: translateY(0) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { transition: none; transform: none; opacity: 1; }
+}
+
+/* ============ STEPPER PULSE (single-shot on activation) ============ */
+@keyframes step-dot-pulse {
+  0%   { transform: scale(1.15); box-shadow: 0 0 0 4px var(--bg-2), 0 0 0   var(--frost-glow); }
+  45%  { transform: scale(1.45); box-shadow: 0 0 0 4px var(--bg-2), 0 0 28px var(--frost-glow); }
+  100% { transform: scale(1.15); box-shadow: 0 0 0 4px var(--bg-2), 0 0 16px var(--frost-glow); }
+}
+.stepper-list a.step-pulse.is-active .step-dot {
+  animation: step-dot-pulse .6s var(--ease-out);
 }
 
 /* small screens: collapse stepper into top compact bar */
 @media (max-width: 1279px) {
   .journey { padding-left: 0; }
 }
+
+/* ================================================================
+   IMPROVEMENT PASS — additions / overrides only.
+   This block is appended (not woven into the rules above) so the
+   diff is contained. Everything here is additive and respects
+   prefers-reduced-motion.
+   ================================================================ */
+
+/* ---- Typography ---- */
+.seg-lead { font-size: 16px; line-height: 1.6; }
+.proof-back p { font-size: 14.5px; }
+.cando-blurb, .next-card-desc, .community-back-text, .app-desc {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* Tighter tracking on the largest titles */
+.hero-title { letter-spacing: -0.035em; }
+.seg-title { font-size: clamp(2.2rem, 4.4vw, 3.5rem); }
+
+/* ---- Buttons: universal press feedback + lift ---- */
+.btn,
+.seg-tab, .chain-pill, .method-tab,
+.bridge-tab, .chain-tab, .route-type-tab,
+.eco-persona-btn, .eco-cat-btn {
+  -webkit-tap-highlight-color: transparent;
+}
+.btn:active,
+.seg-tab:active, .chain-pill:active, .method-tab:active,
+.bridge-tab:active, .chain-tab:active, .route-type-tab:active {
+  transform: scale(.97);
+  transition: transform 80ms ease;
+}
+.btn--frost:active { transform: scale(.97) translateY(0); }
+
+/* ---- Hero: brighter glows + drawn-in route + portrait scale-in ---- */
+.hero-glow--a { opacity: .48; }
+.hero-glow--b { opacity: .42; }
+
+/* SVG route draws itself in on load */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-route path {
+    stroke-dasharray: 4 8;
+    /* Use the existing dasharray, but offset to push the dashes off-screen,
+       then animate offset to 0 so the line "draws" in. */
+    animation: hero-route-draw 2.4s cubic-bezier(.22,.61,.36,1) .2s both;
+  }
+  @keyframes hero-route-draw {
+    0%   { stroke-dashoffset: 360; opacity: 0; }
+    20%  { opacity: .55; }
+    100% { stroke-dashoffset: 0;   opacity: .55; }
+  }
+
+  /* Portrait scale-in on load (subtle) */
+  .hero-portrait-frame img {
+    animation: hero-portrait-in 1.4s cubic-bezier(.22,.61,.36,1) .15s both;
+  }
+  @keyframes hero-portrait-in {
+    0%   { transform: scale(.96); opacity: 0; }
+    60%  { opacity: 1; }
+    100% { transform: scale(1);   opacity: 1; }
+  }
+}
+
+/* ---- Step 02: $3T+ card extra halo + brighter trust logos ---- */
+.proof-card--lg .proof-front::after {
+  content: '';
+  position: absolute;
+  inset: 30% -10% -20% 30%;
+  background: radial-gradient(ellipse at 30% 50%, rgba(147,210,232,.18), transparent 60%);
+  filter: blur(40px);
+  pointer-events: none;
+  z-index: 0;
+}
+.proof-card--lg .proof-front > * { position: relative; z-index: 1; }
+
+#why .trust-logo img { opacity: .72; }
+#why .trust-logo:hover img { opacity: 1; }
+
+/* ---- Step 03 (cando): per-card frost left accent for rhythm ---- */
+.cando-grid .cando-card:nth-child(1) .cando-front,
+.cando-grid .cando-card:nth-child(4) .cando-front {
+  box-shadow: inset 3px 0 0 0 rgba(147,210,232,.35);
+}
+.cando-grid .cando-card:nth-child(2) .cando-front,
+.cando-grid .cando-card:nth-child(5) .cando-front {
+  box-shadow: inset 3px 0 0 0 rgba(147,210,232,.18);
+}
+.cando-grid .cando-card:nth-child(3) .cando-front,
+.cando-grid .cando-card:nth-child(6) .cando-front {
+  box-shadow: inset 3px 0 0 0 rgba(147,210,232,.55);
+}
+
+/* ---- Step 04: persistent soft frost halo behind the Solflare hero ---- */
+.wallet-hero {
+  position: relative;
+}
+.wallet-hero::after {
+  content: '';
+  position: absolute;
+  inset: -40px -40px auto auto;
+  width: 320px; height: 320px;
+  background: radial-gradient(circle, rgba(147,210,232,.18), transparent 60%);
+  filter: blur(50px);
+  pointer-events: none;
+  z-index: 0;
+}
+.wallet-hero > * { position: relative; z-index: 1; }
+
+/* ---- Step 05: Bridge/Buy as a real pill segment with sliding indicator ---- */
+.seg-tabs--xl {
+  position: relative;
+  padding: 6px;
+  background: var(--bg-2);
+  border: 1px solid var(--line-2);
+  border-radius: 14px;
+  overflow: hidden;
+}
+.seg-tabs--xl::before {
+  content: '';
+  position: absolute;
+  top: 6px;
+  bottom: 6px;
+  width: calc(50% - 6px);
+  left: 6px;
+  background: linear-gradient(155deg, rgba(147,210,232,.10), rgba(147,210,232,.04));
+  border: 1px solid rgba(147,210,232,.32);
+  border-radius: 10px;
+  transition: transform .35s cubic-bezier(.22,.61,.36,1);
+  z-index: 0;
+}
+/* When the second tab is active, slide indicator right */
+.seg-tabs--xl:has(> .seg-tab:nth-child(2).is-active)::before {
+  transform: translateX(100%);
+}
+.seg-tabs--xl .seg-tab {
+  position: relative;
+  z-index: 1;
+  background: transparent;
+  border: 1px solid transparent;
+}
+.seg-tabs--xl .seg-tab:hover { background: transparent; border-color: transparent; }
+.seg-tabs--xl .seg-tab.is-active {
+  background: transparent;
+  border: 1px solid transparent;
+  box-shadow: none;
+}
+
+/* ---- Step 06 (next): dim siblings on hover, accent badge color ---- */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .next-grid:hover .next-card { opacity: .55; transition: opacity .25s ease; }
+  .next-grid:hover .next-card:hover { opacity: 1; }
+}
+.next-card:nth-child(1) .next-card-tag { color: var(--frost-2); border-color: rgba(147,210,232,.3); background: rgba(147,210,232,.06); }
+.next-card:nth-child(4) .next-card-tag { color: rgb(196,160,232);  border-color: rgba(196,160,232,.3); background: rgba(196,160,232,.06); }
+
+/* ---- Step 07: warmer surface tint without leaving the palette ---- */
+.seg--07 .community-card .community-front {
+  background: linear-gradient(155deg, #1a1c20 0%, #1f1d22 100%);
+}
+.seg--07 .community-card:hover .community-front {
+  background: linear-gradient(155deg, #1d1f24 0%, #232026 100%);
+}
+
+/* ---- Step 08: hover frost glow + proper CTA button for "Explore" ---- */
+.app-card {
+  transition: border-color var(--dur), background var(--dur), transform var(--dur), box-shadow var(--dur);
+}
+.app-card:hover {
+  box-shadow: 0 14px 36px -16px rgba(147,210,232,.45),
+              0 0 0 1px rgba(147,210,232,.22);
+}
+
+.apps-more {
+  padding: 18px 26px;
+  background:
+    radial-gradient(ellipse at 80% 50%, rgba(147,210,232,.08), transparent 60%),
+    linear-gradient(135deg, var(--surface), var(--surface-2));
+  border-color: rgba(147,210,232,.22);
+  transition: border-color var(--dur), background var(--dur), transform var(--dur), box-shadow var(--dur);
+}
+.apps-more:hover {
+  border-color: rgba(147,210,232,.5);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 36px -16px rgba(147,210,232,.4);
+}
+.apps-more-text { color: var(--frost-1); }
+
+/* ---- Newsletter checkpoint: more elevated band + celebratory success ---- */
+.checkpoint {
+  background:
+    radial-gradient(ellipse at 0% 50%, rgba(147,210,232,.10), transparent 60%),
+    radial-gradient(ellipse at 100% 50%, rgba(178,150,220,.05), transparent 60%),
+    linear-gradient(180deg, var(--bg-2) 0%, var(--bg-3) 100%);
+  border-top: 1px solid rgba(147,210,232,.18);
+  border-bottom: 1px solid rgba(147,210,232,.18);
+}
+
+@keyframes checkpoint-success-pop {
+  0%   { transform: scale(.94); opacity: 0; }
+  60%  { transform: scale(1.04); opacity: 1; }
+  100% { transform: scale(1);    opacity: 1; }
+}
+@keyframes checkpoint-success-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(147,210,232,0); }
+  50%      { box-shadow: 0 0 60px 6px rgba(147,210,232,.18); }
+}
+.checkpoint-success {
+  animation: checkpoint-success-pop .55s cubic-bezier(.22,.61,.36,1) both;
+  padding: 14px 18px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(147,210,232,.07), rgba(147,210,232,.02));
+  border: 1px solid rgba(147,210,232,.25);
+  position: relative;
+}
+.checkpoint-success::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  pointer-events: none;
+  animation: checkpoint-success-glow 1.4s ease-out both;
+}
+
+/* ---- Section dividers as thin gradient lines (subtle, premium) ---- */
+.seg {
+  border-top: 0;
+}
+.seg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(147,210,232,.18) 25%,
+    rgba(147,210,232,.28) 50%,
+    rgba(147,210,232,.18) 75%,
+    transparent 100%);
+  opacity: .7;
+  pointer-events: none;
+  z-index: 2;
+}
+/* The first section after the hero doesn't need a divider — the hero already
+   provides a strong visual break. Keep it for the rest. */
+.seg--01::before { display: none; }
+
+/* ---- Inline text-link underline (background trick, not text-decoration) ---- */
+.step-link, .closing-link, .jfoot-link, .stepper-help-link, .cando-link, .community-cta {
+  /* These are buttons or branded buttons, not inline text — skip. */
+}
+/* Apply to inline links found in body copy: closing-quote, etc. */
+.closing-quote a,
+.proof-back a,
+.cando-back p a,
+.hero-desc a,
+.seg-lead a {
+  background-image: linear-gradient(to right, var(--frost-2), var(--frost-2));
+  background-repeat: no-repeat;
+  background-size: 0% 1px;
+  background-position: 0 100%;
+  text-decoration: none;
+  transition: background-size .35s var(--ease);
+}
+.closing-quote a:hover,
+.proof-back a:hover,
+.cando-back p a:hover,
+.hero-desc a:hover,
+.seg-lead a:hover {
+  background-size: 100% 1px;
+}
+
+/* ---- Section kicker variance: knowledge sections (01, 02) get silver,
+        action sections (04, 05, 06) stay frost. Section 03/07/08 stay frost.
+        Implemented via per-section overrides on .seg-label-num. ---- */
+.seg--01 .seg-label-num,
+.seg--02 .seg-label-num {
+  background: linear-gradient(155deg, rgba(220,225,234,.22) 0%, rgba(158,165,176,.22) 100%);
+  color: var(--ink);
+  box-shadow: inset 0 0 0 1px rgba(220,225,234,.2);
+}
+
+/* ---- Light card-press feedback for tabs/pills ---- */
+.chain-pill:active, .method-tab:active { transition: transform 80ms ease; }
+
+/* ================================================================
+   CARD SYSTEM NORMALIZATION
+   Reference cards: .cando-card (step 03) for layout + hierarchy;
+   .arch-card (gate) + .app-card (step 08) for touch & feel.
+
+   Locked system:
+     • Container — 280px tall · 28px padding · 12px radius · 1px outline
+     • Hover    — translateY(-3px) · frost border · surface-2 bg
+                  · soft frost glow shadow
+     • Top      — 48–52px tinted glyph/badge (or small mono tag pill)
+     • Title    — 22px serif weight 600
+     • Body     — 14.5px line-1.55, color ink-2
+     • CTA      — bottom, dashed top border, mono 11.5px uppercase frost
+   ================================================================ */
+
+/* ---------- Step 01 — Learn cards (flip) — alphabet-card layout ---------- */
+/* Front: title fixed top · image fixed large · subtitle pinned to bottom   */
+/* margin-top:auto on .learn-sub is the only reliable bottom-anchor method  */
+.learn-grid { grid-auto-rows: 280px; }
+.learn-card { height: 100%; }
+.learn-front, .learn-back { padding: 24px 26px; }
+/* Reduce bottom pad so caption sits closer to the card edge */
+.learn-front { justify-content: flex-start; align-items: flex-start; padding-bottom: 16px; }
+.learn-metric {
+  font-size: clamp(1.8rem, 2.5vw, 2.15rem);
+  color: var(--ink);
+  line-height: 1;
+  flex-shrink: 0;
+}
+/* All images share the same layout zone — same height, same margin-top.
+   This locks all illustrations into the same central band and all captions
+   onto the same shared baseline via margin-top:auto on .learn-sub.
+   Visual size is adjusted per-card using scale() which is purely cosmetic
+   and does not shift the layout zone at all.                              */
+.learn-card-img {
+  flex-shrink: 0;
+  width: 100%;
+  height: 160px;
+  object-fit: contain;
+  object-position: center;
+  margin-top: 10px;
+  transform-origin: center;
+}
+/* sparkles feel largest visually → scale down to match the set */
+.learn-grid .learn-card:nth-child(2) .learn-card-img { transform: scale(0.75); }
+/* staking figure feels smallest → scale up to match the set */
+.learn-grid .learn-card:nth-child(3) .learn-card-img { transform: scale(1.14); }
+/* margin-top:auto consumes all remaining space above subtitle → always bottom-anchored */
+.learn-sub {
+  margin-top: auto;
+  width: 100%;
+  text-align: center;
+  font-family: var(--font-sans);
+  font-size: clamp(0.88rem, 1.22vw, 1.02rem);
+  font-weight: 600;
+  color: var(--ink-2);
+  letter-spacing: 0;
+  text-transform: none;
+  flex-shrink: 0;
+}
+.learn-back { justify-content: center; }
+.learn-back-text { font-size: 16px; line-height: 1.7; margin: 0; flex: none; }
+.learn-accent { color: var(--frost-2); }
+.learn-card:hover .learn-front { box-shadow: 0 14px 36px -16px rgba(147,210,232,.32); }
+
+/* ---------- Step 02 — Proof cards (flip) ---------- */
+/* Equal grid, no 2×2 hero. $3T+ stays featured via gradient text + halo
+   but at the same physical size as every other card. */
+.proof-grid {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-auto-rows: 280px;
+  gap: 18px;
+  margin-bottom: 48px;
+}
+@media (min-width: 720px) {
+  .proof-grid { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+}
+@media (min-width: 1080px) {
+  .proof-grid { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); grid-auto-rows: 280px; }
+}
+.proof-card,
+.proof-card--lg {
+  grid-column: span 1;
+  grid-row: span 1;
+}
+.proof-front, .proof-back { padding: 28px; }
+.proof-metric {
+  font-size: clamp(1.9rem, 3vw, 2.6rem);
+  margin: 14px 0 6px;
+}
+.proof-card--lg .proof-metric {
+  font-size: clamp(1.9rem, 3vw, 2.6rem);
+  background: none;
+  -webkit-background-clip: unset;
+  background-clip: unset;
+  color: var(--ink);
+}
+.proof-card--lg .proof-title {
+  font-size: 11.5px;
+  color: var(--ink-2);
+}
+.proof-card--lg .proof-back p { font-size: 14.5px; line-height: 1.55; }
+.proof-back p { font-size: 14.5px; line-height: 1.55; }
+
+/* Hint moves from absolute to bottom-anchored row with a dashed top border,
+   matching cando-cta / next-card-cta. */
+.proof-hint {
+  position: static;
+  width: 100%;
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px dashed var(--line-2);
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--frost-2);
+  display: inline-flex; align-items: center; gap: 6px;
+  transition: gap var(--dur), color var(--dur);
+}
+.proof-card:hover .proof-hint { gap: 10px; color: var(--frost-1); }
+.proof-card .proof-front {
+  justify-content: flex-start;
+}
+.proof-back p { flex: 1; }
+.proof-back-hint { margin-top: 0; padding-top: 14px; border-top: 1px dashed var(--line-2); width: 100%; }
+/* $3T+ card — same surface/border as all other proof cards */
+.proof-card--lg .proof-front::after { display: none; }
+.proof-card--lg .proof-front {
+  background: var(--surface);
+  border-color: var(--line-2);
+}
+/* The base CSS set position:relative + z-index:1 on all --lg front children
+   so they'd stack above the halo. The halo is now hidden, but position:relative
+   still causes bottom/right offsets from the old absolute .proof-hint rule to
+   apply — shifting the footer left and up. Reset the stacking context. */
+.proof-card--lg .proof-front > * {
+  position: static;
+  z-index: auto;
+}
+
+/* Match cando hover glow */
+.proof-card:hover .proof-front {
+  box-shadow: 0 14px 36px -16px rgba(147,210,232,.32);
+}
+
+/* ---------- Step 06 — Next cards (non-flip, vertical) ---------- */
+.next-grid {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+}
+.next-card {
+  display: flex;
+  flex-direction: column;
+  padding: 26px 28px;
+  height: 280px;
+  position: relative;
+}
+/* Number becomes a top badge — matches cando-glyph slot. */
+.next-card-num {
+  width: 48px; height: 48px;
+  border-radius: var(--r-sm);
+  background: rgba(147,210,232,.07);
+  border: 1px solid rgba(147,210,232,.18);
+  color: var(--frost-2);
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 600;
+  font-style: normal;
+  letter-spacing: -0.01em;
+  display: inline-flex; align-items: center; justify-content: center;
+  margin-bottom: 16px;
+  line-height: 1;
+  transition: background var(--dur), border-color var(--dur), color var(--dur);
+}
+.next-card:hover .next-card-num {
+  background: rgba(147,210,232,.12);
+  border-color: rgba(147,210,232,.35);
+  color: var(--frost-2);
+}
+.next-card-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+.next-card-title {
+  font-family: var(--font-display);
+  font-size: 21px;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+  margin-bottom: 6px;
+}
+.next-card-desc {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--ink-2);
+  margin-bottom: 14px;
+  flex: 1;
+  /* Clamp at 3 lines so the card height stays locked. */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.next-card-cta {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--frost-2);
+  display: inline-flex; align-items: center; gap: 6px;
+  width: 100%;
+  padding-top: 14px;
+  margin-top: auto;
+  border-top: 1px dashed var(--line-2);
+  transition: gap var(--dur), color var(--dur);
+}
+.next-card:hover .next-card-cta { gap: 10px; color: var(--frost-1); }
+.next-card:hover .next-card-cta::after {
+  /* no-op; gap+color handles it */
+}
+/* Keep small "tag" pill in top-right corner */
+.next-card-tag { top: 22px; right: 22px; }
+/* Match cando hover glow */
+.next-card:hover {
+  box-shadow: 0 14px 36px -16px rgba(147,210,232,.32);
+}
+
+/* ---------- Step 07 — Community cards (flip) ---------- */
+.community-grid {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+}
+.community-card { height: 280px; }
+.community-front, .community-back { padding: 28px; }
+.community-name { font-size: 22px; }
+.community-tag { font-size: 12px; }
+.community-back-text { font-size: 14.5px; line-height: 1.55; }
+.community-logo,
+.community-logo-frame {
+  width: 52px; height: 52px;
+  margin-bottom: 18px;
+}
+.community-card:hover .community-front {
+  box-shadow: 0 14px 36px -16px rgba(147,210,232,.32);
+}
+
+/* ---------- Step 03 — Cando (reference): tighten to match exactly ---------- */
+.cando-grid {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+}
+.cando-card { height: 280px; }
+.cando-glyph { width: 52px; height: 52px; margin-bottom: 18px; }
+.cando-card:hover .cando-front {
+  box-shadow: 0 14px 36px -16px rgba(147,210,232,.32);
+}
+
+/* ---------- Mobile: fixed height on learn-cards so margin-top:auto works on subtitle ---------- */
+@media (max-width: 719px) {
+  .proof-grid { grid-auto-rows: auto; }
+  .proof-card, .proof-card--lg { min-height: 260px; height: auto; }
+  /* Fixed height is required — height:auto breaks margin-top:auto subtitle anchoring */
+  .learn-grid { grid-auto-rows: 260px; }
+  .learn-card { height: 260px; }
+  /* Same height for all — scale() overrides handle per-card visual size */
+  .learn-card-img { height: 132px; }
+  .cando-card, .community-card { height: auto; min-height: 260px; }
+  .next-card { height: auto; min-height: 240px; }
+  .next-card-desc { -webkit-line-clamp: unset; display: block; overflow: visible; }
+}
+
+

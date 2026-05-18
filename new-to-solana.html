@@ -25,22 +25,12 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,300..900;1,8..60,300..900&family=JetBrains+Mono:wght@400;500;600&display=swap"/>
 <link rel="stylesheet" href="journey.css"/>
 <style>
-/* ===== V3 · Step 02 recomposition (rev 2) =====
-   Desktop fix only. Mobile (< 720px) and tablet (720–1079px) untouched.
+/* ===== V3 · Step 02 — overrides now live in journey.css =====
+   The earlier "3-col × 165px-rows with $3T+ at 2×2" recomposition has
+   been replaced by the unified card system (see journey.css "Card
+   system normalization"). All proof cards now match cando/community
+   in size and rhythm; $3T+ stays featured via gradient text + halo.
    =============================================== */
-
-/* PROOF GRID — 3 columns, reduced row height.
-   At 165px the regular cards are proper rectangles (~350px wide).
-   $3T+ at 2 rows (165 + 12 + 165 = 342px) stays prominent but compact.
-   Tight gap to trust layer below. */
-@media (min-width: 1080px) {
-  #why .proof-grid {
-    grid-template-columns: repeat(3, 1fr);
-    grid-auto-rows: 165px;
-    gap: 12px;
-    margin-bottom: 16px;
-  }
-}
 
 /* TRUST LAYER — wide horizontal band.
    Two-column layout: label left, logos fill the right evenly.
@@ -109,17 +99,12 @@
 }
 
 /* Step 02 mobile-only fixes (< 720px).
-   Desktop and tablet (720px+) are unchanged. */
+   Desktop and tablet (720px+) are unchanged.
+   With the new unified card system (280px height for proof cards),
+   we no longer need the row-height override or the padding-bottom
+   workaround for the "Tap to read" hint — the hint is now part of the
+   normal flex flow with a dashed top border. */
 @media (max-width: 719px) {
-  /* Proof cards: extra row height + bottom padding so the absolute-
-     positioned "Tap to read" hint never overlaps the title text. */
-  #why .proof-grid {
-    grid-auto-rows: 252px;
-  }
-  #why .proof-front {
-    padding-bottom: 46px;
-  }
-
   /* Trust layer: tighten horizontal padding and shrink logos slightly
      so the 3-column grid sits cleanly on narrow screens. */
   #why .trust {
@@ -163,17 +148,19 @@
   opacity: 1;
 }
 
-/* Step 01 — readable back text at comfortable size. */
-#what .learn-card {
-  height: 350px;
-}
-#what .learn-back-tag {
-  margin-bottom: 6px;
+/* Step 01 — learn cards */
+#what .learn-back {
+  justify-content: center;
 }
 #what .learn-back-text {
-  font-size: 14px;
-  line-height: 1.52;
-  margin: 10px 0;
+  font-size: 16px;
+  line-height: 1.7;
+  margin: 0;
+  font-weight: 500;
+  color: var(--ink);
+}
+.learn-accent {
+  color: var(--frost-2);
 }
 
 /* Back-to-top — override global button { text-align: left } that misaligns the arrow */
@@ -185,12 +172,10 @@
   line-height: 1;
 }
 
-/* Step 06 — push title below the absolute-positioned top-right badge.
-   Badge bottom lands at ~38px from card top (top:16 + ~22px height).
-   Body padding-top:28 → title starts at 24+28=52px → 14px clear below badge. */
-#next .next-card-body {
-  padding-top: 28px;
-}
+/* Step 06 — next card layout now governed by the unified card system
+   (vertical flex with the number as a top-left badge, not an absolute
+   element). The old padding-top workaround for the absolute tag is no
+   longer needed. */
 
 /* Newsletter — checkpoint success & error states */
 .checkpoint-success { display: flex; flex-direction: column; gap: 6px; }
@@ -413,20 +398,12 @@
       <button class="learn-card" data-flip aria-label="SOL — the native token">
         <div class="learn-inner">
           <div class="learn-front">
-            <div class="learn-front-top">
-              <span class="learn-tag">Token</span>
-              <span class="learn-hint">Tap to read <span aria-hidden="true">↻</span></span>
-            </div>
-            <div class="learn-front-main">
-              <div class="learn-metric">SOL</div>
-              <div class="learn-sub">The native token</div>
-            </div>
-            <p class="learn-blurb">Fuel for every transaction, swap, and app on the network.</p>
+            <div class="learn-metric">SOL</div>
+            <img src="soltoken.png" class="learn-card-img" alt="" aria-hidden="true">
+            <div class="learn-sub">The native token</div>
           </div>
           <div class="learn-back">
-            <div class="learn-back-tag">SOL &middot; The native token</div>
-            <p class="learn-back-text">SOL is like the small fee your bank charges when you pay with a debit card.<br/>Every action on Solana, from using apps to sending tokens or making transactions, needs a tiny bit of SOL.<br/>One transaction usually costs about $0.00025. Super cheap.</p>
-            <span class="learn-back-hint">Tap to flip back</span>
+            <p class="learn-back-text"><span class="learn-accent">SOL</span> is the basic token <span class="learn-accent">you need to use Solana,</span> like having a little fuel in the tank before you can drive.</p>
           </div>
         </div>
       </button>
@@ -434,20 +411,12 @@
       <button class="learn-card" data-flip aria-label="Transaction fees">
         <div class="learn-inner">
           <div class="learn-front">
-            <div class="learn-front-top">
-              <span class="learn-tag">Cost</span>
-              <span class="learn-hint">Tap to read <span aria-hidden="true">↻</span></span>
-            </div>
-            <div class="learn-front-main">
-              <div class="learn-metric">&lt;$0.01</div>
-              <div class="learn-sub">Transaction fees</div>
-            </div>
-            <p class="learn-blurb">Average fee around $0.00025. Fast and cheap by design.</p>
+            <div class="learn-metric">&lt;$0.01</div>
+            <img src="txfees.png" class="learn-card-img" alt="" aria-hidden="true">
+            <div class="learn-sub">Transaction fees</div>
           </div>
           <div class="learn-back">
-            <div class="learn-back-tag">Sub-cent fees</div>
-            <p class="learn-back-text">Solana fees stay tiny, usually less than a penny, even when the network is busy.<br/>That&rsquo;s why companies like Visa and Shopify choose to build on Solana.<br/>You can swap, send tokens, mint NFTs, or play games without worrying about the cost.</p>
-            <span class="learn-back-hint">Tap to flip back</span>
+            <p class="learn-back-text">Solana is built so <span class="learn-accent">actions usually cost less than one cent,</span> which makes it easy to send, swap, play, or use apps without thinking about fees.</p>
           </div>
         </div>
       </button>
@@ -455,20 +424,12 @@
       <button class="learn-card" data-flip aria-label="Staking">
         <div class="learn-inner">
           <div class="learn-front">
-            <div class="learn-front-top">
-              <span class="learn-tag">Yield</span>
-              <span class="learn-hint">Tap to read <span aria-hidden="true">↻</span></span>
-            </div>
-            <div class="learn-front-main">
-              <div class="learn-metric">Staking</div>
-              <div class="learn-sub">Earn while you hold</div>
-            </div>
-            <p class="learn-blurb">Stake SOL directly in your wallet and earn rewards while helping secure the network.</p>
+            <div class="learn-metric">Staking</div>
+            <img src="stakingrewards.png" class="learn-card-img" alt="" aria-hidden="true">
+            <div class="learn-sub">Earn while you hold</div>
           </div>
           <div class="learn-back">
-            <div class="learn-back-tag">Staking</div>
-            <p class="learn-back-text">Staking SOL is like putting money in a savings account or owning a share in the network.<br/>You help secure Solana and earn rewards in return.<br/>It is one of the simplest ways to participate in the network while holding SOL.</p>
-            <span class="learn-back-hint">Tap to flip back</span>
+            <p class="learn-back-text"><span class="learn-accent">Staking SOL means</span> keeping your tokens in the network to help support Solana and <span class="learn-accent">earning rewards while you hold them.</span></p>
           </div>
         </div>
       </button>
@@ -476,20 +437,12 @@
       <button class="learn-card" data-flip aria-label="Everything — What SOL unlocks">
         <div class="learn-inner">
           <div class="learn-front">
-            <div class="learn-front-top">
-              <span class="learn-tag">Ecosystem</span>
-              <span class="learn-hint">Tap to read <span aria-hidden="true">↻</span></span>
-            </div>
-            <div class="learn-front-main">
-              <div class="learn-metric">Everything</div>
-              <div class="learn-sub">What SOL unlocks</div>
-            </div>
-            <p class="learn-blurb">Your SOL lets you use apps, payments, NFTs, games, communities, and more across Solana.</p>
+            <div class="learn-metric">Everything</div>
+            <img src="everything-raj.png" class="learn-card-img" alt="" aria-hidden="true">
+            <div class="learn-sub">What SOL unlocks</div>
           </div>
           <div class="learn-back">
-            <div class="learn-back-tag">Everything SOL unlocks</div>
-            <p class="learn-back-text">SOL lets you do almost everything on Solana.<br/>Swap tokens, send instant payments, mint NFTs, play games, launch projects, network with communities, and so much more.<br/>We&rsquo;re glad curious people like you are exploring Solana.</p>
-            <span class="learn-back-hint">Tap to flip back</span>
+            <p class="learn-back-text"><span class="learn-accent">With SOL, you can</span> use apps, send payments, collect NFTs, trade tokens, join communities, and explore almost <span class="learn-accent">everything</span> happening on Solana.</p>
           </div>
         </div>
       </button>
