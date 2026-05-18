@@ -2901,18 +2901,80 @@ a { color: inherit; text-decoration: none; }
   box-shadow: 0 14px 36px -16px rgba(147,210,232,.32);
 }
 
-/* ---------- Mobile: fixed height on learn-cards so margin-top:auto works on subtitle ---------- */
+/* ---------- Mobile ---------- */
 @media (max-width: 719px) {
-  .proof-grid { grid-auto-rows: auto; }
-  .proof-card, .proof-card--lg { min-height: 260px; height: auto; }
+  /* Step 02 proof cards: normalization block uses minmax(260px,1fr) → 1 col on phones.
+     Force 2-column compact grid so cards don't become huge full-width blocks. */
+  .proof-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: auto;
+    gap: 12px;
+  }
+  /* Fixed height so proof-inner (height:100%) and the absolute front/back faces
+     all have a definite size — same 260px as Step 01 SOL cards for consistency */
+  .proof-card, .proof-card--lg { height: 260px; }
+  /* Tighter internal padding for compact 2-col cards */
+  #why .proof-front, #why .proof-back { padding: 18px 16px; }
+  /* Slightly smaller metric so numbers fit cleanly in narrow columns */
+  #why .proof-metric { font-size: clamp(1.35rem, 5.5vw, 1.65rem); margin: 6px 0 4px; }
+
   /* Fixed height is required — height:auto breaks margin-top:auto subtitle anchoring */
   .learn-grid { grid-auto-rows: 260px; }
   .learn-card { height: 260px; }
   /* Same height for all — scale() overrides handle per-card visual size */
   .learn-card-img { height: 132px; }
-  .cando-card, .community-card { height: auto; min-height: 260px; }
-  .next-card { height: auto; min-height: 240px; }
-  .next-card-desc { -webkit-line-clamp: unset; display: block; overflow: visible; }
+  /* Step 03 cando: 2-column compact grid, fixed height so flip faces resolve correctly */
+  #cando .cando-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  #cando .cando-card { height: 260px; }
+  #cando .cando-front, #cando .cando-back { padding: 18px 16px; }
+  #cando .cando-glyph { width: 40px; height: 40px; margin-bottom: 12px; }
+  #cando .cando-title { font-size: 17px; }
+  #cando .cando-blurb { font-size: 13.5px; margin-bottom: 10px; }
+  /* Back face: tighter spacing so title + short text + button all fit in 260px */
+  #cando .cando-back-title { font-size: 15px; margin-bottom: 8px; }
+  #cando .cando-back p { font-size: 13.5px; line-height: 1.5; }
+  #cando .cando-link { margin-top: 10px; padding: 8px 12px; font-size: 13px; }
+  /* community-card uses absolute-positioned faces — needs fixed height, same as proof/cando */
+  .community-card { height: 260px; }
+
+  /* Step 04: wallet-hero is intentionally full-width; just reduce heavy mobile padding */
+  #wallet .wallet-hero { padding: 22px 20px; }
+  #wallet .wallet-hero-ribbon { margin-bottom: 16px; }
+  #wallet .wallet-hero-top { margin-bottom: 14px; }
+  #wallet .wallet-hero-logo { width: 54px; height: 54px; }
+  #wallet .wallet-hero-name { font-size: 24px; }
+  #wallet .wallet-hero-num { font-size: 42px; }
+  #wallet .wallet-hero-desc { font-size: 14px; line-height: 1.55; margin-bottom: 16px; }
+
+  /* Step 06: 2-column compact grid — typography matches Step 03 readable scale */
+  #next .next-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  #next .next-card { height: 260px; padding: 18px 16px; }
+  #next .next-card-num { width: 38px; height: 38px; font-size: 17px; margin-bottom: 10px; }
+  #next .next-card-title { font-size: 17px; line-height: 1.2; margin-bottom: 4px; }
+  #next .next-card-desc { font-size: 13.5px; line-height: 1.5; margin-bottom: 10px; -webkit-line-clamp: 3; }
+  #next .next-card-tag { top: 14px; right: 12px; font-size: 9.5px; padding: 2px 6px; }
+  #next .next-card-cta { font-size: 11px; padding-top: 10px; }
+
+  /* Step 07: 2-column compact grid — same pattern and typography as Step 03 */
+  #community .community-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  #community .community-card { height: 260px; }
+  #community .community-front, #community .community-back { padding: 18px 16px; }
+  #community .community-logo,
+  #community .community-logo-frame { width: 42px; height: 42px; margin-bottom: 12px; }
+  #community .community-name { font-size: 17px; }
+  #community .community-tag { font-size: 11px; }
+  #community .community-hint { font-size: 11px; padding-top: 10px; margin-top: 10px; }
+  #community .community-back-tag { font-size: 11px; margin-bottom: 8px; }
+  #community .community-back-text { font-size: 13.5px; line-height: 1.5; }
+  #community .community-cta { margin-top: 10px; padding: 8px 12px; font-size: 13px; }
+}
+
+/* Very narrow screens: drop back to 1 column to avoid clipping */
+@media (max-width: 359px) {
+  .proof-grid { grid-template-columns: 1fr; }
+  #cando .cando-grid { grid-template-columns: 1fr; }
+  #next .next-grid { grid-template-columns: 1fr; }
+  #community .community-grid { grid-template-columns: 1fr; }
 }
 
 
