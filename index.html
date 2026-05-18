@@ -56,16 +56,25 @@
   background-size: 28px 28px;
 }
 
-/* Ambient glow, like V3 hero */
-.gate-body::before {
+/* Ambient glows — primary (top-right frost) + secondary (bottom-left warm violet) */
+.gate-body::before,
+.gate-body::after {
   content: '';
   position: fixed;
-  top: -120px; right: -120px;
-  width: 640px; height: 640px;
-  background: radial-gradient(circle, rgba(147,210,232,.13), transparent 70%);
-  filter: blur(90px);
   pointer-events: none;
   z-index: 0;
+  filter: blur(90px);
+}
+.gate-body::before {
+  top: -120px; right: -120px;
+  width: 640px; height: 640px;
+  background: radial-gradient(circle, rgba(147,210,232,.16), transparent 70%);
+}
+.gate-body::after {
+  bottom: -160px; left: -140px;
+  width: 580px; height: 580px;
+  background: radial-gradient(circle, rgba(178,150,220,.08), transparent 70%);
+  filter: blur(110px);
 }
 
 /* Title — V3 weight/tracking */
@@ -75,43 +84,104 @@
   color: var(--on-surface);
 }
 
-/* Subtitle — V3 frost italic gradient */
+/* Subtitle — V3 frost italic gradient, with slow shimmer */
 .gate-sub {
   font-weight: 300;
-  font-size: clamp(1.1rem, 2.6vw, 1.9rem);
+  font-size: clamp(1.25rem, 2.9vw, 2.1rem);
   letter-spacing: -0.01em;
-  background: linear-gradient(90deg, #cfeef6 0%, #93d2e8 60%, #6fb9d6 100%);
+  background: linear-gradient(
+    90deg,
+    #93d2e8 0%,
+    #cfeef6 25%,
+    #ffffff 50%,
+    #cfeef6 75%,
+    #93d2e8 100%
+  );
+  background-size: 220% 100%;
+  background-position: 0% 0%;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  margin-top: .9rem;
-}
-
-/* Cards — V3 surface + border language */
-.arch-card {
-  background: var(--surface);
-  border-color: rgba(255,255,255,.10);
-  border-radius: 18px;
+  margin-top: 1rem;
 }
 @media (prefers-reduced-motion: no-preference) {
+  .gate-sub { animation: gate-sub-shimmer 8s linear infinite; }
+}
+@keyframes gate-sub-shimmer {
+  0%   { background-position: 0% 0%; }
+  100% { background-position: -220% 0%; }
+}
+
+/* ===== Cards — bigger, with persona color tints ===== */
+.card-fan { gap: 0; }
+.arch-card {
+  width: 210px;
+  height: 340px;
+  background: var(--surface);
+  border-color: rgba(255,255,255,.10);
+  border-radius: 20px;
+  transition:
+    transform .42s cubic-bezier(.22,.61,.36,1),
+    border-color .35s,
+    box-shadow .45s ease;
+}
+.arch-card + .arch-card { margin-left: -28px; }
+/* Persona tint — a soft inner radial wash, blue glow ring on hover.
+   --tint-rgb is set per card; consumed by the inner wash + hover glow. */
+.arch-card[data-persona="new-to-solana"] { --tint-rgb: 147,210,232; }   /* frost blue */
+.arch-card[data-persona="creator"]       { --tint-rgb: 196,160,232; }   /* soft violet */
+.arch-card[data-persona="builder"]       { --tint-rgb: 232,196,120; }   /* warm amber */
+.arch-card[data-persona="pro"]           { --tint-rgb: 130,222,180; }   /* cool green */
+
+.arch-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at 50% 110%,
+    rgba(var(--tint-rgb), .14) 0%,
+    rgba(var(--tint-rgb), .04) 35%,
+    transparent 65%
+  );
+  pointer-events: none;
+  opacity: .9;
+  transition: opacity .35s ease;
+  z-index: 0;
+}
+.arch-card > * { position: relative; z-index: 1; }
+
+@media (prefers-reduced-motion: no-preference) {
   .arch-card:hover {
-    border-color: rgba(147,210,232,.35);
-    box-shadow: 0 20px 56px rgba(0,0,0,.55),
-                0 0 0 1px rgba(147,210,232,.14),
-                0 0 60px -20px rgba(147,210,232,.18);
+    border-color: rgba(var(--tint-rgb), .45);
+    box-shadow:
+      0 22px 60px rgba(0,0,0,.6),
+      0 0 0 1px rgba(var(--tint-rgb), .22),
+      0 0 80px -16px rgba(var(--tint-rgb), .42);
+  }
+  .arch-card:hover::before { opacity: 1.35; }
+  .arch-card:hover .arch-media img {
+    transform: scale(1.07) translateY(-6px);
+  }
+  .arch-card:active {
+    transform: rotate(var(--r)) translateY(-10px) scale(1.015);
+    transition: transform .08s ease;
   }
 }
 
 /* Card label — V3 mono style */
 .arch-label {
   font-family: var(--font-mono);
-  font-size: 9px;
+  font-size: 10.5px;
   font-weight: 500;
-  letter-spacing: .1em;
-  color: var(--on-surface-dim);
-  padding: .7rem .5rem 1rem;
+  letter-spacing: .14em;
+  color: var(--on-surface-variant);
+  padding: .8rem .5rem 1.05rem;
+  transition: color .3s ease, letter-spacing .3s ease;
 }
-.arch-card:hover .arch-label { color: var(--frost-2); }
+.arch-card:hover .arch-label {
+  color: rgb(var(--tint-rgb));
+  letter-spacing: .18em;
+}
 
 /* Overlay — V3 background */
 #gate-overlay { background: var(--bg); }
@@ -122,10 +192,12 @@
   font-weight: 500;
   letter-spacing: .12em;
   color: var(--on-surface-dim);
+  transition: opacity .26s ease, transform .26s ease;
 }
+.overlay-text.is-leaving { opacity: 0; transform: translateY(-4px); }
+.overlay-text.is-entering { opacity: 0; transform: translateY(4px); }
 
-/* Escape link — V3 mono style */
-/* Bottom CTA block */
+/* ===== Bottom CTA — glass buttons ===== */
 .gate-cta {
   display: flex;
   flex-direction: column;
@@ -148,6 +220,41 @@
   flex-wrap: wrap;
   justify-content: center;
 }
+/* Override .placeholder-back styling, but ONLY when used inside the gate CTA. */
+.gate-cta-btns .placeholder-back {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .14em;
+  color: var(--on-surface-variant);
+  background: rgba(255,255,255,.035);
+  border: 1px solid rgba(255,255,255,.10);
+  backdrop-filter: blur(14px) saturate(1.1);
+  -webkit-backdrop-filter: blur(14px) saturate(1.1);
+  padding: .75rem 1.1rem;
+  border-radius: 999px;
+  margin-top: 0;
+  transition: border-color .25s ease, background .25s ease, color .25s ease, transform .15s ease, box-shadow .25s ease;
+}
+.gate-cta-btns .placeholder-back:hover {
+  border-color: rgba(147,210,232,.32);
+  background: rgba(147,210,232,.07);
+  color: var(--on-surface);
+  box-shadow: 0 8px 28px -12px rgba(147,210,232,.4);
+}
+.gate-cta-btns .placeholder-back:active {
+  transform: scale(.97);
+  transition: transform .08s ease;
+}
+
+/* Universal focus rings + button press feedback on the gate */
+.arch-card:focus-visible,
+.gate-cta-btns .placeholder-back:focus-visible {
+  outline: 2px solid var(--frost-2);
+  outline-offset: 4px;
+  border-radius: 20px;
+}
+.arch-card { -webkit-tap-highlight-color: transparent; }
 </style>
 </head>
 <body class="gate-body">
@@ -235,6 +342,7 @@
   var busy      = false;
 
   var isMobile = window.matchMedia('(max-width: 768px)').matches || ('ontouchstart' in window && screen.width < 1024);
+  var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   function pickCard(card){
     if(busy) return;
@@ -242,12 +350,19 @@
 
     var href    = card.dataset.href;
     var persona = card.dataset.persona;
+    localStorage.setItem('wts_persona', persona);
+    window._track('gate_path_select', { persona: persona });
+
+    /* When reduce-motion is on, skip the overlay entirely — no JS animation
+       sequence means no flicker caused by CSS killing transitions mid-sequence. */
+    if(reducedMotion){
+      window.location.href = href;
+      return;
+    }
+
     var img     = card.dataset.img;
     var video   = card.dataset.video;
     var texts   = JSON.parse(card.dataset.texts || '["Getting ready…"]');
-
-    localStorage.setItem('wts_persona', persona);
-    window._track('gate_path_select', { persona: persona });
 
     var rect = card.getBoundingClientRect();
     var cx   = rect.left + rect.width  / 2;
@@ -257,7 +372,12 @@
       oVideo.src = video;
       oVideo.style.display = 'block';
       oImg.style.display = 'none';
-      oVideo.play();
+      oVideo.play().catch(function(){
+        /* video play blocked (e.g. iOS policy) — fall back to static image */
+        oVideo.style.display = 'none';
+        oImg.src = img;
+        oImg.style.display = 'block';
+      });
     } else {
       oImg.src = img;
       oImg.style.display = 'block';
@@ -276,10 +396,16 @@
     var i = 0;
     var seq = setInterval(function(){
       i = (i + 1) % texts.length;
-      oText.style.opacity = '0';
+      oText.classList.add('is-leaving');
       setTimeout(function(){
         oText.textContent = texts[i];
-        oText.style.opacity = '1';
+        oText.classList.remove('is-leaving');
+        oText.classList.add('is-entering');
+        requestAnimationFrame(function(){
+          requestAnimationFrame(function(){
+            oText.classList.remove('is-entering');
+          });
+        });
       }, 260);
     }, 1100);
 

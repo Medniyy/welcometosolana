@@ -1,22 +1,107 @@
 (function () {
   'use strict';
 
-  /* ===== Scroll reveal ===== */
-  var revealEls = document.querySelectorAll('.seg-header, .learn-card, .proof-card, .cando-card, .next-card, .community-card, .app-card, .trust, .watch-row, .checkpoint, .wallet-hero, .wallet-alt');
-  var ro = new IntersectionObserver(function (entries) {
-    entries.forEach(function (e) {
-      if (e.isIntersecting) {
-        // stagger
-        var siblings = e.target.parentElement ? Array.prototype.indexOf.call(e.target.parentElement.children, e.target) : 0;
-        e.target.style.transitionDelay = Math.min(siblings, 6) * 60 + 'ms';
-        e.target.classList.add('is-visible');
-        ro.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-  revealEls.forEach(function (el) { ro.observe(el); });
+  /* When the user has requested reduced motion, skip ALL JS-driven reveal
+     and animation logic entirely. CSS already sets durations to 0.01ms, but
+     if JS also fires classList changes + stagger timers they fight each other
+     and produce a rapid flicker on macOS/iOS. Just mark everything visible
+     immediately and bail out before any IntersectionObserver is created. */
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll(
+      '.reveal, .learn-card, .proof-card, .cando-card, .community-card, ' +
+      '.next-card, .app-card, .seg-header, .stepper-step'
+    ).forEach(function (el) { el.classList.add('is-visible'); });
+    return;
+  }
 
-  /* ===== Stepper / progress rail ===== */
+  /* ===== Scroll reveal — typed, staggered, fast-scroll-aware =====
+     Replaces the old fade-in-everything pass. Each element gets a reveal
+     variant based on what it is (kicker / title / card / image), and grids
+     stagger their children. Elements that are already 60%+ on-screen on
+     first observation (e.g. someone deep-linked and the section is in view)
+     skip the animation entirely. */
+
+  /* Tag elements with reveal variant + child index for stagger.
+     Done once on init so the IO callback can stay light. */
+  function tagReveal(el, variant) {
+    el.classList.add('reveal', 'reveal--' + variant);
+  }
+
+  /* Section headers: kicker slides in from left, title scales in, lead fades up.
+     Tag each child of .seg-header individually so they can stagger. */
+  document.querySelectorAll('.seg-header').forEach(function (header) {
+    var kicker = header.querySelector('.seg-label');
+    var title  = header.querySelector('.seg-title');
+    var lead   = header.querySelector('.seg-lead');
+    if (kicker) tagReveal(kicker, 'left');
+    if (title)  { tagReveal(title, 'scale'); title.style.transitionDelay = '90ms'; }
+    if (lead)   { tagReveal(lead,  'up');    lead.style.transitionDelay  = '180ms'; }
+  });
+
+  /* Hero parts — kicker, title, desc, actions, help, scroll cue. */
+  var heroLeft = document.querySelector('.hero-left');
+  if (heroLeft) {
+    var heroKicker = heroLeft.querySelector('.hero-kicker');
+    var heroTitle  = heroLeft.querySelector('.hero-title');
+    var heroDesc   = heroLeft.querySelector('.hero-desc');
+    var heroActions = heroLeft.querySelector('.hero-actions');
+    var heroHelp   = heroLeft.querySelector('.hero-help');
+    if (heroKicker)  { tagReveal(heroKicker, 'left'); }
+    if (heroTitle)   { tagReveal(heroTitle, 'scale');  heroTitle.style.transitionDelay  = '120ms'; }
+    if (heroDesc)    { tagReveal(heroDesc, 'up');      heroDesc.style.transitionDelay   = '220ms'; }
+    if (heroActions) { tagReveal(heroActions, 'up');   heroActions.style.transitionDelay= '320ms'; }
+    if (heroHelp)    { tagReveal(heroHelp, 'up');      heroHelp.style.transitionDelay   = '420ms'; }
+  }
+  /* Hero portrait: fade only (no translate — keeps it grounded). Scale-in handled by CSS keyframe. */
+  var heroPortrait = document.querySelector('.hero-portrait-frame');
+  if (heroPortrait) tagReveal(heroPortrait, 'fade');
+
+  /* Grid cards — translateY + scale-in. Stagger across siblings. */
+  function tagGridChildren(selector, variant) {
+    document.querySelectorAll(selector).forEach(function (grid) {
+      Array.prototype.slice.call(grid.children).forEach(function (child, i) {
+        tagReveal(child, variant);
+        child.style.transitionDelay = Math.min(i, 6) * 75 + 'ms';
+      });
+    });
+  }
+  tagGridChildren('.learn-grid',     'card');
+  tagGridChildren('.proof-grid',     'card');
+  tagGridChildren('.cando-grid',     'card');
+  tagGridChildren('.next-grid',      'card');
+  tagGridChildren('.community-grid', 'card');
+  tagGridChildren('.apps-grid',      'card');
+
+  /* Other one-off blocks */
+  document.querySelectorAll('.trust, .watch-row, .wallet-hero, .checkpoint, .closing, .apps-more, .route-summary-card').forEach(function (el) {
+    tagReveal(el, 'up');
+  });
+  /* Wallet alt list: stagger each item */
+  document.querySelectorAll('.wallet-others .wallet-alt').forEach(function (el, i) {
+    tagReveal(el, 'card');
+    el.style.transitionDelay = (60 + i * 75) + 'ms';
+  });
+
+  /* Observer — apply is-visible, with fast-scroll skip:
+     if element is already 60%+ in viewport when first observed, mark
+     visible immediately without animation. */
+  var revealEls = document.querySelectorAll('.reveal');
+  var io = new IntersectionObserver(function (entries, obs) {
+    entries.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      if (e.intersectionRatio >= 0.6) {
+        /* Already deeply on-screen — skip animation. */
+        e.target.classList.add('is-visible', 'reveal-no-anim');
+      } else {
+        e.target.classList.add('is-visible');
+      }
+      obs.unobserve(e.target);
+    });
+  }, { threshold: [0.08, 0.6], rootMargin: '0px 0px -40px 0px' });
+  revealEls.forEach(function (el) { io.observe(el); });
+
+  /* ===== Stepper / progress rail =====
+     Active state + single-shot pulse animation when the active step changes. */
   var stepperLinks = document.querySelectorAll('.stepper-list a[data-step]');
   var railFill = document.getElementById('rail-fill');
   var sections = document.querySelectorAll('section[data-step]');
@@ -28,8 +113,17 @@
     currentStep = step;
     stepperLinks.forEach(function (link) {
       var s = parseInt(link.dataset.step, 10);
-      link.classList.toggle('is-active', s === step);
+      var wasActive = link.classList.contains('is-active');
+      var nowActive = s === step;
+      link.classList.toggle('is-active', nowActive);
       link.classList.toggle('is-done', s < step);
+      /* Single-shot pulse: re-trigger keyframe by toggling the class. */
+      if (nowActive && !wasActive) {
+        link.classList.remove('step-pulse');
+        // force reflow so the next add re-runs the animation
+        void link.offsetWidth;
+        link.classList.add('step-pulse');
+      }
     });
     if (railFill) {
       var pct = step === 0 ? 0 : ((step - 0.5) / total) * 100;

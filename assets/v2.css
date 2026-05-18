@@ -64,7 +64,7 @@ button{font-family:inherit;cursor:pointer}
 #gate-overlay{position:fixed;inset:0;background:var(--bg);z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2rem;clip-path:circle(0% at 50% 50%);transition:clip-path .65s cubic-bezier(.22,.61,.36,1);pointer-events:none}
 #gate-overlay.is-active{clip-path:circle(150% at var(--cx,50%) var(--cy,50%));pointer-events:all}
 .overlay-char{width:clamp(130px,20vw,200px);height:clamp(130px,20vw,200px);display:flex;align-items:center;justify-content:center;animation:overlay-float 3s ease-in-out infinite}
-.overlay-char img{width:100%;height:100%;object-fit:contain}
+.overlay-char img{width:100%;height:100%;object-fit:contain;mix-blend-mode:screen}
 @keyframes overlay-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 .overlay-text{font-family:var(--font-body);font-size:11px;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--on-surface-dim);text-align:center;min-height:1.5em;transition:opacity .35s}
 .overlay-dots{display:flex;gap:.4rem;align-items:center}
@@ -319,8 +319,10 @@ button{font-family:inherit;cursor:pointer}
 .placeholder-title{font-family:var(--font-display);font-weight:300;font-size:clamp(2rem,5vw,3.5rem);line-height:1;letter-spacing:-0.025em;color:var(--on-surface)}
 .placeholder-title em{font-style:italic;font-weight:400;color:var(--premium)}
 .placeholder-sub{font-size:15px;color:var(--on-surface-variant);max-width:38ch;line-height:1.6}
-.placeholder-back{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--font-body);font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--on-surface-dim);text-decoration:none;border:1px solid var(--outline);padding:.65rem 1.25rem;border-radius:4px;margin-top:.5rem;transition:border-color .25s,color .25s}
+.placeholder-back{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--font-body);font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--on-surface-dim);text-decoration:none;border:1px solid var(--outline);padding:.65rem 1.25rem;border-radius:4px;margin-top:.5rem;transition:border-color .25s,color .25s,transform .15s ease,background .25s ease}
 .placeholder-back:hover{border-color:var(--premium-border);color:var(--on-surface-variant)}
+.placeholder-back:active{transform:scale(.97);transition:transform .08s ease}
+.placeholder-back:focus-visible{outline:2px solid var(--frost-2);outline-offset:3px}
 
 /* ==================== EXPANDABLE CARDS ==================== */
 .expand-card{cursor:pointer;user-select:none}
