@@ -701,18 +701,24 @@
 
   async function toggleFullscreen() {
     try {
-      if (!document.fullscreenElement && !document.webkitFullscreenElement) {
-        const target = video; // use video element so mobile gets proper native FS
-        const reqFS = target.requestFullscreen || target.webkitRequestFullscreen || target.mozRequestFullScreen;
-        await reqFS.call(target);
-        // Lock to landscape on mobile
+      const isFS = document.fullscreenElement || document.webkitFullscreenElement || video.webkitDisplayingFullscreen;
+      if (!isFS) {
+        const reqFS = video.requestFullscreen || video.webkitRequestFullscreen || video.webkitEnterFullscreen || video.mozRequestFullScreen;
+        if (reqFS) {
+          const p = reqFS.call(video);
+          if (p && p.then) await p;
+        }
         if (screen.orientation && screen.orientation.lock) {
           try { await screen.orientation.lock('landscape'); } catch(e) {}
         }
         fsBtn.querySelector('svg').innerHTML = FS_SHRINK;
       } else {
-        const exitFS = document.exitFullscreen || document.webkitExitFullscreen || document.mozCancelFullScreen;
-        await exitFS.call(document);
+        if (video.webkitDisplayingFullscreen && video.webkitExitFullscreen) {
+          video.webkitExitFullscreen();
+        } else {
+          const exitFS = document.exitFullscreen || document.webkitExitFullscreen || document.mozCancelFullScreen;
+          if (exitFS) { const p = exitFS.call(document); if (p && p.then) await p; }
+        }
         if (screen.orientation && screen.orientation.unlock) {
           try { screen.orientation.unlock(); } catch(e) {}
         }
@@ -724,6 +730,9 @@
   fsBtn.addEventListener('click', toggleFullscreen);
   document.addEventListener('fullscreenchange',       () => { if (!document.fullscreenElement)       fsBtn.querySelector('svg').innerHTML = FS_EXPAND; });
   document.addEventListener('webkitfullscreenchange', () => { if (!document.webkitFullscreenElement) fsBtn.querySelector('svg').innerHTML = FS_EXPAND; });
+  // iOS Safari fires these on the video element, not document
+  video.addEventListener('webkitbeginfullscreen', () => { fsBtn.querySelector('svg').innerHTML = FS_SHRINK; });
+  video.addEventListener('webkitendfullscreen',   () => { fsBtn.querySelector('svg').innerHTML = FS_EXPAND; });
 
   // ── Keyboard shortcuts ──
   document.addEventListener('keydown', e => {
