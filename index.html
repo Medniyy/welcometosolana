@@ -22,7 +22,7 @@
 <script>(function(){var s=document.createElement('script');s.defer=true;s.src='https://umami-service-production-3ded.up.railway.app/script.js';s.dataset.websiteId='faf37f2f-424a-4061-8416-2c4b5193a4b5';document.head.appendChild(s);})();</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&family=JetBrains+Mono:wght@400;500;600&display=swap"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&family=JetBrains+Mono:wght@400;500&display=swap"/>
 <link rel="stylesheet" href="assets/v2.css"/>
 <style>
 /* ===== Gate — V3 design alignment =====
@@ -255,6 +255,28 @@
   border-radius: 20px;
 }
 .arch-card { -webkit-tap-highlight-color: transparent; }
+
+/* ===== Mobile — whole gate fits on one screen ===== */
+@media (max-width: 600px) {
+  .gate-body {
+    gap: clamp(1rem, 3svh, 1.75rem);
+    padding: max(1.25rem, env(safe-area-inset-top)) 1rem calc(1rem + env(safe-area-inset-bottom));
+  }
+  .gate-title { font-size: clamp(2.2rem, 11vw, 2.9rem); }
+  .gate-sub { font-size: 1.1rem; margin-top: .6rem; }
+  .card-fan { gap: .625rem; width: 100%; max-width: 380px; }
+  .arch-card {
+    width: 100%;
+    height: clamp(148px, 23svh, 220px);
+    border-radius: 16px;
+  }
+  .arch-card + .arch-card { margin-left: 0; }
+  .arch-label { font-size: 10px; padding: .5rem .4rem .75rem; }
+  .gate-cta { gap: .7rem; }
+  .gate-cta-text { font-size: 12px; }
+  .gate-cta-btns { gap: .5rem; }
+  .gate-cta-btns .placeholder-back { padding: .6rem .95rem; font-size: 10px; letter-spacing: .12em; }
+}
 </style>
 </head>
 <body class="gate-body">
@@ -318,6 +340,7 @@
   <div class="gate-cta-btns">
     <a href="ecosystem-new.html" class="placeholder-back">Explore the ecosystem →</a>
     <a href="https://t.me/+3prPanTSreIwMzMy" target="_blank" rel="noopener" class="placeholder-back" onclick="window._track('click_telegram',{from:'gate'})">Join Telegram ↗</a>
+    <a href="pitch.html" class="placeholder-back" onclick="window._track('click_pitch',{from:'gate'})">Why we built this →</a>
   </div>
 </footer>
 
