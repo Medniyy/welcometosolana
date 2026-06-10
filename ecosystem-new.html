@@ -3,19 +3,19 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Solana Ecosystem Directory — 86+ projects across 25 categories</title>
-<meta name="description" content="Explore 86+ Solana projects across 25 categories. Filter by persona — newcomer, creator, builder, or pro. Search, discover, and find the tools that match your path."/>
+<title>Solana Ecosystem Directory — 88 projects across 25 categories</title>
+<meta name="description" content="Explore 88 Solana projects across 25 categories — wallets, communities, DeFi, developers, and more. Search, discover, and find the tools that match your path."/>
 <link rel="canonical" href="https://welcometosolana.xyz/ecosystem-new.html"/>
 <meta property="og:type" content="website"/>
 <meta property="og:url" content="https://welcometosolana.xyz/ecosystem-new.html"/>
-<meta property="og:title" content="Solana Ecosystem Directory — 86+ projects across 25 categories"/>
-<meta property="og:description" content="Explore 86+ Solana projects across 25 categories. Filter by persona and discover the tools that match your path."/>
+<meta property="og:title" content="Solana Ecosystem Directory — 88 projects across 25 categories"/>
+<meta property="og:description" content="Explore 88 Solana projects across 25 categories and discover the tools that match your path."/>
 <meta property="og:image" content="https://welcometosolana.xyz/og-image-v3.png"/>
 <meta property="og:image:width" content="1200"/>
 <meta property="og:image:height" content="630"/>
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:title" content="Solana Ecosystem Directory — 86+ projects"/>
-<meta name="twitter:description" content="Explore 86+ Solana projects across 25 categories."/>
+<meta name="twitter:title" content="Solana Ecosystem Directory — 88 projects"/>
+<meta name="twitter:description" content="Explore 88 Solana projects across 25 categories."/>
 <meta name="twitter:image" content="https://welcometosolana.xyz/og-image-v3.png"/>
 <link rel="icon" type="image/svg+xml" href="favicon.svg"/>
 <script>window._track=function(n,d){try{if(window.umami&&typeof window.umami.track==='function')window.umami.track(n,d||{})}catch(e){}}</script>
@@ -80,30 +80,6 @@
   max-width: 380px;
 }
 
-/* Right-side image slot — user provides image */
-.eco-hero-visual {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 280px;
-  border-radius: 20px;
-  overflow: hidden;
-  position: relative;
-}
-.eco-hero-visual img {
-  width: auto;
-  height: auto;
-  max-width: 50%;
-  max-height: 220px;
-  object-fit: contain;
-  display: block;
-}
-/* placeholder state — shown when no img src */
-.eco-hero-visual:not(:has(img[src])) {
-  background: var(--surface, #1a1a1a);
-  border: 1px dashed rgba(147,210,232,.2);
-}
-
 /* ---- Toolbar (search + persona filters) ---- */
 .eco-toolbar {
   max-width: 1280px;
@@ -145,36 +121,6 @@
 }
 .eco-search::placeholder { color: var(--on-surface-dim, #737373); }
 .eco-search:focus { border-color: rgba(147,210,232,.4); }
-
-.eco-persona-filters {
-  display: flex;
-  gap: 6px;
-  flex-wrap: wrap;
-  margin-bottom: 0;
-}
-.eco-persona-btn {
-  font-family: 'Geist', sans-serif;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: .16em;
-  text-transform: uppercase;
-  padding: .5rem 1rem;
-  border: 1px solid var(--outline, rgba(64,64,64,.55));
-  background: transparent;
-  color: var(--on-surface-dim, #737373);
-  cursor: pointer;
-  border-radius: 9999px;
-  transition: border-color .2s, color .2s, background .2s;
-}
-.eco-persona-btn:hover {
-  border-color: rgba(147,210,232,.3);
-  color: var(--on-surface-variant, #979da2);
-}
-.eco-persona-btn.is-active {
-  background: rgba(147,210,232,.1);
-  border-color: rgba(147,210,232,.4);
-  color: #bfe8f2;
-}
 
 /* ---- Category rail ---- */
 .eco-cat-rail-wrap {
@@ -237,21 +183,23 @@
 }
 .eco-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 12px;
 }
-@media (max-width: 480px) {
-  .eco-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+@media (max-width: 540px) {
+  .eco-grid { grid-template-columns: 1fr; gap: 10px; }
 }
 
-/* ---- Card ---- */
+/* ---- Card — compact row: logo inline with name + category, 2-line desc ---- */
 .eco-card {
+  position: relative;
   display: flex;
   flex-direction: column;
+  gap: 10px;
+  padding: 14px 16px;
   background: var(--surface, #1a1a1a);
   border: 1px solid var(--outline, rgba(64,64,64,.55));
-  border-radius: 14px;
-  overflow: hidden;
+  border-radius: 12px;
   text-decoration: none;
   color: inherit;
   opacity: 0;
@@ -264,41 +212,53 @@
   box-shadow: 0 8px 28px rgba(0,0,0,.4), 0 0 0 1px rgba(147,210,232,.1);
 }
 
-/* Logo face — compact */
-.eco-card-face {
-  width: 100%;
-  height: 72px;
-  background: #111;
+/* Head row: logo · name + category */
+.eco-card-head {
   display: flex;
   align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  border-bottom: 1px solid var(--outline, rgba(64,64,64,.4));
-  position: relative;
-  transition: background .22s;
-}
-.eco-card:hover .eco-card-face {
-  background: #141414;
+  gap: 11px;
+  min-width: 0;
 }
 .eco-card-logo {
-  width: 40px;
-  height: 40px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
   object-fit: cover;
   background: #1e1e1e;
   flex-shrink: 0;
   transition: transform .22s ease;
 }
-.eco-card:hover .eco-card-logo {
-  transform: scale(1.06);
-}
+.eco-card:hover .eco-card-logo { transform: scale(1.06); }
 /* Solflare Empire logo has yellow edge artifacts — scale slightly to clip them */
 .eco-card-logo[src="logos/solflareempire.jpg"] { transform: scale(1.10); }
 .eco-card:hover .eco-card-logo[src="logos/solflareempire.jpg"] { transform: scale(1.16); }
+
+.eco-card-id { min-width: 0; }
+.eco-card-name {
+  font-family: 'Geist', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--on-surface, #e8e8e8);
+  line-height: 1.25;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.eco-tag-cat {
+  display: inline-block;
+  font-family: 'Geist', sans-serif;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--on-surface-dim, #737373);
+  margin-top: 3px;
+}
+
 .eco-card-featured-dot {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 12px;
+  right: 12px;
   width: 6px;
   height: 6px;
   border-radius: 50%;
@@ -306,57 +266,15 @@
   box-shadow: 0 0 6px rgba(147,210,232,.6);
 }
 
-/* Card body */
-.eco-card-body {
-  padding: 14px 16px 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  flex: 1;
-}
-
-.eco-card-name {
-  font-family: 'Geist', sans-serif;
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--on-surface, #e8e8e8);
-  line-height: 1.3;
-}
-
 .eco-card-desc {
-  font-size: 13px !important;
-  line-height: 1.6 !important;
+  font-size: 12.5px !important;
+  line-height: 1.5 !important;
   color: var(--on-surface-variant, #979da2) !important;
-  margin-top: 4px;
-}
-
-/* Tag pills row */
-.eco-card-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
-  align-items: center;
-}
-.eco-tag {
-  display: inline-block;
-  font-family: 'Geist', sans-serif;
-  font-size: 9px;
-  font-weight: 600;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  padding: 2px 7px;
-  border-radius: 4px;
-  line-height: 1.6;
-}
-.eco-tag-cat {
-  background: rgba(255,255,255,.04);
-  color: var(--on-surface-dim, #737373);
-  border: 1px solid rgba(255,255,255,.07);
-}
-.eco-tag-persona {
-  background: rgba(147,210,232,.07);
-  color: rgba(147,210,232,.75);
-  border: 1px solid rgba(147,210,232,.13);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 /* ---- Empty state ---- */
@@ -402,6 +320,22 @@
 /* Match "Welcome to Solana" mark to new-to-solana.html: 17px + frost-2 italic em */
 .path-nav-logo { font-size: 17px; }
 .path-nav-logo em { color: var(--frost-2, #93d2e8); }
+
+/* ---- Mobile: category rail becomes one scrollable row ---- */
+@media (max-width: 600px) {
+  .eco-cat-rail-wrap { padding-left: 0; padding-right: 0; }
+  .eco-category-rail {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding: 0 20px 4px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .eco-category-rail::-webkit-scrollbar { display: none; }
+  .eco-cat-btn { flex-shrink: 0; }
+  .eco-toolbar { gap: 12px; }
+  .eco-search-wrap { max-width: none; }
+}
 </style>
 </head>
 <body>
@@ -420,7 +354,7 @@
     <div class="eco-hero-text">
       <p class="eco-hero-kicker">Ecosystem Directory</p>
       <h1 class="eco-hero-title">Explore <em>everything.</em></h1>
-      <p class="eco-hero-lead" id="eco-subtitle">25 categories. 86+ projects. Updated 2026.</p>
+      <p class="eco-hero-lead" id="eco-subtitle">25 categories. 88 projects. Updated 2026.</p>
     </div>
 
   </div>
@@ -445,7 +379,10 @@
   <div class="eco-results-meta" id="eco-count"></div>
   <div class="eco-grid-wrap">
     <div class="eco-grid" id="eco-grid">
-      <div class="eco-empty" id="eco-empty">No projects match your search.</div>
+      <div class="eco-empty" id="eco-empty">
+        No projects match your search.<br/>
+        <button class="eco-cat-btn" id="eco-reset" style="margin-top:1rem">Reset filters</button>
+      </div>
     </div>
   </div>
 
@@ -467,6 +404,7 @@
   <div class="path-footer-inner">
     <div class="path-footer-links">
       <a href="index.html" class="path-footer-link">Choose a path</a>
+      <a href="pitch.html" class="path-footer-link">Why we built this</a>
       <a href="https://t.me/+3prPanTSreIwMzMy" target="_blank" rel="noopener" class="path-footer-link">Join Telegram</a>
       <a href="https://x.com/athcamera" target="_blank" rel="noopener" class="path-footer-link">@athcamera</a>
     </div>
@@ -482,7 +420,11 @@
   var state = { cat: 'communities', query: '' };
   var allProjects = [], allCats = [];
 
-  var PERSONA_LABELS = { new: 'Newcomer', builder: 'Builder', creator: 'Creator', pro: 'Pro' };
+  function esc(s){
+    return String(s == null ? '' : s)
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+      .replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+  }
 
   fetch(DATA_URL)
     .then(function(r){ return r.json(); })
@@ -490,13 +432,14 @@
       allCats = data.categories;
       allProjects = data.projects;
       buildCatRail();
+      updateSubtitle();
       render();
     })
     .catch(function(e){ console.error('Ecosystem data failed to load', e); });
 
   function buildCatRail(){
     var rail = document.getElementById('eco-cats');
-    rail.innerHTML = '<button class="eco-cat-btn" data-cat="all">All categories</button>';
+    rail.innerHTML = '<button class="eco-cat-btn' + (state.cat === 'all' ? ' is-active' : '') + '" data-cat="all">All categories</button>';
     allCats.forEach(function(cat){
       var btn = document.createElement('button');
       btn.className = 'eco-cat-btn' + (cat.id === state.cat ? ' is-active' : '');
@@ -519,7 +462,7 @@
     var sub = document.getElementById('eco-subtitle');
     sub.textContent = state.query
       ? '"' + state.query + '"'
-      : '25 categories. 86+ projects. Updated 2026.';
+      : allCats.length + ' categories. ' + allProjects.length + ' projects. Updated 2026.';
   }
 
   function matches(p){
@@ -528,9 +471,40 @@
       var q = state.query.toLowerCase();
       if(p.name.toLowerCase().indexOf(q) === -1 &&
          p.description.toLowerCase().indexOf(q) === -1 &&
-         p.category.toLowerCase().indexOf(q) === -1) return false;
+         p.category.toLowerCase().indexOf(q) === -1 &&
+         catLabel(p.category).toLowerCase().indexOf(q) === -1) return false;
     }
     return true;
+  }
+
+  /* Display order. Within a category: featured first, then data order.
+     In the "all" view: round-robin one project per category (in rail order)
+     so the first rows show the breadth of the ecosystem instead of a
+     single category dominating — Solflare (first featured wallet) stays
+     pinned at position one. */
+  function displayOrder(list){
+    var rank = {};
+    allCats.forEach(function(c, i){ rank[c.id] = i; });
+    var byCat = {};
+    list.forEach(function(p){ (byCat[p.category] = byCat[p.category] || []).push(p); });
+    Object.keys(byCat).forEach(function(k){
+      byCat[k].sort(function(a, b){ return (b.featured ? 1 : 0) - (a.featured ? 1 : 0); });
+    });
+    var catIds = Object.keys(byCat).sort(function(a, b){
+      var ra = rank[a] !== undefined ? rank[a] : 99;
+      var rb = rank[b] !== undefined ? rank[b] : 99;
+      return ra - rb;
+    });
+    if(state.cat !== 'all' || catIds.length <= 1) return catIds.map(function(k){ return byCat[k]; }).reduce(function(a, b){ return a.concat(b); }, []);
+    var out = [], round = 0, added = true;
+    while(added){
+      added = false;
+      catIds.forEach(function(k){
+        if(byCat[k][round]){ out.push(byCat[k][round]); added = true; }
+      });
+      round++;
+    }
+    return out;
   }
 
   function catLabel(catId){
@@ -542,7 +516,7 @@
     var grid  = document.getElementById('eco-grid');
     var empty = document.getElementById('eco-empty');
     var count = document.getElementById('eco-count');
-    var visible = allProjects.filter(matches);
+    var visible = displayOrder(allProjects.filter(matches));
 
     count.textContent = visible.length + ' project' + (visible.length !== 1 ? 's' : '');
     // Remove all cards and reset any flipped state
@@ -561,24 +535,17 @@
       card.rel = 'noopener';
       card.className = 'eco-card';
 
-      var personaTags = p.personas.map(function(persona){
-        return '<span class="eco-tag eco-tag-persona">' + (PERSONA_LABELS[persona] || persona) + '</span>';
-      }).join('');
-
       card.innerHTML =
-        '<div class="eco-card-face">' +
-          (p.featured ? '<span class="eco-card-featured-dot"></span>' : '') +
-          '<img class="eco-card-logo" src="' + p.logo + '" alt="' + p.name + '" loading="lazy"' +
+        (p.featured ? '<span class="eco-card-featured-dot"></span>' : '') +
+        '<div class="eco-card-head">' +
+          '<img class="eco-card-logo" src="' + esc(p.logo) + '" alt="' + esc(p.name) + '" loading="lazy" decoding="async"' +
           ' onerror="this.style.opacity=\'0\'">' +
-        '</div>' +
-        '<div class="eco-card-body">' +
-          '<div class="eco-card-name">' + p.name + '</div>' +
-          '<div class="eco-card-tags">' +
-            '<span class="eco-tag eco-tag-cat">' + catLabel(p.category) + '</span>' +
-            personaTags +
+          '<div class="eco-card-id">' +
+            '<div class="eco-card-name">' + esc(p.name) + '</div>' +
+            '<span class="eco-tag-cat">' + esc(catLabel(p.category)) + '</span>' +
           '</div>' +
-          '<div class="eco-card-desc">' + p.description + '</div>' +
-        '</div>';
+        '</div>' +
+        '<div class="eco-card-desc">' + esc(p.description) + '</div>';
 
       card.addEventListener('click', function(){
         window._track('eco_project_click', { project: p.name, category: p.category });
@@ -590,6 +557,17 @@
       setTimeout(function(){ card.classList.add('is-visible'); }, delay);
     });
   }
+
+  // Reset filters (empty state)
+  document.getElementById('eco-reset').addEventListener('click', function(){
+    state.cat = 'all'; state.query = '';
+    document.getElementById('eco-search').value = '';
+    document.querySelectorAll('#eco-cats .eco-cat-btn').forEach(function(b){
+      b.classList.toggle('is-active', b.dataset.cat === 'all');
+    });
+    updateSubtitle();
+    render();
+  });
 
   // Search
   var searchTimer;
