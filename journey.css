@@ -2902,6 +2902,18 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* ---------- Mobile ---------- */
+/* Desktop grid balance — deterministic column counts so card counts divide
+   evenly (4 next/community cards, 5 app cards) instead of leaving orphan rows
+   from auto-fit. */
+@media (min-width: 720px) {
+  .next-grid, .community-grid { grid-template-columns: repeat(2, 1fr); }
+  .apps-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (min-width: 1100px) {
+  .next-grid, .community-grid { grid-template-columns: repeat(4, 1fr); }
+  .apps-grid { grid-template-columns: repeat(5, 1fr); }
+}
+
 @media (max-width: 719px) {
   /* Step 02 proof cards: normalization block uses minmax(260px,1fr) → 1 col on phones.
      Force 2-column compact grid so cards don't become huge full-width blocks. */
@@ -2967,6 +2979,21 @@ a { color: inherit; text-decoration: none; }
   #community .community-back-tag { font-size: 11px; margin-bottom: 8px; }
   #community .community-back-text { font-size: 13.5px; line-height: 1.5; }
   #community .community-cta { margin-top: 10px; padding: 8px 12px; font-size: 13px; }
+
+  /* Step 08: 2-column compact grid — same pattern and typography as Steps 02–07.
+     No fixed height: app-cards are plain links (no flip faces), so natural
+     height keeps them compact instead of leaving dead space. */
+  #apps .apps-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  #apps .app-card { padding: 18px 16px; }
+  /* Odd card count: last card spans both columns instead of sitting orphaned */
+  #apps .app-card:last-child:nth-child(odd) { grid-column: span 2; }
+  #apps .app-logo { width: 40px; height: 40px; border-radius: 10px; margin-bottom: 12px; }
+  #apps .app-name { font-size: 17px; }
+  #apps .app-desc { font-size: 13.5px; line-height: 1.5; margin-bottom: 10px; }
+  #apps .app-tag { font-size: 9.5px; padding: 3px 6px; }
+  #apps .app-arrow { top: 14px; right: 12px; font-size: 14px; }
+  #apps .apps-more { padding: 14px 18px; }
+  #apps .apps-more-text { font-size: 13px; }
 }
 
 /* Very narrow screens: drop back to 1 column to avoid clipping */
@@ -2975,6 +3002,7 @@ a { color: inherit; text-decoration: none; }
   #cando .cando-grid { grid-template-columns: 1fr; }
   #next .next-grid { grid-template-columns: 1fr; }
   #community .community-grid { grid-template-columns: 1fr; }
+  #apps .apps-grid { grid-template-columns: 1fr; }
 }
 
 

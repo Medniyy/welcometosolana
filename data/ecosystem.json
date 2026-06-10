@@ -49,7 +49,7 @@
     {"id":"pudgy","name":"Pudgy Penguins","category":"communities","description":"The internet's favorite penguins.","url":"https://x.com/pudgypenguins","logo":"logos/pudgypengguins.jpg","featured":false,"personas":["creator"]},
     {"id":"moonbirds","name":"Moonbirds","category":"communities","description":"It's super birbish.","url":"https://x.com/moonbirds","logo":"logos/moonbirdds.jpg","featured":false,"personas":["creator"]},
     {"id":"radiants","name":"Radiants DAO","category":"communities","description":"An on-chain cadre of talented storytellers, creators, developers, & artists. Hosts of the Solana Mobile Hackathon & the Bonkathon.","url":"https://x.com/RadiantDAO","logo":"logos/radiants.jpg","featured":false,"personas":["creator"]},
-    {"id":"island-dao","name":"Island DAO","category":"communities","description":"DAO, network state, events. Stay tuned for 2026 events lineup.","url":"#","logo":"logos/island dao.jpg","featured":false,"personas":["creator"]},
+    {"id":"island-dao","name":"IslandDAO","category":"communities","description":"DAO, network state, events. Stay tuned for 2026 events lineup.","url":"https://x.com/islanddao","logo":"logos/islanddaonew.jpg","featured":false,"personas":["creator"]},
     {"id":"lp-army","name":"LP Army","category":"communities","description":"A community of liquidity providers on MeteoraAG driving a world of market making, powered by retail.","url":"https://x.com/met_lparmy","logo":"logos/lparmy.jpg","featured":false,"personas":["pro"]},
     {"id":"la-familia","name":"La Familia","category":"communities","description":"Boosting the solana ecosystem in Spain 🇪🇸 We are the Family! 🎩","url":"https://x.com/LaFamilia_so","logo":"logos/lafamilia.jpg","featured":false,"personas":["new","creator"]},
 
