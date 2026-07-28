@@ -1,596 +1,215 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Solana Ecosystem Directory — 88 projects across 25 categories</title>
-<meta name="description" content="Explore 88 Solana projects across 25 categories — wallets, communities, DeFi, developers, and more. Search, discover, and find the tools that match your path."/>
-<link rel="canonical" href="https://welcometosolana.xyz/ecosystem-new.html"/>
-<meta property="og:type" content="website"/>
-<meta property="og:url" content="https://welcometosolana.xyz/ecosystem-new.html"/>
-<meta property="og:title" content="Solana Ecosystem Directory — 88 projects across 25 categories"/>
-<meta property="og:description" content="Explore 88 Solana projects across 25 categories and discover the tools that match your path."/>
-<meta property="og:image" content="https://welcometosolana.xyz/og-image-v3.png"/>
-<meta property="og:image:width" content="1200"/>
-<meta property="og:image:height" content="630"/>
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:title" content="Solana Ecosystem Directory — 88 projects"/>
-<meta name="twitter:description" content="Explore 88 Solana projects across 25 categories."/>
-<meta name="twitter:image" content="https://welcometosolana.xyz/og-image-v3.png"/>
-<link rel="icon" type="image/svg+xml" href="favicon.svg"/>
-<script>window._track=function(n,d){try{if(window.umami&&typeof window.umami.track==='function')window.umami.track(n,d||{})}catch(e){}}</script>
-<script>(function(){var s=document.createElement('script');s.defer=true;s.src='https://umami-service-production-3ded.up.railway.app/script.js';s.dataset.websiteId='faf37f2f-424a-4061-8416-2c4b5193a4b5';document.head.appendChild(s);})();</script>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&display=swap"/>
-<link rel="stylesheet" href="assets/v2.css"/>
-
-<style>
-/* ============================================================
-   ECOSYSTEM PAGE — redesigned card system
-   Inspired by internetgems-style grid: large logo face,
-   name, mini category + persona tag pills below.
-   Keeps WelcomeToSolana dark branding throughout.
-   ============================================================ */
-
-/* ---- Page layout ---- */
-.eco-page {
-  min-height: 100vh;
-  padding-top: 64px; /* nav height */
-}
-
-/* ---- Hero ---- */
-.eco-hero {
-  padding: clamp(48px, 8vw, 96px) clamp(20px, 4vw, 64px) 0;
-  max-width: 1280px;
-  margin: 0 auto;
-}
-
-.eco-hero-text {}
-
-.eco-hero-kicker {
-  font-family: 'Geist', sans-serif;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: .18em;
-  text-transform: uppercase;
-  color: var(--frost-2, #93d2e8);
-  margin-bottom: 14px;
-}
-
-.eco-hero-title {
-  font-family: 'Source Serif 4', serif;
-  font-size: clamp(2.8rem, 6vw, 5rem);
-  font-weight: 700;
-  line-height: .95;
-  letter-spacing: -0.03em;
-  color: var(--on-surface, #e8e8e8);
-  margin-bottom: 18px;
-}
-.eco-hero-title em {
-  font-style: italic;
-  font-weight: 300;
-  color: var(--frost-2, #93d2e8);
-}
-
-.eco-hero-lead {
-  font-size: 15px;
-  color: var(--on-surface-dim, #737373);
-  line-height: 1.6;
-  max-width: 380px;
-}
-
-/* ---- Toolbar (search + persona filters) ---- */
-.eco-toolbar {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 40px clamp(20px, 4vw, 64px) 0;
-  display: flex;
-  align-items: flex-start;
-  gap: 20px;
-  flex-wrap: wrap;
-}
-
-.eco-search-wrap {
-  position: relative;
-  flex: 1;
-  min-width: 200px;
-  max-width: 340px;
-  margin-bottom: 0;
-}
-.eco-search-icon {
-  position: absolute;
-  left: 14px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: var(--on-surface-dim, #737373);
-  pointer-events: none;
-  font-size: 16px;
-}
-.eco-search {
-  width: 100%;
-  background: var(--surface, #1a1a1a);
-  border: 1px solid var(--outline, rgba(64,64,64,.55));
-  color: var(--on-surface, #e8e8e8);
-  font-family: 'Geist', sans-serif;
-  font-size: 13px;
-  padding: .65rem 1rem .65rem 2.5rem;
-  border-radius: 9999px;
-  outline: none;
-  transition: border-color .2s;
-}
-.eco-search::placeholder { color: var(--on-surface-dim, #737373); }
-.eco-search:focus { border-color: rgba(147,210,232,.4); }
-
-/* ---- Category rail ---- */
-.eco-cat-rail-wrap {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 16px clamp(20px, 4vw, 64px) 16px;
-  border-bottom: 1px solid var(--outline, rgba(64,64,64,.4));
-}
-.eco-category-rail {
-  display: flex;
-  gap: 6px;
-  flex-wrap: wrap;
-  margin-bottom: 0;
-  padding-bottom: 0;
-  border-bottom: none;
-}
-.eco-cat-btn {
-  font-family: 'Geist', sans-serif;
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  padding: .35rem .85rem;
-  border: 1px solid var(--outline-muted, rgba(42,42,42,.55));
-  background: transparent;
-  color: var(--on-surface-dim, #737373);
-  cursor: pointer;
-  border-radius: 9999px;
-  transition: border-color .2s, color .2s, background .2s;
-  white-space: nowrap;
-}
-.eco-cat-btn:hover {
-  border-color: rgba(147,210,232,.25);
-  color: var(--on-surface-variant, #979da2);
-}
-.eco-cat-btn.is-active {
-  border-color: rgba(147,210,232,.35);
-  color: #bfe8f2;
-  background: rgba(147,210,232,.07);
-}
-
-/* ---- Results meta ---- */
-.eco-results-meta {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 20px clamp(20px, 4vw, 64px) 12px;
-  font-family: 'Geist', sans-serif;
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: .18em;
-  text-transform: uppercase;
-  color: var(--on-surface-dim, #737373);
-}
-
-/* ---- Card grid ---- */
-.eco-grid-wrap {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 clamp(20px, 4vw, 64px) 80px;
-}
-.eco-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 12px;
-}
-@media (max-width: 540px) {
-  .eco-grid { grid-template-columns: 1fr; gap: 10px; }
-}
-
-/* ---- Card — compact row: logo inline with name + category, 2-line desc ---- */
-.eco-card {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding: 14px 16px;
-  background: var(--surface, #1a1a1a);
-  border: 1px solid var(--outline, rgba(64,64,64,.55));
-  border-radius: 12px;
-  text-decoration: none;
-  color: inherit;
-  opacity: 0;
-  transform: translateY(8px);
-  transition: opacity .3s ease, transform .3s ease, border-color .22s ease, box-shadow .22s ease;
-}
-.eco-card.is-visible { opacity: 1; transform: none; }
-.eco-card:hover {
-  border-color: rgba(147,210,232,.28);
-  box-shadow: 0 8px 28px rgba(0,0,0,.4), 0 0 0 1px rgba(147,210,232,.1);
-}
-
-/* Head row: logo · name + category */
-.eco-card-head {
-  display: flex;
-  align-items: center;
-  gap: 11px;
-  min-width: 0;
-}
-.eco-card-logo {
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  object-fit: cover;
-  background: #1e1e1e;
-  flex-shrink: 0;
-  transition: transform .22s ease;
-}
-.eco-card:hover .eco-card-logo { transform: scale(1.06); }
-/* Solflare Empire logo has yellow edge artifacts — scale slightly to clip them */
-.eco-card-logo[src="logos/solflareempire.jpg"] { transform: scale(1.10); }
-.eco-card:hover .eco-card-logo[src="logos/solflareempire.jpg"] { transform: scale(1.16); }
-
-.eco-card-id { min-width: 0; }
-.eco-card-name {
-  font-family: 'Geist', sans-serif;
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--on-surface, #e8e8e8);
-  line-height: 1.25;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.eco-tag-cat {
-  display: inline-block;
-  font-family: 'Geist', sans-serif;
-  font-size: 9px;
-  font-weight: 600;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  color: var(--on-surface-dim, #737373);
-  margin-top: 3px;
-}
-
-.eco-card-featured-dot {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--frost-2, #93d2e8);
-  box-shadow: 0 0 6px rgba(147,210,232,.6);
-}
-
-.eco-card-desc {
-  font-size: 12.5px !important;
-  line-height: 1.5 !important;
-  color: var(--on-surface-variant, #979da2) !important;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-/* ---- Empty state ---- */
-.eco-empty {
-  grid-column: 1 / -1;
-  text-align: center;
-  padding: 5rem 2rem;
-  color: var(--on-surface-dim, #737373);
-  font-size: 14px;
-  display: none;
-}
-.eco-empty.is-visible { display: block; }
-
-/* toolbar gets a bottom border now that category rail is gone */
-.eco-toolbar {
-  border-bottom: 1px solid var(--outline, rgba(64,64,64,.4));
-  padding-bottom: 20px;
-}
-
-/* Scroll-to-top */
-#scroll-top {
-  position: fixed;
-  bottom: 1.5rem;
-  right: 1.5rem;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: var(--surface, #1a1a1a);
-  border: 1px solid var(--outline, rgba(64,64,64,.55));
-  color: var(--on-surface-dim, #737373);
-  font-size: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity .2s, border-color .2s, color .2s;
-}
-#scroll-top.is-visible { opacity: 1; pointer-events: auto; }
-#scroll-top:hover { border-color: rgba(147,210,232,.4); color: var(--frost-2, #93d2e8); }
-
-/* Match "Welcome to Solana" mark to new-to-solana.html: 17px + frost-2 italic em */
-.path-nav-logo { font-size: 17px; }
-.path-nav-logo em { color: var(--frost-2, #93d2e8); }
-
-/* ---- Mobile: category rail becomes one scrollable row ---- */
-@media (max-width: 600px) {
-  .eco-cat-rail-wrap { padding-left: 0; padding-right: 0; }
-  .eco-category-rail {
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    padding: 0 20px 4px;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
-  }
-  .eco-category-rail::-webkit-scrollbar { display: none; }
-  .eco-cat-btn { flex-shrink: 0; }
-  .eco-toolbar { gap: 12px; }
-  .eco-search-wrap { max-width: none; }
-}
-</style>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Explore the Solana ecosystem — Welcome to Solana</title>
+  <meta name="description" content="A searchable directory of wallets, communities, apps, tools, and projects across the Solana ecosystem."/>
+  <link rel="canonical" href="https://welcometosolana.xyz/ecosystem-new.html"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://welcometosolana.xyz/ecosystem-new.html"/>
+  <meta property="og:title" content="Explore the Solana ecosystem"/>
+  <meta property="og:description" content="Find the apps, communities, and tools built on Solana."/>
+  <meta property="og:image" content="https://welcometosolana.xyz/og-image-v3.png"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap"/>
+  <link rel="stylesheet" href="assets/ecosystem.css"/>
+  <script>window._track=function(n,d){try{if(window.umami&&typeof window.umami.track==='function')window.umami.track(n,d||{})}catch(e){}}</script>
+  <script>(function(){var s=document.createElement('script');s.defer=true;s.src='https://umami-service-production-3ded.up.railway.app/script.js';s.dataset.websiteId='faf37f2f-424a-4061-8416-2c4b5193a4b5';document.head.appendChild(s);})();</script>
 </head>
 <body>
+  <a class="skip-link" href="#directory">Skip to directory</a>
+  <header class="site-header">
+    <a class="wordmark" href="index.html">Welcome to Solana</a>
+    <a class="header-action" href="index.html#migrate">Bridge assets <span aria-hidden="true">↗</span></a>
+  </header>
 
-<nav class="path-nav">
-  <a href="index.html" class="path-nav-logo">Welcome to <em>Solana</em></a>
-  <div class="nav-right">
-    <a href="index.html" class="nav-switch">← Choose path</a>
-  </div>
-</nav>
-
-<div class="eco-page">
-
-  <!-- Hero split: title left · image right -->
-  <div class="eco-hero">
-    <div class="eco-hero-text">
-      <p class="eco-hero-kicker">Ecosystem Directory</p>
-      <h1 class="eco-hero-title">Explore <em>everything.</em></h1>
-      <p class="eco-hero-lead" id="eco-subtitle">25 categories. 88 projects. Updated 2026.</p>
-    </div>
-
-  </div>
-
-  <!-- Search + persona filters -->
-  <div class="eco-toolbar">
-    <div class="eco-search-wrap">
-      <span class="eco-search-icon" aria-hidden="true">⌕</span>
-      <input class="eco-search" id="eco-search" type="search" placeholder="Search projects…"
-             autocomplete="off" aria-label="Search ecosystem projects"/>
-    </div>
-  </div>
-
-  <!-- Category rail -->
-  <div class="eco-cat-rail-wrap">
-    <div class="eco-category-rail" id="eco-cats" role="group" aria-label="Filter by category">
-      <button class="eco-cat-btn is-active" data-cat="all">All categories</button>
-    </div>
-  </div>
-
-  <!-- Results count + grid -->
-  <div class="eco-results-meta" id="eco-count"></div>
-  <div class="eco-grid-wrap">
-    <div class="eco-grid" id="eco-grid">
-      <div class="eco-empty" id="eco-empty">
-        No projects match your search.<br/>
-        <button class="eco-cat-btn" id="eco-reset" style="margin-top:1rem">Reset filters</button>
+  <main>
+    <section class="eco-hero" aria-labelledby="eco-title">
+      <div>
+        <p class="eyebrow">Ecosystem directory</p>
+        <h1 id="eco-title">Explore<br/><em>Solana.</em></h1>
       </div>
-    </div>
-  </div>
+      <div class="eco-summary">
+        <p id="eco-subtitle">Loading the ecosystem…</p>
+        <a href="#directory">Browse everything <span aria-hidden="true">↓</span></a>
+      </div>
+    </section>
 
-</div><!-- /eco-page -->
+    <section class="directory" id="directory" aria-label="Solana ecosystem projects">
+      <div class="directory-tools">
+        <label class="search">
+          <span>Search</span>
+          <input id="eco-search" type="search" placeholder="Project, category, or use case" autocomplete="off"/>
+        </label>
+        <span class="result-count" id="eco-count" aria-live="polite"></span>
+      </div>
+      <div class="category-rail" id="eco-cats" role="group" aria-label="Filter by category">
+        <button class="category-button is-active" type="button" data-cat="all">All</button>
+      </div>
+      <div class="eco-grid" id="eco-grid"></div>
+      <div class="empty-state" id="eco-empty" hidden>
+        <p>No projects match that search.</p>
+        <button type="button" id="eco-reset">Clear filters</button>
+      </div>
+    </section>
 
-<section class="human-section">
-  <div class="human-inner">
-    <div>
-      <div class="human-built-by">Built by</div>
-      <div class="human-name">ATH</div>
-      <div class="human-cred">Community-run · Solana contributors</div>
-      <a href="https://ath.camera" target="_blank" rel="noopener" class="human-link">ath.camera ↗</a>
-    </div>
-    <blockquote class="human-quote">"We made this move ourselves. This guide was originally built for ourselves. If something is wrong or missing, DM us and we'll fix it."</blockquote>
-  </div>
-</section>
+    <section class="eco-end">
+      <p class="eyebrow">Keep moving</p>
+      <h2>Need assets on Solana first?</h2>
+      <a class="button" href="index.html#migrate">Bridge to Solana <span aria-hidden="true">→</span></a>
+    </section>
+  </main>
 
-<footer class="path-footer">
-  <div class="path-footer-inner">
-    <div class="path-footer-links">
-      <a href="index.html" class="path-footer-link">Choose a path</a>
-      <a href="pitch.html" class="path-footer-link">Why we built this</a>
-      <a href="https://t.me/+3prPanTSreIwMzMy" target="_blank" rel="noopener" class="path-footer-link">Join Telegram</a>
-      <a href="https://x.com/athcamera" target="_blank" rel="noopener" class="path-footer-link">@athcamera</a>
-    </div>
-    <span class="path-footer-copy">© 2026 Welcome to Solana · Not financial advice</span>
-  </div>
-</footer>
+  <footer class="site-footer">
+    <p>Community-made. Listings are not endorsements.</p>
+    <nav aria-label="Footer">
+      <a href="index.html">Home</a>
+      <a href="https://t.me/+3prPanTSreIwMzMy" target="_blank" rel="noopener">Suggest a project</a>
+    </nav>
+  </footer>
+  <button class="scroll-top" id="scroll-top" type="button" aria-label="Back to top">↑</button>
 
-<button id="scroll-top" aria-label="Back to top">↑</button>
+  <script>
+  (function(){
+    "use strict";
+    var state = { cat: "all", query: "" };
+    var projects = [];
+    var categories = [];
+    var categoryNames = {};
+    var grid = document.getElementById("eco-grid");
+    var empty = document.getElementById("eco-empty");
+    var count = document.getElementById("eco-count");
+    var subtitle = document.getElementById("eco-subtitle");
+    var rail = document.getElementById("eco-cats");
 
-<script>
-(function(){
-  var DATA_URL = 'data/ecosystem.json';
-  var state = { cat: 'communities', query: '' };
-  var allProjects = [], allCats = [];
-
-  function esc(s){
-    return String(s == null ? '' : s)
-      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
-      .replace(/"/g,'&quot;').replace(/'/g,'&#39;');
-  }
-
-  fetch(DATA_URL)
-    .then(function(r){ return r.json(); })
-    .then(function(data){
-      allCats = data.categories;
-      allProjects = data.projects;
-      buildCatRail();
-      updateSubtitle();
-      render();
-    })
-    .catch(function(e){ console.error('Ecosystem data failed to load', e); });
-
-  function buildCatRail(){
-    var rail = document.getElementById('eco-cats');
-    rail.innerHTML = '<button class="eco-cat-btn' + (state.cat === 'all' ? ' is-active' : '') + '" data-cat="all">All categories</button>';
-    allCats.forEach(function(cat){
-      var btn = document.createElement('button');
-      btn.className = 'eco-cat-btn' + (cat.id === state.cat ? ' is-active' : '');
-      btn.dataset.cat = cat.id;
-      btn.textContent = cat.label;
-      rail.appendChild(btn);
-    });
-    rail.addEventListener('click', function(e){
-      var btn = e.target.closest('.eco-cat-btn');
-      if(!btn) return;
-      state.cat = btn.dataset.cat;
-      rail.querySelectorAll('.eco-cat-btn').forEach(function(b){ b.classList.remove('is-active'); });
-      btn.classList.add('is-active');
-      render();
-      window._track('eco_filter_category', { category: btn.dataset.cat });
-    });
-  }
-
-  function updateSubtitle(){
-    var sub = document.getElementById('eco-subtitle');
-    sub.textContent = state.query
-      ? '"' + state.query + '"'
-      : allCats.length + ' categories. ' + allProjects.length + ' projects. Updated 2026.';
-  }
-
-  function matches(p){
-    if(state.cat !== 'all' && p.category !== state.cat) return false;
-    if(state.query){
-      var q = state.query.toLowerCase();
-      if(p.name.toLowerCase().indexOf(q) === -1 &&
-         p.description.toLowerCase().indexOf(q) === -1 &&
-         p.category.toLowerCase().indexOf(q) === -1 &&
-         catLabel(p.category).toLowerCase().indexOf(q) === -1) return false;
+    function escapeHtml(value) {
+      return String(value == null ? "" : value)
+        .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;").replace(/'/g, "&#39;");
     }
-    return true;
-  }
-
-  /* Display order. Within a category: featured first, then data order.
-     In the "all" view: round-robin one project per category (in rail order)
-     so the first rows show the breadth of the ecosystem instead of a
-     single category dominating — Solflare (first featured wallet) stays
-     pinned at position one. */
-  function displayOrder(list){
-    var rank = {};
-    allCats.forEach(function(c, i){ rank[c.id] = i; });
-    var byCat = {};
-    list.forEach(function(p){ (byCat[p.category] = byCat[p.category] || []).push(p); });
-    Object.keys(byCat).forEach(function(k){
-      byCat[k].sort(function(a, b){ return (b.featured ? 1 : 0) - (a.featured ? 1 : 0); });
-    });
-    var catIds = Object.keys(byCat).sort(function(a, b){
-      var ra = rank[a] !== undefined ? rank[a] : 99;
-      var rb = rank[b] !== undefined ? rank[b] : 99;
-      return ra - rb;
-    });
-    if(state.cat !== 'all' || catIds.length <= 1) return catIds.map(function(k){ return byCat[k]; }).reduce(function(a, b){ return a.concat(b); }, []);
-    var out = [], round = 0, added = true;
-    while(added){
-      added = false;
-      catIds.forEach(function(k){
-        if(byCat[k][round]){ out.push(byCat[k][round]); added = true; }
+    function matches(project) {
+      if (state.cat !== "all" && project.category !== state.cat) return false;
+      if (!state.query) return true;
+      var searchable = [project.name, project.description, project.category, categoryNames[project.category]].join(" ").toLowerCase();
+      return searchable.indexOf(state.query.toLowerCase()) !== -1;
+    }
+    function ordered(list) {
+      var byCategory = {};
+      list.forEach(function(project) {
+        (byCategory[project.category] = byCategory[project.category] || []).push(project);
       });
-      round++;
+      Object.keys(byCategory).forEach(function(key) {
+        byCategory[key].sort(function(a, b) { return a.name.localeCompare(b.name); });
+      });
+      if (state.cat !== "all") return byCategory[state.cat] || [];
+      var ids = categories.map(function(category) { return category.id; }).filter(function(id) { return byCategory[id]; });
+      var result = [];
+      var row = 0;
+      var added = true;
+      while (added) {
+        added = false;
+        ids.forEach(function(id) {
+          if (byCategory[id][row]) {
+            result.push(byCategory[id][row]);
+            added = true;
+          }
+        });
+        row += 1;
+      }
+      return result;
     }
-    return out;
-  }
-
-  function catLabel(catId){
-    var c = allCats.find(function(x){ return x.id === catId; });
-    return c ? c.label : catId;
-  }
-
-  function render(){
-    var grid  = document.getElementById('eco-grid');
-    var empty = document.getElementById('eco-empty');
-    var count = document.getElementById('eco-count');
-    var visible = displayOrder(allProjects.filter(matches));
-
-    count.textContent = visible.length + ' project' + (visible.length !== 1 ? 's' : '');
-    // Remove all cards and reset any flipped state
-    grid.querySelectorAll('.eco-card').forEach(function(c){ c.remove(); });
-
-    if(visible.length === 0){
-      empty.classList.add('is-visible');
-      return;
+    function render() {
+      var visible = ordered(projects.filter(matches));
+      count.textContent = visible.length + (visible.length === 1 ? " project" : " projects");
+      grid.innerHTML = "";
+      empty.hidden = visible.length !== 0;
+      visible.forEach(function(project, index) {
+        var card = document.createElement("a");
+        card.className = "eco-card";
+        card.href = project.url;
+        card.target = "_blank";
+        card.rel = "noopener";
+        card.style.setProperty("--delay", Math.min(index, 14) * 24 + "ms");
+        card.innerHTML =
+          '<img src="' + escapeHtml(project.logo) + '" alt="" loading="lazy" decoding="async"/>' +
+          '<span class="eco-card-copy"><strong>' + escapeHtml(project.name) + '</strong>' +
+          '<small>' + escapeHtml(categoryNames[project.category] || project.category) + '</small></span>' +
+          '<span class="eco-card-arrow" aria-hidden="true">↗</span>';
+        card.querySelector("img").addEventListener("error", function() { this.style.visibility = "hidden"; });
+        card.addEventListener("click", function() {
+          window._track("eco_project_click", { project: project.name, category: project.category });
+        });
+        grid.appendChild(card);
+      });
     }
-    empty.classList.remove('is-visible');
+    function buildCategories() {
+      categories.forEach(function(category) {
+        categoryNames[category.id] = category.label;
+        var button = document.createElement("button");
+        button.className = "category-button";
+        button.type = "button";
+        button.dataset.cat = category.id;
+        button.textContent = category.label;
+        rail.appendChild(button);
+      });
+      rail.addEventListener("click", function(event) {
+        var button = event.target.closest("[data-cat]");
+        if (!button) return;
+        state.cat = button.dataset.cat;
+        rail.querySelectorAll("[data-cat]").forEach(function(item) {
+          item.classList.toggle("is-active", item === button);
+        });
+        render();
+        window._track("eco_filter_category", { category: state.cat });
+      });
+    }
 
-    visible.forEach(function(p, i){
-      var card = document.createElement('a');
-      card.href = p.url;
-      card.target = '_blank';
-      card.rel = 'noopener';
-      card.className = 'eco-card';
-
-      card.innerHTML =
-        (p.featured ? '<span class="eco-card-featured-dot"></span>' : '') +
-        '<div class="eco-card-head">' +
-          '<img class="eco-card-logo" src="' + esc(p.logo) + '" alt="' + esc(p.name) + '" loading="lazy" decoding="async"' +
-          ' onerror="this.style.opacity=\'0\'">' +
-          '<div class="eco-card-id">' +
-            '<div class="eco-card-name">' + esc(p.name) + '</div>' +
-            '<span class="eco-tag-cat">' + esc(catLabel(p.category)) + '</span>' +
-          '</div>' +
-        '</div>' +
-        '<div class="eco-card-desc">' + esc(p.description) + '</div>';
-
-      card.addEventListener('click', function(){
-        window._track('eco_project_click', { project: p.name, category: p.category });
+    fetch("data/ecosystem.json")
+      .then(function(response) {
+        if (!response.ok) throw new Error("Directory data unavailable");
+        return response.json();
+      })
+      .then(function(data) {
+        categories = data.categories;
+        projects = data.projects;
+        buildCategories();
+        subtitle.textContent = categories.length + " categories. " + projects.length + " projects. One place to explore.";
+        render();
+      })
+      .catch(function(error) {
+        subtitle.textContent = "The directory could not be loaded.";
+        console.error(error);
       });
 
-      grid.appendChild(card);
-
-      var delay = Math.min(i, 16) * 30;
-      setTimeout(function(){ card.classList.add('is-visible'); }, delay);
+    var searchTimer;
+    document.getElementById("eco-search").addEventListener("input", function(event) {
+      clearTimeout(searchTimer);
+      var value = event.target.value;
+      searchTimer = setTimeout(function() {
+        state.query = value.trim();
+        render();
+      }, 150);
     });
-  }
-
-  // Reset filters (empty state)
-  document.getElementById('eco-reset').addEventListener('click', function(){
-    state.cat = 'all'; state.query = '';
-    document.getElementById('eco-search').value = '';
-    document.querySelectorAll('#eco-cats .eco-cat-btn').forEach(function(b){
-      b.classList.toggle('is-active', b.dataset.cat === 'all');
-    });
-    updateSubtitle();
-    render();
-  });
-
-  // Search
-  var searchTimer;
-  document.getElementById('eco-search').addEventListener('input', function(e){
-    clearTimeout(searchTimer);
-    var q = e.target.value;
-    searchTimer = setTimeout(function(){
-      state.query = q.trim();
-      updateSubtitle();
+    document.getElementById("eco-reset").addEventListener("click", function() {
+      state = { cat: "all", query: "" };
+      document.getElementById("eco-search").value = "";
+      rail.querySelectorAll("[data-cat]").forEach(function(item) {
+        item.classList.toggle("is-active", item.dataset.cat === "all");
+      });
       render();
-      if(state.query.length >= 3) window._track('eco_search', { query: state.query });
-    }, 180);
-  });
-
-  // Scroll-to-top
-  var scrollBtn = document.getElementById('scroll-top');
-  window.addEventListener('scroll', function(){
-    scrollBtn.classList.toggle('is-visible', window.scrollY > 400);
-  }, {passive:true});
-  scrollBtn.addEventListener('click', function(){
-    window.scrollTo({top:0, behavior:'smooth'});
-  });
-})();
-</script>
+    });
+    var scrollButton = document.getElementById("scroll-top");
+    window.addEventListener("scroll", function() {
+      scrollButton.classList.toggle("is-visible", window.scrollY > 500);
+    }, { passive: true });
+    scrollButton.addEventListener("click", function() {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  })();
+  </script>
 </body>
 </html>

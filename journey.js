@@ -220,10 +220,10 @@
         from: 'Ethereum / EVM', glyph: '⬡', method: 'Squid · Permissionless', time: '~2 min',
         ctaText: 'Open Squid Router', ctaHref: 'https://app.squidrouter.com/',
         steps: [
-          ['1', '<strong>Install Solflare</strong> — your Solana address'],
+          ['1', '<strong>Choose a Solana wallet</strong> — copy its receiving address'],
           ['2', '<strong>Open Squid</strong> · connect EVM wallet'],
           ['3', '<strong>Token → SOL</strong> · enter address · confirm'],
-          ['4', '<strong>SOL arrives</strong> in Solflare']
+          ['4', '<strong>SOL arrives</strong> in your wallet']
         ]
       },
       'evm-cex': {
@@ -232,7 +232,7 @@
         steps: [
           ['1', '<strong>Deposit</strong> ETH/USDC to a CEX'],
           ['2', '<strong>Swap to SOL</strong> on exchange'],
-          ['3', '<strong>Install Solflare</strong>'],
+          ['3', '<strong>Choose a Solana wallet</strong>'],
           ['4', '<strong>Withdraw SOL</strong> · Solana network']
         ]
       },
@@ -241,7 +241,7 @@
         ctaText: 'Open Squid Router', ctaHref: 'https://app.squidrouter.com/',
         steps: [
           ['1', '<strong>Swap → USDC</strong> on Osmosis via Squid'],
-          ['2', '<strong>Install Solflare</strong>'],
+          ['2', '<strong>Choose a Solana wallet</strong>'],
           ['3', '<strong>Bridge USDC</strong> Cosmos → Solana (Noble)']
         ]
       },
@@ -252,7 +252,7 @@
           ['1', '<strong>Swap to ATOM</strong> on Osmosis'],
           ['2', '<strong>IBC back</strong> to Cosmos Hub'],
           ['3', '<strong>Deposit + swap</strong> for SOL on CEX'],
-          ['4', '<strong>Install Solflare</strong> · withdraw SOL']
+          ['4', '<strong>Use your wallet address</strong> · withdraw SOL']
         ]
       },
       'other': {
@@ -266,9 +266,9 @@
       },
       'buy': {
         from: 'Fiat (card / bank)', glyph: '$', method: 'In-wallet purchase', time: '~5 min',
-        ctaText: 'Download Solflare', ctaHref: 'https://www.solflare.com/download/',
+        ctaText: 'Compare Solana wallets', ctaHref: '#wallet',
         steps: [
-          ['1', '<strong>Install Solflare</strong> — has Buy built in'],
+          ['1', '<strong>Choose a Solana wallet</strong> — compare built-in buy options'],
           ['2', '<strong>Tap Buy</strong> · use card or bank transfer'],
           ['3', '<strong>SOL arrives</strong> — you\u2019re on Solana']
         ]

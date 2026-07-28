@@ -1,450 +1,167 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Welcome to Solana — Choose your path</title>
-<meta name="description" content="Choose your path into Solana. For newcomers, creators, builders, and experienced traders. Pick who you are and get a fully tailored guide."/>
-<link rel="canonical" href="https://welcometosolana.xyz/"/>
-<meta property="og:type" content="website"/>
-<meta property="og:url" content="https://welcometosolana.xyz/"/>
-<meta property="og:title" content="Welcome to Solana — Choose your path"/>
-<meta property="og:description" content="Choose your path into Solana. For newcomers, creators, builders, and experienced traders."/>
-<meta property="og:image" content="https://welcometosolana.xyz/og-image-v3.png"/>
-<meta property="og:image:width" content="1200"/>
-<meta property="og:image:height" content="630"/>
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:title" content="Welcome to Solana — Choose your path"/>
-<meta name="twitter:description" content="Pick your path into Solana. Newcomer, creator, builder, or pro — each path is tailored for you."/>
-<meta name="twitter:image" content="https://welcometosolana.xyz/og-image-v3.png"/>
-<link rel="icon" type="image/svg+xml" href="favicon.svg"/>
-<script>window._track=function(n,d){try{if(window.umami&&typeof window.umami.track==='function')window.umami.track(n,d||{})}catch(e){}}</script>
-<script>(function(){var s=document.createElement('script');s.defer=true;s.src='https://umami-service-production-3ded.up.railway.app/script.js';s.dataset.websiteId='faf37f2f-424a-4061-8416-2c4b5193a4b5';document.head.appendChild(s);})();</script>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&family=JetBrains+Mono:wght@400;500&display=swap"/>
-<link rel="stylesheet" href="assets/v2.css"/>
-<style>
-/* ===== Gate — V3 design alignment =====
-   Overrides v2.css tokens for gate.html only. All other pages unaffected. */
-
-:root {
-  /* V3 background / surface */
-  --bg:               #0d0f12;
-  --surface:          #161a20;
-  --surface-raised:   #1b2029;
-  /* V3 borders */
-  --outline:          rgba(255,255,255,.07);
-  --outline-muted:    rgba(255,255,255,.05);
-  /* V3 ink scale */
-  --on-surface:       #ecedef;
-  --on-surface-variant: #b6bbc4;
-  --on-surface-dim:   #5f646d;
-  /* V3 fonts */
-  --font-body:        'Inter', system-ui, -apple-system, sans-serif;
-  --font-mono:        'JetBrains Mono', ui-monospace, monospace;
-  /* V3 frost */
-  --frost-1:          #cfeef6;
-  --frost-2:          #93d2e8;
-  --frost-3:          #6fb9d6;
-  --frost-glow:       rgba(147,210,232,.20);
-}
-
-/* Dot grid — V3 tone (slightly cooler, softer) */
-.dot-grid {
-  background-image: radial-gradient(circle, rgba(255,255,255,.04) 1px, transparent 1px);
-  background-size: 28px 28px;
-}
-
-/* Ambient glows — primary (top-right frost) + secondary (bottom-left warm violet) */
-.gate-body::before,
-.gate-body::after {
-  content: '';
-  position: fixed;
-  pointer-events: none;
-  z-index: 0;
-  filter: blur(90px);
-}
-.gate-body::before {
-  top: -120px; right: -120px;
-  width: 640px; height: 640px;
-  background: radial-gradient(circle, rgba(147,210,232,.16), transparent 70%);
-}
-.gate-body::after {
-  bottom: -160px; left: -140px;
-  width: 580px; height: 580px;
-  background: radial-gradient(circle, rgba(178,150,220,.08), transparent 70%);
-  filter: blur(110px);
-}
-
-/* Title — V3 weight/tracking */
-.gate-title {
-  font-weight: 600;
-  letter-spacing: -0.035em;
-  color: var(--on-surface);
-}
-
-/* Subtitle — V3 frost italic gradient, with slow shimmer */
-.gate-sub {
-  font-weight: 300;
-  font-size: clamp(1.25rem, 2.9vw, 2.1rem);
-  letter-spacing: -0.01em;
-  background: linear-gradient(
-    90deg,
-    #93d2e8 0%,
-    #cfeef6 25%,
-    #ffffff 50%,
-    #cfeef6 75%,
-    #93d2e8 100%
-  );
-  background-size: 220% 100%;
-  background-position: 0% 0%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  margin-top: 1rem;
-}
-@media (prefers-reduced-motion: no-preference) {
-  .gate-sub { animation: gate-sub-shimmer 8s linear infinite; }
-}
-@keyframes gate-sub-shimmer {
-  0%   { background-position: 0% 0%; }
-  100% { background-position: -220% 0%; }
-}
-
-/* ===== Cards — bigger, with persona color tints ===== */
-.card-fan { gap: 0; }
-.arch-card {
-  width: 210px;
-  height: 340px;
-  background: var(--surface);
-  border-color: rgba(255,255,255,.10);
-  border-radius: 20px;
-  transition:
-    transform .42s cubic-bezier(.22,.61,.36,1),
-    border-color .35s,
-    box-shadow .45s ease;
-}
-.arch-card + .arch-card { margin-left: -28px; }
-/* Persona tint — a soft inner radial wash, blue glow ring on hover.
-   --tint-rgb is set per card; consumed by the inner wash + hover glow. */
-.arch-card[data-persona="new-to-solana"] { --tint-rgb: 147,210,232; }   /* frost blue */
-.arch-card[data-persona="creator"]       { --tint-rgb: 196,160,232; }   /* soft violet */
-.arch-card[data-persona="builder"]       { --tint-rgb: 232,196,120; }   /* warm amber */
-.arch-card[data-persona="pro"]           { --tint-rgb: 130,222,180; }   /* cool green */
-
-.arch-card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(
-    ellipse at 50% 110%,
-    rgba(var(--tint-rgb), .14) 0%,
-    rgba(var(--tint-rgb), .04) 35%,
-    transparent 65%
-  );
-  pointer-events: none;
-  opacity: .9;
-  transition: opacity .35s ease;
-  z-index: 0;
-}
-.arch-card > * { position: relative; z-index: 1; }
-
-@media (prefers-reduced-motion: no-preference) {
-  .arch-card:hover {
-    border-color: rgba(var(--tint-rgb), .45);
-    box-shadow:
-      0 22px 60px rgba(0,0,0,.6),
-      0 0 0 1px rgba(var(--tint-rgb), .22),
-      0 0 80px -16px rgba(var(--tint-rgb), .42);
-  }
-  .arch-card:hover::before { opacity: 1.35; }
-  .arch-card:hover .arch-media img {
-    transform: scale(1.07) translateY(-6px);
-  }
-  .arch-card:active {
-    transform: rotate(var(--r)) translateY(-10px) scale(1.015);
-    transition: transform .08s ease;
-  }
-}
-
-/* Card label — V3 mono style */
-.arch-label {
-  font-family: var(--font-mono);
-  font-size: 10.5px;
-  font-weight: 500;
-  letter-spacing: .14em;
-  color: var(--on-surface-variant);
-  padding: .8rem .5rem 1.05rem;
-  transition: color .3s ease, letter-spacing .3s ease;
-}
-.arch-card:hover .arch-label {
-  color: rgb(var(--tint-rgb));
-  letter-spacing: .18em;
-}
-
-/* Overlay — V3 background */
-#gate-overlay { background: var(--bg); }
-
-.overlay-text {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: .12em;
-  color: var(--on-surface-dim);
-  transition: opacity .26s ease, transform .26s ease;
-}
-.overlay-text.is-leaving { opacity: 0; transform: translateY(-4px); }
-.overlay-text.is-entering { opacity: 0; transform: translateY(4px); }
-
-/* ===== Bottom CTA — glass buttons ===== */
-.gate-cta {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: .875rem;
-  position: relative;
-  z-index: 1;
-}
-.gate-cta-text {
-  font-family: var(--font-body);
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--on-surface-dim);
-  letter-spacing: .02em;
-  text-align: center;
-}
-.gate-cta-btns {
-  display: flex;
-  gap: .625rem;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-/* Override .placeholder-back styling, but ONLY when used inside the gate CTA. */
-.gate-cta-btns .placeholder-back {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: .14em;
-  color: var(--on-surface-variant);
-  background: rgba(255,255,255,.035);
-  border: 1px solid rgba(255,255,255,.10);
-  backdrop-filter: blur(14px) saturate(1.1);
-  -webkit-backdrop-filter: blur(14px) saturate(1.1);
-  padding: .75rem 1.1rem;
-  border-radius: 999px;
-  margin-top: 0;
-  transition: border-color .25s ease, background .25s ease, color .25s ease, transform .15s ease, box-shadow .25s ease;
-}
-.gate-cta-btns .placeholder-back:hover {
-  border-color: rgba(147,210,232,.32);
-  background: rgba(147,210,232,.07);
-  color: var(--on-surface);
-  box-shadow: 0 8px 28px -12px rgba(147,210,232,.4);
-}
-.gate-cta-btns .placeholder-back:active {
-  transform: scale(.97);
-  transition: transform .08s ease;
-}
-
-/* Universal focus rings + button press feedback on the gate */
-.arch-card:focus-visible,
-.gate-cta-btns .placeholder-back:focus-visible {
-  outline: 2px solid var(--frost-2);
-  outline-offset: 4px;
-  border-radius: 20px;
-}
-.arch-card { -webkit-tap-highlight-color: transparent; }
-
-/* ===== Mobile — whole gate fits on one screen ===== */
-@media (max-width: 600px) {
-  .gate-body {
-    gap: clamp(1rem, 3svh, 1.75rem);
-    padding: max(1.25rem, env(safe-area-inset-top)) 1rem calc(1rem + env(safe-area-inset-bottom));
-  }
-  .gate-title { font-size: clamp(2.2rem, 11vw, 2.9rem); }
-  .gate-sub { font-size: 1.1rem; margin-top: .6rem; }
-  .card-fan { gap: .625rem; width: 100%; max-width: 380px; }
-  .arch-card {
-    width: 100%;
-    height: clamp(148px, 23svh, 220px);
-    border-radius: 16px;
-  }
-  .arch-card + .arch-card { margin-left: 0; }
-  .arch-label { font-size: 10px; padding: .5rem .4rem .75rem; }
-  .gate-cta { gap: .7rem; }
-  .gate-cta-text { font-size: 12px; }
-  .gate-cta-btns { gap: .5rem; }
-  .gate-cta-btns .placeholder-back { padding: .6rem .95rem; font-size: 10px; letter-spacing: .12em; }
-}
-</style>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Welcome to Solana — Bridge assets to Solana</title>
+  <meta name="description" content="Bridge assets from 50+ chains to Solana with Squid or NEAR Intents."/>
+  <link rel="canonical" href="https://welcometosolana.xyz/"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://welcometosolana.xyz/"/>
+  <meta property="og:title" content="Welcome to Solana — Bridge to Solana"/>
+  <meta property="og:description" content="A direct route from 50+ chains to Solana."/>
+  <meta property="og:image" content="https://welcometosolana.xyz/og-image-v3.png"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="Welcome to Solana — Bridge to Solana"/>
+  <meta name="twitter:description" content="A direct route from 50+ chains to Solana."/>
+  <meta name="twitter:image" content="https://welcometosolana.xyz/og-image-v3.png"/>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap"/>
+  <link rel="stylesheet" href="assets/home.css"/>
+  <script>window._track=function(n,d){try{if(window.umami&&typeof window.umami.track==='function')window.umami.track(n,d||{})}catch(e){}}</script>
+  <script>(function(){var s=document.createElement('script');s.defer=true;s.src='https://umami-service-production-3ded.up.railway.app/script.js';s.dataset.websiteId='faf37f2f-424a-4061-8416-2c4b5193a4b5';document.head.appendChild(s);})();</script>
 </head>
-<body class="gate-body">
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="wordmark" href="/" aria-label="Welcome to Solana home">Welcome to Solana</a>
+    <a class="header-action" href="#migrate">Migrate assets <span aria-hidden="true">↓</span></a>
+  </header>
 
-<div class="dot-grid" aria-hidden="true"></div>
-
-<header class="gate-header">
-  <h1 class="gate-title">Welcome to<br/>Solana</h1>
-  <p class="gate-sub">Who are you here as?</p>
-</header>
-
-<main>
-  <div class="card-fan" id="card-fan">
-
-    <button class="arch-card" data-href="new-to-solana.html" data-persona="new-to-solana"
-      data-img="Newtosolana.png"
-      data-video="animatednewtosolana-alpha.webm"
-      data-texts='["Mapping your route…","Collecting your first steps…","Almost ready…"]'
-      aria-label="New to Solana">
-      <div class="arch-media">
-        <img src="Newtosolana.png" alt="" aria-hidden="true"/>
+  <main id="main">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-copy reveal">
+        <div class="hero-stat"><strong>50+</strong><span>source chains<br/>one destination</span></div>
+        <h1 id="hero-title">Bridge to<br/><em>Solana.</em></h1>
+        <p class="hero-lead">Move your assets to Solana in one place. Choose a route, review the quote, and sign.</p>
+        <div class="hero-actions">
+          <a class="button button--primary" href="#migrate" data-track="hero_migrate">Migrate my assets <span class="button-icon" aria-hidden="true">↓</span></a>
+          <a class="text-link" href="#wallets">Get a wallet first</a>
+        </div>
+        <p class="hero-note">You keep control of your funds. Always review the destination, fees, and amount received.</p>
       </div>
-      <span class="arch-label">New to Solana</span>
-    </button>
 
-    <button class="arch-card" data-href="creator.html" data-persona="creator"
-      data-img="Creators%20%26%20Media_%E2%80%A8.png"
-      data-texts='["Finding your tools…","Building your path…","Almost ready…"]'
-      aria-label="Creator">
-      <div class="arch-media">
-        <img src="Creators%20%26%20Media_%E2%80%A8.png" alt="" aria-hidden="true"/>
+      <aside class="chain-field reveal" aria-label="Networks available through the migration providers">
+        <div class="chain-field-head"><span>From everywhere</span><span>To Solana</span></div>
+        <div class="chain-cloud">
+          <img src="assets/chains/eth.svg" alt="Ethereum" title="Ethereum"/>
+          <img src="assets/chains/base.svg" alt="Base" title="Base"/>
+          <img src="assets/chains/arb.svg" alt="Arbitrum" title="Arbitrum"/>
+          <img src="assets/chains/btc.svg" alt="Bitcoin" title="Bitcoin"/>
+          <img src="near.png" alt="NEAR" title="NEAR"/>
+          <img src="assets/chains/bsc.svg" alt="BNB Chain" title="BNB Chain"/>
+          <img src="assets/chains/avax.svg" alt="Avalanche" title="Avalanche"/>
+          <img src="assets/chains/op.svg" alt="Optimism" title="Optimism"/>
+          <img src="assets/chains/pol.svg" alt="Polygon" title="Polygon"/>
+          <img src="assets/chains/aurora.svg" alt="Aurora" title="Aurora"/>
+          <img src="assets/chains/bera.svg" alt="Berachain" title="Berachain"/>
+          <img src="assets/chains/gnosis.svg" alt="Gnosis" title="Gnosis"/>
+          <img src="assets/chains/sui.svg" alt="Sui" title="Sui"/>
+          <img src="assets/chains/ton.svg" alt="TON" title="TON"/>
+          <img src="assets/chains/tron.svg" alt="Tron" title="Tron"/>
+          <img src="assets/chains/xrp.svg" alt="XRP Ledger" title="XRP Ledger"/>
+          <img src="assets/chains/zec.svg" alt="Zcash" title="Zcash"/>
+          <img src="assets/chains/ltc.svg" alt="Litecoin" title="Litecoin"/>
+          <img src="assets/chains/doge.svg" alt="Dogecoin" title="Dogecoin"/>
+          <img src="assets/chains/mon.svg" alt="Monad" title="Monad"/>
+          <img src="assets/chains/plasma.svg" alt="Plasma" title="Plasma"/>
+          <img src="assets/chains/scroll.svg" alt="Scroll" title="Scroll"/>
+          <img src="assets/chains/xlayer.svg" alt="X Layer" title="X Layer"/>
+          <img src="assets/chains/cardano.svg" alt="Cardano" title="Cardano"/>
+          <img src="assets/chains/stellar.svg" alt="Stellar" title="Stellar"/>
+          <img src="assets/chains/aleo.svg" alt="Aleo" title="Aleo"/>
+          <img src="assets/chains/bch.svg" alt="Bitcoin Cash" title="Bitcoin Cash"/>
+          <img src="assets/chains/dash.svg" alt="Dash" title="Dash"/>
+          <img src="assets/chains/hypercore.svg" alt="Hyperliquid" title="Hyperliquid"/>
+          <img src="assets/chains/adi.svg" alt="ADI Chain" title="ADI Chain"/>
+          <img src="assets/chains/starknet.svg" alt="Starknet" title="Starknet"/>
+        </div>
+        <p>Source networks available across Squid and NEAR Intents. Solana is the destination.</p>
+      </aside>
+    </section>
+
+    <section class="founder section" aria-labelledby="founder-title">
+      <div class="section-heading reveal">
+        <p class="eyebrow">What is Solana</p>
+        <h2 id="founder-title">Hear it from<br/><em>the founder.</em></h2>
+        <p>Anatoly Yakovenko explains the idea behind Solana—and why it was built differently.</p>
       </div>
-      <span class="arch-label">Creator</span>
-    </button>
-
-    <button class="arch-card" data-href="builder.html" data-persona="builder"
-      data-img="Builders_%E2%80%A8.png"
-      data-texts='["Loading your stack…","Finding your tools…","Almost ready…"]'
-      aria-label="Builder">
-      <div class="arch-media">
-        <img src="Builders_%E2%80%A8.png" alt="" aria-hidden="true"/>
+      <div class="video-frame reveal">
+        <iframe src="https://www.youtube-nocookie.com/embed/3-SWJaLZBic?rel=0" title="What is Solana? Hear from founder Anatoly Yakovenko" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
       </div>
-      <span class="arch-label">Builder</span>
-    </button>
+    </section>
 
-    <button class="arch-card" data-href="pro.html" data-persona="pro"
-      data-img="Pro%20and%20degens%20_.png"
-      data-texts='["Assembling the deep stack…","Mapping your routes…","Almost ready…"]'
-      aria-label="Pro">
-      <div class="arch-media">
-        <img src="Pro%20and%20degens%20_.png" alt="" aria-hidden="true"/>
+    <section class="wallets section" id="wallets" aria-labelledby="wallets-title">
+      <div class="section-heading reveal">
+        <p class="eyebrow">01 · Wallet</p>
+        <h2 id="wallets-title">Choose your wallet.</h2>
       </div>
-      <span class="arch-label">Pro</span>
-    </button>
+      <div class="wallet-grid reveal">
+        <a class="wallet-card" href="https://jup.ag/mobile" target="_blank" rel="noopener" data-wallet="Jupiter"><img src="logos/jupwallet.jpg" alt="Jupiter Wallet"/><strong>Jupiter</strong><span class="card-arrow" aria-hidden="true">↗</span></a>
+        <a class="wallet-card" href="https://www.solflare.com/download/" target="_blank" rel="noopener" data-wallet="Solflare"><img src="logos/solflare.jpg" alt="Solflare"/><strong>Solflare</strong><span class="card-arrow" aria-hidden="true">↗</span></a>
+        <a class="wallet-card" href="https://backpack.app/" target="_blank" rel="noopener" data-wallet="Backpack"><img src="logos/backpack.png" alt="Backpack"/><strong>Backpack</strong><span class="card-arrow" aria-hidden="true">↗</span></a>
+        <a class="wallet-card" href="https://phantom.app/" target="_blank" rel="noopener" data-wallet="Phantom"><img src="logos/phantom.jpg" alt="Phantom"/><strong>Phantom</strong><span class="card-arrow" aria-hidden="true">↗</span></a>
+      </div>
+    </section>
 
-  </div>
-</main>
+    <section class="migrate section" id="migrate" aria-labelledby="migrate-title">
+      <div class="section-heading reveal">
+        <p class="eyebrow">02 · Migrate</p>
+        <h2 id="migrate-title">Choose a route.</h2>
+        <p>Compare providers, then confirm the destination is Solana before you sign.</p>
+      </div>
+      <div class="provider-tabs reveal" role="tablist" aria-label="Migration provider">
+        <button class="provider-tab is-active" type="button" role="tab" aria-selected="true" aria-controls="provider-squid" id="tab-squid" data-provider="squid">
+          <span class="provider-mark"><img src="logos/squid.jpg" alt=""/></span><span><strong>Squid</strong><small>Cross-chain router</small></span><span class="provider-check" aria-hidden="true"></span>
+        </button>
+        <button class="provider-tab" type="button" role="tab" aria-selected="false" aria-controls="provider-near" id="tab-near" data-provider="near">
+          <span class="provider-mark"><img src="near.png" alt=""/></span><span><strong>NEAR Intents</strong><small>Intent-based swaps</small></span><span class="provider-check" aria-hidden="true"></span>
+        </button>
+      </div>
+      <div class="provider-stage reveal">
+        <div class="provider-stage-head"><span id="provider-context">Squid · embedded router</span><a id="provider-external" href="https://app.squidrouter.com/" target="_blank" rel="noopener">Open full screen ↗</a></div>
+        <section class="provider-panel is-active" id="provider-squid" role="tabpanel" aria-labelledby="tab-squid">
+          <iframe class="migration-frame migration-frame--squid" title="Squid cross-chain router" data-src="https://studio.squidrouter.com/iframe?config=%7B%22integratorId%22%3A%22squid-widget-studio%22%2C%22themeType%22%3A%22dark%22%2C%22tabs%22%3A%7B%22swap%22%3Atrue%2C%22buy%22%3Afalse%2C%22send%22%3Afalse%7D%7D" src="about:blank" allow="clipboard-write" loading="lazy"></iframe>
+        </section>
+        <section class="provider-panel" id="provider-near" role="tabpanel" aria-labelledby="tab-near" hidden>
+          <iframe class="migration-frame migration-frame--near" title="NEAR Intents cross-chain swap" data-src="near-widget-dist/near-intents-widget.html" src="about:blank" allow="clipboard-write" loading="lazy"></iframe>
+          <noscript><p class="widget-fallback">JavaScript is required for the embedded widget. <a href="https://near.com/" target="_blank" rel="noopener">Open near.com ↗</a></p></noscript>
+        </section>
+      </div>
+      <div class="safety-note reveal"><span class="safety-icon" aria-hidden="true">i</span><p><strong>Before you confirm</strong>Check the token, amount, destination network, receiving address, fees, and minimum received.</p></div>
+    </section>
 
-<footer class="gate-cta">
-  <p class="gate-cta-text">Just want to browse everything?</p>
-  <div class="gate-cta-btns">
-    <a href="ecosystem-new.html" class="placeholder-back">Explore the ecosystem →</a>
-    <a href="https://t.me/+3prPanTSreIwMzMy" target="_blank" rel="noopener" class="placeholder-back" onclick="window._track('click_telegram',{from:'gate'})">Join Telegram ↗</a>
-    <a href="pitch.html" class="placeholder-back" onclick="window._track('click_pitch',{from:'gate'})">Why we built this →</a>
-  </div>
-</footer>
+    <section class="communities section" aria-labelledby="communities-title">
+      <div class="section-heading reveal">
+        <p class="eyebrow">03 · Communities</p>
+        <h2 id="communities-title">Find your people.</h2>
+        <p>Solana is easier to learn with others. Start with one of these community-led groups.</p>
+      </div>
+      <div class="community-grid reveal">
+        <a class="community-card" href="https://discord.gg/solflare" target="_blank" rel="noopener"><img src="logos/solflareempire.jpg" alt="Solflare Empire"/><span><strong>Solflare Empire</strong><small>Discord community</small></span><span aria-hidden="true">↗</span></a>
+        <a class="community-card" href="https://superteam.fun/" target="_blank" rel="noopener"><img src="logos/superteam.jpg" alt="Superteam"/><span><strong>Superteam</strong><small>Global contributor network</small></span><span aria-hidden="true">↗</span></a>
+        <a class="community-card" href="https://x.com/MonkeDAO" target="_blank" rel="noopener"><img src="logos/monkedao.jpg" alt="MonkeDAO"/><span><strong>MonkeDAO</strong><small>Community DAO</small></span><span aria-hidden="true">↗</span></a>
+        <a class="community-card" href="https://x.com/mtndao" target="_blank" rel="noopener"><img src="logos/mntdao.jpg" alt="MTN DAO"/><span><strong>MTN DAO</strong><small>Builder community</small></span><span aria-hidden="true">↗</span></a>
+      </div>
+    </section>
 
-<div id="gate-overlay" role="status" aria-live="polite">
-  <div class="overlay-char">
-    <img id="overlay-char-img" src="" alt=""/>
-    <video id="overlay-char-video" autoplay loop muted playsinline style="display:none;width:100%;height:100%;object-fit:contain"></video>
-  </div>
-  <p class="overlay-text" id="overlay-text"></p>
-  <div class="overlay-dots" aria-hidden="true">
-    <span></span><span></span><span></span>
-  </div>
-</div>
+    <section class="done section reveal" aria-labelledby="done-title">
+      <p class="eyebrow">04 · Explore</p>
+      <h2 id="done-title">Now see what’s here.</h2>
+      <p>Once your assets arrive, find the apps, communities, and tools built on Solana.</p>
+      <a class="button button--primary" href="ecosystem-new.html">Explore the ecosystem <span aria-hidden="true">→</span></a>
+    </section>
+  </main>
 
-<script>
-(function(){
-  var overlay   = document.getElementById('gate-overlay');
-  var oImg      = document.getElementById('overlay-char-img');
-  var oVideo    = document.getElementById('overlay-char-video');
-  var oText     = document.getElementById('overlay-text');
-  var fan       = document.getElementById('card-fan');
-  var busy      = false;
-
-  var isMobile = window.matchMedia('(max-width: 768px)').matches || ('ontouchstart' in window && screen.width < 1024);
-  var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  function pickCard(card){
-    if(busy) return;
-    busy = true;
-
-    var href    = card.dataset.href;
-    var persona = card.dataset.persona;
-    localStorage.setItem('wts_persona', persona);
-    window._track('gate_path_select', { persona: persona });
-
-    /* When reduce-motion is on, skip the overlay entirely — no JS animation
-       sequence means no flicker caused by CSS killing transitions mid-sequence. */
-    if(reducedMotion){
-      window.location.href = href;
-      return;
-    }
-
-    var img     = card.dataset.img;
-    var video   = card.dataset.video;
-    var texts   = JSON.parse(card.dataset.texts || '["Getting ready…"]');
-
-    var rect = card.getBoundingClientRect();
-    var cx   = rect.left + rect.width  / 2;
-    var cy   = rect.top  + rect.height / 2;
-
-    if(video && !isMobile){
-      oVideo.src = video;
-      oVideo.style.display = 'block';
-      oImg.style.display = 'none';
-      oVideo.play().catch(function(){
-        /* video play blocked (e.g. iOS policy) — fall back to static image */
-        oVideo.style.display = 'none';
-        oImg.src = img;
-        oImg.style.display = 'block';
-      });
-    } else {
-      oImg.src = img;
-      oImg.style.display = 'block';
-      oVideo.style.display = 'none';
-    }
-    oText.textContent = texts[0];
-
-    [].forEach.call(fan.querySelectorAll('.arch-card'), function(c){
-      if(c !== card) c.classList.add('fading-out');
-    });
-
-    overlay.style.setProperty('--cx', cx + 'px');
-    overlay.style.setProperty('--cy', cy + 'px');
-    overlay.classList.add('is-active');
-
-    var i = 0;
-    var seq = setInterval(function(){
-      i = (i + 1) % texts.length;
-      oText.classList.add('is-leaving');
-      setTimeout(function(){
-        oText.textContent = texts[i];
-        oText.classList.remove('is-leaving');
-        oText.classList.add('is-entering');
-        requestAnimationFrame(function(){
-          requestAnimationFrame(function(){
-            oText.classList.remove('is-entering');
-          });
-        });
-      }, 260);
-    }, 1100);
-
-    setTimeout(function(){
-      clearInterval(seq);
-      window.location.href = href;
-    }, 3400);
-  }
-
-  [].forEach.call(document.querySelectorAll('.arch-card'), function(card){
-    card.addEventListener('click', function(){ pickCard(card); });
-    card.addEventListener('keydown', function(e){
-      if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); pickCard(card); }
-    });
-  });
-})();
-</script>
+  <footer class="site-footer">
+    <p>Community-made. Provider links are not endorsements.</p>
+    <nav aria-label="Footer">
+      <a href="https://t.me/+3prPanTSreIwMzMy" target="_blank" rel="noopener" onclick="window._track('click_telegram',{from:'home'})">Get help</a>
+      <a href="https://docs.intents.aurora.dev/intents-swap/widget-integration" target="_blank" rel="noopener">Aurora Intents docs</a>
+    </nav>
+  </footer>
+  <script src="assets/home.js" defer></script>
 </body>
 </html>
