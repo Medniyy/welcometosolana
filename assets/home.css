@@ -247,6 +247,30 @@ h2 {
   font-size: 13px;
   line-height: 1.7;
 }
+.founder-context {
+  align-self: end;
+  margin-bottom: 5px;
+}
+.founder-context p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.7;
+}
+.founder-context a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 15px;
+  font-size: 12px;
+  font-weight: 700;
+  text-underline-offset: 4px;
+}
+.founder-context a span {
+  color: var(--muted);
+  transition: transform .18s ease;
+}
+.founder-context a:hover span { transform: translate(2px, -2px); }
 
 .video-frame {
   position: relative;
