@@ -665,6 +665,7 @@ h2 {
 }
 
 @media (max-width: 600px) {
+  .mobile-arrow { display: none !important; }
   .site-header, .site-footer, main {
     width: calc(100vw - 30px);
     max-width: calc(100vw - 30px);
