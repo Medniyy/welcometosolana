@@ -75,6 +75,22 @@
     });
   });
 
+  var credits = document.getElementById("creators");
+  if (credits && window.location.hash === "#creators") {
+    credits.open = true;
+    window.requestAnimationFrame(function () {
+      credits.scrollIntoView({ block: "start" });
+    });
+  }
+
+  var summerSong = document.querySelector("[data-summer-song]");
+  if (summerSong) {
+    summerSong.addEventListener("play", function trackSummerSongPlay() {
+      window._track("play_solana_summer_song");
+      summerSong.removeEventListener("play", trackSummerSongPlay);
+    });
+  }
+
   var revealItems = document.querySelectorAll(".reveal");
   if ("IntersectionObserver" in window) {
     var observer = new IntersectionObserver(function (entries) {
