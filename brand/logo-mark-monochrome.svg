@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" role="img" aria-labelledby="title desc">
+  <title id="title">Welcome to Solana monochrome mark</title>
+  <desc id="desc">A circular portal and path rendered as a single-color mark.</desc>
+  <g fill="none" stroke="#fff">
+    <circle cx="500" cy="500" r="347" stroke-width="22"/>
+    <circle cx="500" cy="500" r="236" stroke-width="14" opacity="0.72"/>
+    <circle cx="500" cy="500" r="181" stroke-width="12" opacity="0.82"/>
+    <circle cx="500" cy="500" r="143" stroke-width="10" opacity="0.9"/>
+    <circle cx="500" cy="500" r="111" stroke-width="8"/>
+    <path d="M500 558 840 770M500 558 160 770" stroke-width="14" stroke-linecap="round"/>
+    <path d="M500 566V824" stroke-width="12" stroke-linecap="round" opacity="0.82"/>
+  </g>
+</svg>

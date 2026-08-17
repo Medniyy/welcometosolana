@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" role="img" aria-labelledby="title desc">
+  <title id="title">Welcome to Solana portal mark</title>
+  <desc id="desc">A luminous cyan portal above a reflective path, enclosed by a circular horizon.</desc>
+  <defs>
+    <radialGradient id="background" cx="50%" cy="46%" r="62%">
+      <stop offset="0" stop-color="#0d2530"/>
+      <stop offset="0.58" stop-color="#061219"/>
+      <stop offset="1" stop-color="#040a0e"/>
+    </radialGradient>
+    <linearGradient id="rim" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ddf2f9"/>
+      <stop offset="0.48" stop-color="#a7d4e5"/>
+      <stop offset="1" stop-color="#73adc6"/>
+    </linearGradient>
+    <radialGradient id="portalOuter" cx="50%" cy="47%" r="61%">
+      <stop offset="0" stop-color="#a7d4e5" stop-opacity="0.92"/>
+      <stop offset="0.68" stop-color="#3e819d" stop-opacity="0.86"/>
+      <stop offset="1" stop-color="#264b5c" stop-opacity="0.96"/>
+    </radialGradient>
+    <radialGradient id="portalMid" cx="50%" cy="47%" r="58%">
+      <stop offset="0" stop-color="#ddf2f9"/>
+      <stop offset="0.72" stop-color="#86b9cf"/>
+      <stop offset="1" stop-color="#5995ae"/>
+    </radialGradient>
+    <radialGradient id="portalInner" cx="50%" cy="45%" r="60%">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="0.66" stop-color="#ddf2f9"/>
+      <stop offset="1" stop-color="#a7d4e5"/>
+    </radialGradient>
+    <radialGradient id="path" cx="50%" cy="4%" r="76%" fx="50%" fy="4%">
+      <stop offset="0" stop-color="#ddf2f9"/>
+      <stop offset="0.08" stop-color="#86b9cf"/>
+      <stop offset="0.34" stop-color="#3e819d"/>
+      <stop offset="0.72" stop-color="#163646"/>
+      <stop offset="1" stop-color="#081923"/>
+    </radialGradient>
+    <linearGradient id="reflection" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.95"/>
+      <stop offset="0.18" stop-color="#c8edf8" stop-opacity="0.72"/>
+      <stop offset="0.72" stop-color="#73adc6" stop-opacity="0.12"/>
+      <stop offset="1" stop-color="#73adc6" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="portalGlow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="14"/>
+    </filter>
+    <filter id="waterTexture" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.012 0.15" numOctaves="2" seed="17" result="noise"/>
+      <feColorMatrix in="noise" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 .18 0" result="softNoise"/>
+      <feBlend in="SourceGraphic" in2="softNoise" mode="screen"/>
+    </filter>
+    <clipPath id="discClip">
+      <circle cx="500" cy="500" r="347"/>
+    </clipPath>
+    <clipPath id="pathClip">
+      <path d="M500 558 874 790 1000 1000H0l126-210Z"/>
+    </clipPath>
+  </defs>
+
+  <rect width="1000" height="1000" rx="96" fill="url(#background)"/>
+
+  <g clip-path="url(#discClip)">
+    <circle cx="500" cy="500" r="239" fill="#73adc6" opacity="0.14" filter="url(#portalGlow)"/>
+    <circle cx="500" cy="500" r="236" fill="url(#portalOuter)" stroke="#86b9cf" stroke-width="2"/>
+    <circle cx="500" cy="500" r="181" fill="url(#portalMid)" stroke="#c4e8f5" stroke-width="2"/>
+    <circle cx="500" cy="500" r="143" fill="#a7d4e5" stroke="#ddf2f9" stroke-width="2"/>
+    <circle cx="500" cy="500" r="111" fill="url(#portalInner)" stroke="#eefaff" stroke-width="2"/>
+
+    <path d="M500 558 874 790 1000 1000H0l126-210Z" fill="url(#path)" filter="url(#waterTexture)"/>
+    <path d="M500 558 874 790" fill="none" stroke="#73adc6" stroke-width="1.5" opacity="0.85"/>
+    <path d="M500 558 126 790" fill="none" stroke="#73adc6" stroke-width="1.5" opacity="0.85"/>
+    <path d="M500 558C487 647 476 752 458 898h84c-18-146-29-251-42-340Z" fill="url(#reflection)" opacity="0.92" clip-path="url(#pathClip)"/>
+    <path d="M500 558V878" stroke="#eaf9ff" stroke-width="3" opacity="0.62" filter="url(#portalGlow)"/>
+  </g>
+
+  <circle cx="500" cy="500" r="347" fill="none" stroke="url(#rim)" stroke-width="20"/>
+  <circle cx="500" cy="500" r="336" fill="none" stroke="#d9f4fc" stroke-opacity="0.45" stroke-width="1.5"/>
+</svg>
