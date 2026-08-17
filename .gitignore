@@ -45,6 +45,8 @@ skills-lock.json
 SETUP.md
 DESIGN_GUIDELINES.md
 README.md
+!/README.md
+!/brand/README.md
 
 # OS / editor
 .DS_Store
