@@ -93,7 +93,8 @@
     <p class="callout"><b>You keep half of what you charge.</b> We submit
       <span class="mono">appFees: 50</span> and 1Click rewrites it to 25 bps for
       us and 25 bps for them. The user is charged 0.5%; we receive 0.25%. The
-      implied-volume range below already accounts for it.</p>
+      volume figures above are derived from what reached us, so they already
+      account for it — an earlier version did not, and read half.</p>
   </section>
 
   <section>
@@ -111,13 +112,17 @@ const NEAR_ACCT = "welcometosolana.near";
 const OSMO_LCD  = "https://osmosis-api.polkachu.com";
 const NEAR_RPC  = "https://rpc.mainnet.near.org";
 const TOKENS    = "https://1click.chaindefuser.com/v0/tokens";
-const FEE_BPS   = 50;
-const SHARE     = { cosmos: 0.8, near: 0.5 };
+const FEE_BPS   = 50;                       // charged to the user
+/* What actually reaches us. NEAR is confirmed exact from a live quote: we
+   submit appFees 50 and 1Click rewrites it to 25 for us, 25 for itself. Skip
+   keeps 25% without an API key, so 37.5 of 50. Verified 2026-08-20: two NEAR
+   transfers delivered 4.441249 USDC and credited 0.0112 - 25 bps of 4.48. */
+const NET_BPS   = { cosmos: 37.5, near: 25 };
 
 const money = n => "$" + Number(n).toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2});
 const fine  = n => "$" + Number(n).toLocaleString("en-US",{minimumFractionDigits:4,maximumFractionDigits:4});
 const el    = id => document.getElementById(id);
-const vol   = (usd, share) => ({ low: usd/(FEE_BPS/1e4), high: usd/share/(FEE_BPS/1e4) });
+const vol   = (usd, rail) => usd / (NET_BPS[rail]/1e4);
 
 el("osmo-addr").textContent = OSMO_ADDR;
 el("near-acct").textContent = NEAR_ACCT;
@@ -209,16 +214,16 @@ async function load() {
     el("near").innerHTML = `<p class="empty err">Could not read NEAR: ${e.message}</p>`;
   }
 
-  const cv = vol(cUsd, SHARE.cosmos), nv = vol(nUsd, SHARE.near);
+  const cv = vol(cUsd, "cosmos"), nv = vol(nUsd, "near");
   el("cards").innerHTML = `
     <div class="card"><p>Total fees earned</p><strong>${fine(cUsd+nUsd)}</strong>
       <small>Across both rails, all time.</small></div>
     <div class="card"><p>Completed transfers</p><strong>${cCount}</strong>
       <small>Cosmos legs that carried a fee. NEAR settles into a balance, so it has no per-transfer count.</small></div>
-    <div class="card"><p>Cosmos volume</p><strong>${money(cv.low)}</strong>
-      <small>Fee-bearing only, up to ${money(cv.high)} gross. Swapless transfers are invisible here.</small></div>
-    <div class="card"><p>NEAR volume</p><strong>${money(nv.low)}</strong>
-      <small>Between ${money(nv.low)} and ${money(nv.high)} depending on the split.</small></div>`;
+    <div class="card"><p>Cosmos volume</p><strong>${money(cv)}</strong>
+      <small>Fee-bearing legs only, at ${NET_BPS.cosmos} bps net. Swapless transfers move money and appear nowhere here.</small></div>
+    <div class="card"><p>NEAR volume</p><strong>${money(nv)}</strong>
+      <small>Delivered, at ${NET_BPS.near} bps net. Every 1Click transfer pays, swap or not.</small></div>`;
 
   el("when").textContent = "updated " + new Date().toLocaleTimeString();
 }

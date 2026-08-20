@@ -34,19 +34,23 @@ const NEAR_RPC = "https://rpc.mainnet.near.org";
    so a fee credited in any asset can be valued without a second source. */
 const ONECLICK_TOKENS = "https://1click.chaindefuser.com/v0/tokens";
 
-/* Gross rate charged to the user, shared by both rails so the two halves of
-   the report are comparable. */
+/* What the user is charged. */
 const FEE_BPS = 50;
-/* Neither rail pays us the whole fee: Skip keeps 20-25%, 1Click splits 50/50.
-   Implied volume is therefore a range, and is printed as one. */
-const OUR_SHARE = { cosmos: 0.8, near: 0.5 };
+
+/* What actually reaches us, which is not the same thing and is the reason
+   early volume estimates read half what they should have.
+ *
+ *   NEAR  - confirmed from a live quote: we submit appFees 50 and 1Click
+ *           rewrites it to 25 for us and 25 for itself. Exactly half.
+ *   Cosmos- Skip keeps 25% without an API key (20% with one), so 37.5 of 50.
+ *
+ * Checked against reality on 2026-08-20: two NEAR transfers delivered
+ * 4.441249 USDC and credited 0.0112 in fees. 25 bps of 4.48 is 0.0112. */
+const NET_BPS = { cosmos: 37.5, near: 25 };
 
 const usdc = (base) => Number(base) / 1e6;
 const money = (n) => "$" + n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-const impliedVolume = (feeUsd, share) => ({
-  low: feeUsd / (FEE_BPS / 10000),
-  high: feeUsd / share / (FEE_BPS / 10000),
-});
+const impliedVolume = (feeUsd, rail) => feeUsd / (NET_BPS[rail] / 10000);
 
 async function cosmosFees() {
   const q = encodeURIComponent(`transfer.recipient='${OSMO_FEE_ADDRESS}'`);
@@ -126,8 +130,7 @@ async function nearFees() {
     console.log(`    total fees            : ${cosmosUsd.toFixed(6)} USDC`);
     if (p.length) {
       console.log(`    first / latest        : ${p[p.length - 1].at}  /  ${p[0].at}`);
-      const v = impliedVolume(cosmosUsd, OUR_SHARE.cosmos);
-      console.log(`    implied volume        : ${money(v.low)} - ${money(v.high)}`);
+      console.log(`    fee-bearing volume    : ${money(impliedVolume(cosmosUsd, "cosmos"))}   (at ${NET_BPS.cosmos} bps net)`);
     }
   } catch (e) {
     console.log(`\n  Cosmos   could not read: ${e.message}`);
@@ -145,9 +148,8 @@ async function nearFees() {
           (x.usd == null ? "    (unpriced)" : `    ${money(x.usd)}`));
       }
       nearUsd = t.reduce((s, x) => s + (x.usd || 0), 0);
-      const v = impliedVolume(nearUsd, OUR_SHARE.near);
       console.log(`    total                 : ${money(nearUsd)}`);
-      console.log(`    implied volume        : ${money(v.low)} - ${money(v.high)}`);
+      console.log(`    volume delivered      : ${money(impliedVolume(nearUsd, "near"))}   (at ${NET_BPS.near} bps net)`);
     }
   } catch (e) {
     console.log(`\n  NEAR     could not read: ${e.message}`);
@@ -166,12 +168,16 @@ async function nearFees() {
              with no balance change. The funds are real; the wallet cannot see
              a balance the intents contract holds on your behalf.
 
-  Two things this number is not:
-    - It is not everything that moved. On Cosmos the affiliate cut rides the
-      Osmosis swap, so a transfer with no swap in it - USDC that is already
-      USDC, going to Noble and out - has nothing for a fee to attach to.
-    - It is not what the user paid to move funds. Network gas and the CCTP
-      "smart relay" charge are costs of the route, paid to validators and
+  You charge 0.5% and keep half of it. Volume above is derived from what
+  reached us, not from what was charged.
+
+  Two things these numbers are not:
+    - The Cosmos figure is not everything that moved. The affiliate cut rides
+      the Osmosis swap, so a transfer with no swap in it - USDC that is
+      already USDC, going to Noble and out - has nothing for a fee to attach
+      to. It moves real money and earns nothing.
+    - Neither figure is what the user paid to move funds. Network gas and the
+      CCTP "smart relay" charge are costs of the route, paid to validators and
       relayers. None of that reaches us.
 `);
 })();
