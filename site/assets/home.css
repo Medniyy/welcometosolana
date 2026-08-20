@@ -826,3 +826,83 @@ h2 {
   }
   .consent-inner { padding: 24px 20px 22px; }
 }
+
+/* ------------------------------------------------------- community button
+
+   Rendered by assets/community.js on every page. Sits low-right, quiet enough
+   to ignore and specific enough to answer "where do I say something".        */
+
+.community {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 40;
+  display: flex;
+  align-items: stretch;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: var(--paper);
+  box-shadow: 0 10px 34px rgba(23, 24, 22, .14);
+  overflow: hidden;
+}
+.community-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 8px 11px 16px;
+  color: var(--ink);
+  text-decoration: none;
+  transition: background-color .18s ease;
+}
+.community-btn:hover { background: var(--surface); }
+.community-icon {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  color: var(--focus);
+}
+.community-text { display: flex; flex-direction: column; gap: 1px; }
+.community-text strong {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: -.01em;
+  white-space: nowrap;
+}
+.community-text small {
+  color: var(--muted);
+  font-size: 11px;
+  white-space: nowrap;
+}
+.community-close {
+  flex: none;
+  width: 34px;
+  padding: 0;
+  border: 0;
+  border-left: 1px solid var(--line);
+  background: none;
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1;
+  cursor: pointer;
+}
+.community-close:hover { background: var(--surface); color: var(--ink); }
+
+@media (max-width: 700px) {
+  /* On a phone the second line is the first thing to go — the label alone
+     still says what it is, and the bridge's own full-width button is close
+     enough that this must not become a thumb trap. */
+  .community { right: 12px; bottom: 12px; }
+  .community-btn { padding: 10px 6px 10px 13px; gap: 9px; }
+  .community-text small { display: none; }
+  .community-text strong { font-size: 12.5px; }
+  .community-icon { width: 19px; height: 19px; }
+  .community-close { width: 30px; font-size: 15px; }
+}
+
+@media (max-width: 380px) {
+  /* Narrowest phones: the icon alone, so it never crowds the page it sits on. */
+  .community-text { display: none; }
+  .community-btn { padding: 11px 12px; }
+}
+
+@media print { .community { display: none; } }
