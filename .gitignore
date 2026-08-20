@@ -1,54 +1,83 @@
-# Local-only / tool folders
+# ---------------------------------------------------------------- private
+# Internal strategy, roadmaps, session notes and working copies. None of this
+# belongs in a public repo. Three of these folders are duplicates of docs/ and
+# were previously neither tracked nor ignored, which meant a single
+# `git add -A` would have published all of them.
+docs/
+local-docs/
+_docs/
+Hermes/
+Clean deploy/
+archive/
+transcripts/
+Migration/
+videopresentations/
+Stitch/
+website/
+website-minimal/
+
+# Internal task and source documents (never deploy)
+TASK_*.md
+*_SOURCE.md
+CURSOR_DEPLOY_TASK.md
+bios.txt
+bios(descriptions).txt
+VERSION
+index.local.html
+
+# Tool folders
 .cursor/
 .claude/
 .agents/
 
-# Local-only docs
-local-docs/
-docs/
-VERSION
-bios(descriptions).txt
-bios.txt
-index.local.html
-
-# Internal task and source docs (never deploy)
-TASK_*.md
-*_SOURCE.md
-CURSOR_DEPLOY_TASK.md
-
-# Local scratch + heavy artifacts
+# ------------------------------------------------------------ build output
+# Both bundles are produced by .github/workflows/pages.yml at deploy time.
+# Committing them meant carrying ~150 machine-generated, content-hashed files
+# in the tree and re-committing all of them on every rebuild.
 node_modules/
+site/near-widget-dist/
+site/cosmos-bridge-dist/
+
+# --------------------------------------------------- superseded, kept locally
+# Left on disk but out of the repo. The tailwind pipeline emitted a stylesheet
+# no page ever linked; the prototype and the old cosmos entry were replaced by
+# src/cosmos/entry.js and site/assets/bridge.js.
+tailwind.config.js
+src/input.css
+src/cosmos-bridge-entry.js
+
+# --------------------------------------------------------------- local junk
 category-pngs/
+favicons/
+scripts/
+test-artifacts/
+app/
 ascii-art.html
 generate_category_pngs.py
-scripts/
-videopresentations/
-Migration/
-transcripts/
-archive/
-Stitch/
-website/
-website-minimal/
-favicons/
-~/
-
-# Local tooling / project files (keep repo focused on the site)
-package.json
-package-lock.json
-tailwind.config.js
-src/
 export-pdf.mjs
 generate-og.mjs
 og-template.html
 project_overview.html
 skills-lock.json
-SETUP.md
-DESIGN_GUIDELINES.md
-README.md
-!/README.md
-!/brand/README.md
+ramp-prototype.html
+~/
 
-# OS / editor
+# Unreferenced local files. Kept on disk, kept out of the repo — an old
+# working copy and a handful of images nothing on the site links to. The
+# stray "old-index" file uses a private-use codepoint where a colon would be,
+# so it is matched by wildcard rather than by name.
+# Leading slashes matter here: a bare `cosmos.png` would also have excluded
+# assets/chains/cosmos.png, which the Cosmos tab needs.
+/Everything Raj.png
+/C*UsersmedniDesktopold-index.html
+/arbitrum.jpg
+/base.jpg
+/etherium.jpg
+/cosmos.png
+/animatednewtosolana.mp4
+/welcometosolana-logo-400.png
+site/animatednewtosolana-alpha.webm
+
+# ------------------------------------------------------------------- OS
 .DS_Store
 Thumbs.db
-

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Explore the Solana ecosystem — Welcome to Solana</title>
+  <meta name="description" content="A searchable directory of wallets, communities, apps, tools, and projects across the Solana ecosystem."/>
+  <link rel="canonical" href="https://welcometosolana.xyz/ecosystem-new.html"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://welcometosolana.xyz/ecosystem-new.html"/>
+  <meta property="og:title" content="Explore the Solana ecosystem"/>
+  <meta property="og:description" content="Find the apps, communities, and tools built on Solana."/>
+  <meta property="og:image" content="https://welcometosolana.xyz/og-image-v3.png"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg?v=2"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap"/>
+  <link rel="stylesheet" href="assets/ecosystem.css"/>
+  <script>window._track=function(n,d){try{if(window.umami&&typeof window.umami.track==='function')window.umami.track(n,d||{})}catch(e){}}</script>
+  <script>(function(){var s=document.createElement('script');s.defer=true;s.src='https://umami-service-production-3ded.up.railway.app/script.js';s.dataset.websiteId='faf37f2f-424a-4061-8416-2c4b5193a4b5';document.head.appendChild(s);})();</script>
+</head>
+<body>
+  <a class="skip-link" href="#directory">Skip to directory</a>
+  <header class="site-header">
+    <a class="wordmark" href="index.html">Welcome to Solana</a>
+    <a class="header-action" href="index.html#migrate">Bridge assets <span aria-hidden="true">↗</span></a>
+  </header>
+
+  <main>
+    <section class="eco-hero" aria-labelledby="eco-title">
+      <div>
+        <p class="eyebrow">Ecosystem directory</p>
+        <h1 id="eco-title">Explore<br/><em>Solana.</em></h1>
+      </div>
+      <div class="eco-summary">
+        <p id="eco-subtitle">Loading the ecosystem…</p>
+        <a href="#directory">Browse everything <span aria-hidden="true">↓</span></a>
+      </div>
+    </section>
+
+    <section class="directory" id="directory" aria-label="Solana ecosystem projects">
+      <div class="directory-tools">
+        <label class="search">
+          <span>Search</span>
+          <input id="eco-search" type="search" placeholder="Project, category, or use case" autocomplete="off"/>
+        </label>
+        <span class="result-count" id="eco-count" aria-live="polite"></span>
+      </div>
+      <div class="category-rail" id="eco-cats" role="group" aria-label="Filter by category">
+        <button class="category-button is-active" type="button" data-cat="all">All</button>
+      </div>
+      <div class="eco-grid" id="eco-grid"></div>
+      <div class="empty-state" id="eco-empty" hidden>
+        <p>No projects match that search.</p>
+        <button type="button" id="eco-reset">Clear filters</button>
+      </div>
+    </section>
+
+    <section class="eco-end">
+      <p class="eyebrow">Keep moving</p>
+      <h2>Need assets on Solana first?</h2>
+      <a class="button" href="index.html#migrate">Bridge to Solana <span aria-hidden="true">→</span></a>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Community-made. Listings are not endorsements.</p>
+    <nav aria-label="Footer">
+      <a href="index.html">Home</a>
+      <a href="https://t.me/+3prPanTSreIwMzMy" target="_blank" rel="noopener">Suggest a project</a>
+    </nav>
+  </footer>
+  <button class="scroll-top" id="scroll-top" type="button" aria-label="Back to top">↑</button>
+
+  <script>
+  (function(){
+    "use strict";
+    var state = { cat: "all", query: "" };
+    var projects = [];
+    var categories = [];
+    var categoryNames = {};
+    var grid = document.getElementById("eco-grid");
+    var empty = document.getElementById("eco-empty");
+    var count = document.getElementById("eco-count");
+    var subtitle = document.getElementById("eco-subtitle");
+    var rail = document.getElementById("eco-cats");
+
+    function escapeHtml(value) {
+      return String(value == null ? "" : value)
+        .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+    }
+    function matches(project) {
+      if (state.cat !== "all" && project.category !== state.cat) return false;
+      if (!state.query) return true;
+      var searchable = [project.name, project.description, project.category, categoryNames[project.category]].join(" ").toLowerCase();
+      return searchable.indexOf(state.query.toLowerCase()) !== -1;
+    }
+    function ordered(list) {
+      var byCategory = {};
+      list.forEach(function(project) {
+        (byCategory[project.category] = byCategory[project.category] || []).push(project);
+      });
+      Object.keys(byCategory).forEach(function(key) {
+        byCategory[key].sort(function(a, b) { return a.name.localeCompare(b.name); });
+      });
+      if (state.cat !== "all") return byCategory[state.cat] || [];
+      var ids = categories.map(function(category) { return category.id; }).filter(function(id) { return byCategory[id]; });
+      var result = [];
+      var row = 0;
+      var added = true;
+      while (added) {
+        added = false;
+        ids.forEach(function(id) {
+          if (byCategory[id][row]) {
+            result.push(byCategory[id][row]);
+            added = true;
+          }
+        });
+        row += 1;
+      }
+      return result;
+    }
+    function render() {
+      var visible = ordered(projects.filter(matches));
+      count.textContent = visible.length + (visible.length === 1 ? " project" : " projects");
+      grid.innerHTML = "";
+      empty.hidden = visible.length !== 0;
+      visible.forEach(function(project, index) {
+        var card = document.createElement("a");
+        card.className = "eco-card";
+        card.href = project.url;
+        card.target = "_blank";
+        card.rel = "noopener";
+        card.style.setProperty("--delay", Math.min(index, 14) * 24 + "ms");
+        card.innerHTML =
+          '<img src="' + escapeHtml(project.logo) + '" alt="" loading="lazy" decoding="async"/>' +
+          '<span class="eco-card-copy"><strong>' + escapeHtml(project.name) + '</strong>' +
+          '<small>' + escapeHtml(categoryNames[project.category] || project.category) + '</small></span>' +
+          '<span class="eco-card-arrow" aria-hidden="true">↗</span>';
+        card.querySelector("img").addEventListener("error", function() { this.style.visibility = "hidden"; });
+        card.addEventListener("click", function() {
+          window._track("eco_project_click", { project: project.name, category: project.category });
+        });
+        grid.appendChild(card);
+      });
+    }
+    function buildCategories() {
+      categories.forEach(function(category) {
+        categoryNames[category.id] = category.label;
+        var button = document.createElement("button");
+        button.className = "category-button";
+        button.type = "button";
+        button.dataset.cat = category.id;
+        button.textContent = category.label;
+        rail.appendChild(button);
+      });
+      rail.addEventListener("click", function(event) {
+        var button = event.target.closest("[data-cat]");
+        if (!button) return;
+        state.cat = button.dataset.cat;
+        rail.querySelectorAll("[data-cat]").forEach(function(item) {
+          item.classList.toggle("is-active", item === button);
+        });
+        render();
+        window._track("eco_filter_category", { category: state.cat });
+      });
+    }
+
+    fetch("data/ecosystem.json")
+      .then(function(response) {
+        if (!response.ok) throw new Error("Directory data unavailable");
+        return response.json();
+      })
+      .then(function(data) {
+        categories = data.categories;
+        projects = data.projects;
+        buildCategories();
+        subtitle.textContent = categories.length + " categories. " + projects.length + " projects. One place to explore.";
+        render();
+      })
+      .catch(function(error) {
+        subtitle.textContent = "The directory could not be loaded.";
+        console.error(error);
+      });
+
+    var searchTimer;
+    document.getElementById("eco-search").addEventListener("input", function(event) {
+      clearTimeout(searchTimer);
+      var value = event.target.value;
+      searchTimer = setTimeout(function() {
+        state.query = value.trim();
+        render();
+      }, 150);
+    });
+    document.getElementById("eco-reset").addEventListener("click", function() {
+      state = { cat: "all", query: "" };
+      document.getElementById("eco-search").value = "";
+      rail.querySelectorAll("[data-cat]").forEach(function(item) {
+        item.classList.toggle("is-active", item.dataset.cat === "all");
+      });
+      render();
+    });
+    var scrollButton = document.getElementById("scroll-top");
+    window.addEventListener("scroll", function() {
+      scrollButton.classList.toggle("is-visible", window.scrollY > 500);
+    }, { passive: true });
+    scrollButton.addEventListener("click", function() {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  })();
+  </script>
+  <script src="assets/consent.js" defer></script>
+</body>
+</html>

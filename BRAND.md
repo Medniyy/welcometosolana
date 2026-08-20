@@ -22,7 +22,7 @@
 
 ## Brand premise
 
-**Welcome to Solana is a direct route from 50+ source chains to one destination: Solana.** The website helps people choose a wallet, compare migration routes through Squid and NEAR Intents, review a quote, and discover communities and applications after they arrive.
+**Welcome to Solana is a direct route from 50+ source chains to one destination: Solana.** The website helps people choose a wallet, move assets from Ethereum, Cosmos, Bitcoin and 30+ other chains through one interface, review the exact amount that will arrive, and discover communities and applications once they get there.
 
 The identity turns that journey into a simple visual idea: **portal, path, horizon**. It should feel calm enough for a first-time user, precise enough for a transaction interface, and optimistic without becoming promotional hype.
 

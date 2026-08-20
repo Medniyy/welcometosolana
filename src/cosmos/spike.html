@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Cosmos → Solana spike</title>
+<style>
+  :root { --bg:#141414; --panel:#1c1c1c; --rule:#2e2e2e; --ink:#eaeaea; --dim:#8b8b8b;
+          --ok:#98FFB5; --warn:#FADFAD; --err:#FFB8BE; --sig:#FFC48A; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:14px/1.5 ui-monospace,"SF Mono",Consolas,monospace; }
+  .wrap { max-width:1000px; margin:0 auto; padding:32px 20px 80px; }
+  h1 { font-size:19px; margin:0 0 6px; font-weight:600; }
+  .sub { color:var(--dim); margin:0 0 28px; font-size:13px; }
+  fieldset { border:1px solid var(--rule); border-radius:4px; padding:16px 18px; margin:0 0 18px; background:var(--panel); }
+  legend { color:var(--dim); font-size:11px; letter-spacing:.12em; text-transform:uppercase; padding:0 6px; }
+  button { font:inherit; background:var(--ink); color:#111; border:0; border-radius:3px;
+           padding:8px 16px; cursor:pointer; }
+  button:disabled { background:var(--rule); color:var(--dim); cursor:not-allowed; }
+  button.ghost { background:transparent; color:var(--ink); border:1px solid var(--rule); }
+  input[type=text] { font:inherit; background:#111; color:var(--ink); border:1px solid var(--rule);
+                     border-radius:3px; padding:8px 10px; width:100%; }
+  label.field { display:block; margin-bottom:12px; }
+  label.field span { display:block; color:var(--dim); font-size:12px; margin-bottom:5px; }
+  .row { display:grid; grid-template-columns:20px 70px 130px 130px 1fr; gap:10px; align-items:center;
+         padding:6px 4px; border-bottom:1px solid var(--rule); cursor:pointer; }
+  .row:hover { background:#212121; }
+  .sym { font-weight:600; }
+  .amt { text-align:right; }
+  .dim { color:var(--dim); }
+  .tiny { font-size:11px; }
+  .cols { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  @media (max-width:720px){ .cols { grid-template-columns:1fr; } .row { grid-template-columns:20px 60px 1fr; } .row .tiny,.row .dim:not(.tiny){ display:none; } }
+  #log { border:1px solid var(--rule); border-radius:4px; background:#101010; padding:12px 14px;
+         max-height:460px; overflow:auto; font-size:12.5px; }
+  .line { padding:2px 0; white-space:pre-wrap; word-break:break-all; border-bottom:1px solid #191919; }
+  .line.ok{color:var(--ok);} .line.warn{color:var(--warn);} .line.err{color:var(--err);} .line.sig{color:var(--sig);}
+  .note { color:var(--warn); font-size:12.5px; border-left:2px solid var(--warn); padding-left:10px; margin:0 0 18px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Cosmos → Solana spike</h1>
+  <p class="sub">Mainnet. Real funds. Keyless Skip. Measures signature count, token-account behaviour, cost and duration.</p>
+
+  <p class="note">Use $5. This is instrumentation, not a product — if a hop stalls, funds sit at an intermediate chain and need manual recovery.</p>
+
+  <fieldset>
+    <legend>1 · wallet</legend>
+    <button id="connect">Connect Keplr &amp; scan balances</button>
+    <div id="balances" style="margin-top:14px"></div>
+  </fieldset>
+
+  <fieldset>
+    <legend>2 · destination</legend>
+    <div class="cols">
+      <label class="field"><span>Solana address to receive USDC</span>
+        <input type="text" id="solana" placeholder="paste a Solana address" spellcheck="false"/></label>
+      <label class="field"><span>Amount to send</span>
+        <input type="text" id="amount" placeholder="0.0" spellcheck="false"/></label>
+    </div>
+    <button id="recheck" class="ghost">Re-check USDC token account</button>
+  </fieldset>
+
+  <fieldset>
+    <legend>3 · run</legend>
+    <button id="quote" disabled>Get route</button>
+    <button id="go" disabled>Execute — signs in Keplr</button>
+  </fieldset>
+
+  <fieldset>
+    <legend>log</legend>
+    <div id="log"></div>
+  </fieldset>
+</div>
+<script type="module" src="./spike-entry.js"></script>
+</body>
+</html>

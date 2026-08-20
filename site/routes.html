@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Other routes to Solana — Welcome to Solana</title>
+  <meta name="description" content="Third-party routers you can use to bridge to Solana: Squid and the NEAR Intents swap widget."/>
+  <link rel="canonical" href="https://welcometosolana.xyz/routes.html"/>
+  <!-- Deliberately not indexed. This page exists so the third-party routers
+       stay reachable for anyone who prefers them, not to compete with the
+       main route for search traffic. -->
+  <meta name="robots" content="noindex, follow"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://welcometosolana.xyz/routes.html"/>
+  <meta property="og:title" content="Other routes to Solana"/>
+  <meta property="og:description" content="Third-party routers you can use to bridge to Solana."/>
+  <meta property="og:image" content="https://welcometosolana.xyz/og-image-v4.png"/>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg?v=2"/>
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png?v=2"/>
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png?v=2"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap"/>
+  <link rel="stylesheet" href="assets/home.css"/>
+  <script>window._track=function(n,d){try{if(window.umami&&typeof window.umami.track==='function')window.umami.track(n,d||{})}catch(e){}}</script>
+  <script>(function(){var s=document.createElement('script');s.defer=true;s.src='https://umami-service-production-3ded.up.railway.app/script.js';s.dataset.websiteId='faf37f2f-424a-4061-8416-2c4b5193a4b5';document.head.appendChild(s);})();</script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="wordmark" href="/" aria-label="Welcome to Solana home">Welcome to Solana</a>
+    <a class="header-action" href="/#migrate">Back to the main route</a>
+  </header>
+
+  <main id="main">
+    <section class="migrate section" id="migrate" aria-labelledby="migrate-title" style="border-top:0">
+      <div class="section-heading reveal">
+        <p class="eyebrow">Other routes</p>
+        <h2 id="migrate-title">Third-party routers.</h2>
+        <p>These are independent services embedded here for convenience. Most people should use <a href="/#migrate">the main route</a> instead — it costs less on the corridors we support and needs no wallet connection. Provider links are not endorsements.</p>
+      </div>
+      <div class="provider-tabs reveal" role="tablist" aria-label="Migration provider">
+        <button class="provider-tab is-active" type="button" role="tab" aria-selected="true" aria-controls="provider-squid" id="tab-squid" data-provider="squid">
+          <span class="provider-mark"><img src="logos/squid.jpg" alt=""/></span><span><strong>Squid</strong><small>Cross-chain router</small></span><span class="provider-check" aria-hidden="true"></span>
+        </button>
+        <button class="provider-tab" type="button" role="tab" aria-selected="false" aria-controls="provider-near" id="tab-near" data-provider="near">
+          <span class="provider-mark"><img src="assets/img/near.png" alt=""/></span><span><strong>NEAR Intents</strong><small>Intent-based swaps</small></span><span class="provider-check" aria-hidden="true"></span>
+        </button>
+      </div>
+      <div class="provider-stage reveal">
+        <div class="provider-stage-head"><span id="provider-context">Squid · embedded router</span><a id="provider-external" href="https://app.squidrouter.com/" target="_blank" rel="noopener">Open full screen <span class="mobile-arrow" aria-hidden="true">↗</span></a></div>
+        <section class="provider-panel is-active" id="provider-squid" role="tabpanel" aria-labelledby="tab-squid">
+          <iframe class="migration-frame migration-frame--squid" title="Squid cross-chain router" data-src="https://studio.squidrouter.com/iframe?config=%7B%22integratorId%22%3A%22squid-widget-studio%22%2C%22themeType%22%3A%22dark%22%2C%22tabs%22%3A%7B%22swap%22%3Atrue%2C%22buy%22%3Afalse%2C%22send%22%3Afalse%7D%7D" src="about:blank" allow="clipboard-write" loading="lazy"></iframe>
+        </section>
+        <section class="provider-panel" id="provider-near" role="tabpanel" aria-labelledby="tab-near" hidden>
+          <iframe class="migration-frame migration-frame--near" title="NEAR Intents cross-chain swap" data-src="near-widget-dist/index.html" src="about:blank" allow="clipboard-write" loading="lazy"></iframe>
+          <noscript><p class="widget-fallback">JavaScript is required for the embedded widget. <a href="https://near.com/" target="_blank" rel="noopener">Open near.com <span class="mobile-arrow" aria-hidden="true">↗</span></a></p></noscript>
+        </section>
+      </div>
+      <div class="safety-note reveal"><span class="safety-icon" aria-hidden="true">i</span><p><strong>Before you confirm</strong>Check the token, amount, destination network, receiving address, fees, and minimum received.</p></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Community-made. Provider links are not endorsements.</p>
+    <nav aria-label="Footer">
+      <a href="/#migrate">Main route</a>
+      <a href="https://t.me/+3prPanTSreIwMzMy" target="_blank" rel="noopener" onclick="window._track('click_telegram',{from:'routes'})">Get help</a>
+    </nav>
+  </footer>
+  <script src="assets/home.js" defer></script>
+  <script src="assets/consent.js" defer></script>
+</body>
+</html>

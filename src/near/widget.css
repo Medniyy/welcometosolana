@@ -1,0 +1,19 @@
+:root {
+  color-scheme: dark;
+  font-family: "Manrope", "Helvetica Neue", sans-serif;
+  background: #10110f;
+}
+
+html,
+body,
+#near-intents-root {
+  min-height: 100%;
+  margin: 0;
+  background: #10110f;
+}
+
+body {
+  overflow-x: hidden;
+  padding: 24px 0;
+  box-sizing: border-box;
+}

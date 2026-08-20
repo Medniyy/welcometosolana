@@ -1,0 +1,24 @@
+{
+  "name": "welcometosolana",
+  "private": true,
+  "scripts": {
+    "build": "npm run build:near-widget && npm run build:cosmos",
+    "build:near-widget": "vite build --config vite.near.config.js",
+    "build:cosmos": "vite build --config vite.cosmos.config.js",
+    "dev:cosmos": "vite --config vite.cosmos.config.js",
+    "serve": "npx --yes serve site -l 8899"
+  },
+  "dependencies": {
+    "@aurora-is-near/intents-swap-widget-standalone": "^7.15.2",
+    "@skip-go/client": "^1.5.18",
+    "@vitejs/plugin-react": "^6.0.4",
+    "@wagmi/connectors": "^6.2.0",
+    "@wagmi/core": "^2.22.1",
+    "algosdk": "^3.6.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "viem": "^2.55.10",
+    "vite": "^8.1.5",
+    "wagmi": "^2.19.5"
+  }
+}

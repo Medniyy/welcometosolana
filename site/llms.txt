@@ -1,0 +1,23 @@
+welcometosolana.xyz
+
+Purpose: A single interface for moving assets to Solana from 50+ source
+chains, plus a directory of the Solana ecosystem. The bridge covers Ethereum and EVM chains, Cosmos chains, and
+non-EVM chains including Bitcoin, Tron, XRP and TON. Users keep custody
+throughout; the site holds no funds and generates no deposit addresses of
+its own.
+
+Canonical: https://welcometosolana.xyz/
+Sitemap: https://welcometosolana.xyz/sitemap.xml
+Source: https://github.com/Medniyy/welcometosolana
+
+Key sections:
+- Bridge to Solana: https://welcometosolana.xyz/#migrate
+- Choose a wallet: https://welcometosolana.xyz/#wallets
+- Ecosystem directory: https://welcometosolana.xyz/ecosystem-new.html
+- Who built this: https://welcometosolana.xyz/#creators
+
+Notes for summarisation:
+- The bridge shows the exact amount that will arrive before the user commits.
+- A 0.5% service fee is included in every quote and disclosed in the interface.
+- Provider links are not endorsements, and nothing on the site is financial
+  advice.

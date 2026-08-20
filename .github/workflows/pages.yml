@@ -1,0 +1,94 @@
+name: Deploy to GitHub Pages
+
+# Everything that gets served lives in site/. Everything else in this repo —
+# source, docs, build config — does not. That single rule is why this workflow
+# has no exclude list to keep in sync: a new page ships by being added to
+# site/, and nothing else can leak into the deploy by accident.
+#
+# The two engine bundles are built here rather than committed. Committing them
+# meant carrying ~150 machine-generated, content-hashed files that churned
+# completely on every rebuild.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Never cancel a deploy midway; let it finish and queue the next one.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      # Both write straight into site/, which is what gets uploaded.
+      #   near-widget-dist/  backs the embedded widget on routes.html
+      #   cosmos-bridge-dist/cosmos-engine.js is lazy-imported by bridge.js
+      - name: Build the engine bundles
+        run: npm run build
+
+      # A build can succeed and still be wrong. Vite 8 inlines dynamic imports
+      # when given a single JS entry, and once did so by dropping the Cosmos
+      # engine entirely: the entry file still existed, the build still printed
+      # a tick, and the 3.4 MB chunk the page fetches at runtime was simply
+      # absent. Checking that the entry exists would not have caught it. So
+      # check for the chunk it is supposed to load, and for a shape that says
+      # code splitting actually happened.
+      - name: Check the build produced what the site imports
+        run: |
+          set -e
+          test -f site/cosmos-bridge-dist/cosmos-engine.js
+          test -f site/near-widget-dist/index.html
+          # Pages runs Jekyll unless told otherwise, which would drop any
+          # underscore-prefixed path without reporting an error.
+          test -f site/.nojekyll
+
+          # The engine must be a separate chunk, and a large one.
+          engine=$(find site/cosmos-bridge-dist/assets -name 'engine-*.js' | head -1)
+          if [ -z "$engine" ]; then
+            echo "::error::Cosmos engine chunk missing - dynamic import was inlined or dropped"
+            ls -R site/cosmos-bridge-dist
+            exit 1
+          fi
+          size=$(wc -c < "$engine")
+          echo "engine chunk: $engine ($size bytes)"
+          if [ "$size" -lt 1000000 ]; then
+            echo "::error::Engine chunk is only $size bytes; expected a few MB"
+            exit 1
+          fi
+
+          # And the entry must still reference it rather than having absorbed it.
+          grep -q 'assets/engine-' site/cosmos-bridge-dist/cosmos-engine.js || {
+            echo "::error::cosmos-engine.js does not reference the engine chunk"
+            exit 1
+          }
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
