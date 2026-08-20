@@ -934,11 +934,56 @@
       if (res.status === 404) { paint("PENDING_DEPOSIT"); return; }
       if (!res.ok) return;
       const j = await res.json();
-      paint(j.status || "PENDING_DEPOSIT");
+      paint(j.status || "PENDING_DEPOSIT", j);
     } catch (e) { /* transient; the next tick retries */ }
   }
 
-  function paint(status) {
+  /* Explorer links for the receipt. A transfer someone cannot verify for
+     themselves is a transfer they have to take our word for, and "it says it
+     worked" is worth much less than a block explorer saying so. */
+  const EXPLORER_TX = {
+    sol: (h) => `https://solscan.io/tx/${h}`,
+    eth: (h) => `https://etherscan.io/tx/${h}`,
+    base: (h) => `https://basescan.org/tx/${h}`,
+    arb: (h) => `https://arbiscan.io/tx/${h}`,
+    op: (h) => `https://optimistic.etherscan.io/tx/${h}`,
+    pol: (h) => `https://polygonscan.com/tx/${h}`,
+    bsc: (h) => `https://bscscan.com/tx/${h}`,
+    avax: (h) => `https://snowtrace.io/tx/${h}`,
+    btc: (h) => `https://mempool.space/tx/${h}`,
+    tron: (h) => `https://tronscan.org/#/transaction/${h}`,
+    doge: (h) => `https://dogechain.info/tx/${h}`,
+    ltc: (h) => `https://blockchair.com/litecoin/transaction/${h}`,
+    xrp: (h) => `https://xrpscan.com/tx/${h}`,
+    ton: (h) => `https://tonviewer.com/transaction/${h}`,
+    sui: (h) => `https://suiscan.xyz/mainnet/tx/${h}`,
+    near: (h) => `https://nearblocks.io/txns/${h}`,
+  };
+  /* The API returns either bare hashes or objects, depending on the chain. */
+  const hashOf = (x) => (typeof x === "string" ? x : (x && (x.hash || x.txHash || x.transactionHash)) || "");
+
+  function receipt(body) {
+    const d = (body && body.swapDetails) || {};
+    const o = S.order || {};
+    const dst = hashOf((d.destinationChainTxHashes || [])[0]);
+    const src = hashOf((d.originChainTxHashes || [])[0]);
+    const link = (chain, h, label) => {
+      const f = EXPLORER_TX[chain];
+      return f && h
+        ? `<a href="${f(h)}" target="_blank" rel="noopener">${label} <span aria-hidden="true">↗</span></a>`
+        : "";
+    };
+    const got = d.amountOutFormatted || o.getAmt;
+    const parts = [
+      `<strong>${esc(String(got))} ${esc(o.getSym || "")} arrived on Solana.</strong>`,
+      link("sol", dst, "View it on Solscan"),
+      link(o.chain, src, `Your ${esc(o.chainName || "")} transaction`),
+      '<a href="ecosystem-new.html">See what you can do with it →</a>',
+    ].filter(Boolean);
+    return parts.join(" &middot; ");
+  }
+
+  function paint(status, body) {
     const st = STATUS[status] || STATUS.PENDING_DEPOSIT;
     const o = S.order || {};
     $("nb-status").innerHTML =
@@ -968,9 +1013,12 @@
         status, chain: o.chain, symbol: o.sendSym, dst: o.getSym,
         usd: o.usd, out_usd: o.outUsd, bucket: usdBucket(o.usd),
       });
+      $("nb-foot").className = "note" + (status === "SUCCESS" ? " ok" : "");
       $("nb-foot").innerHTML = status === "SUCCESS"
-        ? 'Your assets are on Solana. <a href="ecosystem-new.html">See what you can do with them →</a>'
-        : "";
+        ? receipt(body)
+        : status === "REFUNDED"
+          ? `Your funds went back to ${esc(o.chainName || "the sending chain")}. Nothing was lost.`
+          : "";
     }
   }
 

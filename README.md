@@ -97,6 +97,7 @@ No API keys are required to run this.
 | `npm run dev:cosmos` | Cosmos engine dev server on `:5180`, opens the harness |
 | `npm run serve` | Serve `site/` statically |
 | `npm run revenue` | Completed volume and fees, read from the chains |
+| `npm run dashboard` | The same, as a page — `http://127.0.0.1:8877/dashboard.html` |
 
 `src/cosmos/spike.html` on the dev server is a no-UI route diagnostic — the
 instrument to re-run whenever a route stops behaving.

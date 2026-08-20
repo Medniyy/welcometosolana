@@ -9,8 +9,9 @@
     "build:near-widget": "vite build --config vite.near.config.js",
     "build:cosmos": "vite build --config vite.cosmos.config.js",
     "dev:cosmos": "vite --config vite.cosmos.config.js",
-    "serve": "npx --yes serve site -l 8899",
-    "revenue": "node tools/revenue.mjs"
+    "serve": "node tools/serve.mjs site 8899",
+    "revenue": "node tools/revenue.mjs",
+    "dashboard": "node tools/serve.mjs tools 8877"
   },
   "dependencies": {
     "@aurora-is-near/intents-swap-widget-standalone": "^7.15.2",

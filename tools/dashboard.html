@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Revenue — Welcome to Solana</title>
+<!-- Private tool. It lives in tools/ and not in site/, so it is never
+     deployed. Everything it reads is public on-chain data; keeping it out of
+     the site is about not advertising the fee addresses, not about secrecy. -->
+<meta name="robots" content="noindex, nofollow"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&family=Newsreader:opsz,wght@6..72,400&display=swap"/>
+<style>
+  :root{--paper:#e7e5df;--surface:#efede7;--ink:#171816;--muted:#686b65;
+        --line:#ceccc5;--line-strong:#b8b7b0;--focus:#365d49;--warn:#7d5a1c;
+        --mono:ui-monospace,"SF Mono",Consolas,monospace}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--paper);color:var(--ink);font-family:Manrope,sans-serif;
+       padding:44px 28px 80px}
+  .wrap{max-width:940px;margin:0 auto}
+  .eyebrow{color:var(--muted);font-size:10px;font-weight:700;letter-spacing:.18em;
+           text-transform:uppercase;margin-bottom:14px}
+  h1{font-family:Newsreader,Georgia,serif;font-weight:400;font-size:clamp(34px,6vw,52px);
+     line-height:.95;letter-spacing:-.04em}
+  .sub{margin-top:14px;color:var(--muted);font-size:13.5px;line-height:1.65;max-width:70ch}
+  .bar{display:flex;gap:12px;align-items:center;margin-top:24px}
+  button{min-height:42px;padding:0 18px;border:1px solid var(--line-strong);border-radius:4px;
+         background:var(--surface);color:var(--ink);font:inherit;font-size:13px;font-weight:700;
+         cursor:pointer}
+  button:hover{border-color:var(--ink)}
+  #when{color:var(--muted);font-size:12px}
+
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin-top:32px}
+  .card{padding:20px;border:1px solid var(--line-strong);border-radius:4px;background:var(--surface)}
+  .card p{color:var(--muted);font-size:9.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+  .card strong{display:block;margin-top:10px;font-family:Newsreader,Georgia,serif;font-weight:400;
+               font-size:38px;line-height:1;letter-spacing:-.03em}
+  .card small{display:block;margin-top:8px;color:var(--muted);font-size:11.5px;line-height:1.5}
+
+  section{margin-top:44px}
+  h2{font-family:Newsreader,Georgia,serif;font-weight:400;font-size:26px;letter-spacing:-.03em}
+  .note{margin-top:8px;color:var(--muted);font-size:12.5px;line-height:1.7;max-width:74ch}
+  table{width:100%;border-collapse:collapse;margin-top:18px;font-size:13px}
+  th{text-align:left;padding:9px 8px;border-bottom:1px solid var(--line-strong);
+     color:var(--muted);font-size:9.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase}
+  td{padding:11px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+  td.num{text-align:right;font-variant-numeric:tabular-nums;font-weight:700}
+  td.mono{font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+  a{color:var(--focus);text-underline-offset:3px}
+  .empty{padding:26px 8px;color:var(--muted);font-size:13px}
+  .callout{margin-top:20px;padding-left:14px;border-left:2px solid var(--warn);
+           color:var(--muted);font-size:12.5px;line-height:1.75;max-width:74ch}
+  .callout b{color:var(--ink)}
+  .err{color:#8c3a30}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="eyebrow">Welcome to Solana · private</p>
+  <h1>Fees &amp; completed volume</h1>
+  <p class="sub">Read straight from the chains. A fee exists only if a transfer
+    completed, so unlike the site analytics this cannot miss a transfer just
+    because someone closed the tab. Nothing here needs a key or a server.</p>
+  <div class="bar">
+    <button id="refresh">Refresh</button>
+    <span id="when">loading…</span>
+  </div>
+
+  <div class="cards" id="cards"></div>
+
+  <section>
+    <h2>Cosmos — Skip affiliate</h2>
+    <p class="note">One payment per fee-bearing leg, paid in USDC on Osmosis to
+      <span class="mono" id="osmo-addr"></span>. Each row is a completed transfer.</p>
+    <div id="cosmos"></div>
+    <p class="callout"><b>Why this understates volume.</b> The affiliate cut rides
+      the Osmosis swap. A transfer with no swap in it — USDC that is already
+      USDC, moving to Noble and out — has nothing for a fee to attach to, so it
+      moves real money and earns nothing. Stablecoin holders are the clearest
+      case, and they are exactly who the sweep serves best.</p>
+  </section>
+
+  <section>
+    <h2>NEAR — 1Click appFees</h2>
+    <p class="note">Credited as an <b>intents balance</b> held by the
+      <span class="mono">intents.near</span> contract for
+      <span class="mono" id="near-acct"></span>. A normal NEAR wallet shows these
+      settlements as “App Interaction — execute_intents” and no balance change:
+      the funds are real, but a wallet cannot display a balance the contract
+      holds on your behalf.</p>
+    <div id="near"></div>
+    <p class="callout"><b>You keep half of what you charge.</b> We submit
+      <span class="mono">appFees: 50</span> and 1Click rewrites it to 25 bps for
+      us and 25 bps for them. The user is charged 0.5%; we receive 0.25%. The
+      implied-volume range below already accounts for it.</p>
+  </section>
+
+  <section>
+    <h2>What is not in these numbers</h2>
+    <p class="note">Network gas and the CCTP <b>smart relay</b> charge (a flat
+      ~$0.19 to leave Cosmos, whatever the size) are costs of the route. The
+      user pays them to validators and relayers. None of it reaches us, and none
+      of it appears above.</p>
+  </section>
+</div>
+
+<script>
+const OSMO_ADDR = "osmo18cz2h9dtuekk6kupzc40mngth0chy8qc29ymug";
+const NEAR_ACCT = "welcometosolana.near";
+const OSMO_LCD  = "https://osmosis-api.polkachu.com";
+const NEAR_RPC  = "https://rpc.mainnet.near.org";
+const TOKENS    = "https://1click.chaindefuser.com/v0/tokens";
+const FEE_BPS   = 50;
+const SHARE     = { cosmos: 0.8, near: 0.5 };
+
+const money = n => "$" + Number(n).toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2});
+const fine  = n => "$" + Number(n).toLocaleString("en-US",{minimumFractionDigits:4,maximumFractionDigits:4});
+const el    = id => document.getElementById(id);
+const vol   = (usd, share) => ({ low: usd/(FEE_BPS/1e4), high: usd/share/(FEE_BPS/1e4) });
+
+el("osmo-addr").textContent = OSMO_ADDR;
+el("near-acct").textContent = NEAR_ACCT;
+
+async function cosmos() {
+  const q = encodeURIComponent(`transfer.recipient='${OSMO_ADDR}'`);
+  const r = await fetch(`${OSMO_LCD}/cosmos/tx/v1beta1/txs?query=${q}&limit=100&order_by=ORDER_BY_DESC`);
+  if (!r.ok) throw new Error("Osmosis LCD " + r.status);
+  const body = await r.json();
+  const rows = [];
+  for (const tx of body.tx_responses || []) {
+    for (const ev of tx.events || []) {
+      if (ev.type !== "transfer") continue;
+      const at = Object.fromEntries(ev.attributes.map(a => [a.key, a.value]));
+      if (at.recipient !== OSMO_ADDR) continue;
+      const m = String(at.amount||"").match(/^(\d+)(.+)$/);
+      if (m) rows.push({ at: tx.timestamp, usd: Number(m[1])/1e6, hash: tx.txhash });
+    }
+  }
+  return rows;
+}
+
+async function nearView(method, args) {
+  const r = await fetch(NEAR_RPC, { method:"POST", headers:{"Content-Type":"application/json"},
+    body: JSON.stringify({ jsonrpc:"2.0", id:1, method:"query", params:{
+      request_type:"call_function", finality:"final", account_id:"intents.near",
+      method_name: method, args_base64: btoa(JSON.stringify(args)) }}) });
+  const j = await r.json();
+  if (!j.result) throw new Error((j.error && j.error.name) || "NEAR RPC error");
+  return JSON.parse(new TextDecoder().decode(new Uint8Array(j.result.result)));
+}
+
+async function near() {
+  const owned = await nearView("mt_tokens_for_owner", { account_id: NEAR_ACCT, from_index:"0", limit:200 });
+  const ids = owned.map(t => t.token_id);
+  if (!ids.length) return [];
+  const bal = await nearView("mt_batch_balance_of", { account_id: NEAR_ACCT, token_ids: ids });
+  let meta = [];
+  try { meta = await (await fetch(TOKENS)).json(); } catch (e) {}
+  return ids.map((id,i) => {
+    const m = meta.find(t => t.assetId === id);
+    const dec = m ? m.decimals : 18;
+    const amount = Number(bal[i]||0)/10**dec;
+    return { id, label: m ? m.symbol : id.split(":")[1].slice(0,18),
+             chain: m ? m.blockchain : "?", amount,
+             usd: m && m.price ? amount*Number(m.price) : null };
+  }).filter(t => t.amount > 0);
+}
+
+function table(head, rows, empty) {
+  if (!rows.length) return `<p class="empty">${empty}</p>`;
+  return `<table><thead><tr>${head.map(h=>`<th>${h}</th>`).join("")}</tr></thead>
+    <tbody>${rows.join("")}</tbody></table>`;
+}
+
+async function load() {
+  el("when").textContent = "loading…";
+  let cUsd = 0, nUsd = 0, cCount = 0;
+
+  try {
+    const rows = await cosmos();
+    cCount = rows.length;
+    cUsd = rows.reduce((s,x)=>s+x.usd,0);
+    el("cosmos").innerHTML = table(
+      ["When","Fee (USDC)","Transaction"],
+      rows.map(r => `<tr>
+        <td>${new Date(r.at).toLocaleString()}</td>
+        <td class="num">${r.usd.toFixed(6)}</td>
+        <td class="mono"><a href="https://www.mintscan.io/osmosis/tx/${r.hash}" target="_blank" rel="noopener">${r.hash.slice(0,20)}… ↗</a></td>
+      </tr>`),
+      "No affiliate fees received yet.");
+  } catch (e) {
+    el("cosmos").innerHTML = `<p class="empty err">Could not read Osmosis: ${e.message}</p>`;
+  }
+
+  try {
+    const t = await near();
+    nUsd = t.reduce((s,x)=>s+(x.usd||0),0);
+    el("near").innerHTML = table(
+      ["Token","Chain","Amount","Value"],
+      t.map(x => `<tr>
+        <td><b>${x.label}</b></td>
+        <td class="mono">${x.chain}</td>
+        <td class="num">${x.amount.toFixed(8)}</td>
+        <td class="num">${x.usd==null ? "—" : fine(x.usd)}</td>
+      </tr>`),
+      "No appFees credited yet.");
+  } catch (e) {
+    el("near").innerHTML = `<p class="empty err">Could not read NEAR: ${e.message}</p>`;
+  }
+
+  const cv = vol(cUsd, SHARE.cosmos), nv = vol(nUsd, SHARE.near);
+  el("cards").innerHTML = `
+    <div class="card"><p>Total fees earned</p><strong>${fine(cUsd+nUsd)}</strong>
+      <small>Across both rails, all time.</small></div>
+    <div class="card"><p>Completed transfers</p><strong>${cCount}</strong>
+      <small>Cosmos legs that carried a fee. NEAR settles into a balance, so it has no per-transfer count.</small></div>
+    <div class="card"><p>Cosmos volume</p><strong>${money(cv.low)}</strong>
+      <small>Fee-bearing only, up to ${money(cv.high)} gross. Swapless transfers are invisible here.</small></div>
+    <div class="card"><p>NEAR volume</p><strong>${money(nv.low)}</strong>
+      <small>Between ${money(nv.low)} and ${money(nv.high)} depending on the split.</small></div>`;
+
+  el("when").textContent = "updated " + new Date().toLocaleTimeString();
+}
+
+el("refresh").addEventListener("click", load);
+load();
+</script>
+</body>
+</html>
