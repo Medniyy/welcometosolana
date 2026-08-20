@@ -1111,15 +1111,48 @@ async function planExit(stagedBase, dest) {
   }
 }
 
+/* Skip's affiliate cut is taken out of a swap, and only a swap — its own type
+   for it reads "an affiliate that receives fees from a swap". A route that
+   merely transfers, which is what USDC that is already USDC does on its way to
+   Noble and out, has nothing for the cut to come from. No configuration
+   changes that.
+
+   So read what the route actually contains instead of assuming the rate
+   applies. Getting this wrong is not a rounding error: a $244 sweep of
+   stablecoins quoted a fee of $1.22 and collected essentially nothing. */
+const routeSwaps = (r) =>
+  (r?.operations || []).filter((o) => o && (o.swap || o.evmSwap));
+
+/* Only the legs that actually swap can carry the fee, so only their value is
+   the base for it. */
+function feeBaseUsd() {
+  const legs = (S.plan?.legs || []).filter((l) => l.route && routeSwaps(l.route).length);
+  const exit = S.plan?.exit;
+  const exitUsd = exit?.route && routeSwaps(exit.route).length
+    ? Number(exit.route.usdAmountIn || 0) : 0;
+  return legs.reduce((t, l) => t + Number(l.route.usdAmountIn || 0), 0) + exitUsd;
+}
+
 /* Stated plainly and always, including when it is nothing. A fee someone finds
-   later reads as a trick; a fee they were shown reads as a price. */
+   later reads as a trick; a fee they were shown reads as a price — and a fee
+   shown but never taken is a third thing, which is why this no longer prints a
+   percentage the route cannot deliver. */
 function feeRow(inUsd) {
   if (!feeEnabled()) return "";
   if (!S.plan.feeBps) {
     return `<div class="row"><span class="k">Service fee</span><span class="v">None — under ${money(FEE_FREE_BELOW_USD)}</span></div>`;
   }
-  const feeUsd = (inUsd * S.plan.feeBps) / 10000;
-  return `<div class="row"><span class="k">Service fee (${(S.plan.feeBps / 100).toFixed(2)}%)</span><span class="v">${money(feeUsd)}</span></div>`;
+  const base = feeBaseUsd();
+  if (base <= 0) {
+    return `<div class="row"><span class="k">Service fee</span><span class="v">None — nothing is swapped</span></div>`;
+  }
+  const feeUsd = (base * S.plan.feeBps) / 10000;
+  /* When only part of the transfer swaps, say so rather than letting the
+     percentage look wrong against the total. */
+  const partial = base < inUsd * 0.995
+    ? `<div class="row"><span class="k">Fee applies to</span><span class="v">${money(base)} of ${money(inUsd)}</span></div>`
+    : "";
+  return `<div class="row"><span class="k">Service fee (${(S.plan.feeBps / 100).toFixed(2)}%)</span><span class="v">${money(feeUsd)}</span></div>${partial}`;
 }
 
 function renderReview(dest) {
@@ -1384,9 +1417,14 @@ async function start() {
   /* The Cosmos equivalent of reserving a deposit address: the point past
      which the user has committed and Keplr starts asking for signatures. */
   const planUsd = legs.reduce((t, l) => t + (sendUsd(l.asset) || 0), 0);
+  /* Report both, because the gap between them is the whole revenue story:
+     what moved, and how much of it could be charged for. */
+  const chargeable = feeBaseUsd();
   track("bridge_cosmos_start", {
     mode, assets: runnable.length,
     usd: money2(planUsd), bucket: usdBucket(planUsd),
+    chargeable_usd: money2(chargeable),
+    fee_usd: money2((chargeable * (S.plan.feeBps || 0)) / 10000),
   });
 
   S.queue = runnable.map((l) => ({
