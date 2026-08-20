@@ -30,9 +30,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # Pinned to match the npm that wrote package-lock.json. npm 10 and
+      # npm 11 disagree about which peer dependencies belong in a lock file,
+      # so a lock written by one is rejected as "out of sync" by the other and
+      # `npm ci` refuses to install. Keep this aligned with the version used
+      # to regenerate the lock, or regenerate the lock to match.
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
           cache: npm
 
       - run: npm ci

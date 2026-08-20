@@ -1,6 +1,9 @@
 {
   "name": "welcometosolana",
   "private": true,
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "build": "npm run build:near-widget && npm run build:cosmos",
     "build:near-widget": "vite build --config vite.near.config.js",
