@@ -210,6 +210,10 @@
        not overwrite it. Until then we keep it sensible for whatever token
        is selected. */
     amountTouched: false,
+    /* Whether anything on this page happened because a person did it. The
+       bridge quotes its own defaults on load, so without this the funnel
+       counts every homepage visit as interest in bridging. */
+    engaged: false,
   };
 
   const esc = (s) => String(s).replace(/[&<>"']/g,
@@ -526,6 +530,7 @@
   function choose(assetId) {
     const t = S.tokens.find((x) => x.assetId === assetId);
     if (!t) return;
+    S.engaged = true;
     if (pickerFor === "src") { S.src = t; syncAmount(); } else S.dst = t;
     /* A different destination token means a different token account, so the
        rent warning has to be re-asked rather than left stale. */
@@ -562,7 +567,11 @@
       if (seq !== S.previewSeq) return;          // a newer keystroke won
       S.quote = q;
       setOut(q);
-      trackOnce("bridge_quote", {
+      /* Only a quote the user brought about is worth counting. The boot
+         quote prices a default nobody chose, and counting it made
+         bridge_quote fire before bridge_view and land level with pageviews
+         — a funnel step that every visitor passes measures nothing. */
+      if (S.engaged) trackOnce("bridge_quote", {
         group: S.group, chain: s.blockchain, symbol: s.symbol,
         dst: d.symbol,
         usd: money2(q.quote.amountInUsd), bucket: usdBucket(q.quote.amountInUsd),
@@ -1082,7 +1091,7 @@
   function wire() {
     $("bridge-tabs").addEventListener("click", (e) => {
       const t = e.target.closest("[data-group]");
-      if (t) setGroup(t.dataset.group);
+      if (t) { S.engaged = true; setGroup(t.dataset.group); }
     });
     /* Arrow keys across a tablist are expected behaviour, not a nicety —
        without them the tabs are unreachable by keyboard beyond the first. */
@@ -1112,10 +1121,13 @@
 
     $("nb-amt").addEventListener("input", () => {
       S.amountTouched = true;
+      S.engaged = true;
       setOut(null);
       schedulePreview();
     });
-    $("nb-rcpt").addEventListener("input", () => { saveDest(); checkDest(); schedulePreview(); });
+    $("nb-rcpt").addEventListener("input", () => {
+      S.engaged = true; saveDest(); checkDest(); schedulePreview();
+    });
     $("nb-refund").addEventListener("input", () => { checkRefund(); schedulePreview(); });
     $("nb-fill").addEventListener("click", fillFromWallet);
     $("nb-go").addEventListener("click", submit);

@@ -11,7 +11,18 @@
 [![Custody](https://img.shields.io/badge/custody-none-365d49?style=flat-square)](#security--custody)
 [![Backend](https://img.shields.io/badge/backend-none-365d49?style=flat-square)](#architecture)
 
-[**Open the site ↗**](https://welcometosolana.xyz/) · [Architecture](ARCHITECTURE.md) · [Brand book](BRAND.md) · [Terms](site/terms.html)
+[**Open the site ↗**](https://welcometosolana.xyz/) · [**Watch the demo ↗**](https://youtu.be/TmEUH0MiYB8) · [Architecture](ARCHITECTURE.md) · [Brand book](BRAND.md) · [Terms](site/terms.html)
+
+<br/>
+
+<!-- GitHub strips iframes, so the demo is a thumbnail that links out. -->
+<a href="https://youtu.be/TmEUH0MiYB8">
+  <img src="https://img.youtube.com/vi/TmEUH0MiYB8/maxresdefault.jpg" width="70%" alt="Watch the demo: moving assets to Solana in one interface" />
+</a>
+
+<sub><b><a href="https://youtu.be/TmEUH0MiYB8">▶ Watch the demo</a></b> — the bridge end to end</sub>
+
+<br/><br/>
 
 <img src="brand/brand-board.png" width="100%" alt="Welcome to Solana brand system" />
 
