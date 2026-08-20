@@ -857,6 +857,13 @@
       track("bridge_deposit_reserved", {
         group: S.group, chain: s.blockchain, symbol: s.symbol, dst: d.symbol,
         usd: money2(v.amountInUsd), bucket: usdBucket(v.amountInUsd),
+        /* The deposit address makes this transfer's outcome recoverable later:
+           it can be handed back to /v0/status to learn what actually arrived,
+           long after the tab that started it was closed. Without it, a
+           transfer completed on someone's phone is unaccountable forever.
+           Single-use and issued by the router, so it identifies the transfer
+           rather than the person. */
+        deposit: v.depositAddress,
       });
       showOrder(S.order);
     } catch (e) {
