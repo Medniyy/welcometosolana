@@ -40,7 +40,20 @@ jobs:
           node-version: 24
           cache: npm
 
-      - run: npm ci
+      # `npm install`, not `npm ci`, and deliberately so.
+      #
+      # The lock file is committed and npm still honours it, but `npm ci`
+      # additionally demands that the lock agree exactly with what it would
+      # resolve on this machine — and a lock generated on Windows does not
+      # satisfy a Linux runner. Six peer and optional entries differ, npm 10
+      # and npm 11 disagree about a seventh, and `npm ci` treats any of that
+      # as a hard failure rather than something to reconcile.
+      #
+      # The honest fix is to generate the lock on Linux, which needs a
+      # container this project does not otherwise require. Until then this
+      # keeps the lock authoritative for versions while letting the runner
+      # resolve the handful of platform-specific entries itself.
+      - run: npm install --no-audit --no-fund
 
       # Both write straight into site/, which is what gets uploaded.
       #   near-widget-dist/  backs the embedded widget on routes.html
