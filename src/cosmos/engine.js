@@ -465,8 +465,14 @@ async function loadAssets() {
         usd,
         /* Only true dust is blocked outright. Anything between the sweep floor
            and the solo floor is perfectly movable — but only alongside
-           something else, which quoting decides once the selection is known. */
+           something else, which quoting decides once the selection is known.
+
+           An asset the router cannot price is a different case again, and is
+           marked rather than blocked. It is almost always a spam airdrop or a
+           stranded IBC denom, and moving one costs a signature and gas to
+           deliver nothing. See `unpriced` below. */
         blocked: usd > 0 && usd < SWEEP_DUST_USD ? "too small to be worth the fees" : null,
+        unpriced: usd === 0,
       });
     }
   }
@@ -476,7 +482,8 @@ async function loadAssets() {
   /* Nothing is selected for the user — moving someone's money is their choice
      to start, not ours to pre-make. A balance reload (after a gas top-up, say)
      keeps whatever they had already ticked and is still selectable. */
-  S.picked = new Set([...S.picked].filter((id) => S.assets.some((a) => a.id === id && !a.blocked)));
+  S.picked = new Set([...S.picked].filter((id) =>
+    S.assets.some((a) => a.id === id && !a.blocked && !a.unpriced)));
   renderAssets();
 }
 
@@ -741,6 +748,26 @@ function renderAssets() {
     if (!a.blocked && S.picked.has(a.id)) group.appendChild(amountLine(a));
     box.appendChild(group);
   }
+
+  /* Say what is missing and why. A wallet full of airdropped denoms that the
+     router cannot price would otherwise make this list look wrong to the one
+     person who knows exactly what they hold. Stated, not offered: anything
+     genuinely worth something can be swapped on Osmosis first, and will
+     appear here priced on the next load. */
+  const hidden = S.assets.filter((a) => a.unpriced).length;
+  if (hidden) {
+    const note = document.createElement("p");
+    note.className = "step-note";
+    note.style.marginTop = "16px";
+    note.textContent =
+      `${hidden} other ${hidden === 1 ? "balance is" : "balances are"} not listed — ` +
+      `no price is available for ${hidden === 1 ? "it" : "them"}, which usually means ` +
+      `an airdropped or stranded token with no route out. Moving one would cost a ` +
+      `signature and a network fee to deliver nothing. If you know one is worth ` +
+      `something, swap it on Osmosis first and it will show up here.`;
+    box.appendChild(note);
+  }
+
   updatePicked();
 }
 
@@ -825,8 +852,16 @@ function updatePicked() {
   maybeReview();
 }
 
+/* "Select all" means the list in front of you, not every denom the wallet has
+   ever received. It used to select anything not explicitly blocked, and since
+   an unpriced asset is never blocked, one click pulled in every spam airdrop
+   and stranded IBC denom in the wallet — each of which then appeared in the
+   list, and each of which would have cost a signature and gas to deliver
+   nothing. */
 $("pick-all").addEventListener("click", () => {
-  S.assets.filter((a) => !a.blocked).forEach((a) => S.picked.add(a.id));
+  S.assets
+    .filter((a) => !a.blocked && !a.unpriced && a.usd >= SWEEP_DUST_USD)
+    .forEach((a) => S.picked.add(a.id));
   renderAssets();
 });
 $("pick-none").addEventListener("click", () => { S.picked.clear(); renderAssets(); });
