@@ -1582,6 +1582,10 @@ async function finish(deliveredUsd) {
     outcome: arrived === 0 ? "none" : failed.length ? "partial" : "ok",
     assets: arrived, mode: sweeping ? "sweep" : "direct",
     usd: money2(totalUsdc), bucket: usdBucket(totalUsdc),
+    /* Feeds the analytics Revenue report, which sums these two fields by
+       itself. USDC is close enough to a dollar that the delivered amount is
+       the volume figure. Only when something actually arrived. */
+    ...(arrived && totalUsdc ? { revenue: money2(totalUsdc), currency: "USD" } : {}),
   });
   $("c-done").querySelector(".step-title").textContent = title;
 

@@ -1023,6 +1023,13 @@
       track(status === "SUCCESS" ? "bridge_success" : "bridge_failed", {
         status, chain: o.chain, symbol: o.sendSym, dst: o.getSym,
         usd: o.usd, out_usd: o.outUsd, bucket: usdBucket(o.usd),
+        /* `revenue` and `currency` are the two fields the analytics Revenue
+           report sums on its own, so completed volume shows up there without
+           anything having to read the API from outside. It is volume, not our
+           cut - the panel is the only summing tool available and this is the
+           number worth summing. Only on success: a failed transfer moved
+           nothing. */
+        ...(status === "SUCCESS" && o.usd ? { revenue: o.usd, currency: "USD" } : {}),
       });
       $("nb-foot").className = "note" + (status === "SUCCESS" ? " ok" : "");
       $("nb-foot").innerHTML = status === "SUCCESS"

@@ -53,10 +53,6 @@
            color:var(--muted);font-size:12.5px;line-height:1.75;max-width:74ch}
   .callout b{color:var(--ink)}
   .err{color:#8c3a30}
-  .authrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
-  input{min-height:42px;padding:0 13px;border:1px solid var(--line-strong);border-radius:4px;
-        background:var(--surface);color:var(--ink);font:inherit;font-size:13px;min-width:180px}
-  input:focus{outline:none;border-color:var(--focus)}
 </style>
 </head>
 <body>
@@ -75,25 +71,14 @@
 
   <section>
     <h2>All volume moved</h2>
-    <p class="note">Fees only see transfers that could be charged for. This
-      reads the analytics instead, so a transfer that moved real money and
-      earned nothing still appears. It needs your Umami login once — the token
-      is kept in this browser and never leaves it.</p>
-    <div id="auth">
-      <div class="authrow">
-        <input id="u" placeholder="Umami username" autocomplete="username"/>
-        <input id="pw" type="password" placeholder="Password" autocomplete="current-password"/>
-        <button id="login">Connect</button>
-        <button id="logout" hidden>Disconnect</button>
-      </div>
-      <p class="note" id="authmsg"></p>
-    </div>
-    <div id="volume"></div>
-    <p class="callout"><b>This one undercounts, the fee figures do not.</b> A
-      completion event only fires while the tab is open, so a transfer finished
-      on someone's phone after they closed the laptop is missing here. Reserved
-      transfers now carry their deposit address, which makes their outcome
-      recoverable after the fact — so this gap closes as that data accumulates.</p>
+    <p class="note">Not here — in the analytics, under <b>Revenue</b>. Completed
+      transfers now report <span class="mono">revenue</span> and
+      <span class="mono">currency</span>, which is the pair that report sums on
+      its own, so total bridged volume appears there with nothing to connect and
+      no second login. That view includes transfers which earned nothing, which
+      the fee tables below cannot see.</p>
+    <p class="note">This page stays for the part the analytics cannot do: fees,
+      read straight off the chains, exact and immune to a closed tab.</p>
   </section>
 
   <section>
@@ -255,106 +240,8 @@ async function load() {
   el("when").textContent = "updated " + new Date().toLocaleTimeString();
 }
 
-/* ---------------------------------------------------------------- volume */
-
-const UMAMI   = "https://umami-service-production-3ded.up.railway.app";
-const SITE_ID = "faf37f2f-424a-4061-8416-2c4b5193a4b5";
-const TOKKEY  = "wts.umami.token";
-
-const token = () => { try { return localStorage.getItem(TOKKEY); } catch (e) { return null; } };
-
-async function umami(path) {
-  const r = await fetch(UMAMI + path, { headers: { Authorization: "Bearer " + token() } });
-  if (r.status === 401) { localStorage.removeItem(TOKKEY); throw new Error("Session expired — connect again."); }
-  if (!r.ok) throw new Error("Umami " + r.status);
-  return r.json();
-}
-
-/* Umami returns distinct property values with a count each, so a total is
-   sum(value x count). Numbers may arrive as strings; shapes differ a little
-   between versions, hence the defensive field picking. */
-function sumValues(rows) {
-  let total = 0, n = 0;
-  for (const row of (Array.isArray(rows) ? rows : (rows && rows.data) || [])) {
-    const v = Number(row.value ?? row.x ?? 0);
-    const c = Number(row.total ?? row.count ?? row.y ?? 1);
-    if (Number.isFinite(v) && Number.isFinite(c)) { total += v * c; n += c; }
-  }
-  return { total, n };
-}
-
-async function series(eventName, property) {
-  const end = Date.now(), start = end - 365 * 864e5;
-  const qs = `?startAt=${start}&endAt=${end}&event=${encodeURIComponent(eventName)}` +
-             `&propertyName=${encodeURIComponent(property)}`;
-  return sumValues(await umami(`/api/websites/${SITE_ID}/event-data/values${qs}`));
-}
-
-async function loadVolume() {
-  if (!token()) {
-    el("volume").innerHTML = '<p class="empty">Not connected.</p>';
-    return;
-  }
-  el("volume").innerHTML = '<p class="empty">reading analytics…</p>';
-  try {
-    const [nearOut, cosmosOut, cosmosMoved, chargeable] = await Promise.all([
-      series("bridge_success", "usd"),
-      series("bridge_cosmos_done", "usd"),
-      series("bridge_cosmos_start", "usd"),
-      series("bridge_cosmos_start", "chargeable_usd"),
-    ]);
-    const totalVol = nearOut.total + cosmosOut.total;
-    const free = Math.max(0, cosmosMoved.total - chargeable.total);
-    el("volume").innerHTML = `
-      <table><thead><tr><th>Source</th><th>Transfers</th><th>Volume</th></tr></thead><tbody>
-        <tr><td><b>NEAR</b> delivered</td><td class="num">${nearOut.n}</td><td class="num">${money(nearOut.total)}</td></tr>
-        <tr><td><b>Cosmos</b> delivered</td><td class="num">${cosmosOut.n}</td><td class="num">${money(cosmosOut.total)}</td></tr>
-        <tr><td><b>Total moved</b></td><td class="num">${nearOut.n + cosmosOut.n}</td><td class="num">${money(totalVol)}</td></tr>
-        <tr><td>of which Cosmos earned nothing</td><td class="num">—</td><td class="num">${money(free)}</td></tr>
-      </tbody></table>`;
-  } catch (e) {
-    el("volume").innerHTML = `<p class="empty err">${e.message}</p>`;
-  }
-}
-
-async function login() {
-  el("authmsg").textContent = "connecting…";
-  try {
-    const r = await fetch(UMAMI + "/api/auth/login", {
-      method: "POST", headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username: el("u").value.trim(), password: el("pw").value }),
-    });
-    if (!r.ok) throw new Error(r.status === 401 ? "Wrong username or password." : "Umami " + r.status);
-    const j = await r.json();
-    if (!j.token) throw new Error("No token returned.");
-    localStorage.setItem(TOKKEY, j.token);
-    el("pw").value = "";
-    showAuth();
-    loadVolume();
-  } catch (e) {
-    el("authmsg").className = "note err";
-    el("authmsg").textContent = e.message;
-  }
-}
-
-function showAuth() {
-  const on = !!token();
-  el("u").hidden = on; el("pw").hidden = on;
-  el("login").hidden = on; el("logout").hidden = !on;
-  el("authmsg").className = "note";
-  el("authmsg").textContent = on ? "Connected. The token stays in this browser." : "";
-}
-
-el("login").addEventListener("click", login);
-el("pw").addEventListener("keydown", e => { if (e.key === "Enter") login(); });
-el("logout").addEventListener("click", () => {
-  localStorage.removeItem(TOKKEY); showAuth(); loadVolume();
-});
-
-el("refresh").addEventListener("click", () => { load(); loadVolume(); });
-showAuth();
+el("refresh").addEventListener("click", load);
 load();
-loadVolume();
 </script>
 </body>
 </html>
