@@ -392,7 +392,11 @@
     const engine = GROUPS[key].engine;
     $("bridge-panel-near").hidden = engine !== "near";
     $("bridge-panel-cosmos").hidden = engine !== "cosmos";
-    track("bridge_tab", { group: key });
+    /* Once per corridor, not once per click. Counting every click put this at
+       104 against 44 visits, which is a fine engagement number and a useless
+       funnel step - the stages either count the same thing or they cannot be
+       read against each other. */
+    trackOnce("bridge_tab", { group: key }, `bridge_tab:${key}`);
 
     if (engine === "cosmos") { ensureCosmos(); return; }
 
