@@ -253,6 +253,7 @@ const S = {
   solana: "",
   plan: null,      // { mode, legs, exit, feeBps, dest } — see quoteAll
   queue: [],       // { id, status, signatures, txHash, error }
+  pricing: 0,      // balances being valued by quote right now
   running: false,
 };
 
@@ -421,7 +422,10 @@ async function connect() {
    one call across every chain, which is the only reason the portfolio screen
    can show a real total rather than a list of raw denoms. */
 
+let loadToken = 0;
+
 async function loadAssets() {
+  const mine = ++loadToken;
   $("total").innerHTML = '<span class="spinner"></span>';
   $("total-sub").textContent = "reading balances";
 
@@ -450,17 +454,20 @@ async function loadAssets() {
       const usd = Number(d.valueUsd || 0);
       const amount = d.amount;
       if (!amount || Number(amount) === 0) continue;
+      /* Only denoms Skip prices carry decimals here, and a bare `?? 6` would
+         print an 18-decimal balance a trillion times too large. */
+      const decimals = d.decimals ?? assetNames.get(`${chainId}|${denom}`)?.decimals ?? 6;
       S.assets.push({
         id: `${chainId}|${denom}`,
         chainId,
         chainName: CHAINS[chainId] || chainId,
         denom,
-        decimals: d.decimals ?? 6,
+        decimals,
         amount,
         sendable: amount,
         reserved: "0",
         price: Number(d.price || 0),
-        formatted: d.formattedAmount || amount,
+        formatted: d.formattedAmount || String(Number(amount) / 10 ** decimals),
         symbol: symbolFor(denom, chainId),
         usd,
         /* Only true dust is blocked outright. Anything between the sweep floor
@@ -484,6 +491,61 @@ async function loadAssets() {
      keeps whatever they had already ticked and is still selectable. */
   S.picked = new Set([...S.picked].filter((id) =>
     S.assets.some((a) => a.id === id && !a.blocked && !a.unpriced)));
+  renderAssets();
+  priceByQuote(mine);      // unawaited: priced balances are on screen already
+}
+
+/* Skip's price feed and Skip's router disagree — a balance can come back with
+   no price at all and still sell. So anything the feed cannot price but the
+   registry lists gets valued by asking the router what it would pay. Registry
+   membership is the spam filter: 522 of 4,533 Osmosis denoms carry metadata.
+   Quoted against USDC on Noble, not Solana, so the flat exit fee — charged
+   once per run — is not subtracted from every row. */
+const PRICE_PROBE_MAX = 8;
+
+async function priceByQuote(mine) {
+  const todo = S.assets.filter((a) =>
+    a.unpriced && Number(a.sendable) > 0 && assetNames.has(`${a.chainId}|${a.denom}`));
+  if (!todo.length) return;
+
+  S.pricing = Math.min(todo.length, PRICE_PROBE_MAX);
+  renderAssets();
+
+  await Promise.all(todo.slice(0, PRICE_PROBE_MAX).map(async (a) => {
+    const priceAt = async (amountBase) => {
+      const r = await route(routeReq(a, NOBLE_CHAIN, NOBLE_USDC, amountBase, 0));
+      const out = usdc(r?.amountOut);
+      return out > 0 ? out / (Number(amountBase) / 10 ** a.decimals) : 0;
+    };
+
+    let price = 0;
+    try {
+      price = await priceAt(a.sendable);
+    } catch {
+      /* Refusal is nearly always the price-impact guard, not a missing route:
+         measured, a thin-pool balance quoted at 8.0% impact and was refused at
+         10.7%. A tenth clears the guard, so a price back means "too big to
+         sell in one go" and nothing back means no route. */
+      try {
+        const slice = String(Math.floor(Number(a.sendable) / 10));
+        if (Number(slice) > 0) {
+          price = await priceAt(slice);
+          a.indicative = price > 0;
+        }
+      } catch { /* refused at a tenth too — genuinely no way out */ }
+    }
+
+    if (!(price > 0)) return;
+    a.price = price;
+    a.usd = price * (Number(a.amount) / 10 ** a.decimals);
+    a.unpriced = false;
+    a.quoted = true;
+    if (!a.blocked && a.usd < SWEEP_DUST_USD) a.blocked = "too small to be worth the fees";
+  }));
+
+  if (mine !== loadToken) return;   // a reload superseded this run
+  S.pricing = 0;
+  S.assets.sort((a, b) => b.usd - a.usd);
   renderAssets();
 }
 
@@ -551,7 +613,7 @@ const NATIVE = {
   udvpn: "DVPN",
 };
 
-const assetNames = new Map();   // "chainId|denom" -> { symbol, name }
+const assetNames = new Map();   // "chainId|denom" -> { symbol, name, decimals }
 const gasPrices = new Map();    // chainId -> { denom, price } in base units per gas unit
 
 /* Same one-chain-per-request rule as the assets endpoint — a comma-separated
@@ -582,6 +644,7 @@ async function loadAssetNames(chainIds) {
       assetNames.set(`${chainId}|${a.denom}`, {
         symbol: a.recommended_symbol || a.symbol || null,
         name: a.name || null,
+        decimals: Number.isFinite(a.decimals) ? a.decimals : null,
       });
     }
   }));
@@ -722,7 +785,9 @@ function renderAssets() {
     row.className = "asset" + (a.blocked ? " blocked" : "");
     const held = Number(a.reserved) > 0
       ? ` · keeping ${qty(Number(a.reserved) / 10 ** a.decimals, 4)} for fees`
-      : "";
+      /* A live quote rather than a feed price, so it can move before review. */
+      : a.indicative ? " · rough value — more than the pool takes in one go"
+      : a.quoted ? " · valued from a live sell quote" : "";
     const sending = Number(sendBase(a)) / 10 ** a.decimals;
     row.innerHTML = `
       <input type="checkbox" ${S.picked.has(a.id) ? "checked" : ""} ${a.blocked ? "disabled" : ""}/>
@@ -755,16 +820,23 @@ function renderAssets() {
      genuinely worth something can be swapped on Osmosis first, and will
      appear here priced on the next load. */
   const hidden = S.assets.filter((a) => a.unpriced).length;
-  if (hidden) {
+  if (S.pricing) {
+    const note = document.createElement("p");
+    note.className = "step-note";
+    note.style.marginTop = "16px";
+    note.innerHTML = `<span class="spinner"></span> Checking ${S.pricing} more balance${S.pricing === 1 ? "" : "s"} — there is no listed price for ${S.pricing === 1 ? "it" : "them"}, so we are asking what ${S.pricing === 1 ? "it" : "they"} would sell for.`;
+    box.appendChild(note);
+  } else if (hidden) {
     const note = document.createElement("p");
     note.className = "step-note";
     note.style.marginTop = "16px";
     note.textContent =
       `${hidden} other ${hidden === 1 ? "balance is" : "balances are"} not listed — ` +
-      `no price is available for ${hidden === 1 ? "it" : "them"}, which usually means ` +
-      `an airdropped or stranded token with no route out. Moving one would cost a ` +
-      `signature and a network fee to deliver nothing. If you know one is worth ` +
-      `something, swap it on Osmosis first and it will show up here.`;
+      `${hidden === 1 ? "it has" : "they have"} no listed price and no sell quote came ` +
+      `back for ${hidden === 1 ? "it" : "them"}, which usually means an airdropped or ` +
+      `stranded token with no route out. Moving one would cost a signature and a ` +
+      `network fee to deliver nothing. If you know one is worth something, swap it ` +
+      `on Osmosis first and it will show up here.`;
     box.appendChild(note);
   }
 
