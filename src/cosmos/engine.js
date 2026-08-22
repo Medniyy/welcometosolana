@@ -512,8 +512,8 @@ async function priceByQuote(mine) {
   renderAssets();
 
   await Promise.all(todo.slice(0, PRICE_PROBE_MAX).map(async (a) => {
-    const priceAt = async (amountBase) => {
-      const r = await route(routeReq(a, NOBLE_CHAIN, NOBLE_USDC, amountBase, 0));
+    const priceAt = async (amountBase, unsafe = false) => {
+      const r = await route(routeReq(a, NOBLE_CHAIN, NOBLE_USDC, amountBase, 0, unsafe));
       const out = usdc(r?.amountOut);
       return out > 0 ? out / (Number(amountBase) / 10 ** a.decimals) : 0;
     };
@@ -532,7 +532,23 @@ async function priceByQuote(mine) {
           price = await priceAt(slice);
           a.indicative = price > 0;
         }
-      } catch { /* refused at a tenth too — genuinely no way out */ }
+      } catch { /* refused at a tenth too — see the unsafe probe below */ }
+    }
+
+    /* Last resort, and valuation only. Skip refuses to vouch for a swap it
+       cannot price-check, and for a token with no feed that refusal comes and
+       goes: the same 80 units quoted at 93 USDC and then failed eight minutes
+       later, having also refused 70 in between. So it is not a size rule and
+       must not be reported as one. Asking without the guard costs nothing —
+       a quote moves no money — and it recovers the true value of a balance
+       the guard is currently sulking about. The transfer itself still goes
+       out guarded, so anything priced this way is shown and blocked, and
+       re-probed on the next load, when the answer may differ. */
+    if (!(price > 0)) {
+      try {
+        price = await priceAt(a.sendable, true);
+        a.unsellable = price > 0;
+      } catch { /* refused even unguarded — genuinely no way out */ }
     }
 
     if (!(price > 0)) return;
@@ -541,6 +557,7 @@ async function priceByQuote(mine) {
     a.unpriced = false;
     a.quoted = true;
     if (!a.blocked && a.usd < SWEEP_DUST_USD) a.blocked = "too small to be worth the fees";
+    if (!a.blocked && a.unsellable) a.blocked = "the router will not price this one right now — try again shortly";
   }));
 
   if (mine !== loadToken) return;   // a reload superseded this run
@@ -1060,7 +1077,7 @@ const usdc = (base) => Number(base || 0) / 1e6;
 
 /* One route request, built the same way everywhere so the execute-time
    re-quote cannot silently differ from the one the user approved. */
-const routeReq = (from, toChainId, toDenom, amountIn, feeBps) => ({
+const routeReq = (from, toChainId, toDenom, amountIn, feeBps, unsafe = false) => ({
   amountIn,
   sourceAssetDenom: from.denom,
   sourceAssetChainId: from.chainId,
@@ -1069,7 +1086,7 @@ const routeReq = (from, toChainId, toDenom, amountIn, feeBps) => ({
   cumulativeAffiliateFeeBps: String(feeBps),
   smartRelay: true,
   allowMultiTx: true,
-  allowUnsafe: false,
+  allowUnsafe: unsafe,
 });
 
 async function gasRouteFor(routeResponse, routeRequest) {
