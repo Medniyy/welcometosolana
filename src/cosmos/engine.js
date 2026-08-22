@@ -499,66 +499,52 @@ async function loadAssets() {
    no price at all and still sell. So anything the feed cannot price but the
    registry lists gets valued by asking the router what it would pay. Registry
    membership is the spam filter: 522 of 4,533 Osmosis denoms carry metadata.
-   Quoted against USDC on Noble, not Solana, so the flat exit fee — charged
-   once per run — is not subtracted from every row. */
-const PRICE_PROBE_MAX = 8;
+
+   Quoted permissively, and only here. Skip refuses to vouch for a swap it
+   cannot price-check, and for a token with no feed that refusal comes and
+   goes — the same 80 units quoted at 93 USDC and failed eight minutes later.
+   A quote moves no money, so asking unguarded costs nothing and is the more
+   truthful number besides: it prices the whole balance through the pool it
+   would really cross, rather than extrapolating from a slice. Transfers are
+   still quoted guarded, and whether Skip will run one is Skip's to answer at
+   review, not ours to guess here.
+
+   One call per asset, because a real wallet has more of these than expected:
+   a test wallet held 27, and probing only the first handful spent them all on
+   dust while the balance its owner was looking for went unasked. */
+const PRICE_PROBE_MAX = 40;
+const PRICE_PROBE_LANES = 6;
 
 async function priceByQuote(mine) {
-  const todo = S.assets.filter((a) =>
-    a.unpriced && Number(a.sendable) > 0 && assetNames.has(`${a.chainId}|${a.denom}`));
+  const todo = S.assets
+    .filter((a) => a.unpriced && Number(a.sendable) > 0 && assetNames.has(`${a.chainId}|${a.denom}`))
+    .slice(0, PRICE_PROBE_MAX);
   if (!todo.length) return;
 
-  S.pricing = Math.min(todo.length, PRICE_PROBE_MAX);
+  S.pricing = todo.length;
   renderAssets();
 
-  await Promise.all(todo.slice(0, PRICE_PROBE_MAX).map(async (a) => {
-    const priceAt = async (amountBase, unsafe = false) => {
-      const r = await route(routeReq(a, NOBLE_CHAIN, NOBLE_USDC, amountBase, 0, unsafe));
-      const out = usdc(r?.amountOut);
-      return out > 0 ? out / (Number(amountBase) / 10 ** a.decimals) : 0;
-    };
-
-    let price = 0;
-    try {
-      price = await priceAt(a.sendable);
-    } catch {
-      /* Refusal is nearly always the price-impact guard, not a missing route:
-         measured, a thin-pool balance quoted at 8.0% impact and was refused at
-         10.7%. A tenth clears the guard, so a price back means "too big to
-         sell in one go" and nothing back means no route. */
+  let next = 0;
+  const lane = async () => {
+    while (next < todo.length) {
+      const a = todo[next++];
       try {
-        const slice = String(Math.floor(Number(a.sendable) / 10));
-        if (Number(slice) > 0) {
-          price = await priceAt(slice);
-          a.indicative = price > 0;
+        const r = await route(routeReq(a, NOBLE_CHAIN, NOBLE_USDC, a.sendable, 0, true));
+        const out = usdc(r?.amountOut);
+        if (out > 0) {
+          a.price = out / (Number(a.sendable) / 10 ** a.decimals);
+          a.usd = a.price * (Number(a.amount) / 10 ** a.decimals);
+          a.unpriced = false;
+          a.quoted = true;
+          if (!a.blocked && a.usd < SWEEP_DUST_USD) a.blocked = "too small to be worth the fees";
         }
-      } catch { /* refused at a tenth too — see the unsafe probe below */ }
+      } catch { /* no route out — stays unpriced and unlisted */ }
+      if (mine !== loadToken) return;
+      S.pricing--;
+      renderAssets();      // each one appears as it lands
     }
-
-    /* Last resort, and valuation only. Skip refuses to vouch for a swap it
-       cannot price-check, and for a token with no feed that refusal comes and
-       goes: the same 80 units quoted at 93 USDC and then failed eight minutes
-       later, having also refused 70 in between. So it is not a size rule and
-       must not be reported as one. Asking without the guard costs nothing —
-       a quote moves no money — and it recovers the true value of a balance
-       the guard is currently sulking about. The transfer itself still goes
-       out guarded, so anything priced this way is shown and blocked, and
-       re-probed on the next load, when the answer may differ. */
-    if (!(price > 0)) {
-      try {
-        price = await priceAt(a.sendable, true);
-        a.unsellable = price > 0;
-      } catch { /* refused even unguarded — genuinely no way out */ }
-    }
-
-    if (!(price > 0)) return;
-    a.price = price;
-    a.usd = price * (Number(a.amount) / 10 ** a.decimals);
-    a.unpriced = false;
-    a.quoted = true;
-    if (!a.blocked && a.usd < SWEEP_DUST_USD) a.blocked = "too small to be worth the fees";
-    if (!a.blocked && a.unsellable) a.blocked = "the router will not price this one right now — try again shortly";
-  }));
+  };
+  await Promise.all(Array.from({ length: Math.min(PRICE_PROBE_LANES, todo.length) }, lane));
 
   if (mine !== loadToken) return;   // a reload superseded this run
   S.pricing = 0;
@@ -803,7 +789,6 @@ function renderAssets() {
     const held = Number(a.reserved) > 0
       ? ` · keeping ${qty(Number(a.reserved) / 10 ** a.decimals, 4)} for fees`
       /* A live quote rather than a feed price, so it can move before review. */
-      : a.indicative ? " · rough value — more than the pool takes in one go"
       : a.quoted ? " · valued from a live sell quote" : "";
     const sending = Number(sendBase(a)) / 10 ** a.decimals;
     row.innerHTML = `
